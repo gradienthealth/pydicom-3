@@ -648,7 +648,7 @@ class DA(_DateTimeBase, datetime.date):
         a string conformant to the DA definition in the DICOM Standard,
         Part 5, :dcm:`Table 6.2-1<part05/sect_6.2.html#table_6.2-1>`,
         or it is a :class:`datetime.date` object, or an object of type
-        :class:`~pydicom.valuerep.DA`.
+        :class:`~pydicom3.valuerep.DA`.
         """
         if not args or args[0] is None:
             return None
@@ -734,7 +734,7 @@ class DT(_DateTimeBase, datetime.datetime):
         a string conformant to the DT definition in the DICOM Standard,
         Part 5, :dcm:`Table 6.2-1<part05/sect_6.2.html#table_6.2-1>`,
         or it is a :class:`datetime.datetime` object, or an object of type
-        :class:`~pydicom.valuerep.DT`.
+        :class:`~pydicom3.valuerep.DT`.
         """
         if not args or args[0] is None:
             return None
@@ -843,7 +843,7 @@ class TM(_DateTimeBase, datetime.time):
         a string conformant to the TM definition in the DICOM Standard,
         Part 5, :dcm:`Table 6.2-1<part05/sect_6.2.html#table_6.2-1>`,
         or it is a :class:`datetime.time` object, or an object of type
-        :class:`~pydicom.valuerep.TM`.
+        :class:`~pydicom3.valuerep.TM`.
         """
         if not args or args[0] is None:
             return None
@@ -1303,9 +1303,9 @@ class ISfloat(float):
     however, it is not uncommon to see float IS values.  This class
     is used if the config settings allow non-strict reading.
 
-    Generally, use :class:`~pydicom.valuerep.IS` to create IS values,
+    Generally, use :class:`~pydicom3.valuerep.IS` to create IS values,
     this is returned instead if the value cannot be represented as an
-    :class:`int`.  See :class:`~pydicom.valuerep.IS` for details of the
+    :class:`int`.  See :class:`~pydicom3.valuerep.IS` for details of the
     parameters and return values.
     """
 

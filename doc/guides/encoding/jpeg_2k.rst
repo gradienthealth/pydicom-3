@@ -108,7 +108,7 @@ multiple-component transformation:
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPE2000Lossless
+    from pydicom3.uid import JPE2000Lossless
 
     ds = examples.rgb_color
     assert ds.SamplesPerPixel == 1
@@ -128,7 +128,7 @@ transformation:
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPE2000Lossless
+    from pydicom3.uid import JPE2000Lossless
 
     ds = examples.rgb_color
     assert ds.SamplesPerPixel == 1
@@ -150,7 +150,7 @@ Losslessly compress signed greyscale pixel data in-place:
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPE2000Lossless
+    from pydicom3.uid import JPE2000Lossless
 
     ds = examples.ct
     assert ds.SamplesPerPixel == 1
@@ -177,7 +177,7 @@ JPEG 2000
 When performing lossy encoding one or more quality layers may be used, with each
 quality layer allowing the reconstruction of the pixel data at a given resolution.
 The image quality of each layer is controlled by passing either the `j2k_cr` or the
-`j2k_psnr` parameter to the :meth:`encoding function<pydicom.dataset.Dataset.compress>`
+`j2k_psnr` parameter to the :meth:`encoding function<pydicom3.dataset.Dataset.compress>`
 as ``list[float]``, where:
 
 * `j2k_cr`: a list of the compression ratios to use for each quality
@@ -207,7 +207,7 @@ Lossy compression of unsigned RGB pixel data without multiple-component transfor
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPEG2000
+    from pydicom3.uid import JPEG2000
 
     ds = examples.rgb_color
     assert ds.SamplesPerPixel == 1
@@ -227,7 +227,7 @@ Lossy compression of unsigned RGB pixel data with multiple-component transformat
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPEG2000
+    from pydicom3.uid import JPEG2000
 
     ds = examples.rgb_color
     assert ds.SamplesPerPixel == 1
@@ -250,7 +250,7 @@ Lossy compression of signed greyscale pixel data:
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPEG2000
+    from pydicom3.uid import JPEG2000
 
     ds = examples.ct
     assert ds.SamplesPerPixel == 1
@@ -285,7 +285,7 @@ pylibjpeg
 |                                                          +-----------+-----------------------------+-----+
 |                                                          | Name      | Requires                    |Added|
 +==========================================================+===========+=============================+=====+
-|:attr:`~pydicom.pixels.encoders.JPEG2000LosslessEncoder`  | pylibjpeg | `numpy <np_>`_,             |v3.0 |
+|:attr:`~pydicom3.pixels.encoders.JPEG2000LosslessEncoder`  | pylibjpeg | `numpy <np_>`_,             |v3.0 |
 +----------------------------------------------------------+           | `pylibjpeg <_pylj>`_,       |     |
-|:attr:`~pydicom.pixels.encoders.JPEG2000Encoder`          |           | `pylibjpeg-openjpeg <_oj>`_ |     |
+|:attr:`~pydicom3.pixels.encoders.JPEG2000Encoder`          |           | `pylibjpeg-openjpeg <_oj>`_ |     |
 +----------------------------------------------------------+-----------+-----------------------------+-----+

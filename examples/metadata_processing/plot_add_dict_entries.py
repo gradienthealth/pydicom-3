@@ -14,9 +14,9 @@ pydicom's private dictionary when loading an existing dataset.
 import io
 
 from pydicom import dcmread
-from pydicom.datadict import add_private_dict_entries
-from pydicom.dataset import Dataset
-from pydicom.valuerep import VR
+from pydicom3.datadict import add_private_dict_entries
+from pydicom3.dataset import Dataset
+from pydicom3.valuerep import VR
 
 print(__doc__)
 

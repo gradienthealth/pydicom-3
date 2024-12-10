@@ -18,7 +18,7 @@ class UID(str):
     **Private Transfer Syntaxes**
 
     If creating a private transfer syntax UID, then you must also use
-    :meth:`~pydicom.UID.set_private_encoding` to set the corresponding
+    :meth:`~pydicom3.UID.set_private_encoding` to set the corresponding
     dataset encoding.
 
     Examples
@@ -26,7 +26,7 @@ class UID(str):
 
     General usage::
 
-      >>> from pydicom.uid import UID
+      >>> from pydicom3.uid import UID
       >>> uid = UID('1.2.840.10008.1.2.4.50')
       >>> uid
       '1.2.840.10008.1.2.4.50'
@@ -58,7 +58,7 @@ class UID(str):
 
         Parameters
         ----------
-        val : str or pydicom.uid.UID
+        val : str or pydicom3.uid.UID
             The UID string to use to create the UID object.
         validation_mode : int
             Defines if values are validated and how validation errors are
@@ -66,7 +66,7 @@ class UID(str):
 
         Returns
         -------
-        pydicom.uid.UID
+        pydicom3.uid.UID
             The UID object.
         """
         if isinstance(val, str):
@@ -455,7 +455,7 @@ UncompressedTransferSyntaxes = [
 
 PrivateTransferSyntaxes = []
 """Private transfer syntaxes added using the
-:func:`~pydicom.uid.register_transfer_syntax` function.
+:func:`~pydicom3.uid.register_transfer_syntax` function.
 """
 
 
@@ -464,28 +464,28 @@ def register_transfer_syntax(
     implicit_vr: bool | None = None,
     little_endian: bool | None = None,
 ) -> UID:
-    """Register a private transfer syntax with the :mod:`~pydicom.uid` module
-    so it can be used when reading datasets with :func:`~pydicom.filereader.dcmread`.
+    """Register a private transfer syntax with the :mod:`~pydicom3.uid` module
+    so it can be used when reading datasets with :func:`~pydicom3.filereader.dcmread`.
 
     .. versionadded: 3.0
 
     Parameters
     ----------
-    uid : str | pydicom.uid.UID
+    uid : str | pydicom3.uid.UID
         A UID which may or may not have had the corresponding dataset encoding
-        set using :meth:`~pydicom.uid.UID.set_private_encoding`.
+        set using :meth:`~pydicom3.uid.UID.set_private_encoding`.
     implicit_vr : bool, optional
         If ``True`` then the transfer syntax uses implicit VR encoding, otherwise
         if ``False`` then it uses explicit VR encoding. Required when `uid` has
-        not had the encoding set using :meth:`~pydicom.uid.UID.set_private_encoding`.
+        not had the encoding set using :meth:`~pydicom3.uid.UID.set_private_encoding`.
     little_endian : bool, optional
         If ``True`` then the transfer syntax uses little endian encoding, otherwise
         if ``False`` then it uses big endian encoding. Required when `uid` has
-        not had the encoding set using :meth:`~pydicom.uid.UID.set_private_encoding`.
+        not had the encoding set using :meth:`~pydicom3.uid.UID.set_private_encoding`.
 
     Returns
     -------
-    pydicom.uid.UID
+    pydicom3.uid.UID
         The registered UID.
     """
     uid = UID(uid)
@@ -537,7 +537,7 @@ def generate_uid(
 
     Returns
     -------
-    pydicom.uid.UID
+    pydicom3.uid.UID
         A DICOM UID of up to 64 characters.
 
     Raises
@@ -548,7 +548,7 @@ def generate_uid(
     Examples
     --------
 
-    >>> from pydicom.uid import generate_uid
+    >>> from pydicom3.uid import generate_uid
     >>> generate_uid()
     1.2.826.0.1.3680043.8.498.22463838056059845879389038257786771680
     >>> generate_uid(prefix=None)

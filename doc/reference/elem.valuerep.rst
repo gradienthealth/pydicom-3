@@ -1,9 +1,9 @@
 .. _api_elem_valuerep:
 
-Specialized Element Value Representation (:mod:`pydicom.valuerep`)
+Specialized Element Value Representation (:mod:`pydicom3.valuerep`)
 ==================================================================
 
-.. currentmodule:: pydicom.valuerep
+.. currentmodule:: pydicom3.valuerep
 
 Representation of the value for data elements with VR of PN, DS, IS, DA, DT
 or TM and utilities.

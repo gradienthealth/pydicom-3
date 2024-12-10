@@ -6,7 +6,7 @@ from pathlib import Path
 from collections import defaultdict
 import sys
 
-from pydicom.valuerep import VR
+from pydicom3.valuerep import VR
 
 
 GDCM_PRIVATE_DICT = (

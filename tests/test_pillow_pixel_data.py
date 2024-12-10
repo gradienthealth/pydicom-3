@@ -3,12 +3,12 @@
 import pytest
 
 import pydicom
-from pydicom.data import get_testdata_file
-from pydicom.encaps import get_frame, generate_frames, encapsulate
-from pydicom.filereader import dcmread
-from pydicom.pixels.processing import convert_color_space
-from pydicom.pixels.utils import get_j2k_parameters
-from pydicom.uid import (
+from pydicom3.data import get_testdata_file
+from pydicom3.encaps import get_frame, generate_frames, encapsulate
+from pydicom3.filereader import dcmread
+from pydicom3.pixels.processing import convert_color_space
+from pydicom3.pixels.utils import get_j2k_parameters
+from pydicom3.uid import (
     JPEGBaseline8Bit,
     JPEGLosslessSV1,
     JPEGExtended12Bit,
@@ -20,7 +20,7 @@ from pydicom.uid import (
 
 try:
     import numpy as np
-    from pydicom.pixel_data_handlers import numpy_handler as NP_HANDLER
+    from pydicom3.pixel_data_handlers import numpy_handler as NP_HANDLER
 
     HAVE_NP = True
 except ImportError:
@@ -28,8 +28,8 @@ except ImportError:
     HAVE_NP = False
 
 try:
-    from pydicom.pixel_data_handlers import pillow_handler as PIL_HANDLER
-    from pydicom.pixel_data_handlers.pillow_handler import get_pixeldata
+    from pydicom3.pixel_data_handlers import pillow_handler as PIL_HANDLER
+    from pydicom3.pixel_data_handlers.pillow_handler import get_pixeldata
 
     HAVE_PIL = PIL_HANDLER.HAVE_PIL
     HAVE_JPEG = PIL_HANDLER.HAVE_JPEG
@@ -140,12 +140,12 @@ class TestNoNumpy_NoPillowHandler:
 
     def setup_method(self):
         """Setup the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = []
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = []
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_environment(self):
         """Check that the testing environment is as expected."""
@@ -454,14 +454,14 @@ class TestPillowHandler_JPEG2K:
 
     def setup_method(self):
         """Setup the test datasets and the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        self.original_j2k = pydicom.config.APPLY_J2K_CORRECTIONS
-        pydicom.config.pixel_data_handlers = [NP_HANDLER, PIL_HANDLER]
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        self.original_j2k = pydicom3.config.APPLY_J2K_CORRECTIONS
+        pydicom3.config.pixel_data_handlers = [NP_HANDLER, PIL_HANDLER]
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
-        pydicom.config.APPLY_J2K_CORRECTIONS = self.original_j2k
+        pydicom3.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.APPLY_J2K_CORRECTIONS = self.original_j2k
 
     def test_environment(self):
         """Check that the testing environment is as expected."""
@@ -471,7 +471,7 @@ class TestPillowHandler_JPEG2K:
 
     def test_unsupported_syntax_raises(self):
         """Test pixel_array raises exception for unsupported syntaxes."""
-        pydicom.config.pixel_data_handlers = [PIL_HANDLER]
+        pydicom3.config.pixel_data_handlers = [PIL_HANDLER]
 
         ds = dcmread(EXPL)
         ds.pixel_array_options(use_v2_backend=True)
@@ -570,7 +570,7 @@ class TestPillowHandler_JPEG2K:
 
     def test_changing_bits_stored(self):
         """Test changing BitsStored affects the pixel data."""
-        pydicom.config.APPLY_J2K_CORRECTIONS = False
+        pydicom3.config.APPLY_J2K_CORRECTIONS = False
         ds = dcmread(J2KR_16_14_1_1_1F_M2)
         ds.pixel_array_options(use_v2_backend=True)
         assert 16 == ds.BitsStored
@@ -613,12 +613,12 @@ class TestPillowHandler_JPEG:
 
     def setup_method(self):
         """Setup the test datasets and the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = [NP_HANDLER, PIL_HANDLER]
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = [NP_HANDLER, PIL_HANDLER]
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_environment(self):
         """Check that the testing environment is as expected."""
@@ -628,7 +628,7 @@ class TestPillowHandler_JPEG:
 
     def test_unsupported_syntax_raises(self):
         """Test pixel_array raises exception for unsupported syntaxes."""
-        pydicom.config.pixel_data_handlers = [PIL_HANDLER]
+        pydicom3.config.pixel_data_handlers = [PIL_HANDLER]
 
         ds = dcmread(EXPL)
         ds.pixel_array_options(use_v2_backend=True)

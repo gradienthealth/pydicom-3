@@ -7,8 +7,8 @@ import tempfile
 
 import pytest
 
-from pydicom.config import settings
-from pydicom.fileutil import (
+from pydicom3.config import settings
+from pydicom3.fileutil import (
     path_from_pathlike,
     check_buffer,
     reset_buffer_position,

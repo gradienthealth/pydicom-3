@@ -5,7 +5,7 @@ import uuid
 
 import pytest
 
-from pydicom.uid import (
+from pydicom3.uid import (
     UID,
     generate_uid,
     register_transfer_syntax,
@@ -13,11 +13,11 @@ from pydicom.uid import (
     JPEGLSNearLossless,
     CTImageStorage,
 )
-import pydicom.uid
+import pydicom3.uid
 
 
 def test_storage_sopclass_uids():
-    assert CTImageStorage == pydicom.uid.CTImageStorage
+    assert CTImageStorage == pydicom3.uid.CTImageStorage
 
 
 class TestGenerateUID:
@@ -415,7 +415,7 @@ class TestRegisterTransferSyntax:
     """Tests for register_transfer_syntax()"""
 
     def teardown_method(self):
-        pydicom.uid.PrivateTransferSyntaxes = []
+        pydicom3.uid.PrivateTransferSyntaxes = []
 
     def test_no_encoding_raises(self):
         """Test not supplying the encoding raises"""
@@ -430,27 +430,27 @@ class TestRegisterTransferSyntax:
         with pytest.raises(ValueError, match=msg):
             register_transfer_syntax("1.2.3")
 
-        assert pydicom.uid.PrivateTransferSyntaxes == []
+        assert pydicom3.uid.PrivateTransferSyntaxes == []
 
     def test_encoding_uid(self):
         """Test encoding supplied via set_private_encoding()"""
-        assert pydicom.uid.PrivateTransferSyntaxes == []
+        assert pydicom3.uid.PrivateTransferSyntaxes == []
 
         uid = UID("1.2.3")
         uid.set_private_encoding(True, False)
         register_transfer_syntax(uid)
-        assert uid in pydicom.uid.PrivateTransferSyntaxes
-        uid = pydicom.uid.PrivateTransferSyntaxes[0]
+        assert uid in pydicom3.uid.PrivateTransferSyntaxes
+        uid = pydicom3.uid.PrivateTransferSyntaxes[0]
         assert uid.is_transfer_syntax
         assert uid.is_implicit_VR
         assert not uid.is_little_endian
 
     def test_encoding_str(self):
         """Test encoding supplied via args"""
-        assert pydicom.uid.PrivateTransferSyntaxes == []
+        assert pydicom3.uid.PrivateTransferSyntaxes == []
 
         register_transfer_syntax("1.2.3", False, True)
-        uid = pydicom.uid.PrivateTransferSyntaxes[0]
+        uid = pydicom3.uid.PrivateTransferSyntaxes[0]
         assert uid == "1.2.3"
         assert uid.is_transfer_syntax
         assert not uid.is_implicit_VR

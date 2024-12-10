@@ -38,7 +38,7 @@ def encode_pixel_data(src: bytes, runner: EncodeRunner) -> bytes:
     ----------
     src : bytes
         The raw image frame data to be encoded.
-    runner : pydicom.pixels.encoders.base.EncodeRunner
+    runner : pydicom3.pixels.encoders.base.EncodeRunner
         The runner managing the encoding process.
 
     Returns
@@ -60,7 +60,7 @@ def _rle_encode(src: bytes, runner: EncodeRunner) -> bytes:
     ----------
     src : bytes
         The raw image frame data to be encoded.
-    runner : pydicom.pixels.encoders.base.EncodeRunner
+    runner : pydicom3.pixels.encoders.base.EncodeRunner
         The runner managing the encoding process.
 
     Returns

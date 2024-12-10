@@ -6,11 +6,11 @@ from unittest import mock
 import pytest
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
-from pydicom.dataelem import DataElement, RawDataElement
-from pydicom.dataset import Dataset
-from pydicom.tag import Tag, BaseTag
-from pydicom.valuerep import PersonName
+from pydicom3.data import get_testdata_file
+from pydicom3.dataelem import DataElement, RawDataElement
+from pydicom3.dataset import Dataset
+from pydicom3.tag import Tag, BaseTag
+from pydicom3.valuerep import PersonName
 
 
 class TestPersonName:
@@ -288,7 +288,7 @@ class TestDataSetToJson:
         assert ds_json.index('"00100020"') < ds_json.index('"00100030"')
         assert ds_json.index('"00100030"') < ds_json.index('"00100040"')
 
-    @mock.patch("pydicom.DataElement.to_json_dict", side_effect=ValueError)
+    @mock.patch("pydicom3.DataElement.to_json_dict", side_effect=ValueError)
     def test_suppress_invalid_tags(self, _):
         """Test tags that raise exceptions don't if suppress_invalid_tags True."""
         ds = Dataset()

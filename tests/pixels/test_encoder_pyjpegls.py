@@ -12,19 +12,19 @@ except ImportError:
     HAVE_NP = False
 
 from pydicom import Dataset, examples
-from pydicom.encaps import encapsulate, get_frame
-from pydicom.pixels.encoders import (
+from pydicom3.encaps import encapsulate, get_frame
+from pydicom3.pixels.encoders import (
     JPEGLSLosslessEncoder,
     JPEGLSNearLosslessEncoder,
 )
-from pydicom.pixels.decoders import (
+from pydicom3.pixels.decoders import (
     JPEGLSLosslessDecoder,
     JPEGLSNearLosslessDecoder,
 )
-from pydicom.pixels.common import PhotometricInterpretation as PI
-from pydicom.pixels.utils import _get_jpg_parameters
-from pydicom.uid import JPEGLSLossless, JPEGLSNearLossless
-from pydicom.pixel_data_handlers.gdcm_handler import get_pixeldata
+from pydicom3.pixels.common import PhotometricInterpretation as PI
+from pydicom3.pixels.utils import _get_jpg_parameters
+from pydicom3.uid import JPEGLSLossless, JPEGLSNearLossless
+from pydicom3.pixel_data_handlers.gdcm_handler import get_pixeldata
 
 
 HAVE_JLS = bool(importlib.util.find_spec("jpeg_ls"))

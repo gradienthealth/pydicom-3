@@ -4,7 +4,7 @@ Gather system information and version information for pydicom and auxiliary
 modules.
 
 The output is a GitHub-flavoured markdown table whose contents can help
-diagnose any perceived bugs in pydicom. This can be pasted directly into a new
+diagnose any perceived bugs in pydicom3. This can be pasted directly into a new
 GitHub bug report.
 
 This file is intended to be run as an executable module.

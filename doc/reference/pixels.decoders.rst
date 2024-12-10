@@ -1,15 +1,15 @@
 .. _api_decoders:
 
-Pixel Data Decoders (:mod:`pydicom.pixels.decoders`)
+Pixel Data Decoders (:mod:`pydicom3.pixels.decoders`)
 ====================================================
 
-.. module:: pydicom.pixels.decoders
+.. module:: pydicom3.pixels.decoders
 
-:class:`~pydicom.pixels.decoders.base.Decoder` class instances for decoding
+:class:`~pydicom3.pixels.decoders.base.Decoder` class instances for decoding
 native and compressed (7FE0,0010) *Pixel Data*, (7FE0,0008) *Float Pixel Data* and
 (7FE0,0009) *Double Float Pixel Data*.
 
-.. currentmodule:: pydicom.pixels.decoders
+.. currentmodule:: pydicom3.pixels.decoders
 
 .. autosummary::
    :toctree: generated/
@@ -34,7 +34,7 @@ native and compressed (7FE0,0010) *Pixel Data*, (7FE0,0008) *Float Pixel Data* a
 
 Base decoder classes used by all decoders
 
-.. currentmodule:: pydicom.pixels.decoders.base
+.. currentmodule:: pydicom3.pixels.decoders.base
 
 .. autosummary::
    :toctree: generated/

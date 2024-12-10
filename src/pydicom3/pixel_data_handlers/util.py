@@ -48,7 +48,7 @@ def _dtype_corrected_for_endianness(
     Parameters
     ----------
     is_little_endian : bool
-        The endianness of the affected :class:`~pydicom.dataset.Dataset`.
+        The endianness of the affected :class:`~pydicom3.dataset.Dataset`.
     numpy_dtype : numpy.dtype
         The numpy data type used for the *Pixel Data* without considering
         endianness.
@@ -100,16 +100,16 @@ _DEPRECATED_UTIL = {
 def __getattr__(name: str) -> Any:
     if name in _DEPRECATED and not config._use_future:
         msg = (
-            "The 'pydicom.pixel_data_handlers' module will be removed "
-            f"in v4.0, please use 'from pydicom.pixels import {name}' instead"
+            "The 'pydicom3.pixel_data_handlers' module will be removed "
+            f"in v4.0, please use 'from pydicom3.pixels import {name}' instead"
         )
         warn_and_log(msg, DeprecationWarning)
         return _DEPRECATED[name]
 
     if name in _DEPRECATED_UTIL and not config._use_future:
         msg = (
-            "The 'pydicom.pixel_data_handlers' module will be removed "
-            f"in v4.0, please use 'from pydicom.pixels.utils import {name}' instead"
+            "The 'pydicom3.pixel_data_handlers' module will be removed "
+            f"in v4.0, please use 'from pydicom3.pixels.utils import {name}' instead"
         )
         warn_and_log(msg, DeprecationWarning)
         return _DEPRECATED_UTIL[name]

@@ -6,13 +6,13 @@ import pytest
 
 import pydicom
 from pydicom import examples, FileDataset
-from pydicom.examples import ct
+from pydicom3.examples import ct
 
 
 class TestExamples:
     def test_exception(self):
         """Test accessing missing module attribute raises."""
-        msg = "module 'pydicom.examples' has no attribute 'foo'"
+        msg = "module 'pydicom3.examples' has no attribute 'foo'"
         with pytest.raises(AttributeError, match=msg):
             examples.foo
 
@@ -33,8 +33,8 @@ class TestExamples:
 
     def test_module_characteristics(self):
         """Test characteristics of the attributes."""
-        assert pydicom.examples.ct == examples.ct
-        assert pydicom.examples.ct == ct
+        assert pydicom3.examples.ct == examples.ct
+        assert pydicom3.examples.ct == ct
         assert ct == examples.ct
 
         # New instance every time the attribute is accessed

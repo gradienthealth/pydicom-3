@@ -27,7 +27,7 @@ class CoderBase:
 
         Parameters
         ----------
-        uid : pydicom.uid.UID
+        uid : pydicom3.uid.UID
             The supported *Transfer Syntax UID*.
         decoder : bool
             ``True`` for a decoder subclass, ``False`` for an encoder subclass.
@@ -54,9 +54,9 @@ class CoderBase:
         </guides/decoding/decoder_plugins>`.
 
         Only encoding plugins should be added to
-        :class:`~pydicom.pixels.encoders.base.Encoder` class instances
+        :class:`~pydicom3.pixels.encoders.base.Encoder` class instances
         and only decoding plugins should be added to
-        :class:`~pydicom.pixels.decoders.base.Decoder` class instances.
+        :class:`~pydicom3.pixels.decoders.base.Decoder` class instances.
 
         Parameters
         ----------
@@ -64,8 +64,8 @@ class CoderBase:
             The label to use for the plugin, should be unique.
         import_path : Tuple[str, str]
             The module import path and the function's name (e.g.
-            ``('pydicom.pixels.encoders.pylibjpeg', 'encode_pixel_data')`` or
-            ``('pydicom.pixels.decoders.pylibjpeg', 'decode_pixel_data')``).
+            ``('pydicom3.pixels.encoders.pylibjpeg', 'encode_pixel_data')`` or
+            ``('pydicom3.pixels.decoders.pylibjpeg', 'decode_pixel_data')``).
 
         Raises
         ------
@@ -112,9 +112,9 @@ class CoderBase:
         </guides/decoding/decoder_plugins>`.
 
         Only encoding plugins should be added to
-        :class:`~pydicom.pixels.encoders.base.Encoder` class instances
+        :class:`~pydicom3.pixels.encoders.base.Encoder` class instances
         and only decoding plugins should be added to
-        :class:`~pydicom.pixels.decoders.base.Decoder` class instances.
+        :class:`~pydicom3.pixels.decoders.base.Decoder` class instances.
 
         Parameters
         ----------
@@ -123,8 +123,8 @@ class CoderBase:
 
             * `label` is the label to use for the plugin, which should be unique.
             * `import path` is the module import path and the function's
-              name (e.g. ``('pydicom.pixels.encoders.pylibjpeg', 'encode_pixel_data')``
-              or ``('pydicom.pixels.decoders.pylibjpeg', 'decode_pixel_data')``).
+              name (e.g. ``('pydicom3.pixels.encoders.pylibjpeg', 'encode_pixel_data')``
+              or ``('pydicom3.pixels.decoders.pylibjpeg', 'decode_pixel_data')``).
         """
         for label, import_path in plugins:
             self.add_plugin(label, import_path)
@@ -195,7 +195,7 @@ class CoderBase:
 
     @property
     def UID(self) -> UID:
-        """Return the corresponding *Transfer Syntax UID* as :class:`~pydicom.uid.UID`."""
+        """Return the corresponding *Transfer Syntax UID* as :class:`~pydicom3.uid.UID`."""
         return self._uid
 
     def _validate_plugins(
@@ -298,7 +298,7 @@ class RunnerBase:
 
         Parameters
         ----------
-        tsyntax : pydicom.uid.UID
+        tsyntax : pydicom3.uid.UID
             The transfer syntax UID corresponding to the pixel data to be
             decoded.
         """
@@ -431,7 +431,7 @@ class RunnerBase:
 
     @property
     def is_dataset(self) -> bool:
-        """Return ``True`` if the pixel data source is a :class:`~pydicom.dataset.Dataset`"""
+        """Return ``True`` if the pixel data source is a :class:`~pydicom3.dataset.Dataset`"""
         return self._src_type == "Dataset"
 
     @property
@@ -552,7 +552,7 @@ class RunnerBase:
 
         Parameters
         ----------
-        ds : pydicom.dataset.Dataset
+        ds : pydicom3.dataset.Dataset
             The dataset to use.
         """
         self.set_options(**as_pixel_options(ds))

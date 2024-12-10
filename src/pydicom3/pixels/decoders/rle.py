@@ -28,7 +28,7 @@ def _decode_frame(src: bytes, runner: DecodeRunner) -> bytearray:
     ----------
     src : bytes
         A single frame of RLE encoded data.
-    runner : pydicom.pixels.decoders.base.DecodeRunner
+    runner : pydicom3.pixels.decoders.base.DecodeRunner
 
 
         Required parameters:

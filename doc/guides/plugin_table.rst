@@ -114,7 +114,7 @@ Requires `pydicom <https://github.com/pydicom/pydicom>`_.
 Plugins for Compression
 =======================
 
-.. currentmodule:: pydicom.pixels.encoders
+.. currentmodule:: pydicom3.pixels.encoders
 
 +---------------------------------------------------+---------------+--------------------------------------------+
 | Transfer Syntax                                   | Plugins       | Encoding guide                             |

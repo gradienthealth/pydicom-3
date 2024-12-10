@@ -23,7 +23,7 @@ Glossary
     has been encoded:
 
     * **Encapsulated transfer syntaxes**: so-called because any *Pixel Data* present
-      in the dataset is :func:`encapsulated<pydicom.encaps.encapsulate>`. All
+      in the dataset is :func:`encapsulated<pydicom3.encaps.encapsulate>`. All
       encapsulated transfer syntaxes have pixel data that's been compressed using
       the compression technique specified by the transfer syntax. For example, a
       dataset with the *JPEG Baseline (Process 1)* transfer syntax will have pixel

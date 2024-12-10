@@ -17,18 +17,18 @@ Converting a dataset into JSON format
 and into a deserialized JSON dictionary:
 
   >>> import pydicom
-  >>> ds = pydicom.examples.ct
+  >>> ds = pydicom3.examples.ct
   >>> ds.to_json()
   '{"00080005": {"Value": ["ISO_IR 100"], "vr": "CS"}, "00080008": {"Value":...
   >>> ds.to_json_dict()
   {"00080005": {"Value": ["ISO_IR 100"], "vr": "CS"}, "00080008": {"Value":...
 
 Which of these methods you need depends on your use case. The JSON string
-format created by :func:`~pydicom.dataset.Dataset.to_json` can be used in
+format created by :func:`~pydicom3.dataset.Dataset.to_json` can be used in
 low-level APIs to serialize the dataset.
 Higher-level Python APIs (like Django) often work directly with Python
 dictionaries deserialized from a JSON string instead, so
-:func:`~pydicom.dataset.Dataset.to_json_dict` can be more convenient here.
+:func:`~pydicom3.dataset.Dataset.to_json_dict` can be more convenient here.
 
 Creating a dataset from JSON
 ============================
@@ -36,7 +36,7 @@ Creating a dataset from JSON
 Similar, a dataset can be created both from a JSON string and from a JSON
 dictionary. There is only a single function to handle both cases:
 
-  >>> from pydicom.dataset import Dataset
+  >>> from pydicom3.dataset import Dataset
   >>> Dataset.from_json('{"00080005": {"Value": ["ISO_IR 100"], "vr": "CS"}}')
   (0008, 0005) Specific Character Set              CS: u'ISO_IR 100'
   >>> Dataset.from_json({"00080005": {"Value": ["ISO_IR 100"], "vr": "CS"}})
@@ -45,9 +45,9 @@ dictionary. There is only a single function to handle both cases:
 The conversion in both directions is symmetric:
 
   >>> import pydicom
-  >>> ds = pydicom.examples.ct
+  >>> ds = pydicom3.examples.ct
   >>> ds_json = ds.to_json()
-  >>> ds1 = pydicom.dataset.Dataset.from_json(ds_json)
+  >>> ds1 = pydicom3.dataset.Dataset.from_json(ds_json)
   >>> assert ds == ds1
 
 
@@ -75,7 +75,7 @@ Note that only data greater than ``bulk_data_threshold`` (by default set to
   >>>     uri = store_data_and_return_uri(data_element)
   >>>     return uri
   >>>
-  >>> ds = pydicom.examples.ct
+  >>> ds = pydicom3.examples.ct
   >>> ds_json = ds.to_json(bulk_data_element_handler=bulk_data_handler)
 
 On reading JSON data, the handler must be able to retrieve the data using

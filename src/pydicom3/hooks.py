@@ -35,12 +35,12 @@ class Hooks:
     .. warning::
 
         New instances of this class should not be created, instead use the instance
-        imported with ``from pydicom.hooks import hooks``.
+        imported with ``from pydicom3.hooks import hooks``.
 
     **Available Hooks**
 
-    For conversion of raw element data to :class:`~pydicom.dataelem.DataElement`
-    using :func:`~pydicom.dataelem.convert_raw_data_element`:
+    For conversion of raw element data to :class:`~pydicom3.dataelem.DataElement`
+    using :func:`~pydicom3.dataelem.convert_raw_data_element`:
 
     * ``"raw_element_vr"``: function to perform VR lookups for raw elements,
       default :func:`raw_element_vr`.
@@ -65,7 +65,7 @@ class Hooks:
         .. code-block:: python
 
             from pydicom import dcmread
-            from pydicom.hooks import hooks, raw_element_value_fix_separator
+            from pydicom3.hooks import hooks, raw_element_value_fix_separator
 
             hooks.register_callback(
                 "raw_element_value", raw_element_value_fix_separator
@@ -172,7 +172,7 @@ def raw_element_vr(
     data : dict[str, Any]
         A dict to store the results of the VR lookup, which should be added
         as ``{"VR": str}``.
-    ds : pydicom.dataset.Dataset | None
+    ds : pydicom3.dataset.Dataset | None
         The dataset the element belongs to.
     **kwargs: dict[str, Any]
         Additional keyword arguments.
@@ -255,7 +255,7 @@ def raw_element_value(
         if not config.convert_wrong_length_to_UN:
             raise BytesLengthException(
                 f"{msg} To replace this error with a warning set "
-                "pydicom.config.convert_wrong_length_to_UN = True."
+                "pydicom3.config.convert_wrong_length_to_UN = True."
             )
 
         warn_and_log(f"{msg} Setting VR to 'UN'.")
@@ -297,7 +297,7 @@ def raw_element_value_fix_separator(
     multivalue separator::
 
         from pydicom import dcmread
-        from pydicom.hooks import hooks, raw_element_value_fix_separator
+        from pydicom3.hooks import hooks, raw_element_value_fix_separator
 
         hooks.register_callback(
             "raw_element_value",
@@ -358,7 +358,7 @@ def raw_element_value_retry(
     Retry the value conversion for **DS** elements using **US** or **SS**::
 
         from pydicom import dcmread
-        from pydicom.hooks import hooks, raw_element_value_retry
+        from pydicom3.hooks import hooks, raw_element_value_retry
 
         hooks.register_callback(
             "raw_element_value",
@@ -404,7 +404,7 @@ def raw_element_value_retry(
 
 
 hooks: Hooks = Hooks()
-"""The global :class:`~pydicom.hooks.Hooks` singleton.
+"""The global :class:`~pydicom3.hooks.Hooks` singleton.
 
 .. versionadded:: 3.0
 """

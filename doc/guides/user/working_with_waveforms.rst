@@ -6,7 +6,7 @@ Working with Waveform Data
 
 .. currentmodule:: pydicom
 
-.. rubric:: How to work with waveform data in pydicom.
+.. rubric:: How to work with waveform data in pydicom3.
 
 Introduction
 ------------
@@ -42,12 +42,12 @@ corresponding (5400,1010) *Waveform Data* element.
 
 .. warning::
 
-   :attr:`Dataset.waveform_array()<pydicom.dataset.Dataset.waveform_array>`
+   :attr:`Dataset.waveform_array()<pydicom3.dataset.Dataset.waveform_array>`
    requires `NumPy <http://numpy.org/>`_.
 
 The *Waveform Data* element contains the raw bytes exactly as found in the
 file. To get the waveforms in a more useful form you can use the
-:attr:`Dataset.waveform_array()<pydicom.dataset.Dataset.waveform_array>` method
+:attr:`Dataset.waveform_array()<pydicom3.dataset.Dataset.waveform_array>` method
 to return a :class:`numpy.ndarray` with shape (samples, channels) for the multiplex
 group at `index` in the *Waveform Sequence*.
 
@@ -69,10 +69,10 @@ group at `index` in the *Waveform Sequence*.
 If the *Channel Sensitivity Correction Factor* is available for a given channel
 then it will be applied to the raw channel data. If you need the raw data
 without any corrections then you can use the
-:func:`~pydicom.waveforms.numpy_handler.multiplex_array`
+:func:`~pydicom3.waveforms.numpy_handler.multiplex_array`
 function with the *as_raw* keyword parameter instead:
 
-  >>> from pydicom.waveforms import multiplex_array
+  >>> from pydicom3.waveforms import multiplex_array
   >>> arr = multiplex_array(ds, 0, as_raw=True)
   >>> arr
   array([[  80,   90,   10, ...,  -20,  -55,  -40],

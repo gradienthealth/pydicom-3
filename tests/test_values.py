@@ -4,9 +4,9 @@ import logging
 
 import pytest
 
-from pydicom.tag import Tag
-from pydicom.uid import UID
-from pydicom.values import (
+from pydicom3.tag import Tag
+from pydicom3.uid import UID
+from pydicom3.values import (
     convert_value,
     converters,
     convert_tag,
@@ -18,7 +18,7 @@ from pydicom.values import (
     convert_PN,
     multi_string,
 )
-from pydicom.valuerep import VR
+from pydicom3.valuerep import VR
 
 
 class TestConvertTag:

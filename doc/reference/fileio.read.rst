@@ -1,9 +1,9 @@
 .. _api_fileio_filereader:
 
-Dataset Reading (:mod:`pydicom.filereader`)
+Dataset Reading (:mod:`pydicom3.filereader`)
 ===========================================
 
-.. currentmodule:: pydicom.filereader
+.. currentmodule:: pydicom3.filereader
 
 Functions for reading DICOM datasets from file-likes.
 

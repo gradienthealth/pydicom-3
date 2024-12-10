@@ -1,9 +1,9 @@
 # Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""Unit tests for the pydicom.tag module."""
+"""Unit tests for the pydicom3.tag module."""
 
 import pytest
 
-from pydicom.tag import BaseTag, Tag, TupleTag, tag_in_exception
+from pydicom3.tag import BaseTag, Tag, TupleTag, tag_in_exception
 
 
 class TestBaseTag:

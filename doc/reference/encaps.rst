@@ -1,10 +1,10 @@
 .. _api_encaps:
 
-Bulk Data Encapsulation Utilities (:mod:`pydicom.encaps`)
+Bulk Data Encapsulation Utilities (:mod:`pydicom3.encaps`)
 =========================================================
 
-.. module:: pydicom.encaps
-.. currentmodule:: pydicom.encaps
+.. module:: pydicom3.encaps
+.. currentmodule:: pydicom3.encaps
 
 Functions for parsing and applying encapsulation to bulk data elements such
 as (7FE0,0010) *Pixel Data*.

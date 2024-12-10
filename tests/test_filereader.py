@@ -1,5 +1,5 @@
 # Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""Unit tests for the pydicom.filereader module."""
+"""Unit tests for the pydicom3.filereader module."""
 
 import gzip
 import io
@@ -14,40 +14,40 @@ import tempfile
 
 import pytest
 
-import pydicom.config
+import pydicom3.config
 from pydicom import config, dicomio
-from pydicom.dataset import Dataset, FileDataset, FileMetaDataset
-from pydicom.data import get_testdata_file
-from pydicom.datadict import add_dict_entries
-from pydicom.filereader import (
+from pydicom3.dataset import Dataset, FileDataset, FileMetaDataset
+from pydicom3.data import get_testdata_file
+from pydicom3.datadict import add_dict_entries
+from pydicom3.filereader import (
     dcmread,
     read_dataset,
     data_element_generator,
     read_file_meta_info,
 )
-from pydicom.dataelem import DataElement, convert_raw_data_element
-from pydicom.errors import InvalidDicomError
-from pydicom.filebase import DicomBytesIO
-from pydicom.multival import MultiValue
-from pydicom.sequence import Sequence
-from pydicom.tag import Tag, TupleTag
-import pydicom.uid
-from pydicom.uid import (
+from pydicom3.dataelem import DataElement, convert_raw_data_element
+from pydicom3.errors import InvalidDicomError
+from pydicom3.filebase import DicomBytesIO
+from pydicom3.multival import MultiValue
+from pydicom3.sequence import Sequence
+from pydicom3.tag import Tag, TupleTag
+import pydicom3.uid
+from pydicom3.uid import (
     ImplicitVRLittleEndian,
     ExplicitVRLittleEndian,
     UID,
     register_transfer_syntax,
     PrivateTransferSyntaxes,
 )
-import pydicom.valuerep
+import pydicom3.valuerep
 from pydicom import values
 
 
-from pydicom.pixel_data_handlers import gdcm_handler
+from pydicom3.pixel_data_handlers import gdcm_handler
 
 have_gdcm_handler = gdcm_handler.is_available()
 
-have_numpy = pydicom.config.have_numpy
+have_numpy = pydicom3.config.have_numpy
 if have_numpy:
     import numpy
 
@@ -107,13 +107,13 @@ save_dir = os.getcwd()
 
 
 def test_dicomio():
-    assert dicomio.dcmread is pydicom.dcmread
-    assert dicomio.dcmwrite is pydicom.dcmwrite
+    assert dicomio.dcmread is pydicom3.dcmread
+    assert dicomio.dcmwrite is pydicom3.dcmwrite
 
 
 class TestReader:
     def teardown_method(self):
-        pydicom.uid.PrivateTransferSyntaxes = []
+        pydicom3.uid.PrivateTransferSyntaxes = []
 
     def test_empty_numbers_tag(self):
         """Test that an empty tag with a number VR (FL, UL, SL, US,
@@ -151,7 +151,7 @@ class TestReader:
         assert beam[0x300A, 0x00B2].value == beam.TreatmentMachineName
 
         got = cp1.ReferencedDoseReferenceSequence[0].CumulativeDoseReferenceCoefficient
-        DS = pydicom.valuerep.DS
+        DS = pydicom3.valuerep.DS
         expected = DS("0.9990268")
         assert expected == got
         got = cp0.BeamLimitingDevicePositionSequence[0].LeafJawPositions
@@ -184,7 +184,7 @@ class TestReader:
         # (0020,0032) Image Position (Patient)
         # [-158.13580300000001, -179.035797, -75.699996999999996]
         got = ct.ImagePositionPatient
-        DS = pydicom.valuerep.DS
+        DS = pydicom3.valuerep.DS
         if have_numpy and config.use_DS_numpy:
             expected = numpy.array([-158.135803, -179.035797, -75.699997])
             assert numpy.allclose(got, expected)
@@ -269,7 +269,7 @@ class TestReader:
         assert "CompressedSamples^MR1" == mr.PatientName
         assert mr[0x10, 0x10].value == mr.PatientName
 
-        DS = pydicom.valuerep.DS
+        DS = pydicom3.valuerep.DS
 
         if have_numpy and config.use_DS_numpy:
             expected = numpy.array([0.3125, 0.3125])
@@ -920,13 +920,13 @@ class TestReader:
         # Test for 1338
         ds = Dataset()
         ds.PatientName = ""
-        assert isinstance(ds.PatientName, pydicom.valuerep.PersonName)
+        assert isinstance(ds.PatientName, pydicom3.valuerep.PersonName)
 
         bs = DicomBytesIO()
         ds.save_as(bs, implicit_vr=True)
 
         dcmread(bs, force=True)
-        assert isinstance(ds[0x00100010].value, pydicom.valuerep.PersonName)
+        assert isinstance(ds[0x00100010].value, pydicom3.valuerep.PersonName)
 
     def test_explicit_undefined_length_logged(self, enable_debugging, caplog):
         with caplog.at_level(logging.DEBUG, logger="pydicom"):
@@ -1667,7 +1667,7 @@ class TestDeferredRead:
     def test_filelike_deferred(self):
         """Deferred values work with file-like objects."""
         f = open(ct_name, "rb")
-        dataset = pydicom.dcmread(f, defer_size=1024)
+        dataset = pydicom3.dcmread(f, defer_size=1024)
         assert 32768 == len(dataset.PixelData)
         # The 'Histogram tables' private data element is also > 1024 bytes so
         # pluck this out to confirm multiple deferred reads work (#1609).
@@ -1680,7 +1680,7 @@ class TestDeferredRead:
         with open(ct_name, "rb") as fp:
             data = fp.read()
         filelike = io.BytesIO(data)
-        dataset = pydicom.dcmread(filelike, defer_size=1024)
+        dataset = pydicom3.dcmread(filelike, defer_size=1024)
         assert 32768 == len(dataset.PixelData)
         # The 'Histogram tables' private data element is also > 1024 bytes so
         # pluck this out to confirm multiple deferred reads work (#1609).
@@ -1690,7 +1690,7 @@ class TestDeferredRead:
     def test_named_buffer_deferred(self):
         """Deferred values work with file-like objects."""
         path = get_testdata_file("image_dfl.dcm")
-        ds = pydicom.dcmread(path, defer_size=1024)
+        ds = pydicom3.dcmread(path, defer_size=1024)
         assert isinstance(ds.buffer, DicomBytesIO)
         assert 262144 == len(ds.PixelData)
 
@@ -1701,7 +1701,7 @@ class TestReadTruncatedFile:
         mr.decode()
         assert "CompressedSamples^MR1" == mr.PatientName
         assert mr.PatientName == mr[0x10, 0x10].value
-        DS = pydicom.valuerep.DS
+        DS = pydicom3.valuerep.DS
 
         if have_numpy and config.use_DS_numpy:
             expected = numpy.array([0.3125, 0.3125])
@@ -1737,7 +1737,7 @@ class TestFileLike:
         ct = dcmread(f)
         # XXX Tests here simply repeat testCT -- perhaps should collapse
         # the code together?
-        DS = pydicom.valuerep.DS
+        DS = pydicom3.valuerep.DS
 
         got = ct.ImagePositionPatient
         if have_numpy and config.use_DS_numpy:
@@ -1767,7 +1767,7 @@ class TestFileLike:
         ct = dcmread(file_like)
         # Tests here simply repeat some of testCT test
         got = ct.ImagePositionPatient
-        DS = pydicom.valuerep.DS
+        DS = pydicom3.valuerep.DS
 
         if have_numpy and config.use_DS_numpy:
             expected = numpy.array([-158.135803, -179.035797, -75.699997])

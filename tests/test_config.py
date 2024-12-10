@@ -1,5 +1,5 @@
 # Copyright 2008-2019 pydicom authors. See LICENSE file for details.
-"""Unit tests for the pydicom.config module."""
+"""Unit tests for the pydicom3.config module."""
 
 import logging
 import importlib
@@ -7,12 +7,12 @@ import importlib
 import pytest
 
 from pydicom import dcmread
-from pydicom.config import debug
-from pydicom.data import get_testdata_file
+from pydicom3.config import debug
+from pydicom3.data import get_testdata_file
 from pydicom import config
-from pydicom.dataelem import RawDataElement, convert_raw_data_element
-from pydicom.dataset import Dataset
-from pydicom.tag import Tag
+from pydicom3.dataelem import RawDataElement, convert_raw_data_element
+from pydicom3.dataset import Dataset
+from pydicom3.tag import Tag
 
 DS_PATH = get_testdata_file("CT_small.dcm")
 PYTEST = [int(x) for x in pytest.__version__.split(".")]

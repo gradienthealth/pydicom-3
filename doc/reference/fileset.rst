@@ -1,9 +1,9 @@
 .. _api_fileset:
 
-DICOM File-sets (:mod:`pydicom.fileset`)
+DICOM File-sets (:mod:`pydicom3.fileset`)
 ========================================
 
-.. currentmodule:: pydicom.fileset
+.. currentmodule:: pydicom3.fileset
 
 Representation of DICOM File-sets.
 

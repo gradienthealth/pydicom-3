@@ -57,9 +57,9 @@ class DicomIO:
               :meth:`io.RawIOBase.write` if it supports writing data to itself
 
             If `buffer` supports reading it can be used with
-            :func:`~pydicom.filereader.dcmread` as the source to decode a DICOM
+            :func:`~pydicom3.filereader.dcmread` as the source to decode a DICOM
             dataset from, and if it supports writing it can be used with
-            :func:`~pydicom.filewriter.dcmwrite` as the destination for the
+            :func:`~pydicom3.filewriter.dcmwrite` as the destination for the
             encoded DICOM dataset.
         """
         # Data packers/unpackers
@@ -153,7 +153,7 @@ class DicomIO:
 
     @property
     def name(self) -> str | None:
-        """Return the value of the :attr:`~pydicom.filebase.DicomIO.parent`'s
+        """Return the value of the :attr:`~pydicom3.filebase.DicomIO.parent`'s
         ``name`` attribute, or ``None`` if no such attribute.
         """
         return self._name
@@ -272,15 +272,15 @@ class DicomFileLike(DicomIO):
 
     See Also
     --------
-    :class:`~pydicom.filebase.DicomIO`
-    :class:`~pydicom.filebase.DicomBytesIO`
+    :class:`~pydicom3.filebase.DicomIO`
+    :class:`~pydicom3.filebase.DicomBytesIO`
     """
 
     pass
 
 
 def DicomFile(*args: Any, **kwargs: Any) -> DicomFileLike:
-    """Return an opened :class:`~pydicom.filebase.DicomFileLike` from a file-like."""
+    """Return an opened :class:`~pydicom3.filebase.DicomFileLike` from a file-like."""
     return DicomFileLike(open(*args, **kwargs))
 
 
@@ -289,8 +289,8 @@ class DicomBytesIO(DicomIO):
 
     See Also
     --------
-    :class:`~pydicom.filebase.DicomIO`
-    :class:`~pydicom.filebase.DicomFileLike`
+    :class:`~pydicom3.filebase.DicomIO`
+    :class:`~pydicom3.filebase.DicomFileLike`
     """
 
     def __init__(self, initial_bytes: bytes | bytearray | memoryview = b"") -> None:

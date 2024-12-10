@@ -26,7 +26,7 @@ def _encode_frame(src: bytes, runner: EncodeRunner) -> bytes:
     ----------
     src : bytes
         A single frame of little-endian ordered image data to be RLE encoded.
-    runner : pydicom.pixels.encoders.base.EncodeRunner
+    runner : pydicom3.pixels.encoders.base.EncodeRunner
         The runner managing the encoding process.
 
     Returns

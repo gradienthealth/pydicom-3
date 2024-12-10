@@ -1,12 +1,12 @@
 .. _api_pixel_processing:
 
-Pixel Data Processing (:mod:`pydicom.pixels.processing`)
+Pixel Data Processing (:mod:`pydicom3.pixels.processing`)
 ========================================================
 
 Functions for applying image processing to pixel data.
 
-.. module:: pydicom.pixels.processing
-.. currentmodule:: pydicom.pixels.processing
+.. module:: pydicom3.pixels.processing
+.. currentmodule:: pydicom3.pixels.processing
 
 .. autosummary::
    :toctree: generated/

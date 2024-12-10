@@ -11,9 +11,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pydicom import examples
-from pydicom.data import get_testdata_file
-from pydicom.fileset import FileSet
-from pydicom.uid import generate_uid
+from pydicom3.data import get_testdata_file
+from pydicom3.fileset import FileSet
+from pydicom3.uid import generate_uid
 
 
 path = get_testdata_file("DICOMDIR")

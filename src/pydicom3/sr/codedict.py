@@ -92,7 +92,7 @@ class Collection:
 
         Parameters
         ----------
-        item : pydicom.sr.coding.Code | str
+        item : pydicom3.sr.coding.Code | str
             The code to check for as either the code or the corresponding
             keyword.
 
@@ -145,7 +145,7 @@ class Collection:
         return _filtered(self._scheme_data, filters)
 
     def __getattr__(self, name: str) -> Code:
-        """Return the :class:`~pydicom.sr.Code` corresponding to `name`.
+        """Return the :class:`~pydicom3.sr.Code` corresponding to `name`.
 
         Parameters
         ----------
@@ -155,8 +155,8 @@ class Collection:
 
         Returns
         -------
-        pydicom.sr.Code
-            The :class:`~pydicom.sr.Code` corresponding to `name`.
+        pydicom3.sr.Code
+            The :class:`~pydicom3.sr.Code` corresponding to `name`.
         """
         if self.name.startswith("CID"):
             # Try DICOM's CID collections

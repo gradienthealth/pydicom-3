@@ -1,7 +1,7 @@
 # Copyright 2020 pydicom authors. See LICENSE file for details.
 """Pydicom command line interface program
 
-Each subcommand is a module within pydicom.cli, which
+Each subcommand is a module within pydicom3.cli, which
 defines an add_subparser(subparsers) function to set argparse
 attributes, and calls set_defaults(func=callback_function)
 
@@ -112,7 +112,7 @@ def filespec_parser(filespec: str) -> list[tuple[Dataset, Any]]:
         `type=filespec_parser`. When used that way, the resulting args.filespec
         will contain the return values of this function
         (e.g. use `ds, element_val = args.filespec` after parsing arguments)
-        See the `pydicom.cli.show` module for an example.
+        See the `pydicom3.cli.show` module for an example.
 
     Raises
     ------

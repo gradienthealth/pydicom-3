@@ -2,9 +2,9 @@
 """Decoding benchmarks for the rle_handler module."""
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
-from pydicom.encaps import decode_data_sequence
-from pydicom.pixel_data_handlers.rle_handler import (
+from pydicom3.data import get_testdata_file
+from pydicom3.encaps import decode_data_sequence
+from pydicom3.pixel_data_handlers.rle_handler import (
     get_pixeldata,
     _rle_decode_frame,
 )

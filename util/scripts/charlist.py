@@ -5,7 +5,7 @@ import logging
 import os
 
 import pydicom
-from pydicom.data import get_charset_files
+from pydicom3.data import get_charset_files
 
 
 if __name__ == "__main__":
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # Collect summary information from the files
     files_info = []
     for name in names:
-        ds = pydicom.dcmread(name)
+        ds = pydicom3.dcmread(name)
         ds.decode()
         fname = os.path.basename(name)
         try:

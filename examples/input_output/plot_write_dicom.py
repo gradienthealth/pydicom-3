@@ -3,7 +3,7 @@
 Write DICOM data
 ================
 
-This example shows how to write a DICOM file from scratch using pydicom. This
+This example shows how to write a DICOM file from scratch using pydicom3. This
 example does not produce a DICOM standards compliant file as written, you will
 have to change UIDs to valid values and add all required DICOM data elements.
 
@@ -17,8 +17,8 @@ from pathlib import Path
 import tempfile
 
 import pydicom
-from pydicom.dataset import Dataset, FileMetaDataset
-from pydicom.uid import UID, ExplicitVRLittleEndian
+from pydicom3.dataset import Dataset, FileMetaDataset
+from pydicom3.uid import UID, ExplicitVRLittleEndian
 
 
 print("Setting dataset values...")
@@ -47,7 +47,7 @@ ds.save_as(path, enforce_file_format=True)
 
 # reopen the data just for checking
 print(f"Load dataset from: {path} ...")
-ds = pydicom.dcmread(path)
+ds = pydicom3.dcmread(path)
 print(ds)
 
 # remove the created file

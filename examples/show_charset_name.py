@@ -10,7 +10,7 @@ Very simple app to display unicode person names.
 # authors : Guillaume Lemaitre <g.lemaitre58@gmail.com>
 # license : MIT
 
-from pydicom.valuerep import PersonName
+from pydicom3.valuerep import PersonName
 
 import tkinter
 

@@ -1,5 +1,5 @@
 # Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""test cases for pydicom.filewriter module"""
+"""test cases for pydicom3.filewriter module"""
 import tempfile
 from copy import deepcopy
 from datetime import date, datetime, time, timedelta, timezone
@@ -25,12 +25,12 @@ except ImportError:
 import pytest
 
 from pydicom import config, __version_info__, uid
-from pydicom.data import get_testdata_file, get_charset_files
-from pydicom.dataset import Dataset, FileDataset, FileMetaDataset
-from pydicom.dataelem import DataElement, RawDataElement
-from pydicom.filebase import DicomBytesIO
-from pydicom.filereader import dcmread, read_dataset
-from pydicom.filewriter import (
+from pydicom3.data import get_testdata_file, get_charset_files
+from pydicom3.dataset import Dataset, FileDataset, FileMetaDataset
+from pydicom3.dataelem import DataElement, RawDataElement
+from pydicom3.filebase import DicomBytesIO
+from pydicom3.filereader import dcmread, read_dataset
+from pydicom3.filewriter import (
     _determine_encoding,
     write_data_element,
     write_dataset,
@@ -46,10 +46,10 @@ from pydicom.filewriter import (
     writers,
     dcmwrite,
 )
-from pydicom.multival import MultiValue
-from pydicom.sequence import Sequence
+from pydicom3.multival import MultiValue
+from pydicom3.sequence import Sequence
 from .test_helpers import assert_no_warning
-from pydicom.uid import (
+from pydicom3.uid import (
     ImplicitVRLittleEndian,
     ExplicitVRBigEndian,
     ExplicitVRLittleEndian,
@@ -58,9 +58,9 @@ from pydicom.uid import (
     CTImageStorage,
     UID,
 )
-from pydicom.util.hexutil import hex2bytes
-from pydicom.valuerep import BUFFERABLE_VRS, DA, DT, TM, VR
-from pydicom.values import convert_text
+from pydicom3.util.hexutil import hex2bytes
+from pydicom3.valuerep import BUFFERABLE_VRS, DA, DT, TM, VR
+from pydicom3.values import convert_text
 from ._write_stds import impl_LE_deflen_std_hex
 
 rtplan_name = get_testdata_file("rtplan.dcm")
@@ -391,7 +391,7 @@ class TestWriteDataElement:
 
         Parameters
         ----------
-        elem : pydicom.dataelem.DataElement
+        elem : pydicom3.dataelem.DataElement
             The element to encode
         is_implicit_VR : bool
             Encode using implicit VR, default True
@@ -3119,7 +3119,7 @@ class TestWriteUndefinedLengthPixelData:
         msg = (
             r"The \(7FE0,0010\) 'Pixel Data' element value hasn't been encapsulated "
             "as required for a compressed transfer syntax - see "
-            r"pydicom.encaps.encapsulate\(\) for more information"
+            r"pydicom3.encaps.encapsulate\(\) for more information"
         )
         with pytest.raises(ValueError, match=msg):
             write_data_element(self.fp, pixel_data)
@@ -3144,7 +3144,7 @@ class TestWriteUndefinedLengthPixelData:
         msg = (
             r"The \(7FE0,0010\) 'Pixel Data' element value hasn't been encapsulated "
             "as required for a compressed transfer syntax - see "
-            r"pydicom.encaps.encapsulate\(\) for more information"
+            r"pydicom3.encaps.encapsulate\(\) for more information"
         )
         with pytest.raises(ValueError, match=msg):
             write_data_element(self.fp, pixel_data)

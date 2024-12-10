@@ -28,8 +28,8 @@ General style guidelines
   Data*. When referring to an element name by itself then use italics: *Bits
   Allocated*
 * **ds**, **elem**, **seq**, **arr** - when writing examples try to use ``ds``
-  as the variable name for :class:`~pydicom.dataset.Dataset`, ``elem`` for
-  :class:`~pydicom.dataelem.DataElement`, ``seq`` for sequences and ``arr``
+  as the variable name for :class:`~pydicom3.dataset.Dataset`, ``elem`` for
+  :class:`~pydicom3.dataelem.DataElement`, ``seq`` for sequences and ``arr``
   for numpy arrays.
 * **them**, **they**, **their** - use gender neutral pronouns when referring to
   a hypothetical person
@@ -41,7 +41,7 @@ General style guidelines
   * When writing a hex value ``0xB4``
   * When referring to a class, function, variable, etc and you haven't
     used semantic markup: ``Dataset`` when not using
-    :class:`~pydicom.dataset.Dataset`
+    :class:`~pydicom3.dataset.Dataset`
 * Use a single back-tick \`italics\` for parameter names: If
   `fragments_per_frame` is not...
 * For the API reference documentation, follow the `NumPy docstring guide
@@ -57,10 +57,10 @@ Guidelines for reStructuredText
 * Because Sphinx will automatically link to the corresponding API
   documentation, the more semantic markup you can add, the better. So this::
 
-    :attr:`Dataset.pixel_array<pydicom.dataset.Dataset.pixel_array>` returns a :class:`numpy.ndarray`
+    :attr:`Dataset.pixel_array<pydicom3.dataset.Dataset.pixel_array>` returns a :class:`numpy.ndarray`
 
   which produces: ":attr:`Dataset.pixel_array
-  <pydicom.dataset.Dataset.pixel_array>` returns a :class:`numpy.ndarray`",
+  <pydicom3.dataset.Dataset.pixel_array>` returns a :class:`numpy.ndarray`",
   is better than this::
 
     ``Dataset.pixel_array`` returns a numpy ``ndarray``
@@ -69,8 +69,8 @@ Guidelines for reStructuredText
 
 
 * Targets can be prefixed with **~** so that the last bit of the path gets used
-  as the link title. So ``:class:`~pydicom.dataset.Dataset``` will show as a
-  :class:`~pydicom.dataset.Dataset`.
+  as the link title. So ``:class:`~pydicom3.dataset.Dataset``` will show as a
+  :class:`~pydicom3.dataset.Dataset`.
 * Python and NumPy objects can also be referenced: ``:class:`float```,
   ``:class:`numpy.dtype```
 * Use ``:dcm:`` to link to the CHTML version of the DICOM Standard. For

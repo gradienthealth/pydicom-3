@@ -6,8 +6,8 @@ import os
 
 import pytest
 
-from pydicom.data import get_testdata_file
-from pydicom.misc import is_dicom, size_in_bytes, warn_and_log
+from pydicom3.data import get_testdata_file
+from pydicom3.misc import is_dicom, size_in_bytes, warn_and_log
 
 
 test_file = get_testdata_file("CT_small.dcm")

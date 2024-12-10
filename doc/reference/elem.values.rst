@@ -1,9 +1,9 @@
 .. _api_elem_values:
 
-Element Value Decoding (:mod:`pydicom.values`)
+Element Value Decoding (:mod:`pydicom3.values`)
 ==============================================
 
-.. currentmodule:: pydicom.values
+.. currentmodule:: pydicom3.values
 
 Element value decoding.
 

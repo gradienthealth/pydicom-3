@@ -1,6 +1,6 @@
-from pydicom.dataset import Dataset
-from pydicom.sequence import Sequence
-from pydicom.tag import Tag
+from pydicom3.dataset import Dataset
+from pydicom3.sequence import Sequence
+from pydicom3.tag import Tag
 
 
 def create_nested_test_seq(num_items: int = 6280) -> Dataset:

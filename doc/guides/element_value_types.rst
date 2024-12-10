@@ -140,7 +140,7 @@ in read mode. This allows you to avoid having to read a large amount of data int
 memory when creating datasets::
 
     from pydicom import Dataset, FileMetaDataset
-    from pydicom.uid import ExplicitVRLittleEndian
+    from pydicom3.uid import ExplicitVRLittleEndian
 
     with open("a_large_amount_of_data", "rb") as f:
         ds = Dataset()
@@ -150,13 +150,13 @@ memory when creating datasets::
         ds.save_as("large_dataset.dcm")
 
 To use a buffered *Pixel Data* value with a dataset that has a compressed transfer
-syntax such as *JPEG 2000 Lossles*, the :func:`~pydicom.encaps.encapsulate_buffer` and
-:func:`~pydicom.encaps.encapsulate_extended_buffer` functions can be used to encapsulate
+syntax such as *JPEG 2000 Lossles*, the :func:`~pydicom3.encaps.encapsulate_buffer` and
+:func:`~pydicom3.encaps.encapsulate_extended_buffer` functions can be used to encapsulate
 the buffered frames::
 
     from pydicom import Dataset, FileMetaDataset
-    from pydicom.encaps import encapsulate_buffer
-    from pydicom.uid import JPEG2000Lossless
+    from pydicom3.encaps import encapsulate_buffer
+    from pydicom3.uid import JPEG2000Lossless
 
     with open("a_large_jpeg2000_file.j2k", "rb") as f:
         ds = Dataset()

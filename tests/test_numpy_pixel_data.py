@@ -30,11 +30,11 @@ There are the following possibilities:
 import pytest
 
 from pydicom import config
-from pydicom.data import get_testdata_file
-from pydicom.dataset import Dataset, FileMetaDataset
-from pydicom.filereader import dcmread
-from pydicom.pixels.processing import convert_color_space
-from pydicom.uid import (
+from pydicom3.data import get_testdata_file
+from pydicom3.dataset import Dataset, FileMetaDataset
+from pydicom3.filereader import dcmread
+from pydicom3.pixels.processing import convert_color_space
+from pydicom3.uid import (
     ImplicitVRLittleEndian,
     ExplicitVRLittleEndian,
     DeflatedExplicitVRLittleEndian,
@@ -50,8 +50,8 @@ except ImportError:
     HAVE_NP = False
 
 try:
-    from pydicom.pixel_data_handlers import numpy_handler as NP_HANDLER
-    from pydicom.pixel_data_handlers.numpy_handler import (
+    from pydicom3.pixel_data_handlers import numpy_handler as NP_HANDLER
+    from pydicom3.pixel_data_handlers.numpy_handler import (
         get_pixeldata,
         unpack_bits,
     )

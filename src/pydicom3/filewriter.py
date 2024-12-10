@@ -239,7 +239,7 @@ def correct_ambiguous_vr_element(
     all retired or part of DICONDE.
 
     If the VR is corrected and is 'US' or 'SS' then the value will be updated
-    using the :func:`~pydicom.values.convert_numbers` function.
+    using the :func:`~pydicom3.values.convert_numbers` function.
 
     .. versionchanged:: 3.0
 
@@ -253,7 +253,7 @@ def correct_ambiguous_vr_element(
         The dataset containing `elem`.
     is_little_endian : bool
         The byte ordering of the values in the dataset.
-    ancestors : list[pydicom.dataset.Dataset] | None
+    ancestors : list[pydicom3.dataset.Dataset] | None
         A list of the ancestor datasets to look through when trying to find
         the relevant element value to use in VR correction. Should be ordered
         from closest to furthest. If ``None`` then will build itself
@@ -294,7 +294,7 @@ def correct_ambiguous_vr(
     all retired or part of DICONDE.
 
     If the VR is corrected and is 'US' or 'SS' then the value will be updated
-    using the :func:`~pydicom.values.convert_numbers` function.
+    using the :func:`~pydicom3.values.convert_numbers` function.
 
     .. versionchanged:: 3.0
 
@@ -302,11 +302,11 @@ def correct_ambiguous_vr(
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The dataset containing ambiguous VR elements.
     is_little_endian : bool
         The byte ordering of the values in the dataset.
-    ancestors : list[pydicom.dataset.Dataset] | None
+    ancestors : list[pydicom3.dataset.Dataset] | None
         A list of the ancestor datasets to look through when trying to find
         the relevant element value to use in VR correction. Should be ordered
         from closest to furthest. If ``None`` then will build itself
@@ -686,7 +686,7 @@ def write_data_element(
             raise ValueError(
                 "The (7FE0,0010) 'Pixel Data' element value hasn't been "
                 "encapsulated as required for a compressed transfer syntax - "
-                "see pydicom.encaps.encapsulate() for more information"
+                "see pydicom3.encaps.encapsulate() for more information"
             )
 
     value_length = (
@@ -755,13 +755,13 @@ def write_dataset(
     * ``fp.is_implicit_VR`` and ``fp.is_little_endian``.
     * ``dataset.is_implicit_VR`` and ``dataset.is_little_endian``
     * If `dataset` has been decoded from a file or buffer then
-      :attr:`~pydicom.dataset.Dataset.original_encoding`.
+      :attr:`~pydicom3.dataset.Dataset.original_encoding`.
 
     Parameters
     ----------
-    fp : pydicom.filebase.DicomIO
+    fp : pydicom3.filebase.DicomIO
         The file-like to write the encoded dataset to.
-    dataset : pydicom.dataset.Dataset
+    dataset : pydicom3.dataset.Dataset
         The dataset to be encoded.
     parent_encoding : str | List[str], optional
         The character set to use for encoding strings, defaults to ``"iso8859"``.
@@ -859,7 +859,7 @@ def write_sequence_item(fp: DicomIO, dataset: Dataset, encodings: list[str]) -> 
     fp : file-like
         The file-like to write the encoded data to.
     dataset : Dataset
-        The :class:`Dataset<pydicom.dataset.Dataset>` to write to `fp`.
+        The :class:`Dataset<pydicom3.dataset.Dataset>` to write to `fp`.
     encodings : list of str
         The character encodings to use on text values.
     """
@@ -949,7 +949,7 @@ def write_file_meta_info(
     ----------
     fp : file-like
         The file-like to write the File Meta Information to.
-    file_meta : pydicom.dataset.Dataset
+    file_meta : pydicom3.dataset.Dataset
         The File Meta Information elements.
     enforce_standard : bool
         If ``False``, then only the *File Meta Information* elements already in
@@ -1018,9 +1018,9 @@ def _determine_encoding(
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The dataset that is to be encoded.
-    tsyntax : pydicom.uid.UID | None
+    tsyntax : pydicom3.uid.UID | None
         The dataset's public or private transfer syntax (if any). Private
         transfer syntaxes require `implicit_vr` and `little_endian` be used.
     implicit_vr : bool | None
@@ -1178,11 +1178,11 @@ def dcmwrite(
     others are optional (Type 3/1C). If `enforce_file_format` is ``False``
     then the *File Meta Information Group* elements are all optional, otherwise
     an attempt will be made to add the required elements using `dataset`. See
-    :func:`~pydicom.filewriter.write_file_meta_info` for more information on
+    :func:`~pydicom3.filewriter.write_file_meta_info` for more information on
     which elements are required.
 
     The *File Meta Information Group* elements must be included within their
-    own :class:`~pydicom.dataset.FileMetaDataset` in the ``dataset.file_meta``
+    own :class:`~pydicom3.dataset.FileMetaDataset` in the ``dataset.file_meta``
     attribute.
 
     *Encoding*
@@ -1206,11 +1206,11 @@ def dcmwrite(
     The `dataset` is encoded as specified by (in order of priority):
 
     * The encoding corresponding to the set *Transfer Syntax UID* in
-      :attr:`~pydicom.dataset.FileDataset.file_meta`.
+      :attr:`~pydicom3.dataset.FileDataset.file_meta`.
     * The `implicit_vr` and `little_endian` arguments
-    * :attr:`~pydicom.dataset.Dataset.is_implicit_VR` and
-      :attr:`~pydicom.dataset.Dataset.is_little_endian`
-    * :attr:`~pydicom.dataset.Dataset.original_encoding`
+    * :attr:`~pydicom3.dataset.Dataset.is_implicit_VR` and
+      :attr:`~pydicom3.dataset.Dataset.is_little_endian`
+    * :attr:`~pydicom3.dataset.Dataset.original_encoding`
 
     .. warning::
 
@@ -1218,7 +1218,7 @@ def dcmwrite(
         to big endian encoding (or vice versa). The endianness of values for
         elements with a VR of **OD**, **OF**, **OL**, **OW**, **OV** and
         **UN** must be converted manually prior to calling
-        :func:`~pydicom.filewriter.dcmwrite`.
+        :func:`~pydicom3.filewriter.dcmwrite`.
 
     Parameters
     ----------
@@ -1226,7 +1226,7 @@ def dcmwrite(
         File path, file-like or writeable buffer to write the encoded `dataset`
         to. If using a writeable buffer it must have ``write()``, ``seek()``
         and ``tell()`` methods.
-    dataset : pydicom.dataset.FileDataset
+    dataset : pydicom3.dataset.FileDataset
         The dataset to be encoded.
     write_like_original : bool, optional
         If ``True`` (default) then write `dataset` as-is, otherwise
@@ -1274,9 +1274,9 @@ def dcmwrite(
 
     See Also
     --------
-    pydicom.dataset.Dataset
+    pydicom3.dataset.Dataset
         Dataset class with relevant attributes and information.
-    pydicom.dataset.Dataset.save_as
+    pydicom3.dataset.Dataset.save_as
         Encode a dataset and write it to file, wraps ``dcmwrite()``.
     """
     # TODO: Remove in v4.0

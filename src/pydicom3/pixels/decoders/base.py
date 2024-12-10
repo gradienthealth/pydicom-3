@@ -234,7 +234,7 @@ class DecodeRunner(RunnerBase):
     .. versionadded:: 3.0
 
     This class is not intended to be used directly. For decoding pixel data
-    use the :class:`~pydicom.pixels.decoders.base.Decoder` instance
+    use the :class:`~pydicom3.pixels.decoders.base.Decoder` instance
     corresponding to the transfer syntax of the pixel data.
     """
 
@@ -243,7 +243,7 @@ class DecodeRunner(RunnerBase):
 
         Parameters
         ----------
-        tsyntax : pydicom.uid.UID
+        tsyntax : pydicom3.uid.UID
             The transfer syntax UID corresponding to the pixel data to be
             decoded.
         """
@@ -643,7 +643,7 @@ class DecodeRunner(RunnerBase):
 
         Parameters
         ----------
-        ds : pydicom.dataset.Dataset
+        ds : pydicom3.dataset.Dataset
             The dataset to use.
         """
         super()._set_options_ds(ds)
@@ -678,9 +678,9 @@ class DecodeRunner(RunnerBase):
 
         Parameters
         ----------
-        src : bytes | bytearray | memoryview | pydicom.dataset.Dataset
+        src : bytes | bytearray | memoryview | pydicom3.dataset.Dataset
             If a buffer-like then the encoded pixel data, otherwise the
-            :class:`~pydicom.dataset.Dataset` containing the pixel data and
+            :class:`~pydicom3.dataset.Dataset` containing the pixel data and
             associated group ``0x0028`` elements.
         """
         from pydicom3.dataset import Dataset
@@ -859,7 +859,7 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        uid : pydicom.uid.UID
+        uid : pydicom3.uid.UID
             The *Transfer Syntax UID* that the decoder supports.
         """
         super().__init__(uid, decoder=True)
@@ -907,10 +907,10 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        src : :class:`~pydicom.dataset.Dataset` | buffer-like | file-like
+        src : :class:`~pydicom3.dataset.Dataset` | buffer-like | file-like
             Single or multi-frame pixel data as one of the following:
 
-            * :class:`~pydicom.dataset.Dataset`: a dataset containing
+            * :class:`~pydicom3.dataset.Dataset`: a dataset containing
               the pixel data to be decoded and the corresponding
               *Image Pixel* module elements.
             * :class:`bytes` | :class:`bytearray` | :class:`memoryview`: the
@@ -919,7 +919,7 @@ class Decoder(CoderBase):
               the pixel data element's value. The position will be returned
               to the starting offset prior to returning the array.
 
-            When `src` is not a :class:`~pydicom.dataset.Dataset` then a number
+            When `src` is not a :class:`~pydicom3.dataset.Dataset` then a number
             of keyword parameters are also required. Please see the
             :doc:`decoding options documentation</guides/decoding/decoder_options>`
             for more information.
@@ -934,7 +934,7 @@ class Decoder(CoderBase):
             (default) then additional processing may be applied to convert the
             pixel data to it's most commonly used form (such as converting from
             YCbCr to RGB). To return the raw pixel data with no processing
-            whatsoever, use the :meth:`~pydicom.pixels.decoders.base.Decoder.as_buffer`
+            whatsoever, use the :meth:`~pydicom3.pixels.decoders.base.Decoder.as_buffer`
             method.
         validate : bool, optional
             If ``True`` (default) then validate the supplied decoding options
@@ -972,7 +972,7 @@ class Decoder(CoderBase):
             The :dcm:`Image Pixel<part03/sect_C.7.6.3.html>` module element
             values resulting from the decoding process that describe the array.
             See :meth:`DecodeRunner.pixel_properties()
-            <pydicom.pixels.decoders.base.DecodeRunner.pixel_properties>` for the
+            <pydicom3.pixels.decoders.base.DecodeRunner.pixel_properties>` for the
             possible contents.
         """
         if not HAVE_NP:
@@ -1037,7 +1037,7 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        runner : pydicom.pixels.decoders.base.DecodeRunner
+        runner : pydicom3.pixels.decoders.base.DecodeRunner
             The runner with the encoded data and decoding options.
         index : int | None
             The index of the frame to be returned, or ``None`` if all frames
@@ -1113,7 +1113,7 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        runner : pydicom.pixels.decoders.base.DecodeRunner
+        runner : pydicom3.pixels.decoders.base.DecodeRunner
             The runner with the encoded data and decoding options.
         index : int | None
             The index of the frame to be returned, or ``None`` if all frames
@@ -1279,10 +1279,10 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        src : :class:`~pydicom.dataset.Dataset` | buffer-like | file-like
+        src : :class:`~pydicom3.dataset.Dataset` | buffer-like | file-like
             Single or multi-frame pixel data as one of the following:
 
-            * :class:`~pydicom.dataset.Dataset`: a dataset containing
+            * :class:`~pydicom3.dataset.Dataset`: a dataset containing
               the pixel data to be decoded and the corresponding
               *Image Pixel* module elements.
             * :class:`bytes` | :class:`bytearray` | :class:`memoryview`: the
@@ -1291,7 +1291,7 @@ class Decoder(CoderBase):
               pixel data element's value. The position will be returned
               to the starting offset prior to returning the buffer.
 
-            When `src` is not a :class:`~pydicom.dataset.Dataset` then a number
+            When `src` is not a :class:`~pydicom3.dataset.Dataset` then a number
             of keyword parameters are also required. Please see the
             :doc:`decoding options documentation</guides/decoding/decoder_options>`
             for more information.
@@ -1335,7 +1335,7 @@ class Decoder(CoderBase):
             The :dcm:`Image Pixel<part03/sect_C.7.6.3.html>` module element
             values resulting from the decoding process that describe the
             decoded pixel data. See :meth:`DecodeRunner.pixel_properties()
-            <pydicom.pixels.decoders.base.DecodeRunner.pixel_properties>` for the
+            <pydicom3.pixels.decoders.base.DecodeRunner.pixel_properties>` for the
             possible contents.
         """
         runner = DecodeRunner(self.UID)
@@ -1366,7 +1366,7 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        runner : pydicom.pixels.decoders.base.DecodeRunner
+        runner : pydicom3.pixels.decoders.base.DecodeRunner
             The runner with the encoded data and decoding options.
         index : int | None
             The index of the frame to be returned, or ``None`` if all frames
@@ -1458,7 +1458,7 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        runner : pydicom.pixels.decoders.base.DecodeRunner
+        runner : pydicom3.pixels.decoders.base.DecodeRunner
             The runner with the encoded data and decoding options.
         index : int | None
             The index of the frame to be returned, or ``None`` if all frames
@@ -1587,10 +1587,10 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        src : :class:`~pydicom.dataset.Dataset` | buffer-like | file-like
+        src : :class:`~pydicom3.dataset.Dataset` | buffer-like | file-like
             Single or multi-frame pixel data as one of the following:
 
-            * :class:`~pydicom.dataset.Dataset`: a dataset containing
+            * :class:`~pydicom3.dataset.Dataset`: a dataset containing
               the pixel data to be decoded and the corresponding
               *Image Pixel* module elements.
             * :class:`bytes` | :class:`bytearray` | :class:`memoryview`: the
@@ -1599,7 +1599,7 @@ class Decoder(CoderBase):
               pixel data element's value. The position will be returned
               to the starting offset only after all frames have been yielded.
 
-            When `src` is not a :class:`~pydicom.dataset.Dataset` then a number
+            When `src` is not a :class:`~pydicom3.dataset.Dataset` then a number
             of keyword parameters are also required. Please see the
             :doc:`decoding options documentation</guides/decoding/decoder_options>`
             for more information.
@@ -1612,7 +1612,7 @@ class Decoder(CoderBase):
             (default) then additional processing may be applied to convert the
             pixel data to it's most commonly used form (such as converting from
             YCbCr to RGB). To yield frames of pixel data with no processing
-            whatsoever, use the :meth:`~pydicom.pixels.decoders.base.Decoder.iter_buffer`
+            whatsoever, use the :meth:`~pydicom3.pixels.decoders.base.Decoder.iter_buffer`
             method.
         validate : bool, optional
             If ``True`` (default) then validate the supplied decoding options
@@ -1648,7 +1648,7 @@ class Decoder(CoderBase):
             The :dcm:`Image Pixel<part03/sect_C.7.6.3.html>` module element
             values resulting from the decoding process that describe the array.
             See :meth:`DecodeRunner.pixel_properties()
-            <pydicom.pixels.decoders.base.DecodeRunner.pixel_properties>` for the
+            <pydicom3.pixels.decoders.base.DecodeRunner.pixel_properties>` for the
             possible contents.
         """
         if not HAVE_NP:
@@ -1754,10 +1754,10 @@ class Decoder(CoderBase):
 
         Parameters
         ----------
-        src : :class:`~pydicom.dataset.Dataset` | buffer-like | file-like
+        src : :class:`~pydicom3.dataset.Dataset` | buffer-like | file-like
             Single or multi-frame pixel data as one of the following:
 
-            * :class:`~pydicom.dataset.Dataset`: a dataset containing
+            * :class:`~pydicom3.dataset.Dataset`: a dataset containing
               the pixel data to be decoded and the corresponding
               *Image Pixel* module elements.
             * :class:`bytes` | :class:`bytearray` | :class:`memoryview`: the
@@ -1766,7 +1766,7 @@ class Decoder(CoderBase):
               pixel data element's value. The position will be returned
               to the starting offset only after all frames have been yielded.
 
-            When `src` is not a :class:`~pydicom.dataset.Dataset` then a number
+            When `src` is not a :class:`~pydicom3.dataset.Dataset` then a number
             of keyword parameters are also required. Please see the
             :doc:`decoding options documentation</guides/decoding/decoder_options>`
             for more information.
@@ -1809,7 +1809,7 @@ class Decoder(CoderBase):
             The :dcm:`Image Pixel<part03/sect_C.7.6.3.html>` module element
             values resulting from the decoding process that describe the
             decoded frame of pixel data. See :meth:`DecodeRunner.pixel_properties()
-            <pydicom.pixels.decoders.base.DecodeRunner.pixel_properties>` for the
+            <pydicom3.pixels.decoders.base.DecodeRunner.pixel_properties>` for the
             possible contents.
         """
         runner = DecodeRunner(self.UID)
@@ -1852,93 +1852,93 @@ DeflatedExplicitVRLittleEndianDecoder = Decoder(DeflatedExplicitVRLittleEndian)
 JPEGBaseline8BitDecoder = Decoder(JPEGBaseline8Bit)
 JPEGBaseline8BitDecoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.decoders.gdcm", "_decode_frame")),
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
-        ("pillow", ("pydicom.pixels.decoders.pillow", "_decode_frame")),
+        ("gdcm", ("pydicom3.pixels.decoders.gdcm", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("pillow", ("pydicom3.pixels.decoders.pillow", "_decode_frame")),
     ]
 )
 
 JPEGExtended12BitDecoder = Decoder(JPEGExtended12Bit)
 JPEGExtended12BitDecoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.decoders.gdcm", "_decode_frame")),
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
-        ("pillow", ("pydicom.pixels.decoders.pillow", "_decode_frame")),
+        ("gdcm", ("pydicom3.pixels.decoders.gdcm", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("pillow", ("pydicom3.pixels.decoders.pillow", "_decode_frame")),
     ]
 )
 
 JPEGLosslessDecoder = Decoder(JPEGLossless)
 JPEGLosslessDecoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.decoders.gdcm", "_decode_frame")),
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("gdcm", ("pydicom3.pixels.decoders.gdcm", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
     ]
 )
 
 JPEGLosslessSV1Decoder = Decoder(JPEGLosslessSV1)
 JPEGLosslessSV1Decoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.decoders.gdcm", "_decode_frame")),
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("gdcm", ("pydicom3.pixels.decoders.gdcm", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
     ]
 )
 
 JPEGLSLosslessDecoder = Decoder(JPEGLSLossless)
 JPEGLSLosslessDecoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.decoders.gdcm", "_decode_frame")),
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
-        ("pyjpegls", ("pydicom.pixels.decoders.pyjpegls", "_decode_frame")),
+        ("gdcm", ("pydicom3.pixels.decoders.gdcm", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("pyjpegls", ("pydicom3.pixels.decoders.pyjpegls", "_decode_frame")),
     ]
 )
 
 JPEGLSNearLosslessDecoder = Decoder(JPEGLSNearLossless)
 JPEGLSNearLosslessDecoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.decoders.gdcm", "_decode_frame")),
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
-        ("pyjpegls", ("pydicom.pixels.decoders.pyjpegls", "_decode_frame")),
+        ("gdcm", ("pydicom3.pixels.decoders.gdcm", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("pyjpegls", ("pydicom3.pixels.decoders.pyjpegls", "_decode_frame")),
     ]
 )
 
 JPEG2000LosslessDecoder = Decoder(JPEG2000Lossless)
 JPEG2000LosslessDecoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.decoders.gdcm", "_decode_frame")),
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
-        ("pillow", ("pydicom.pixels.decoders.pillow", "_decode_frame")),
+        ("gdcm", ("pydicom3.pixels.decoders.gdcm", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("pillow", ("pydicom3.pixels.decoders.pillow", "_decode_frame")),
     ]
 )
 
 JPEG2000Decoder = Decoder(JPEG2000)
 JPEG2000Decoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.decoders.gdcm", "_decode_frame")),
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
-        ("pillow", ("pydicom.pixels.decoders.pillow", "_decode_frame")),
+        ("gdcm", ("pydicom3.pixels.decoders.gdcm", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("pillow", ("pydicom3.pixels.decoders.pillow", "_decode_frame")),
     ]
 )
 
 HTJ2KLosslessDecoder = Decoder(HTJ2KLossless)
 HTJ2KLosslessDecoder.add_plugin(
-    "pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")
+    "pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")
 )
 
 HTJ2KLosslessRPCLDecoder = Decoder(HTJ2KLosslessRPCL)
 HTJ2KLosslessRPCLDecoder.add_plugin(
-    "pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")
+    "pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")
 )
 
 HTJ2KDecoder = Decoder(HTJ2K)
 HTJ2KDecoder.add_plugin(
-    "pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")
+    "pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")
 )
 
 RLELosslessDecoder = Decoder(RLELossless)
 RLELosslessDecoder.add_plugins(
     [
-        ("pylibjpeg", ("pydicom.pixels.decoders.pylibjpeg", "_decode_frame")),
-        ("pydicom", ("pydicom.pixels.decoders.rle", "_decode_frame")),
+        ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
+        ("pydicom", ("pydicom3.pixels.decoders.rle", "_decode_frame")),
     ]
 )
 
@@ -1987,7 +1987,7 @@ def _build_decoder_docstrings() -> None:
         )
         s.append("")
         s.append(
-            "See the :class:`~pydicom.pixels.decoders.base.Decoder` "
+            "See the :class:`~pydicom3.pixels.decoders.base.Decoder` "
             "reference for instance methods and attributes."
         )
         dec.__doc__ = "\n".join(s)

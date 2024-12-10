@@ -1,10 +1,10 @@
 .. _api_hooks:
 
-User Hooks (:mod:`pydicom.hooks`)
+User Hooks (:mod:`pydicom3.hooks`)
 =================================
 
-.. module:: pydicom.hooks
-.. currentmodule:: pydicom.hooks
+.. module:: pydicom3.hooks
+.. currentmodule:: pydicom3.hooks
 
 Hooks manager class and instance
 
@@ -15,7 +15,7 @@ Hooks manager class and instance
    Hooks
 
 
-Hooks for :func:`~pydicom.dataelem.convert_raw_data_element`
+Hooks for :func:`~pydicom3.dataelem.convert_raw_data_element`
 
 .. autosummary::
    :toctree: generated/

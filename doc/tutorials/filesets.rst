@@ -5,7 +5,7 @@ DICOM File-sets and DICOMDIR
 This tutorial is about DICOM File-sets and covers:
 
 * An introduction to DICOM File-sets and the DICOMDIR file
-* Loading a File-set using the :class:`~pydicom.fileset.FileSet` class and
+* Loading a File-set using the :class:`~pydicom3.fileset.FileSet` class and
   accessing its managed SOP instances
 * Creating a new File-set and modifying existing ones
 
@@ -37,7 +37,7 @@ The DICOMDIR file
 .. note::
 
     Despite its name, a DICOMDIR file is not a file system directory and
-    can be read using :func:`~pydicom.filereader.dcmread` like any other DICOM
+    can be read using :func:`~pydicom3.filereader.dcmread` like any other DICOM
     dataset.
 
 Every File-set must contain a single file with the filename ``DICOMDIR``, the
@@ -52,7 +52,7 @@ specifies where the DICOMDIR must be located.
     It's **strongly recommended** that you avoid making changes to a DICOMDIR
     dataset directly unless you know what you're doing. Even minor changes may
     require recalculating the offsets for each directory record. Use the
-    :class:`~pydicom.fileset.FileSet` methods (see below) instead.
+    :class:`~pydicom3.fileset.FileSet` methods (see below) instead.
 
 The DICOMDIR file is used to summarize the contents of the File-set and is a
 *Media Storage Directory* instance that follows the
@@ -98,20 +98,20 @@ dataset, making changes to an existing File-set quickly becomes complicated
 due to the need to add and remove directory records, recalculate the
 byte offsets for existing records and manage the corresponding file
 system changes. A more user-friendly way to interact with one is via the
-:class:`~pydicom.fileset.FileSet` class.
+:class:`~pydicom3.fileset.FileSet` class.
 
 
 Loading existing File-sets
 --------------------------
 
 To load an existing File-set just pass a DICOMDIR
-:class:`~pydicom.dataset.Dataset` or the path to the DICOMDIR file to
-:class:`~pydicom.fileset.FileSet`:
+:class:`~pydicom3.dataset.Dataset` or the path to the DICOMDIR file to
+:class:`~pydicom3.fileset.FileSet`:
 
 .. code-block:: python
 
     >>> from pydicom import dcmread
-    >>> from pydicom.fileset import FileSet
+    >>> from pydicom3.fileset import FileSet
     >>> path = examples.get_path("dicomdir")  # The path to the examples.dicomdir dataset
     >>> ds = dcmread(path)
     >>> fs = FileSet(ds)  # or FileSet(path)
@@ -166,11 +166,11 @@ An overview of the File-set's contents is shown when printing:
               IMAGE: 7 SOP Instances
 
 
-The :class:`~pydicom.fileset.FileSet` class treats a File-set as a flat
+The :class:`~pydicom3.fileset.FileSet` class treats a File-set as a flat
 collection of SOP Instances, abstracting away the need to dig down into the
 hierarchy like you would with a DICOMDIR dataset. For example,
-iterating over the :class:`~pydicom.fileset.FileSet` yields a
-:class:`~pydicom.fileset.FileInstance` object for each of the managed
+iterating over the :class:`~pydicom3.fileset.FileSet` yields a
+:class:`~pydicom3.fileset.FileInstance` object for each of the managed
 instances.
 
 .. code-block:: python
@@ -182,7 +182,7 @@ instances.
     Doe^Archibald
 
 A list of unique element values within the File-set can be found using the
-:meth:`~pydicom.fileset.FileSet.find_values` method, which by default
+:meth:`~pydicom3.fileset.FileSet.find_values` method, which by default
 searches the corresponding DICOMDIR records:
 
 .. code-block:: python
@@ -202,11 +202,11 @@ to read and decode the corresponding files:
     ['MONOCHROME1', 'MONOCHROME2']
 
 More importantly, the File-set can be searched to find instances matching
-a query using the :func:`~pydicom.fileset.FileSet.find` method, which returns
-a list of :class:`~pydicom.fileset.FileInstance`. The corresponding file
+a query using the :func:`~pydicom3.fileset.FileSet.find` method, which returns
+a list of :class:`~pydicom3.fileset.FileInstance`. The corresponding file
 can then be read and decoded using :meth:`FileInstance.load()
-<pydicom.fileset.FileInstance.load>`, returning it as a
-:class:`~pydicom.dataset.FileDataset`:
+<pydicom3.fileset.FileInstance.load>`, returning it as a
+:class:`~pydicom3.dataset.FileDataset`:
 
 .. code-block:: python
 
@@ -222,7 +222,7 @@ can then be read and decoded using :meth:`FileInstance.load()
     MONOCHROME2
     MONOCHROME2
 
-:func:`~pydicom.fileset.FileSet.find` also supports the use of the `load`
+:func:`~pydicom3.fileset.FileSet.find` also supports the use of the `load`
 parameter:
 
 .. code-block:: python
@@ -236,7 +236,7 @@ Creating a new File-set
 -----------------------
 
 You can create a new File-set by creating a new
-:class:`~pydicom.fileset.FileSet` instance:
+:class:`~pydicom3.fileset.FileSet` instance:
 
 .. code-block:: python
 
@@ -248,32 +248,32 @@ will be to add some SOP instances to it.
 
 Modifying a File-set
 --------------------
-:class:`~pydicom.fileset.FileSet` and staging
+:class:`~pydicom3.fileset.FileSet` and staging
 .............................................
 
 Before we go any further we need to discuss how the
-:class:`~pydicom.fileset.FileSet` class manages changes to the File-set.
+:class:`~pydicom3.fileset.FileSet` class manages changes to the File-set.
 Modifications to the File-set are first *staged*, which means that although
-the :class:`~pydicom.fileset.FileSet` instance behaves as though you've applied
+the :class:`~pydicom3.fileset.FileSet` instance behaves as though you've applied
 them, nothing will actually change on the file system itself until
-you explicitly call :meth:`FileSet.write()<pydicom.fileset.FileSet.write>`.
+you explicitly call :meth:`FileSet.write()<pydicom3.fileset.FileSet.write>`.
 This includes changes such as:
 
 * Adding SOP instances using the :meth:`FileSet.add()
-  <pydicom.fileset.FileSet.add>` or :meth:`FileSet.add_custom()
-  <pydicom.fileset.FileSet.add_custom>` methods
+  <pydicom3.fileset.FileSet.add>` or :meth:`FileSet.add_custom()
+  <pydicom3.fileset.FileSet.add_custom>` methods
 * Removing SOP instances with :meth:`FileSet.remove()
-  <pydicom.fileset.FileSet.remove>`
+  <pydicom3.fileset.FileSet.remove>`
 * Changing one of the following properties:
-  :attr:`~pydicom.fileset.FileSet.ID`, :attr:`~pydicom.fileset.FileSet.UID`,
-  :attr:`~pydicom.fileset.FileSet.descriptor_file_id` and
-  :attr:`~pydicom.fileset.FileSet.descriptor_character_set`
-* When the :class:`~pydicom.fileset.FileSet` class determines it needs to move
+  :attr:`~pydicom3.fileset.FileSet.ID`, :attr:`~pydicom3.fileset.FileSet.UID`,
+  :attr:`~pydicom3.fileset.FileSet.descriptor_file_id` and
+  :attr:`~pydicom3.fileset.FileSet.descriptor_character_set`
+* When the :class:`~pydicom3.fileset.FileSet` class determines it needs to move
   SOP instances from an existing File-set's directory structure to the
   structure used by *pydicom*
 
 You can tell if changes are staged with the
-:attr:`~pydicom.fileset.FileSet.is_staged` property:
+:attr:`~pydicom3.fileset.FileSet.is_staged` property:
 
 .. code-block:: python
 
@@ -286,7 +286,7 @@ You may also have noticed this line in the ``print(fs)`` output shown above:
 
   Changes staged for write(): DICOMDIR update, directory structure update
 
-This appears when the :class:`~pydicom.fileset.FileSet` is staged and will
+This appears when the :class:`~pydicom3.fileset.FileSet` is staged and will
 contain at least one of the following:
 
 * ``DICOMDIR update`` or ``DICOMDIR creation``: the DICOMDIR file will be
@@ -302,13 +302,13 @@ Adding SOP instances
 ....................
 
 The simplest way to add new SOP instances to the File-set is with the
-:meth:`~pydicom.fileset.FileSet.add` method, which takes the path to the
-instance or the instance itself as a :class:`~pydicom.dataset.Dataset` and
-returns the addition as a :class:`~pydicom.fileset.FileInstance`.
+:meth:`~pydicom3.fileset.FileSet.add` method, which takes the path to the
+instance or the instance itself as a :class:`~pydicom3.dataset.Dataset` and
+returns the addition as a :class:`~pydicom3.fileset.FileInstance`.
 
 To reduce memory usage, instances staged for addition are written to a
 temporary directory and only copied to the File-set itself when
-:meth:`~pydicom.fileset.FileSet.write` is called. However, they can still be
+:meth:`~pydicom3.fileset.FileSet.write` is called. However, they can still be
 accessed and loaded:
 
 .. code-block:: python
@@ -321,13 +321,13 @@ accessed and loaded:
     >>> instance.path
     '/tmp/tmp0aalrzir/86e6b75b-b764-46af-bec3-51698a8366f2'
     >>> type(instance.load())
-    <class 'pydicom.dataset.FileDataset'>
+    <class 'pydicom3.dataset.FileDataset'>
 
 Alternatively, if you want more control over the directory records that will
 be added to the DICOMDIR file, or if you need to use PRIVATE records, you can
-use the :meth:`~pydicom.fileset.FileSet.add_custom` method.
+use the :meth:`~pydicom3.fileset.FileSet.add_custom` method.
 
-The :meth:`~pydicom.fileset.FileSet.add` method uses *pydicom's* default
+The :meth:`~pydicom3.fileset.FileSet.add` method uses *pydicom's* default
 directory record creation functions to create the necessary records based on
 the SOP instance's attributes, such as *SOP Class UID* and *Modality*.
 Occasionally, they may fail when an element required by these functions
@@ -360,8 +360,8 @@ When this occurs, there are three options:
 
 * Update the instance to include the required element and/or value
 * Override the default record creation functions with your own by modifying
-  :attr:`~pydicom.fileset.DIRECTORY_RECORDERS`
-* Use the :meth:`~pydicom.fileset.FileSet.add_custom` method
+  :attr:`~pydicom3.fileset.DIRECTORY_RECORDERS`
+* Use the :meth:`~pydicom3.fileset.FileSet.add_custom` method
 
 According to the exception message above, the *Instance Number* element is empty.
 Let's update the instance and try adding it again:
@@ -376,9 +376,9 @@ Removing instances
 ..................
 
 SOP instances can be removed from the File-set with the
-:meth:`~pydicom.fileset.FileSet.remove` method, which takes the
-:class:`~pydicom.fileset.FileInstance` or :class:`list` of
-:class:`~pydicom.fileset.FileInstance` to be removed:
+:meth:`~pydicom3.fileset.FileSet.remove` method, which takes the
+:class:`~pydicom3.fileset.FileInstance` or :class:`list` of
+:class:`~pydicom3.fileset.FileInstance` to be removed:
 
 .. code-block:: python
 
@@ -402,7 +402,7 @@ Let's add a couple of SOP instances back to the File-set:
     >>> fs.add(examples.mr)
 
 To apply the changes we've made to the File-set we use
-:meth:`~pydicom.fileset.FileSet.write`. For new File-sets, we have to supply the
+:meth:`~pydicom3.fileset.FileSet.write`. For new File-sets, we have to supply the
 path where the File-set root directory will be located:
 
 .. code-block:: python
@@ -425,7 +425,7 @@ path where the File-set root directory will be located:
     /tmp/tmpsqz8rhgb/PT000002/ST000000/SE000000/IM000000
 
 The root directory for existing File-sets cannot be changed, so for those
-you only need to call :meth:`~pydicom.fileset.FileSet.write` without any
+you only need to call :meth:`~pydicom3.fileset.FileSet.write` without any
 arguments:
 
 .. code-block:: python
@@ -442,13 +442,13 @@ arguments:
 
 
 For existing File-sets that don't use the same directory structure semantics
-as :class:`~pydicom.fileset.FileSet`, calling
-:meth:`~pydicom.fileset.FileSet.write` will move SOP instances over to the
+as :class:`~pydicom3.fileset.FileSet`, calling
+:meth:`~pydicom3.fileset.FileSet.write` will move SOP instances over to the
 new structure. However, if the only modification you've made is to remove SOP
-instances or change :attr:`~pydicom.fileset.FileSet.ID`,
-:attr:`~pydicom.fileset.FileSet.UID`,
-:attr:`~pydicom.fileset.FileSet.descriptor_file_id`, or
-:attr:`~pydicom.fileset.FileSet.descriptor_character_set`, then you can pass
+instances or change :attr:`~pydicom3.fileset.FileSet.ID`,
+:attr:`~pydicom3.fileset.FileSet.UID`,
+:attr:`~pydicom3.fileset.FileSet.descriptor_file_id`, or
+:attr:`~pydicom3.fileset.FileSet.descriptor_character_set`, then you can pass
 the *use_existing* keyword parameter to keep the existing directory structure
 and update the DICOMDIR file.
 
@@ -488,7 +488,7 @@ structure:
     /tmp/tmpu068kdwp/77654033/CT2/17166
     /tmp/tmpu068kdwp/77654033/CT2/17196
 
-If you'd just called :meth:`~pydicom.fileset.FileSet.write` without
+If you'd just called :meth:`~pydicom3.fileset.FileSet.write` without
 *use_existing*, then it would've moved the SOP instances to the new
 directory structure:
 
@@ -512,5 +512,5 @@ Conclusion
 ==========
 
 In this tutorial you've learned about DICOM File-sets and the DICOMDIR file.
-You should now be able to use the :class:`~pydicom.fileset.FileSet` class
+You should now be able to use the :class:`~pydicom3.fileset.FileSet` class
 to create new File-sets, and to load, search and modify existing ones.

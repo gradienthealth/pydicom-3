@@ -1,10 +1,10 @@
 .. _api_uid:
 
-UID Definitions and Utilities (:mod:`pydicom.uid`)
+UID Definitions and Utilities (:mod:`pydicom3.uid`)
 ==================================================
 
-.. module:: pydicom.uid
-.. currentmodule:: pydicom.uid
+.. module:: pydicom3.uid
+.. currentmodule:: pydicom3.uid
 
 
 Transfer Syntax UIDs

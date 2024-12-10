@@ -5,8 +5,8 @@ None of the managed SOP Instances are conformant, but they contain the minimum r
 #!/usr/bin/env python
 
 from pydicom import Dataset
-from pydicom.fileset import FileSet
-from pydicom.uid import ExplicitVRLittleEndian, generate_uid, CTImageStorage
+from pydicom3.fileset import FileSet
+from pydicom3.uid import ExplicitVRLittleEndian, generate_uid, CTImageStorage
 
 # True for alphanumeric filenames, False for numeric
 use_alphanumeric = True

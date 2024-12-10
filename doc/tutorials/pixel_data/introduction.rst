@@ -78,13 +78,13 @@ Other things to keep in mind with compressed transfer syntaxes are:
 
 * Only datasets that use the *Pixel Data* element may be compressed
 * Each frame of pixel data is compressed separately
-* The compressed frames are then :func:`encapsulated<pydicom.encaps.encapsulate>`
+* The compressed frames are then :func:`encapsulated<pydicom3.encaps.encapsulate>`
   and the encapsulated data used to set the *Pixel Data* value
 
-To access the encapsulated frames you can use :func:`~pydicom.encaps.get_frame`
-or the :func:`~pydicom.encaps.generate_frames` iterator::
+To access the encapsulated frames you can use :func:`~pydicom3.encaps.get_frame`
+or the :func:`~pydicom3.encaps.generate_frames` iterator::
 
-    >>> from pydicom.encaps import get_frame
+    >>> from pydicom3.encaps import get_frame
     >>> frame = get_frame(ds.PixelData, 0, number_of_frames=1)
     >>> print(len(frame))
     152294
@@ -132,13 +132,13 @@ Properly interpreting all the possible variations of a dataset's pixel data requ
 a lot of specific domain knowledge, not just of DICOM but also the various
 JPEG compression schemes. For this reason *pydicom* offers a number of methods
 for converting the pixel data to a NumPy :class:`~numpy.ndarray`, the most high-level
-of which are the :func:`~pydicom.pixels.pixel_array` and :func:`~pydicom.pixels.iter_pixels`
+of which are the :func:`~pydicom3.pixels.pixel_array` and :func:`~pydicom3.pixels.iter_pixels`
 functions::
 
     import matplotlib.pyplot as plt
 
     from pydicom import examples
-    from pydicom.pixels import pixel_array
+    from pydicom3.pixels import pixel_array
 
     # Get an example dataset as a FileDataset instance
     ds = examples.ct
@@ -158,7 +158,7 @@ frames but you're only interested in a particular one, then you can use the `ind
 to return it::
 
     from pydicom import examples
-    from pydicom.pixels import pixel_array
+    from pydicom3.pixels import pixel_array
 
     # Get an example multi-frame dataset
     ds = examples.rt_dose
@@ -172,11 +172,11 @@ to return it::
     arr = pixel_array(ds, index=0)
     assert arr.shape == (10, 10)
 
-:func:`~pydicom.pixels.iter_pixels` can be used to iterate through either all
+:func:`~pydicom3.pixels.iter_pixels` can be used to iterate through either all
 the available frames or those specified by the `indices` parameter::
 
     from pydicom import examples
-    from pydicom.pixels import iter_pixels
+    from pydicom3.pixels import iter_pixels
 
     # Iterate through all frames
     for arr in iter_pixels(examples.rt_dose):
@@ -189,18 +189,18 @@ the available frames or those specified by the `indices` parameter::
 Controlling decoding
 ....................
 
-The default decoding options for :func:`~pydicom.pixels.pixel_array` and
-:func:`~pydicom.pixels.iter_pixels` have been chosen to return the pixel data in
+The default decoding options for :func:`~pydicom3.pixels.pixel_array` and
+:func:`~pydicom3.pixels.iter_pixels` have been chosen to return the pixel data in
 its most commonly used form; for multi-sample data this means RGB is returned
 by default. Datasets with pixel data in `YCbCr <https://en.wikipedia.org/wiki/YCbCr>`_
-color space are converted using :func:`~pydicom.pixels.convert_color_space` prior
+color space are converted using :func:`~pydicom3.pixels.convert_color_space` prior
 to the array being returned. If you'd like to skip this conversion and return the
 data as found in the dataset you can pass ``raw=True``::
 
     import matplotlib.pyplot as plt
 
     from pydicom import examples
-    from pydicom.pixels import pixel_array
+    from pydicom3.pixels import pixel_array
 
     ds = examples.ybr_color
     assert ds.PhotometricInterpretation == "YBR_FULL_422"
@@ -217,7 +217,7 @@ data as found in the dataset you can pass ``raw=True``::
 
 Further customization of the returned :class:`~numpy.ndarray` is possible by
 passing one or more :doc:`decoding options</guides/decoding/decoder_options>` to
-:func:`~pydicom.pixels.pixel_array` and :func:`~pydicom.pixels.iter_pixels`.
+:func:`~pydicom3.pixels.pixel_array` and :func:`~pydicom3.pixels.iter_pixels`.
 
 
 Compressed transfer syntaxes
@@ -229,7 +229,7 @@ plugins). By default, all available plugins will be tried and the first successf
 one will have its results returned::
 
     from pydicom import examples
-    from pydicom.pixels import pixel_array
+    from pydicom3.pixels import pixel_array
 
     ds = examples.jpeg2k
 
@@ -262,7 +262,7 @@ compression methods. To ensure consistency you can use the `decoding_plugin` arg
 to use the specified :doc:`decompression plugin</guides/plugin_table>`::
 
     from pydicom import examples
-    from pydicom.pixels import pixel_array
+    from pydicom3.pixels import pixel_array
 
     ds = examples.jpeg2k
 
@@ -272,7 +272,7 @@ to use the specified :doc:`decompression plugin</guides/plugin_table>`::
 And of course if the specified plugin isn't available you'll get an exception::
 
     >>> from pydicom import examples
-    >>> from pydicom.pixels import pixel_array
+    >>> from pydicom3.pixels import pixel_array
     >>> pixel_array(examples.jpeg2k, decoding_plugin="pillow")
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
@@ -294,12 +294,12 @@ Minimizing memory usage
 Sometimes a dataset's pixel data may be very large due to it having a large number
 of frames and you'd like to avoid having the entire thing read into memory.
 By passing the path to the dataset (as :class:`str` or :class:`pathlib.Path`) to
-:func:`~pydicom.pixels.pixel_array` only the :dcm:`Image Pixel
+:func:`~pydicom3.pixels.pixel_array` only the :dcm:`Image Pixel
 <part03/sect_C.7.6.3.html>` module elements and the minimum amount of required
 pixel data will be loaded::
 
     from pydicom import examples
-    from pydicom.pixels import pixel_array
+    from pydicom3.pixels import pixel_array
 
     # Get the path to the 'examples.rt_dose' dataset
     path = examples.get_path("rt_dose")
@@ -307,13 +307,13 @@ pixel data will be loaded::
     # Return the first frame of the pixel data
     arr = pixel_array(path, index=0)
 
-The same is true for :func:`~pydicom.pixels.iter_pixels`::
+The same is true for :func:`~pydicom3.pixels.iter_pixels`::
 
     import matplotlib.pyplot as plt
     import numpy as np
 
     from pydicom import examples
-    from pydicom.pixels import iter_pixels
+    from pydicom3.pixels import iter_pixels
 
     # Get the path to the 'examples.ybr_color' dataset
     path = examples.get_path("ybr_color")
@@ -326,17 +326,17 @@ The same is true for :func:`~pydicom.pixels.iter_pixels`::
         im.set_data(frame)
         plt.pause(0.033)
 
-If you're supplying a path to :func:`~pydicom.pixels.pixel_array`
-or :func:`~pydicom.pixels.iter_pixels` and you need access to the :dcm:`Image Pixel
+If you're supplying a path to :func:`~pydicom3.pixels.pixel_array`
+or :func:`~pydicom3.pixels.iter_pixels` and you need access to the :dcm:`Image Pixel
 <part03/sect_C.7.6.3.html>` elements to perform image processing operations on
-the array (such as :func:`rescale<pydicom.pixels.apply_rescale>` or
-:func:`windowing<pydicom.pixels.apply_windowing>`) you can access them by passing
-an empty :class:`~pydicom.dataset.Dataset` instance via the `ds_out` argument,
-or alternatively by using :func:`~pydicom.filereader.dcmread` with
+the array (such as :func:`rescale<pydicom3.pixels.apply_rescale>` or
+:func:`windowing<pydicom3.pixels.apply_windowing>`) you can access them by passing
+an empty :class:`~pydicom3.dataset.Dataset` instance via the `ds_out` argument,
+or alternatively by using :func:`~pydicom3.filereader.dcmread` with
 ``stop_before_pixels=True``::
 
     from pydicom import Dataset, examples
-    from pydicom.pixels import pixel_array, apply_rescale
+    from pydicom3.pixels import pixel_array, apply_rescale
 
     # Get the path to the 'examples.ct' dataset
     path = examples.get_path("ct")
@@ -354,11 +354,11 @@ or alternatively by using :func:`~pydicom.filereader.dcmread` with
 Converting to an :class:`~numpy.ndarray` with metadata
 ------------------------------------------------------
 
-While :func:`~pydicom.pixels.pixel_array` and :func:`~pydicom.pixels.iter_pixels`
+While :func:`~pydicom3.pixels.pixel_array` and :func:`~pydicom3.pixels.iter_pixels`
 should cover most use cases, you may want more information about the returned
 :class:`~numpy.ndarray`, such as what color space it's in. The :meth:`Decoder.as_array()
-<pydicom.pixels.decoders.base.Decoder.as_array>` and :meth:`Decoder.iter_array()
-<pydicom.pixels.decoders.base.Decoder.iter_array>` methods provide mid-level access
+<pydicom3.pixels.decoders.base.Decoder.as_array>` and :meth:`Decoder.iter_array()
+<pydicom3.pixels.decoders.base.Decoder.iter_array>` methods provide mid-level access
 to *pydicom's* pixel data decoding functionality while still handling most of the complexity
 of conversion to an array. More importantly, they return or yield a tuple of
 (:class:`~numpy.ndarray`, :class:`dict`), where the :class:`dict` contains metadata
@@ -366,13 +366,13 @@ describing the corresponding :class:`~numpy.ndarray`.
 
 .. warning::
 
-    The :class:`~pydicom.pixels.decoders.base.Decoder` class should not be used
-    directly, instead use the class instance returned by :func:`~pydicom.pixels.get_decoder`.
+    The :class:`~pydicom3.pixels.decoders.base.Decoder` class should not be used
+    directly, instead use the class instance returned by :func:`~pydicom3.pixels.get_decoder`.
 
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.pixels import get_decoder
+    from pydicom3.pixels import get_decoder
 
     ds = examples.ybr_color
     assert ds.PhotometricInterpretation == "YBR_FULL_422"

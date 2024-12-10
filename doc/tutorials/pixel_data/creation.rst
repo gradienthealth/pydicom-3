@@ -7,7 +7,7 @@
 In part 1 of this tutorial you learned how to :doc:`access the pixel data
 </tutorials/pixel_data/introduction>` as either the raw :class:`bytes` or a NumPy
 :class:`~numpy.ndarray`. In this part we'll be creating pixel data from
-scratch and adding it to a :class:`~pydicom.dataset.Dataset`. We'll be creating
+scratch and adding it to a :class:`~pydicom3.dataset.Dataset`. We'll be creating
 uncompressed datasets with the following types of *Pixel Data*:
 
 * Grayscale with 8-bit unsigned integers
@@ -60,7 +60,7 @@ it to little-endian ordered :class:`bytes` using :meth:`ndarray.tobytes()
 The datasets we'll be creating don't meet the requirements of any DICOM
 :dcm:`IOD<part03/chapter_A.html>` and so aren't conformant DICOM SOP instances, but
 they're sufficient to demonstrate how to create and add pixel data to a
-:class:`~pydicom.dataset.Dataset` using *pydicom*. To create pixel data for an
+:class:`~pydicom3.dataset.Dataset` using *pydicom*. To create pixel data for an
 actual dataset you should check the requirements of the specific IOD you're working
 with, as many IODs place restrictions on the allowed values for elements such
 as *Bits Stored*, *Photometric Interpretation* and others.
@@ -81,7 +81,7 @@ The first example uses a single frame of grayscale *Pixel Data* with 8-bit unsig
 
 The :dcm:`VR<part05/sect_6.2.html>` for *Pixel Data* may be **OB** or **OW** depending
 on the value of *Bits Allocated*. *pydicom* will set this automatically when
-writing the :class:`~pydicom.dataset.Dataset` to file as long as *Bits Allocated* has
+writing the :class:`~pydicom3.dataset.Dataset` to file as long as *Bits Allocated* has
 been set, but for completeness we'll be setting it manually.
 
 The example has two different sets of *Pixel Data*; one with an even number of bytes
@@ -104,7 +104,7 @@ unused bytes with ``ds.PixelData == arr.tobytes()[1::2]``.
     import matplotlib.pyplot as plt
 
     from pydicom import Dataset, FileMetaDataset
-    from pydicom.uid import ExplicitVRLittleEndian
+    from pydicom3.uid import ExplicitVRLittleEndian
 
     ds = Dataset()
     ds.file_meta = FileMetaDataset()
@@ -176,8 +176,8 @@ separately then all the encoded pixels are concatenated together. This matches h
     import matplotlib.pyplot as plt
 
     from pydicom import Dataset, FileMetaDataset
-    from pydicom.pixels import iter_pixels
-    from pydicom.uid import ExplicitVRLittleEndian
+    from pydicom3.pixels import iter_pixels
+    from pydicom3.uid import ExplicitVRLittleEndian
 
     ds = Dataset()
     ds.file_meta = FileMetaDataset()
@@ -224,7 +224,7 @@ separately then all the encoded pixels are concatenated together. This matches h
   ``ds.PlanarConfiguration = 1`` and seeing what effect it has.
 * By default *pydicom* will :doc:`return any extra frames</guides/decoding/decoder_options>`
   it finds in the *Pixel Data*. Set ``ds.NumberOfFrames = 1`` and see what effect it has,
-  then pass ``allow_excess_frames=False`` to :func:`~pydicom.pixels.iter_pixels` and compare
+  then pass ``allow_excess_frames=False`` to :func:`~pydicom3.pixels.iter_pixels` and compare
   the results.
 
 
@@ -248,7 +248,7 @@ of ``16`` to match.
     import matplotlib.pyplot as plt
 
     from pydicom import Dataset, FileMetaDataset
-    from pydicom.uid import ExplicitVRLittleEndian
+    from pydicom3.uid import ExplicitVRLittleEndian
 
     ds = Dataset()
     ds.file_meta = FileMetaDataset()
@@ -301,7 +301,7 @@ that of *Pixel Data*, the main differences being:
 The example below demonstrates creating *Float Pixel Data*::
 
     from pydicom import Dataset, FileMetaDataset
-    from pydicom.uid import ExplicitVRLittleEndian
+    from pydicom3.uid import ExplicitVRLittleEndian
 
     ds = Dataset()
     ds.file_meta = FileMetaDataset()
@@ -323,6 +323,6 @@ Conclusion and next steps
 -------------------------
 
 In part 2 of this tutorial you've learned how to create and add a variety of different pixel
-data to a :class:`~pydicom.dataset.Dataset` using an :class:`~numpy.ndarray`. In the final
+data to a :class:`~pydicom3.dataset.Dataset` using an :class:`~numpy.ndarray`. In the final
 part you'll learn how to :doc:`compress and decompress datasets
 </tutorials/pixel_data/compressing>` containing pixel data.

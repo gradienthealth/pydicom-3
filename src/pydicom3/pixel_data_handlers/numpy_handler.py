@@ -77,10 +77,10 @@ DEPENDENCIES = {
 }
 
 SUPPORTED_TRANSFER_SYNTAXES = [
-    pydicom.uid.ExplicitVRLittleEndian,
-    pydicom.uid.ImplicitVRLittleEndian,
-    pydicom.uid.DeflatedExplicitVRLittleEndian,
-    pydicom.uid.ExplicitVRBigEndian,
+    pydicom3.uid.ExplicitVRLittleEndian,
+    pydicom3.uid.ImplicitVRLittleEndian,
+    pydicom3.uid.DeflatedExplicitVRLittleEndian,
+    pydicom3.uid.ExplicitVRBigEndian,
 ]
 
 
@@ -89,7 +89,7 @@ def is_available() -> bool:
     return HAVE_NP
 
 
-def supports_transfer_syntax(transfer_syntax: pydicom.uid.UID) -> bool:
+def supports_transfer_syntax(transfer_syntax: pydicom3.uid.UID) -> bool:
     """Return ``True`` if the handler supports the `transfer_syntax`.
 
     Parameters

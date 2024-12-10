@@ -70,14 +70,14 @@ you with the specific requirements of the encoding method.
 Compressing with ``Dataset.compress()``
 .......................................
 
-The :meth:`Dataset.compress()<pydicom.dataset.Dataset.compress>` method or
-:func:`~pydicom.pixels.compress` function can be used to compress an uncompressed
+The :meth:`Dataset.compress()<pydicom3.dataset.Dataset.compress>` method or
+:func:`~pydicom3.pixels.compress` function can be used to compress an uncompressed
 dataset in-place:
 
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import RLELossless
+    from pydicom3.uid import RLELossless
 
     ds = examples.ct
     ds.compress(RLELossless)
@@ -95,7 +95,7 @@ A specific encoding plugin can be used by passing the plugin name via the
 
 Implicitly changing the compression on an already compressed dataset is not
 currently supported, however it can still be done by decompressing
-prior to calling :meth:`~pydicom.dataset.Dataset.compress`. In the example
+prior to calling :meth:`~pydicom3.dataset.Dataset.compress`. In the example
 below, a matching :doc:`image data handler<image_data_handlers>` for the
 original transfer syntax - *JPEG 2000 Lossless* - is required.
 
@@ -119,9 +119,9 @@ requirements for compressed *Pixel Data* in the DICOM Standard:
 
 * Each frame of pixel data must be encoded separately
 * All the encoded frames must then be :func:`encapsulated
-  <pydicom.encaps.encapsulate>` using a basic offset table. When the amount
+  <pydicom3.encaps.encapsulate>` using a basic offset table. When the amount
   of encoded data is too large for the basic offset table then the use of
-  the :func:`extended offset table <pydicom.encaps.encapsulate_extended>` is
+  the :func:`extended offset table <pydicom3.encaps.encapsulate_extended>` is
   recommended.
 * A dataset with encapsulated pixel data must use explicit VR little endian
   encoding
@@ -134,8 +134,8 @@ for more information.
     from typing import List, Tuple
 
     from pydicom import examples
-    from pydicom.encaps import encapsulate, encapsulate_extended
-    from pydicom.uid import JPEGBaseline8Bit
+    from pydicom3.encaps import encapsulate, encapsulate_extended
+    from pydicom3.uid import JPEGBaseline8Bit
 
     # Fetch an example dataset
     ds = examples.ct

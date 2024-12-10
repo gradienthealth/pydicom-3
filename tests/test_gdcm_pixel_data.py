@@ -17,13 +17,13 @@ except ImportError:
     HAVE_NP = False
 
 import pydicom
-from pydicom.filereader import dcmread
-from pydicom.data import get_testdata_file
-from pydicom.encaps import get_frame
-from pydicom.pixel_data_handlers import numpy_handler, gdcm_handler
-from pydicom.pixels.processing import _convert_YBR_FULL_to_RGB
-from pydicom.pixels.utils import get_j2k_parameters, reshape_pixel_array
-from pydicom.tag import Tag
+from pydicom3.filereader import dcmread
+from pydicom3.data import get_testdata_file
+from pydicom3.encaps import get_frame
+from pydicom3.pixel_data_handlers import numpy_handler, gdcm_handler
+from pydicom3.pixels.processing import _convert_YBR_FULL_to_RGB
+from pydicom3.pixels.utils import get_j2k_parameters, reshape_pixel_array
+from pydicom3.tag import Tag
 
 try:
     import gdcm
@@ -102,11 +102,11 @@ class TestGDCM_JPEG_LS_no_gdcm:
         self.emri_jpeg_ls_lossless = dcmread(emri_jpeg_ls_lossless)
         self.emri_jpeg_ls_lossless.pixel_array_options(use_v2_backend=True)
 
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = []
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = []
 
     def teardown_method(self):
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_JPEG_LS_PixelArray(self):
         with pytest.raises(NotImplementedError):
@@ -130,11 +130,11 @@ class TestGDCM_JPEG2000_no_gdcm:
         self.sc_rgb_jpeg2k_gdcm_KY = dcmread(sc_rgb_jpeg2k_gdcm_KY)
         self.sc_rgb_jpeg2k_gdcm_KY.pixel_array_options(use_v2_backend=True)
 
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = []
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = []
 
     def teardown_method(self):
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_JPEG2000(self):
         """JPEG2000: Returns correct values for sample data elements"""
@@ -168,11 +168,11 @@ class TestGDCM_JPEGlossy_no_gdcm:
         self.color_3d_jpeg = dcmread(color_3d_jpeg_baseline)
         self.color_3d_jpeg.pixel_array_options(use_v2_backend=True)
 
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = []
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = []
 
     def teardown_method(self):
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_JPEGlossy(self):
         """JPEG-lossy: Returns correct values for sample data elements"""
@@ -194,11 +194,11 @@ class TestGDCM_JPEGlossless_no_gdcm:
         self.jpeg_lossless = dcmread(jpeg_lossless_name)
         self.jpeg_lossless.pixel_array_options(use_v2_backend=True)
 
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = []
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = []
 
     def teardown_method(self):
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def testJPEGlossless(self):
         """JPEGlossless: Returns correct values for sample data elements"""
@@ -331,11 +331,11 @@ class TestsWithGDCM:
         original_value = HAVE_GDCM_IN_MEMORY_SUPPORT
         if request.param == "File":
             gdcm_handler.HAVE_GDCM_IN_MEMORY_SUPPORT = False
-        original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = [numpy_handler, gdcm_handler]
+        original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = [numpy_handler, gdcm_handler]
         yield
         gdcm_handler.HAVE_GDCM_IN_MEMORY_SUPPORT = original_value
-        pydicom.config.pixel_data_handlers = original_handlers
+        pydicom3.config.pixel_data_handlers = original_handlers
 
     @pytest.fixture(scope="class")
     def unicode_filename(self):

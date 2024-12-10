@@ -79,7 +79,7 @@ def add_dict_entry(
 
     See Also
     --------
-    pydicom.examples.add_dict_entry
+    pydicom3.examples.add_dict_entry
         Example file which shows how to use this function
     add_dict_entries
         Update multiple values at once.
@@ -241,7 +241,7 @@ def get_entry(tag: TagType) -> tuple[str, str, str, str, str]:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose entry is to be retrieved, in any of the
-        forms accepted by :func:`~pydicom.tag.Tag`. Only entries in the
+        forms accepted by :func:`~pydicom3.tag.Tag`. Only entries in the
         official DICOM dictionary will be checked, not entries in the
         private dictionary.
 
@@ -285,7 +285,7 @@ def dictionary_is_retired(tag: TagType) -> bool:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose retirement status is being checked, in
-        any of the forms accepted by :func:`~pydicom.tag.Tag`.
+        any of the forms accepted by :func:`~pydicom3.tag.Tag`.
 
     Returns
     -------
@@ -310,7 +310,7 @@ def dictionary_VR(tag: TagType) -> str:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose value representation (VR) is being
-        retrieved, in any of the forms accepted by :func:`~pydicom.tag.Tag`.
+        retrieved, in any of the forms accepted by :func:`~pydicom3.tag.Tag`.
 
     Returns
     -------
@@ -348,7 +348,7 @@ def dictionary_VM(tag: TagType) -> str:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose value multiplicity (VM) is being
-        retrieved, in any of the forms accepted by :func:`~pydicom.tag.Tag`.
+        retrieved, in any of the forms accepted by :func:`~pydicom3.tag.Tag`.
 
     Returns
     -------
@@ -372,7 +372,7 @@ def dictionary_description(tag: TagType) -> str:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose description is being retrieved, in any
-        of the forms accepted by :func:`~pydicom.tag.Tag`.
+        of the forms accepted by :func:`~pydicom3.tag.Tag`.
 
     Returns
     -------
@@ -396,7 +396,7 @@ def dictionary_keyword(tag: TagType) -> str:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose keyword is being retrieved, in any of
-        the forms accepted by :func:`~pydicom.tag.Tag`.
+        the forms accepted by :func:`~pydicom3.tag.Tag`.
 
     Returns
     -------
@@ -418,7 +418,7 @@ def dictionary_has_tag(tag: TagType) -> bool:
     ----------
     tag : int or str or Tuple[int, int]
         The tag to check, in any of the forms accepted by
-        :func:`~pydicom.tag.Tag`.
+        :func:`~pydicom3.tag.Tag`.
 
     Returns
     -------
@@ -439,7 +439,7 @@ def keyword_for_tag(tag: TagType) -> str:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose keyword is being retrieved, in any of
-        the forms accepted by :func:`~pydicom.tag.Tag`.
+        the forms accepted by :func:`~pydicom3.tag.Tag`.
 
     Returns
     -------
@@ -523,7 +523,7 @@ def get_private_entry(tag: TagType, private_creator: str) -> tuple[str, str, str
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose entry is to be retrieved, in any of the
-        forms accepted by :func:`~pydicom.tag.Tag`. Only entries in the
+        forms accepted by :func:`~pydicom3.tag.Tag`. Only entries in the
         private dictionary will be checked.
     private_creator : str
         The name of the private creator.
@@ -590,7 +590,7 @@ def private_dictionary_VR(tag: TagType, private_creator: str) -> str:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose value representation (VR) is being
-        retrieved, in any of the forms accepted by :func:`~pydicom.tag.Tag`.
+        retrieved, in any of the forms accepted by :func:`~pydicom3.tag.Tag`.
     private_creator : str
         The name of the private creator.
 
@@ -614,7 +614,7 @@ def private_dictionary_VM(tag: TagType, private_creator: str) -> str:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose value multiplicity (VM) is being
-        retrieved, in any of the forms accepted by :func:`~pydicom.tag.Tag`.
+        retrieved, in any of the forms accepted by :func:`~pydicom3.tag.Tag`.
     private_creator : str
         The name of the private creator.
 
@@ -638,7 +638,7 @@ def private_dictionary_description(tag: TagType, private_creator: str) -> str:
     ----------
     tag : int or str or Tuple[int, int]
         The tag for the element whose description is being retrieved, in any
-        of the forms accepted by :func:`~pydicom.tag.Tag`.
+        of the forms accepted by :func:`~pydicom3.tag.Tag`.
     private_creator : str
         The name of the private creator.
 

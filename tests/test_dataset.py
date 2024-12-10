@@ -1,5 +1,5 @@
 # Copyright 2008-2023 pydicom authors. See LICENSE file for details.
-"""Unit tests for the pydicom.dataset module."""
+"""Unit tests for the pydicom3.dataset module."""
 
 import copy
 import io
@@ -13,7 +13,7 @@ import tempfile
 
 import pytest
 
-from pydicom.datadict import add_private_dict_entry
+from pydicom3.datadict import add_private_dict_entry
 from .test_helpers import assert_no_warning
 
 try:
@@ -26,15 +26,15 @@ except ImportError:
 import pydicom
 from pydicom import config
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
-from pydicom.dataelem import DataElement, RawDataElement
-from pydicom.dataset import Dataset, FileDataset, validate_file_meta, FileMetaDataset
-from pydicom.encaps import encapsulate
-from pydicom.filebase import DicomBytesIO
-from pydicom.pixels.utils import get_image_pixel_ids
-from pydicom.sequence import Sequence
-from pydicom.tag import Tag
-from pydicom.uid import (
+from pydicom3.data import get_testdata_file
+from pydicom3.dataelem import DataElement, RawDataElement
+from pydicom3.dataset import Dataset, FileDataset, validate_file_meta, FileMetaDataset
+from pydicom3.encaps import encapsulate
+from pydicom3.filebase import DicomBytesIO
+from pydicom3.pixels.utils import get_image_pixel_ids
+from pydicom3.sequence import Sequence
+from pydicom3.tag import Tag
+from pydicom3.uid import (
     ImplicitVRLittleEndian,
     ExplicitVRLittleEndian,
     ExplicitVRBigEndian,
@@ -42,7 +42,7 @@ from pydicom.uid import (
     PYDICOM_IMPLEMENTATION_UID,
     CTImageStorage,
 )
-from pydicom.valuerep import DS, VR
+from pydicom3.valuerep import DS, VR
 
 
 class BadRepr:
@@ -52,10 +52,10 @@ class BadRepr:
 
 @pytest.fixture()
 def clear_pixel_data_handlers():
-    orig_handlers = pydicom.config.pixel_data_handlers
-    pydicom.config.pixel_data_handlers = []
+    orig_handlers = pydicom3.config.pixel_data_handlers
+    pydicom3.config.pixel_data_handlers = []
     yield
-    pydicom.config.pixel_data_handlers = orig_handlers
+    pydicom3.config.pixel_data_handlers = orig_handlers
 
 
 class TestDataset:
@@ -90,9 +90,9 @@ class TestDataset:
 
         def _reset():
             fp.seek(0)
-            ds1 = pydicom.dcmread(fp, force=True)
+            ds1 = pydicom3.dcmread(fp, force=True)
             fp.seek(0)
-            ds2 = pydicom.dcmread(fp, force=True)
+            ds2 = pydicom3.dcmread(fp, force=True)
             return ds1, ds2
 
         ds1, ds2 = _reset()
@@ -1950,7 +1950,7 @@ class TestDatasetSaveAs:
         ds["PixelData"].VR = "OB"
         msg = (
             r"The \(7FE0,0010\) 'Pixel Data' element value hasn't been encapsulated "
-            "as required for a compressed transfer syntax - see pydicom.encaps."
+            "as required for a compressed transfer syntax - see pydicom3.encaps."
             r"encapsulate\(\) for more information"
         )
         with pytest.raises(ValueError, match=msg):
@@ -2159,7 +2159,7 @@ class TestDatasetElements:
 
     def test_formatted_DS_assignment(self):
         """Assigning an auto-formatted decimal string works as expected."""
-        ds = pydicom.Dataset()
+        ds = pydicom3.Dataset()
         ds.PatientWeight = DS(math.pi, auto_format=True)
         assert ds.PatientWeight.auto_format
         # Check correct 16-character string representation
@@ -2215,14 +2215,14 @@ class TestFileDataset:
         self.test_file = get_testdata_file("CT_small.dcm")
 
     def test_pickle_raw_data(self):
-        ds = pydicom.dcmread(self.test_file)
+        ds = pydicom3.dcmread(self.test_file)
         s = pickle.dumps({"ds": ds})
         ds1 = pickle.loads(s)["ds"]
         assert ds == ds1
         assert ds1.Modality == "CT"
 
     def test_pickle_data_elements(self):
-        ds = pydicom.dcmread(self.test_file)
+        ds = pydicom3.dcmread(self.test_file)
         for e in ds:
             # make sure all data elements have been loaded
             pass
@@ -2231,7 +2231,7 @@ class TestFileDataset:
         assert ds == ds1
 
     def test_pickle_nested_sequence(self):
-        ds = pydicom.dcmread(get_testdata_file("nested_priv_SQ.dcm"))
+        ds = pydicom3.dcmread(get_testdata_file("nested_priv_SQ.dcm"))
         for e in ds:
             # make sure all data elements have been loaded
             pass
@@ -2241,7 +2241,7 @@ class TestFileDataset:
 
     def test_pickle_modified(self):
         """Test pickling a modified dataset."""
-        ds = pydicom.dcmread(self.test_file)
+        ds = pydicom3.dcmread(self.test_file)
         ds.PixelSpacing = [1.0, 1.0]
         s = pickle.dumps({"ds": ds})
         ds1 = pickle.loads(s)["ds"]
@@ -2328,7 +2328,7 @@ class TestFileDataset:
 
     def test_copy_filelike_open(self):
         f = open(get_testdata_file("CT_small.dcm"), "rb")
-        ds = pydicom.dcmread(f)
+        ds = pydicom3.dcmread(f)
         assert not f.closed
 
         ds_copy = copy.copy(ds)
@@ -2344,7 +2344,7 @@ class TestFileDataset:
 
     def test_copy_filelike_closed(self):
         f = open(get_testdata_file("CT_small.dcm"), "rb")
-        ds = pydicom.dcmread(f)
+        ds = pydicom3.dcmread(f)
         f.close()
         assert f.closed
 
@@ -2361,7 +2361,7 @@ class TestFileDataset:
         with open(get_testdata_file("CT_small.dcm"), "rb") as fb:
             data = fb.read()
         buff = io.BytesIO(data)
-        ds = pydicom.dcmread(buff)
+        ds = pydicom3.dcmread(buff)
 
         ds_copy = copy.copy(ds)
         assert ds.filename is None
@@ -2377,7 +2377,7 @@ class TestFileDataset:
         with open(get_testdata_file("CT_small.dcm"), "rb") as fb:
             data = fb.read()
         buff = io.BytesIO(data)
-        ds = pydicom.dcmread(buff)
+        ds = pydicom3.dcmread(buff)
         buff.close()
         assert buff.closed
 
@@ -2398,7 +2398,7 @@ class TestFileDataset:
 
     def test_deepcopy_filelike_open(self):
         f = open(get_testdata_file("CT_small.dcm"), "rb")
-        ds = pydicom.dcmread(f)
+        ds = pydicom3.dcmread(f)
         assert not f.closed
 
         ds_copy = copy.deepcopy(ds)
@@ -2414,7 +2414,7 @@ class TestFileDataset:
 
     def test_deepcopy_filelike_closed(self):
         f = open(get_testdata_file("CT_small.dcm"), "rb")
-        ds = pydicom.dcmread(f)
+        ds = pydicom3.dcmread(f)
         f.close()
         assert f.closed
 
@@ -2432,7 +2432,7 @@ class TestFileDataset:
         with open(get_testdata_file("CT_small.dcm"), "rb") as fb:
             data = fb.read()
         buff = io.BytesIO(data)
-        ds = pydicom.dcmread(buff)
+        ds = pydicom3.dcmread(buff)
         assert not buff.closed
 
         ds_copy = copy.deepcopy(ds)
@@ -2455,7 +2455,7 @@ class TestFileDataset:
         with open(get_testdata_file("CT_small.dcm"), "rb") as fb:
             data = fb.read()
         buff = io.BytesIO(data)
-        ds = pydicom.dcmread(buff)
+        ds = pydicom3.dcmread(buff)
         buff.close()
         assert buff.closed
         msg = (
@@ -2504,7 +2504,7 @@ class TestFileDataset:
     def test_deepcopy_dataset_subclass(self):
         """Regression test for #1813."""
 
-        class MyDatasetSubclass(pydicom.Dataset):
+        class MyDatasetSubclass(pydicom3.Dataset):
             pass
 
         my_dataset_subclass = MyDatasetSubclass()
@@ -2656,8 +2656,8 @@ class TestFileMeta:
         assert not hasattr(ds, "file_meta")
 
     def test_show_file_meta(self):
-        orig_show = pydicom.config.show_file_meta
-        pydicom.config.show_file_meta = True
+        orig_show = pydicom3.config.show_file_meta
+        pydicom3.config.show_file_meta = True
 
         ds = Dataset()
         ds.file_meta = FileMetaDataset()
@@ -2669,11 +2669,11 @@ class TestFileMeta:
         assert shown.splitlines()[1].startswith("(0002,0010) Transfer Syntax UID")
 
         # Turn off file_meta display
-        pydicom.config.show_file_meta = False
+        pydicom3.config.show_file_meta = False
         shown = str(ds)
         assert shown.startswith("(0010,0010) Patient's Name")
 
-        pydicom.config.show_file_meta = orig_show
+        pydicom3.config.show_file_meta = orig_show
 
     @pytest.mark.parametrize("copy_method", [Dataset.copy, copy.copy, copy.deepcopy])
     def test_copy(self, copy_method):

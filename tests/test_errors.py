@@ -3,7 +3,7 @@
 
 import pytest
 
-from pydicom.errors import InvalidDicomError
+from pydicom3.errors import InvalidDicomError
 
 
 def test_message():

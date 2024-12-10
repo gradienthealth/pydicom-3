@@ -28,15 +28,15 @@ from struct import pack, unpack
 import pytest
 
 from pydicom import dcmread
-import pydicom.config
-from pydicom.data import get_testdata_file
-from pydicom.encaps import get_frame, generate_frames, encapsulate
-from pydicom.uid import RLELossless, AllTransferSyntaxes, ExplicitVRLittleEndian
+import pydicom3.config
+from pydicom3.data import get_testdata_file
+from pydicom3.encaps import get_frame, generate_frames, encapsulate
+from pydicom3.uid import RLELossless, AllTransferSyntaxes, ExplicitVRLittleEndian
 
 try:
     import numpy as np
-    from pydicom.pixel_data_handlers import numpy_handler as NP_HANDLER
-    from pydicom.pixels.utils import reshape_pixel_array
+    from pydicom3.pixel_data_handlers import numpy_handler as NP_HANDLER
+    from pydicom3.pixels.utils import reshape_pixel_array
 
     HAVE_NP = NP_HANDLER.HAVE_NP
 except ImportError:
@@ -44,8 +44,8 @@ except ImportError:
     HAVE_NP = False
 
 try:
-    from pydicom.pixel_data_handlers import rle_handler as RLE_HANDLER
-    from pydicom.pixel_data_handlers.rle_handler import (
+    from pydicom3.pixel_data_handlers import rle_handler as RLE_HANDLER
+    from pydicom3.pixel_data_handlers.rle_handler import (
         get_pixeldata,
         _rle_decode_frame,
         _rle_decode_segment,
@@ -152,14 +152,14 @@ def _get_pixel_array(fpath):
     if not HAVE_NP:
         raise RuntimeError("Function only usable if the numpy handler is available")
 
-    original_handlers = pydicom.config.pixel_data_handlers
-    pydicom.config.pixel_data_handlers = [NP_HANDLER]
+    original_handlers = pydicom3.config.pixel_data_handlers
+    pydicom3.config.pixel_data_handlers = [NP_HANDLER]
 
     ds = dcmread(fpath)
     ds.pixel_array_options(use_v2_backend=True)
     arr = ds.pixel_array
 
-    pydicom.config.pixel_data_handlers = original_handlers
+    pydicom3.config.pixel_data_handlers = original_handlers
 
     return arr
 
@@ -187,12 +187,12 @@ class TestNoNumpy_NoRLEHandler:
 
     def setup_method(self):
         """Setup the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = []
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = []
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_environment(self):
         """Check that the testing environment is as expected."""
@@ -234,12 +234,12 @@ class TestNoNumpy_RLEHandler:
 
     def setup_method(self):
         """Setup the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = [RLE_HANDLER]
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = [RLE_HANDLER]
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_environment(self):
         """Check that the testing environment is as expected."""
@@ -295,12 +295,12 @@ class TestNumpy_NoRLEHandler:
 
     def setup_method(self):
         """Setup the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = []
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = []
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_environment(self):
         """Check that the testing environment is as expected."""
@@ -342,12 +342,12 @@ class TestNumpy_RLEHandler:
 
     def setup_method(self):
         """Setup the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = [RLE_HANDLER]
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = [RLE_HANDLER]
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_environment(self):
         """Check that the testing environment is as expected."""
@@ -437,7 +437,7 @@ class TestNumpy_RLEHandler:
             ds.decompress(handler_name="numpy")
 
         ds.decompress(handler_name="rle")
-        pydicom.config.pixel_data_handlers.append(NP_HANDLER)
+        pydicom3.config.pixel_data_handlers.append(NP_HANDLER)
         assert hasattr(ds, "_pixel_array")
         arr = ds.pixel_array
         assert arr.shape == (600, 800)
@@ -768,7 +768,7 @@ class TestNumpy_RLEHandler:
         msg = (
             r"The \(7FE0,0010\) 'Pixel Data' element value hasn't been "
             "encapsulated as required for a compressed transfer syntax - "
-            r"see pydicom.encaps.encapsulate\(\) for more information"
+            r"see pydicom3.encaps.encapsulate\(\) for more information"
         )
         with pytest.raises(ValueError, match=msg):
             ds.save_as(BytesIO())

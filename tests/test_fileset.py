@@ -7,10 +7,10 @@ from tempfile import TemporaryDirectory
 import pytest
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
-from pydicom.dataset import Dataset, FileMetaDataset
-from pydicom.filebase import DicomBytesIO
-from pydicom.fileset import (
+from pydicom3.data import get_testdata_file
+from pydicom3.dataset import Dataset, FileMetaDataset
+from pydicom3.filebase import DicomBytesIO
+from pydicom3.fileset import (
     FileSet,
     FileInstance,
     RecordNode,
@@ -22,9 +22,9 @@ from pydicom.fileset import (
     _define_image,
     _PREFIXES,
 )
-from pydicom.filewriter import write_dataset
-from pydicom.tag import Tag
-from pydicom.uid import (
+from pydicom3.filewriter import write_dataset
+from pydicom3.tag import Tag
+from pydicom3.uid import (
     ExplicitVRLittleEndian,
     generate_uid,
     ImplicitVRLittleEndian,
@@ -307,7 +307,7 @@ def write_fs(fs, path=None):
 
     Returns
     -------
-    pydicom.dataset.Dataset
+    pydicom3.dataset.Dataset
         The resulting DICOMDIR dataset
     list of PathLike
         A list of paths for the non-DICOMDIR files in the File-set.
@@ -323,9 +323,9 @@ def copy_fs(fs, path, as_implicit=False):
 
     Returns
     -------
-    pydicom.fileset.FileSet
+    pydicom3.fileset.FileSet
         The new FileSet,
-    pydicom.dataset.Dataset
+    pydicom3.dataset.Dataset
         The new File-set's DICOMDIR dataset
     list of PathLike
         A list of paths for the non-DICOMDIR files in the new File-set.
@@ -1731,7 +1731,7 @@ class TestFileSet:
         mr = get_testdata_file("MR_small.dcm", read=True)
         # mr.SeriesDescription = "TEST_DESC"
         fs.add(mr)
-        # Hack to add description because pydicom.fileset._define_series doesn't copy
+        # Hack to add description because pydicom3.fileset._define_series doesn't copy
         # optional attribute "Series Description".
         _mr_series_record = fs._tree.children[-1].children[-1].children[-1]._record
         _mr_series_record.SeriesDescription = "TEST_DESC"

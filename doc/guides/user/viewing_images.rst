@@ -24,7 +24,7 @@ Using pydicom with matplotlib
 -----------------------------
 
 `matplotlib <https://matplotlib.org/>`_ can be used with the :class:`numpy.ndarray` from
-:attr:`Dataset.pixel_array<pydicom.dataset.Dataset.pixel_array>` to display it::
+:attr:`Dataset.pixel_array<pydicom3.dataset.Dataset.pixel_array>` to display it::
 
   >>> import matplotlib.pyplot as plt
   >>> from pydicom import examples

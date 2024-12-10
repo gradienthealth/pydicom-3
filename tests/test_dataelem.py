@@ -1,5 +1,5 @@
 # Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""Unit tests for the pydicom.dataelem module."""
+"""Unit tests for the pydicom3.dataelem module."""
 
 # Many tests of DataElement class are implied in test_dataset also
 import copy
@@ -13,28 +13,28 @@ import tempfile
 import pytest
 
 from pydicom import filewriter, config, dcmread
-from pydicom.charset import default_encoding
-from pydicom.data import get_testdata_file
-from pydicom.datadict import add_private_dict_entry
-from pydicom.dataelem import (
+from pydicom3.charset import default_encoding
+from pydicom3.data import get_testdata_file
+from pydicom3.datadict import add_private_dict_entry
+from pydicom3.dataelem import (
     DataElement,
     RawDataElement,
     convert_raw_data_element,
 )
-from pydicom.dataset import Dataset
-from pydicom.errors import BytesLengthException
-from pydicom.filebase import DicomBytesIO
-from pydicom.fileutil import read_buffer
-from pydicom.hooks import (
+from pydicom3.dataset import Dataset
+from pydicom3.errors import BytesLengthException
+from pydicom3.filebase import DicomBytesIO
+from pydicom3.fileutil import read_buffer
+from pydicom3.hooks import (
     hooks,
     raw_element_value_retry,
     raw_element_value_fix_separator,
 )
-from pydicom.multival import MultiValue
-from pydicom.tag import Tag, BaseTag
+from pydicom3.multival import MultiValue
+from pydicom3.tag import Tag, BaseTag
 from .test_util import save_private_dict
-from pydicom.uid import UID
-from pydicom.valuerep import BUFFERABLE_VRS, DSfloat, validate_value
+from pydicom3.uid import UID
+from pydicom3.valuerep import BUFFERABLE_VRS, DSfloat, validate_value
 
 
 IS_WINDOWS = platform.system() == "Windows"
@@ -1638,12 +1638,12 @@ def use_future():
 
 
 def test_deprecation_warnings():
-    from pydicom.dataelem import DataElement_from_raw
+    from pydicom3.dataelem import DataElement_from_raw
 
     raw = RawDataElement(Tag(0x00100010), None, 4, b"unknown", 0, True, True)
     msg = (
-        "'pydicom.dataelem.DataElement_from_raw' is deprecated and will be removed "
-        "in v4.0, please use 'pydicom.dataelem.convert_raw_data_element' instead"
+        "'pydicom3.dataelem.DataElement_from_raw' is deprecated and will be removed "
+        "in v4.0, please use 'pydicom3.dataelem.convert_raw_data_element' instead"
     )
     with pytest.warns(DeprecationWarning, match=msg):
         DataElement_from_raw(raw)
@@ -1651,4 +1651,4 @@ def test_deprecation_warnings():
 
 def test_import_raises(use_future):
     with pytest.raises(ImportError):
-        from pydicom.dataelem import DataElement_from_raw
+        from pydicom3.dataelem import DataElement_from_raw

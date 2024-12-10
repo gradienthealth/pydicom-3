@@ -6,7 +6,7 @@ Working with Overlay Data
 
 .. currentmodule:: pydicom
 
-.. rubric:: How to work with overlay data in pydicom.
+.. rubric:: How to work with overlay data in pydicom3.
 
 Introduction
 ------------
@@ -38,12 +38,12 @@ it doesn't do anything with overlay data except read in the raw bytes::
 
 .. warning::
 
-   :meth:`Dataset.overlay_array()<pydicom.dataset.Dataset.overlay_array>`
+   :meth:`Dataset.overlay_array()<pydicom3.dataset.Dataset.overlay_array>`
    requires `NumPy <https://numpy.org/>`_.
 
 The *Overlay Data* element contains the raw bytes exactly as found in the file
 as bit-packed data. To unpack and get an overlay in a more useful form you
-can use the :meth:`~pydicom.dataset.Dataset.overlay_array` method to return a
+can use the :meth:`~pydicom3.dataset.Dataset.overlay_array` method to return a
 :class:`numpy.ndarray`. To use it you only need to pass the group number of the
 overlay elements you're interested in::
 
@@ -67,7 +67,7 @@ the top left pixels are aligned and a value of ``[0, 0]`` indicates that the
 overlay pixels start 1 row above and 1 row to the left of the image pixels.
 
 NumPy can be used to modify the pixels, but if the changes are to be saved,
-they must be bit-packed (using something like :func:`~pydicom.pixels.pack_bits`)
+they must be bit-packed (using something like :func:`~pydicom3.pixels.pack_bits`)
 and written back to the correct element:
 
 .. code-block:: python
@@ -76,7 +76,7 @@ and written back to the correct element:
   arr[10, :] = 1
 
   # Pack the data
-  from pydicom.pixels import pack_bits
+  from pydicom3.pixels import pack_bits
   packed_bytes = pack_bits(arr)
 
   # Update the element value

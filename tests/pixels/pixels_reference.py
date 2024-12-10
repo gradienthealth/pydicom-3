@@ -9,8 +9,8 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom.data import get_testdata_file
-from pydicom.uid import (
+from pydicom3.data import get_testdata_file
+from pydicom3.uid import (
     ExplicitVRLittleEndian,
     ImplicitVRLittleEndian,
     DeflatedExplicitVRLittleEndian,

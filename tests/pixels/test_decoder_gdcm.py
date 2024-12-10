@@ -14,12 +14,12 @@ except ImportError:
     HAVE_NP = False
 
 from pydicom import dcmread, config
-from pydicom.encaps import get_frame
-from pydicom.pixels import get_decoder
-from pydicom.pixels.decoders.gdcm import _decode_frame
-from pydicom.pixels.decoders.base import DecodeRunner
-from pydicom.pixels.utils import _passes_version_check
-from pydicom.uid import (
+from pydicom3.encaps import get_frame
+from pydicom3.pixels import get_decoder
+from pydicom3.pixels.decoders.gdcm import _decode_frame
+from pydicom3.pixels.decoders.base import DecodeRunner
+from pydicom3.pixels.utils import _passes_version_check
+from pydicom3.uid import (
     JPEGBaseline8Bit,
     JPEGExtended12Bit,
     JPEGLossless,

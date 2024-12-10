@@ -1,9 +1,9 @@
 .. _api_fileio_filewriter:
 
-Dataset Writing (:mod:`pydicom.filewriter`)
+Dataset Writing (:mod:`pydicom3.filewriter`)
 ===========================================
 
-.. currentmodule:: pydicom.filewriter
+.. currentmodule:: pydicom3.filewriter
 
 Functions for writing DICOM datasets to file-likes.
 

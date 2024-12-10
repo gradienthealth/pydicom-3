@@ -125,13 +125,13 @@ with the channels interleaved, so for our case the data is ordered as:
     (Ch 1, Sample 10,000), (Ch 2, Sample 10,000), ..., (Ch 12, Sample 10,000)
 
 To decode the raw multiplex waveform data to a numpy :class:`~numpy.ndarray`
-you can use the :func:`~pydicom.waveforms.numpy_handler.multiplex_array`
+you can use the :func:`~pydicom3.waveforms.numpy_handler.multiplex_array`
 function. The following decodes and returns the raw data from the multiplex at
 *index* ``0`` within the *Waveform Sequence*:
 
 .. code-block:: python
 
-    >>> from pydicom.waveforms import multiplex_array
+    >>> from pydicom3.waveforms import multiplex_array
     >>> raw = multiplex_array(ds, 0, as_raw=True)
     >>> raw[0, 0]
     80
@@ -142,7 +142,7 @@ Definition Sequence* then the raw sample data needs to be corrected before it's
 in the quantity it represents. This correction is given by sample x *Channel
 Sensitivity* x *Channel Sensitivity Correction Factor* + *Channel Baseline*
 and will be applied when `as_raw` is ``False`` or when using the
-:meth:`Dataset.waveform_array()<pydicom.dataset.Dataset.waveform_array>`
+:meth:`Dataset.waveform_array()<pydicom3.dataset.Dataset.waveform_array>`
 function:
 
     >>> arr = ds.waveform_array(0)
@@ -161,13 +161,13 @@ function:
    :align: center
 
 When processing large amounts of waveform data it might be more efficient to
-use the :func:`~pydicom.waveforms.numpy_handler.generate_multiplex` function
+use the :func:`~pydicom3.waveforms.numpy_handler.generate_multiplex` function
 instead. It yields an :class:`~numpy.ndarray` for each multiplex group
 within the *Waveform Sequence*:
 
 .. code-block:: python
 
-    >>> from pydicom.waveforms import generate_multiplex
+    >>> from pydicom3.waveforms import generate_multiplex
     >>> for arr in generate_multiplex(ds, as_raw=False):
     ...     print(arr.shape)
     ...
@@ -197,7 +197,7 @@ Next we create the new multiplex group that will contain the waveforms:
 
 .. code-block:: python
 
-    >>> from pydicom.dataset import Dataset
+    >>> from pydicom3.dataset import Dataset
     >>> new = Dataset()
     >>> new.WaveformOriginality = "ORIGINAL"
     >>> new.NumberOfWaveformChannels = 2

@@ -10,14 +10,14 @@ from tempfile import TemporaryFile
 import numpy as np
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
-from pydicom.dataset import Dataset, FileMetaDataset
-from pydicom.pixel_data_handlers.numpy_handler import (
+from pydicom3.data import get_testdata_file
+from pydicom3.dataset import Dataset, FileMetaDataset
+from pydicom3.pixel_data_handlers.numpy_handler import (
     get_pixeldata,
     unpack_bits,
     pack_bits,
 )
-from pydicom.uid import ExplicitVRLittleEndian, generate_uid
+from pydicom3.uid import ExplicitVRLittleEndian, generate_uid
 
 # 1/1, 1 sample/pixel, 1 frame
 EXPL_1_1_1F = get_testdata_file("liver_1frame.dcm")

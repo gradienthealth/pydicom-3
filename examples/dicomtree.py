@@ -19,7 +19,7 @@ print(__doc__)
 
 
 def build_tree(
-    tree: ttk.Treeview, ds: pydicom.Dataset, parent: str | None = None
+    tree: ttk.Treeview, ds: pydicom3.Dataset, parent: str | None = None
 ) -> None:
     """Build out the tree.
 
@@ -27,7 +27,7 @@ def build_tree(
     ----------
     tree : ttk.Treeview
         The treeview object.
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The dataset object to add to the `tree`.
     parent : str | None
         The item ID of the parent item in the tree (if any), default ``None``.
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     # Read the supplied DICOM dataset
     path = Path(sys.argv[1]).resolve(strict=True)
-    ds = pydicom.dcmread(path)
+    ds = pydicom3.dcmread(path)
 
     # Create the root Tk widget
     root = tk.Tk()

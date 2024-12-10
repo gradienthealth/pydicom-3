@@ -287,7 +287,7 @@ class Dataset:
     >>> ds.BeamSequence[1].Manufacturer
     'Linac and Sons, co.'
 
-    Accessing the :class:`~pydicom.dataelem.DataElement` items:
+    Accessing the :class:`~pydicom3.dataelem.DataElement` items:
 
     >>> elem = ds['PatientName']
     >>> elem
@@ -299,7 +299,7 @@ class Dataset:
     >>> elem
     (0010,0010) Patient's Name                      PN: 'CITIZEN^John'
 
-    Accessing a private :class:`~pydicom.dataelem.DataElement`
+    Accessing a private :class:`~pydicom3.dataelem.DataElement`
     item:
 
     >>> block = ds.private_block(0x0041, 'My Creator')
@@ -451,7 +451,7 @@ class Dataset:
         Parameters
         ----------
         data_element : dataelem.DataElement
-            The :class:`~pydicom.dataelem.DataElement` to add.
+            The :class:`~pydicom3.dataelem.DataElement` to add.
         """
         self[data_element.tag] = data_element
 
@@ -462,7 +462,7 @@ class Dataset:
         ----------
         tag
             The DICOM (group, element) tag in any form accepted by
-            :func:`~pydicom.tag.Tag` such as ``[0x0010, 0x0010]``,
+            :func:`~pydicom3.tag.Tag` such as ``[0x0010, 0x0010]``,
             ``(0x10, 0x10)``, ``0x00100010``, etc.
         VR : str
             The 2 character DICOM value representation (see DICOM Standard,
@@ -539,7 +539,7 @@ class Dataset:
         -------
         dataelem.DataElement or None
             For the given DICOM element `keyword`, return the corresponding
-            :class:`~pydicom.dataelem.DataElement` if present, ``None``
+            :class:`~pydicom3.dataelem.DataElement` if present, ``None``
             otherwise.
         """
         tag = tag_for_keyword(name)
@@ -598,14 +598,14 @@ class Dataset:
         :dcm:`Section 6.1.1<part05/chapter_6.html#sect_6.1.1>`.
         """
         # Find specific character set. 'ISO_IR 6' is default
-        # May be multi-valued, but let pydicom.charset handle all logic on that
+        # May be multi-valued, but let pydicom3.charset handle all logic on that
         dicom_character_set = self._character_set
 
-        # Shortcut to the decode function in pydicom.charset
-        decode_data_element = pydicom.charset.decode_element
+        # Shortcut to the decode function in pydicom3.charset
+        decode_data_element = pydicom3.charset.decode_element
 
         # Callback for walk(), to decode the chr strings if necessary
-        # This simply calls the pydicom.charset.decode_element function
+        # This simply calls the pydicom3.charset.decode_element function
         def decode_callback(ds: "Dataset", data_element: DataElement) -> None:
             """Callback to decode `data_element`."""
             if data_element.VR == VR_.SQ:
@@ -632,7 +632,7 @@ class Dataset:
         >>> ds.some_attribute = True
 
         If `name` is a DICOM keyword - delete the corresponding
-        :class:`~pydicom.dataelem.DataElement`
+        :class:`~pydicom3.dataelem.DataElement`
 
         >>> del ds.PatientName
         >>> 'PatientName' in ds
@@ -671,7 +671,7 @@ class Dataset:
 
         Examples
         --------
-        Indexing using :class:`~pydicom.dataelem.DataElement` tag
+        Indexing using :class:`~pydicom3.dataelem.DataElement` tag
 
         >>> ds = Dataset()
         >>> ds.CommandGroupLength = 100
@@ -680,7 +680,7 @@ class Dataset:
         >>> ds
         (0010,0010) Patient's Name                      PN: 'CITIZEN^Jan'
 
-        Slicing using :class:`~pydicom.dataelem.DataElement` tag
+        Slicing using :class:`~pydicom3.dataelem.DataElement` tag
 
         >>> ds = Dataset()
         >>> ds.CommandGroupLength = 100
@@ -827,7 +827,7 @@ class Dataset:
             then return the element's value.
         dataelem.DataElement
             If `key` is a tag for a element in the :class:`Dataset` then
-            return the :class:`~pydicom.dataelem.DataElement`
+            return the :class:`~pydicom3.dataelem.DataElement`
             instance.
         value
             If `key` is a class attribute then return its value.
@@ -856,8 +856,8 @@ class Dataset:
         Returns
         -------
         dict_items
-            The top-level (:class:`~pydicom.tag.BaseTag`,
-            :class:`~pydicom.dataelem.DataElement`) items for the
+            The top-level (:class:`~pydicom3.tag.BaseTag`,
+            :class:`~pydicom3.dataelem.DataElement`) items for the
             :class:`Dataset`.
         """
         return self._dict.items()
@@ -868,7 +868,7 @@ class Dataset:
         Returns
         -------
         dict_keys
-            The :class:`~pydicom.tag.BaseTag` of all the elements in
+            The :class:`~pydicom3.tag.BaseTag` of all the elements in
             the :class:`Dataset`.
         """
         return self._dict.keys()
@@ -879,7 +879,7 @@ class Dataset:
         Returns
         -------
         dict_keys
-            The :class:`DataElements<pydicom.dataelem.DataElement>` that make
+            The :class:`DataElements<pydicom3.dataelem.DataElement>` that make
             up the values of the :class:`Dataset`.
         """
         return self._dict.values()
@@ -946,7 +946,7 @@ class Dataset:
         .. deprecated:: 3.0
 
             ``read_encoding`` will be removed in v4.0, use
-            :attr:`~pydicom.dataset.Dataset.original_character_set` instead.
+            :attr:`~pydicom3.dataset.Dataset.original_character_set` instead.
 
         """
         name = type(self).__name__
@@ -995,7 +995,7 @@ class Dataset:
 
         Examples
         --------
-        Indexing using :class:`~pydicom.dataelem.DataElement` tag
+        Indexing using :class:`~pydicom3.dataelem.DataElement` tag
 
         >>> ds = Dataset()
         >>> ds.SOPInstanceUID = '1.2.3'
@@ -1020,7 +1020,7 @@ class Dataset:
         ----------
         key
             The DICOM (group, element) tag in any form accepted by
-            :func:`~pydicom.tag.Tag` such as ``[0x0010, 0x0010]``,
+            :func:`~pydicom3.tag.Tag` such as ``[0x0010, 0x0010]``,
             ``(0x10, 0x10)``, ``0x00100010``, etc. May also be a :class:`slice`
             made up of DICOM tags.
 
@@ -1028,10 +1028,10 @@ class Dataset:
         -------
         dataelem.DataElement or Dataset
             If a single DICOM element tag is used then returns the
-            corresponding :class:`~pydicom.dataelem.DataElement`.
+            corresponding :class:`~pydicom3.dataelem.DataElement`.
             If a :class:`slice` is used then returns a :class:`Dataset` object
             containing the corresponding
-            :class:`DataElements<pydicom.dataelem.DataElement>`.
+            :class:`DataElements<pydicom3.dataelem.DataElement>`.
         """
         # If passed a slice, return a Dataset containing the corresponding
         #   DataElements
@@ -1257,11 +1257,11 @@ class Dataset:
         ----------
         key
             The DICOM (group, element) tag in any form accepted by
-            :func:`~pydicom.tag.Tag` such as ``[0x0010, 0x0010]``,
+            :func:`~pydicom3.tag.Tag` such as ``[0x0010, 0x0010]``,
             ``(0x10, 0x10)``, ``0x00100010``, etc. May also be a :class:`slice`
             made up of DICOM tags.
         keep_deferred : bool, optional
-            If ``True`` then when returning :class:`~pydicom.dataelem.RawDataElement`
+            If ``True`` then when returning :class:`~pydicom3.dataelem.RawDataElement`
             do not perform the deferred read of the element's value (accessing
             the value will return ``None`` instead). Default ``False``.
 
@@ -1328,8 +1328,8 @@ class Dataset:
 
             ``is_implicit_VR`` will be removed in v4.0, set the *Transfer
             Syntax UID* or use the `implicit_vr` argument with
-            :meth:`~pydicom.dataset.Dataset.save_as` or
-            :func:`~pydicom.filewriter.dcmwrite` instead.
+            :meth:`~pydicom3.dataset.Dataset.save_as` or
+            :func:`~pydicom3.filewriter.dcmwrite` instead.
 
         Returns
         -------
@@ -1369,8 +1369,8 @@ class Dataset:
 
             ``is_little_endian`` will be removed in v4.0, set the *Transfer
             Syntax UID* or use the `little_endian` argument with
-            :meth:`~pydicom.dataset.Dataset.save_as` or
-            :func:`~pydicom.filewriter.dcmwrite` instead.
+            :meth:`~pydicom3.dataset.Dataset.save_as` or
+            :func:`~pydicom3.filewriter.dcmwrite` instead.
 
         Returns
         -------
@@ -1497,16 +1497,16 @@ class Dataset:
         >>> for elem in ds:
         ...     print(elem)
 
-        The :class:`DataElements<pydicom.dataelem.DataElement>` are returned in
+        The :class:`DataElements<pydicom3.dataelem.DataElement>` are returned in
         increasing tag value order. Sequence items are returned as a single
-        :class:`~pydicom.dataelem.DataElement`, so it is up
+        :class:`~pydicom3.dataelem.DataElement`, so it is up
         to the calling code to recurse into the Sequence items if desired.
 
         Yields
         ------
         dataelem.DataElement
             The :class:`Dataset`'s
-            :class:`DataElements<pydicom.dataelem.DataElement>`, sorted by
+            :class:`DataElements<pydicom3.dataelem.DataElement>`, sorted by
             increasing tag order.
         """
         # Note this is different than the underlying dict class,
@@ -1620,15 +1620,15 @@ class Dataset:
             * If :class:`tuple` - the group and element number of the DICOM tag
             * If :class:`int` - the combined group/element number
             * If :class:`str` - the DICOM keyword of the tag
-        default : pydicom.dataelem.DataElement or object, optional
-            The :class:`~pydicom.dataelem.DataElement` to use with `key`, or
-            the value of the :class:`~pydicom.dataelem.DataElement` to use with
+        default : pydicom3.dataelem.DataElement or object, optional
+            The :class:`~pydicom3.dataelem.DataElement` to use with `key`, or
+            the value of the :class:`~pydicom3.dataelem.DataElement` to use with
             `key` (default ``None``).
 
         Returns
         -------
-        pydicom.dataelem.DataElement or object
-            The :class:`~pydicom.dataelem.DataElement` for `key`.
+        pydicom3.dataelem.DataElement or object
+            The :class:`~pydicom3.dataelem.DataElement` for `key`.
 
         Raises
         ------
@@ -1636,7 +1636,7 @@ class Dataset:
             If `key` is not convertible to a valid tag or a known element
             keyword.
         KeyError
-            If :attr:`~pydicom.config.settings.reading_validation_mode` is
+            If :attr:`~pydicom3.config.settings.reading_validation_mode` is
              ``RAISE`` and `key` is an unknown non-private tag.
         """
         tag = Tag(key)
@@ -1669,7 +1669,7 @@ class Dataset:
         .. deprecated:: 3.0
 
             This method will be removed in v4.0, use
-            :meth:`~pydicom.dataset.Dataset.pixel_array_options` instead.
+            :meth:`~pydicom3.dataset.Dataset.pixel_array_options` instead.
 
         Parameters
         ----------
@@ -1677,10 +1677,10 @@ class Dataset:
             The name of the pixel handler or decoding plugin to use to decode
             the dataset's pixel data. Support values are:
 
-            * If using the :mod:`~pydicom.pixel_data_handlers` backend:
+            * If using the :mod:`~pydicom3.pixel_data_handlers` backend:
               ``'gdcm'``, ``'pillow'``, ``'jpeg_ls'``, ``'rle'``, ``'numpy'``
               and ``'pylibjpeg'``.
-            * If using the :mod:`~pydicom.pixels` backend see the
+            * If using the :mod:`~pydicom3.pixels` backend see the
               :doc:`documentation for the decoder</reference/pixels.decoders>`
               corresponding to the dataset's *Transfer Syntax UID*.
 
@@ -1692,7 +1692,7 @@ class Dataset:
         -------
         None
             Converted pixel data is stored internally in the dataset, it can
-            be accessed with the :attr:`~pydicom.dataset.Dataset.pixel_array`
+            be accessed with the :attr:`~pydicom3.dataset.Dataset.pixel_array`
             property.
 
         Raises
@@ -1738,12 +1738,12 @@ class Dataset:
         opts = self._pixel_array_opts.copy()
         name = handler_name.lower() if handler_name else opts.get("decoding_plugin", "")
         if not opts["use_pdh"]:
-            # Use 'pydicom.pixels' backend
+            # Use 'pydicom3.pixels' backend
             opts["decoding_plugin"] = name
             self._pixel_array = pixel_array(self, **opts)
             self._pixel_id = get_image_pixel_ids(self)
         else:
-            # Use 'pydicom.pixel_data_handlers' backend
+            # Use 'pydicom3.pixel_data_handlers' backend
             if name:
                 self._convert_pixel_data_using_handler(name)
             else:
@@ -1764,10 +1764,10 @@ class Dataset:
             # the name in config differs from the actual handler name
             # we allow both
             handler_name = "jpegls_handler"
-        if not hasattr(pydicom.config, handler_name):
+        if not hasattr(pydicom3.config, handler_name):
             raise ValueError(f"'{name}' is not a known handler name")
 
-        handler = getattr(pydicom.config, handler_name)
+        handler = getattr(pydicom3.config, handler_name)
 
         tsyntax = self.file_meta.TransferSyntaxUID
         if not handler.supports_transfer_syntax(tsyntax):
@@ -1795,7 +1795,7 @@ class Dataset:
         ts = self.file_meta.TransferSyntaxUID
         possible_handlers = [
             hh
-            for hh in pydicom.config.pixel_data_handlers
+            for hh in pydicom3.config.pixel_data_handlers
             if hh is not None and hh.supports_transfer_syntax(ts)
         ]
 
@@ -1958,14 +1958,14 @@ class Dataset:
         Compress the existing uncompressed *Pixel Data* in place:
 
         >>> from pydicom import examples
-        >>> from pydicom.uid import RLELossless
+        >>> from pydicom3.uid import RLELossless
         >>> ds = examples.ct
         >>> ds.compress(RLELossless)
         >>> ds.save_as("ct_rle_lossless.dcm")
 
         Parameters
         ----------
-        transfer_syntax_uid : pydicom.uid.UID
+        transfer_syntax_uid : pydicom3.uid.UID
             The UID of the :dcm:`transfer syntax<part05/chapter_10.html>` to
             use when compressing the pixel data.
         arr : numpy.ndarray, optional
@@ -1986,7 +1986,7 @@ class Dataset:
             Data*, otherwise just the basic offset table will be used.
         generate_instance_uid : bool, optional
             If ``True`` then  always generate a new (0008,0018) *SOP Instance UID*
-            using :func:`~pydicom.uid.generate_uid`, otherwise ``False`` to always keep
+            using :func:`~pydicom3.uid.generate_uid`, otherwise ``False`` to always keep
             the original. The default behavior is to only generate a new *SOP Instance
             UID* when performing lossy compression.
         jls_error : int, optional
@@ -2052,7 +2052,7 @@ class Dataset:
         * The *Pixel Data* element's VR will be set to **OB** if *Bits
           Allocated* <= 8, otherwise it will be set to **OW**.
         * The :attr:`DataElement.is_undefined_length
-          <pydicom.dataelem.DataElement.is_undefined_length>` attribute for the
+          <pydicom3.dataelem.DataElement.is_undefined_length>` attribute for the
           *Pixel Data* element will be set to ``False``.
         * Any :dcm:`image pixel<part03/sect_C.7.6.3.html>` module elements may be
           modified as required to match the uncompressed *Pixel Data*.
@@ -2074,12 +2074,12 @@ class Dataset:
         handler_name : str, optional
             Deprecated and will be removed in v4.0, use `decoding_plugin` instead.
         as_rgb : bool, optional
-            :mod:`~pydicom.pixels` **backend only.** If ``True`` (default) then
+            :mod:`~pydicom3.pixels` **backend only.** If ``True`` (default) then
             convert pixel data with a YCbCr :ref:`photometric interpretation
             <photometric_interpretation>` such as ``"YBR_FULL_422"`` to RGB.
         generate_instance_uid : bool, optional
             If ``True`` then  always generate a new (0008,0018) *SOP Instance UID*,
-            using :func:`~pydicom.uid.generate_uid`, otherwise ``False`` to always keep
+            using :func:`~pydicom3.uid.generate_uid`, otherwise ``False`` to always keep
             the original. The default behavior is to only generate a new *SOP Instance
             UID* when the image data has had a YCbCr to RGB conversion applied.
         decoding_plugin : str, optional
@@ -2088,14 +2088,14 @@ class Dataset:
             available plugins will be tried and the result from the first successful
             one yielded.
 
-            * If using the :mod:`~pydicom.pixels` backend (default) then see the
+            * If using the :mod:`~pydicom3.pixels` backend (default) then see the
               :doc:`API documentation</reference/pixels.decoders>` for the available
               plugins for each *Transfer Syntax UID*.
-            * If using the deprecated :mod:`~pydicom.pixel_data_handlers` backend
+            * If using the deprecated :mod:`~pydicom3.pixel_data_handlers` backend
               supported plugins are: ``'gdcm'``, ``'pillow'``, ``'jpeg_ls'``,
               ``'rle'``, ``'numpy'`` and ``'pylibjpeg'``.
         kwargs : dict[str, Any], optional
-            :mod:`~pydicom.pixels` **backend only.** Optional keyword parameters
+            :mod:`~pydicom3.pixels` **backend only.** Optional keyword parameters
             for the decoding plugin may also be present. See the :doc:`decoding
             plugins options</guides/decoding/decoder_options>` for more information.
         """
@@ -2164,22 +2164,22 @@ class Dataset:
         .. versionchanged:: 3.0
 
             The backend used for pixel data decoding has changed from the
-            :mod:`~pydicom.pixel_data_handlers` module to the
-            :mod:`~pydicom.pixels` module. The behavior of the new backend
+            :mod:`~pydicom3.pixel_data_handlers` module to the
+            :mod:`~pydicom3.pixels` module. The behavior of the new backend
             is not backwards compatible with the old one, in particular the
             default color space should now be RGB when previously YCbCr data
             was returned.
 
-            To revert to the deprecated :mod:`~pydicom.pixel_data_handlers`
+            To revert to the deprecated :mod:`~pydicom3.pixel_data_handlers`
             backend pass ``use_v2_backend=True`` to the
-            :meth:`~pydicom.dataset.Dataset.pixel_array_options` method::
+            :meth:`~pydicom3.dataset.Dataset.pixel_array_options` method::
 
                 >>> from pydicom import examples
                 >>> ds = examples.ct
                 >>> ds.pixel_array_options(use_v2_backend=True)
                 >>> arr = ds.pixel_array
 
-            The :mod:`~pydicom.pixel_data_handlers` module and the
+            The :mod:`~pydicom3.pixel_data_handlers` module and the
             `use_v2_backend` keyword argument will be removed in v4.0.
 
         Returns
@@ -2194,20 +2194,20 @@ class Dataset:
             * (frames, rows, columns) for multi-frame, single sample data
             * (frames, rows, columns, samples) for multi-frame, multi-sample data
 
-            When using the :mod:`pydicom.pixels` backend the decoding options
+            When using the :mod:`pydicom3.pixels` backend the decoding options
             used with the returned array can be customized via the
-            :meth:`~pydicom.dataset.Dataset.pixel_array_options` method.
+            :meth:`~pydicom3.dataset.Dataset.pixel_array_options` method.
 
         See Also
         --------
-        pydicom.pixels.pixel_array
+        pydicom3.pixels.pixel_array
             A function for returning the pixel data from the path to a dataset,
             a readable file-like containing a dataset or a
-            :class:`~pydicom.dataset.Dataset` instance. Can be used to minimize
+            :class:`~pydicom3.dataset.Dataset` instance. Can be used to minimize
             the memory required to return the pixel data when used with a path
             or file-like.
-        pydicom.pixels.iter_pixels
-            Similar to :func:`pydicom.pixels.pixel_array` but returns a generator
+        pydicom3.pixels.iter_pixels
+            Similar to :func:`pydicom3.pixels.pixel_array` but returns a generator
             that iterates through the image frames.
         """
         self.convert_pixel_data()
@@ -2223,7 +2223,7 @@ class Dataset:
         **kwargs: Any,
     ) -> None:
         """Set the decoding and processing options used by the
-        :attr:`~pydicom.dataset.Dataset.pixel_array` property.
+        :attr:`~pydicom3.dataset.Dataset.pixel_array` property.
 
         .. versionadded:: 3.0
 
@@ -2246,7 +2246,7 @@ class Dataset:
           expected :ref:`pixel representation<pixel_representation>` will be
           converted to match.
 
-        With the :mod:`pydicom.pixels` backend, if ``raw = False`` (the
+        With the :mod:`pydicom3.pixels` backend, if ``raw = False`` (the
         default) then the following processing operation will also be performed:
 
         * Pixel data with a :ref:`photometric interpretation
@@ -2263,7 +2263,7 @@ class Dataset:
             >>> ds.pixel_array_options(view_only=True)
             >>> arr = ds.pixel_array
 
-        Use the deprecated :mod:`~pydicom.pixel_data_handlers` backend to convert
+        Use the deprecated :mod:`~pydicom3.pixel_data_handlers` backend to convert
         the *Pixel Data* to an array::
 
             >>> from pydicom import examples
@@ -2277,13 +2277,13 @@ class Dataset:
             If ``None`` (default) then return an array containing all the
             frames in the pixel data, otherwise return one containing only
             the frame from the specified `index`, which starts at 0 for the
-            first frame. Only available with the :mod:`~pydicom.pixels` backend.
+            first frame. Only available with the :mod:`~pydicom3.pixels` backend.
         raw : bool, optional
             If ``True`` then return the decoded pixel data after only
             minimal processing (see the processing section above). If ``False``
             (default) then additional processing may be applied to convert the
             pixel data to it's most commonly used form (such as converting from
-            YCbCr to RGB). Only available with the :mod:`~pydicom.pixels` backend.
+            YCbCr to RGB). Only available with the :mod:`~pydicom3.pixels` backend.
         decoding_plugin : str, optional
             The name of the decoding plugin to use when decoding compressed
             pixel data. If no `decoding_plugin` is specified (default) then all
@@ -2291,19 +2291,19 @@ class Dataset:
             one returned. For information on the available plugins for each
             *Transfer Syntax UID*:
 
-            * If using the :mod:`~pydicom.pixels` backend see the
+            * If using the :mod:`~pydicom3.pixels` backend see the
               :doc:`documentation for the decoder</reference/pixels.decoders>`
               corresponding to the dataset's *Transfer Syntax UID*.
-            * If using the :mod:`~pydicom.pixel_data_handlers` backend supported
+            * If using the :mod:`~pydicom3.pixel_data_handlers` backend supported
               values are  ``'gdcm'``, ``'pillow'``, ``'jpeg_ls'``, ``'rle'``,
               ``'numpy'`` and ``'pylibjpeg'``.
         use_v2_backend : bool, optional
-            If ``False`` (default) then use the :mod:`pydicom.pixels` backend
+            If ``False`` (default) then use the :mod:`pydicom3.pixels` backend
             to decode the pixel data, otherwise use the deprecated
-            :mod:`pydicom.pixel_data_handlers` backend.
+            :mod:`pydicom3.pixel_data_handlers` backend.
         **kwargs
             Optional keyword parameters for controlling decoding with the
-            :mod:`~pydicom.pixels` backend, please see the
+            :mod:`~pydicom3.pixels` backend, please see the
             :doc:`decoding options documentation</guides/decoding/decoder_options>`
             for more information.
         """
@@ -2345,8 +2345,8 @@ class Dataset:
 
         See Also
         --------
-        :func:`~pydicom.waveforms.numpy_handler.generate_multiplex`
-        :func:`~pydicom.waveforms.numpy_handler.multiplex_array`
+        :func:`~pydicom3.waveforms.numpy_handler.generate_multiplex`
+        :func:`~pydicom3.waveforms.numpy_handler.multiplex_array`
         """
         if not wave_handler.is_available():
             raise RuntimeError("The waveform data handler requires numpy")
@@ -2372,12 +2372,12 @@ class Dataset:
         element_format : str
             The string format to use for non-sequence elements. Formatting uses
             the attributes of
-            :class:`~pydicom.dataelem.DataElement`. Default is
+            :class:`~pydicom3.dataelem.DataElement`. Default is
             ``"%(tag)s %(name)-35.35s %(VR)s: %(repval)s"``.
         sequence_element_format : str
             The string format to use for sequence elements. Formatting uses
             the attributes of
-            :class:`~pydicom.dataelem.DataElement`. Default is
+            :class:`~pydicom3.dataelem.DataElement`. Default is
             ``"%(tag)s %(name)-35.35s %(VR)s: %(repval)s"``
         indent_format : str or None
             Placeholder for future functionality.
@@ -2426,7 +2426,7 @@ class Dataset:
         ..versionchanged:: 2.0
 
             The file meta information is returned in its own section,
-            if :data:`~pydicom.config.show_file_meta` is ``True`` (default)
+            if :data:`~pydicom3.config.show_file_meta` is ``True`` (default)
 
         Parameters
         ----------
@@ -2449,7 +2449,7 @@ class Dataset:
         if (
             hasattr(self, "file_meta")
             and self.file_meta
-            and pydicom.config.show_file_meta
+            and pydicom3.config.show_file_meta
         ):
             strings.append(f"{'Dataset.file_meta ':-<49}")
             for elem in self.file_meta:
@@ -2479,7 +2479,7 @@ class Dataset:
         .. deprecated:: 3.0
 
             ``read_implicit_vr`` will be removed in v4.0, , use
-            :attr:`~pydicom.dataset.Dataset.original_encoding` instead.
+            :attr:`~pydicom3.dataset.Dataset.original_encoding` instead.
 
         Returns
         -------
@@ -2508,7 +2508,7 @@ class Dataset:
         .. deprecated:: 3.0
 
             ``read_little_endian`` will be removed in v4.0, use
-            :attr:`~pydicom.dataset.Dataset.original_encoding` instead.
+            :attr:`~pydicom3.dataset.Dataset.original_encoding` instead.
 
         Returns
         -------
@@ -2558,7 +2558,7 @@ class Dataset:
     ) -> None:
         """Encode the current :class:`Dataset` and write it to `filename`.
 
-        See the documentation for :func:`~pydicom.filewriter.dcmwrite` for
+        See the documentation for :func:`~pydicom3.filewriter.dcmwrite` for
         more detailed information.
 
         .. warning::
@@ -2571,9 +2571,9 @@ class Dataset:
 
             This function cannot be used to convert a decoded dataset to an
             encoding that uses a different endianness, such as from big to
-            little endian. :func:`~pydicom.filewriter.dcmwrite()` must be used
+            little endian. :func:`~pydicom3.filewriter.dcmwrite()` must be used
             instead, however the process is not automatic. See the
-            documentation of :func:`~pydicom.filewriter.dcmwrite()` for
+            documentation of :func:`~pydicom3.filewriter.dcmwrite()` for
             details.
 
         .. versionchanged:: 3.0
@@ -2600,14 +2600,14 @@ class Dataset:
         implicit_vr : bool, optional
             Required if the dataset has no valid public *Transfer Syntax UID*
             set in the file meta and
-            :attr:`~pydicom.dataset.Dataset.is_implicit_VR` or
-            :attr:`~pydicom.dataset.Dataset.original_encoding` are ``None``. If
+            :attr:`~pydicom3.dataset.Dataset.is_implicit_VR` or
+            :attr:`~pydicom3.dataset.Dataset.original_encoding` are ``None``. If
             ``True`` then encode using implicit VR, otherwise use explicit VR.
         little_endian : bool, optional
             Required if the dataset has no valid public *Transfer Syntax UID*
             set in the file meta and
-            :attr:`~pydicom.dataset.Dataset.is_little_endian` or
-            :attr:`~pydicom.dataset.Dataset.original_encoding` are ``None``. If
+            :attr:`~pydicom3.dataset.Dataset.is_little_endian` or
+            :attr:`~pydicom3.dataset.Dataset.original_encoding` are ``None``. If
             ``True`` (default) then use little endian byte order when encoding,
             otherwise use big endian (not recommended).
         enforce_file_format : bool, optional
@@ -2628,7 +2628,7 @@ class Dataset:
 
         See Also
         --------
-        pydicom.filewriter.dcmwrite
+        pydicom3.filewriter.dcmwrite
             Encode a :class:`Dataset` and write it to a file or buffer.
         """
         # The default for little_endian is `None` so we can detect conversion
@@ -2659,7 +2659,7 @@ class Dataset:
                     "is what you really want to do"
                 )
 
-        pydicom.dcmwrite(
+        pydicom3.dcmwrite(
             filename,
             self,
             __write_like_original,
@@ -2770,7 +2770,7 @@ class Dataset:
             If `key` is a :class:`slice`.
         ValueError
             If the `key` value doesn't match the corresponding
-            :attr:`DataElement.tag<pydicom.dataelem.tag>`.
+            :attr:`DataElement.tag<pydicom3.dataelem.tag>`.
         """
         if isinstance(key, slice):
             raise NotImplementedError(
@@ -2817,8 +2817,8 @@ class Dataset:
         self._dict[elem_tag] = elem
 
         if elem.VR == VR_.SQ and isinstance(elem, DataElement):
-            if not isinstance(elem.value, pydicom.Sequence):
-                elem.value = pydicom.Sequence(elem.value)  # type: ignore
+            if not isinstance(elem.value, pydicom3.Sequence):
+                elem.value = pydicom3.Sequence(elem.value)  # type: ignore
 
             # Update the `_pixel_rep` attribute when nested sequences
             #   containing RawDataElements are being added to a different
@@ -2861,7 +2861,7 @@ class Dataset:
         * If `generate_instance_uid` is ``True`` (default) then the *SOP Instance UID*
           will be added or updated.
         * If a ``bool`` array is used then the pixel data will be bit-packed using
-          :func:`~pydicom.pixels.pack_bits`.
+          :func:`~pydicom3.pixels.pack_bits`.
 
         .. versionchanged:: 3.1
 
@@ -2889,7 +2889,7 @@ class Dataset:
             of `arr`, or 1 in the case of an array of dtype bool.
         generate_instance_uid : bool, optional
             If ``True`` (default) then add or update the (0008,0018) *SOP Instance
-            UID* element with a value generated using :func:`~pydicom.uid.generate_uid`.
+            UID* element with a value generated using :func:`~pydicom3.uid.generate_uid`.
 
         Raises
         ------
@@ -2945,10 +2945,10 @@ class Dataset:
         ----------
         start : int or 2-tuple of int or None
             The slice's starting element tag value, in any format accepted by
-            :func:`~pydicom.tag.Tag`.
+            :func:`~pydicom3.tag.Tag`.
         stop : int or 2-tuple of int or None
             The slice's stopping element tag value, in any format accepted by
-            :func:`~pydicom.tag.Tag`.
+            :func:`~pydicom3.tag.Tag`.
         step : int or None
             The slice's step size.
 
@@ -2995,7 +2995,7 @@ class Dataset:
         ..versionchanged:: 2.0
 
             The file meta information was added in its own section,
-            if :data:`pydicom.config.show_file_meta` is ``True``
+            if :data:`pydicom3.config.show_file_meta` is ``True``
 
         """
         return self._pretty_str()
@@ -3051,7 +3051,7 @@ class Dataset:
 
         Visit all elements in the :class:`Dataset`, possibly recursing into
         sequences and their items. The `callback` function is called for each
-        :class:`~pydicom.dataelem.DataElement` (including elements
+        :class:`~pydicom3.dataelem.DataElement` (including elements
         with a VR of 'SQ'). Can be used to perform an operation on certain
         types of elements.
 
@@ -3068,7 +3068,7 @@ class Dataset:
             A callable function that takes two arguments:
 
             * a :class:`Dataset`
-            * a :class:`~pydicom.dataelem.DataElement` belonging
+            * a :class:`~pydicom3.dataelem.DataElement` belonging
               to that :class:`Dataset`
 
         recursive : bool, optional
@@ -3264,8 +3264,8 @@ class Dataset:
         """Modify the VR or value for the raw element with `tag`.
 
         When a :class:`Dataset` is created most of it's elements are in their
-        :class:`~pydicom.dataelem.RawDataElement` form, and only upon trying to access
-        the element is it converted to a :class:`~pydicom.dataelem.DataElement`.
+        :class:`~pydicom3.dataelem.RawDataElement` form, and only upon trying to access
+        the element is it converted to a :class:`~pydicom3.dataelem.DataElement`.
         When this conversion fails due to non-conformance issues, this method can be
         used to modify the raw element data prior to conversion in order to fix any
         issues.
@@ -3274,21 +3274,21 @@ class Dataset:
         -------
 
         Change the VR for the element with tag (0029,1026) before conversion to
-        :class:`~pydicom.dataelem.DataElement`.
+        :class:`~pydicom3.dataelem.DataElement`.
 
             >>> from pydicom import examples
             >>> ds = examples.ct
             >>> ds.update_raw_element(0x00291026, vr="US")
             >>> elem = ds[0x00291026]  # conversion to DataElement occurs here
             >>> type(elem)
-            <class 'pydicom.dataelem.DataElement'>
+            <class 'pydicom3.dataelem.DataElement'>
             >>> elem.VR
             "US"
 
         Parameters
         ----------
         tag : int | str | tuple[int, int] | BaseTag
-            The tag for a :class:`~pydicom.dataelem.RawDataElement` in the dataset.
+            The tag for a :class:`~pydicom3.dataelem.RawDataElement` in the dataset.
         vr : str, optional
             Required if `value` is not used, the value to use for the modified
             element's VR, if not used then the existing VR will be kept.
@@ -3381,12 +3381,12 @@ class FileDataset(Dataset):
               ``seek()`` methods such as :class:`io.BytesIO`.
         dataset : Dataset or dict
             Some form of dictionary, usually a :class:`Dataset` returned from
-            :func:`~pydicom.filereader.dcmread`.
+            :func:`~pydicom3.filereader.dcmread`.
         preamble : bytes or str, optional
             The 128-byte DICOM preamble.
         file_meta : FileMetaDataset, optional
             The file meta :class:`FileMetaDataset`, such as the one returned by
-            :func:`~pydicom.filereader.read_file_meta_info`, or an empty
+            :func:`~pydicom3.filereader.read_file_meta_info`, or an empty
             :class:`FileMetaDataset` if no file meta information is in the
             file.
         is_implicit_VR : bool, optional
@@ -3544,7 +3544,7 @@ class FileMetaDataset(Dataset):
 
     .. versionadded:: 2.0
 
-    Derived from :class:`~pydicom.dataset.Dataset`, but only allows
+    Derived from :class:`~pydicom3.dataset.Dataset`, but only allows
     Group 2 (File Meta Information) data elements
     """
 

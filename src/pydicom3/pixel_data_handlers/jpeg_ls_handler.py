@@ -35,8 +35,8 @@ DEPENDENCIES = {
 }
 
 SUPPORTED_TRANSFER_SYNTAXES = [
-    pydicom.uid.JPEGLSLossless,
-    pydicom.uid.JPEGLSNearLossless,
+    pydicom3.uid.JPEGLSLossless,
+    pydicom3.uid.JPEGLSNearLossless,
 ]
 
 
@@ -63,7 +63,7 @@ def should_change_PhotometricInterpretation_to_RGB(ds: "Dataset") -> bool:
     return False
 
 
-def supports_transfer_syntax(transfer_syntax: pydicom.uid.UID) -> bool:
+def supports_transfer_syntax(transfer_syntax: pydicom3.uid.UID) -> bool:
     """Return ``True`` if the handler supports the `transfer_syntax`.
 
     Parameters

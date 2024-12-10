@@ -9,8 +9,8 @@ import tempfile
 import pytest
 
 from pydicom import dcmread, config, encaps
-from pydicom.data import get_testdata_file
-from pydicom.encaps import (
+from pydicom3.data import get_testdata_file
+from pydicom3.encaps import (
     fragment_frame,
     itemize_frame,
     encapsulate,
@@ -26,8 +26,8 @@ from pydicom.encaps import (
     encapsulate_buffer,
     encapsulate_extended_buffer,
 )
-from pydicom.filebase import DicomBytesIO
-from pydicom.fileutil import read_buffer
+from pydicom3.filebase import DicomBytesIO
+from pydicom3.fileutil import read_buffer
 
 
 JP2K_10FRAME_NOBOT = get_testdata_file("emri_small_jpeg_2k_lossless.dcm")
@@ -3798,25 +3798,25 @@ def use_future():
 class TestFuture:
     def test_imports_raise(self, use_future):
         with pytest.raises(ImportError):
-            from pydicom.encaps import generate_pixel_data_fragment
+            from pydicom3.encaps import generate_pixel_data_fragment
 
         with pytest.raises(ImportError):
-            from pydicom.encaps import get_frame_offsets
+            from pydicom3.encaps import get_frame_offsets
 
         with pytest.raises(ImportError):
-            from pydicom.encaps import get_nr_fragments
+            from pydicom3.encaps import get_nr_fragments
 
         with pytest.raises(ImportError):
-            from pydicom.encaps import generate_pixel_data_frame
+            from pydicom3.encaps import generate_pixel_data_frame
 
         with pytest.raises(ImportError):
-            from pydicom.encaps import generate_pixel_data
+            from pydicom3.encaps import generate_pixel_data
 
         with pytest.raises(ImportError):
-            from pydicom.encaps import decode_data_sequence
+            from pydicom3.encaps import decode_data_sequence
 
         with pytest.raises(ImportError):
-            from pydicom.encaps import defragment_data
+            from pydicom3.encaps import defragment_data
 
         with pytest.raises(ImportError):
-            from pydicom.encaps import read_item
+            from pydicom3.encaps import read_item

@@ -60,7 +60,7 @@ def apply_color_lut(
         The pixel data to apply the color palette to.
     ds : dataset.Dataset, optional
         Required if `palette` is not supplied. A
-        :class:`~pydicom.dataset.Dataset` containing a suitable
+        :class:`~pydicom3.dataset.Dataset` containing a suitable
         :dcm:`Image Pixel<part03/sect_C.7.6.3.html>` or
         :dcm:`Palette Color Lookup Table<part03/sect_C.7.9.html>` Module.
     palette : str or uid.UID, optional
@@ -263,8 +263,8 @@ def apply_icc_profile(
     arr : numpy.ndarray
         8-bit RGB pixel data to apply an ICC profile to, shaped as either (rows,
         columns, samples) or (frames, rows, columns, samples).
-    ds : pydicom.dataset.Dataset, optional
-        Required if `transform` is not supplied, a :class:`~pydicom.dataset.Dataset`
+    ds : pydicom3.dataset.Dataset, optional
+        Required if `transform` is not supplied, a :class:`~pydicom3.dataset.Dataset`
         containing elements from the :dcm:`ICC Profile<part03/sect_C.11.15.html>`
         module.
     transform : PIL.ImageCms.ImageCmsTransform, optional
@@ -448,8 +448,8 @@ def apply_presentation_lut(arr: "np.ndarray", ds: "Dataset") -> "np.ndarray":
 
     See Also
     --------
-    :func:`~pydicom.pixels.processing.apply_modality_lut`
-    :func:`~pydicom.pixels.processing.apply_voi_lut`
+    :func:`~pydicom3.pixels.processing.apply_modality_lut`
+    :func:`~pydicom3.pixels.processing.apply_voi_lut`
     """
     if "PresentationLUTSequence" in ds:
         item = ds.PresentationLUTSequence[0]
@@ -546,9 +546,9 @@ def apply_voi_lut(
 
     See Also
     --------
-    :func:`~pydicom.pixels.processing.apply_modality_lut`
-    :func:`~pydicom.pixels.processing.apply_voi`
-    :func:`~pydicom.pixels.processing.apply_windowing`
+    :func:`~pydicom3.pixels.processing.apply_modality_lut`
+    :func:`~pydicom3.pixels.processing.apply_voi`
+    :func:`~pydicom3.pixels.processing.apply_windowing`
 
     References
     ----------
@@ -591,7 +591,7 @@ def apply_voi(arr: "np.ndarray", ds: "Dataset", index: int = 0) -> "np.ndarray":
 
     .. versionadded:: 2.1
 
-    See :func:`~pydicom.pixels.processing.apply_voi_lut` for applying *Window
+    See :func:`~pydicom3.pixels.processing.apply_voi_lut` for applying *Window
     Width*/*Window Center* as a fallback if no *VOI LUT Sequence* is present.
 
     Parameters
@@ -615,9 +615,9 @@ def apply_voi(arr: "np.ndarray", ds: "Dataset", index: int = 0) -> "np.ndarray":
 
     See Also
     --------
-    :func:`~pydicom.pixels.processing.apply_modality_lut`
-    :func:`~pydicom.pixels.processing.apply_windowing`
-    :func:`~pydicom.pixels.processing.apply_voi_lut`
+    :func:`~pydicom3.pixels.processing.apply_modality_lut`
+    :func:`~pydicom3.pixels.processing.apply_windowing`
+    :func:`~pydicom3.pixels.processing.apply_voi_lut`
 
     References
     ----------
@@ -718,9 +718,9 @@ def apply_windowing(arr: "np.ndarray", ds: "Dataset", index: int = 0) -> "np.nda
 
     See Also
     --------
-    :func:`~pydicom.pixels.processing.apply_modality_lut`
-    :func:`~pydicom.pixels.processing.apply_voi`
-    :func:`~pydicom.pixels.processing.apply_voi_lut`
+    :func:`~pydicom3.pixels.processing.apply_modality_lut`
+    :func:`~pydicom3.pixels.processing.apply_voi`
+    :func:`~pydicom3.pixels.processing.apply_voi_lut`
 
     References
     ----------
@@ -1015,8 +1015,8 @@ def create_icc_transform(
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset, optional
-        Required if `icc_profile` is not supplied, a :class:`~pydicom.dataset.Dataset`
+    ds : pydicom3.dataset.Dataset, optional
+        Required if `icc_profile` is not supplied, a :class:`~pydicom3.dataset.Dataset`
         containing elements from the :dcm:`ICC Profile<part03/sect_C.11.15.html>` module.
     icc_profile : bytes, optional
         Required if `ds` is not supplied, an ICC profile encoded as :class:`bytes`.

@@ -55,7 +55,7 @@ corresponding color space:
 
     * For *Bits Allocated* and *Bits Stored* less than or equal to 8: pixel
       data must be :func:`converted into YCbCr color space
-      <pydicom.pixels.processing.convert_color_space>`. However
+      <pydicom3.pixels.processing.convert_color_space>`. However
       you should keep in mind that the conversion operation is lossy.
     * For *Bits Allocated* and *Bits Stored* between 9 and 16 (inclusive):
       pixel data should be downscaled to 8-bit (with *Bits Stored*, *Bits
@@ -68,7 +68,7 @@ corresponding color space:
 
   * For *Photometric Interpretation* ``RGB`` the pixel data must first be
     :func:`converted into RGB color space
-    <pydicom.pixels.processing.convert_color_space>`. However the conversion
+    <pydicom3.pixels.processing.convert_color_space>`. However the conversion
     operation is lossy.
   * For *Photometric Interpretation* ``YBR_FULL`` nothing else is required.
 
@@ -96,7 +96,7 @@ Available Plugins
 |                                                   +---------+--------------------------------------+-----+----------------------+
 |                                                   | Name    | Requires                             |Added| Known Limitations    |
 +===================================================+=========+======================================+=====+======================+
-|:attr:`~pydicom.pixels.encoders.RLELosslessEncoder`| pydicom |                                      |v2.2 | ~20x slower to encode|
+|:attr:`~pydicom3.pixels.encoders.RLELosslessEncoder`| pydicom |                                      |v2.2 | ~20x slower to encode|
 |                                                   +---------+--------------------------------------+-----+----------------------+
 |                                                   |pylibjpeg|:ref:`NumPy<tut_install_np>`,         |v2.2 |                      |
 |                                                   |         |:ref:`pylibjpeg<tut_install_pylj>`,   |     |                      |
@@ -113,7 +113,7 @@ Compressing grayscale pixel data in-place:
 .. code-block:: python
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import RLELossless
+    >>> from pydicom3.uid import RLELossless
     >>> ds = examples.ct
     >>> ds.SamplesPerPixel
     1
@@ -153,8 +153,8 @@ new *SOP Instance UID*:
 .. code-block:: python
 
     >>> from pydicom import examples
-    >>> from pydicom.pixels import convert_color_space
-    >>> from pydicom.uid import generate_uid
+    >>> from pydicom3.pixels import convert_color_space
+    >>> from pydicom3.uid import generate_uid
     >>> ds = examples.rgb_color
     >>> rgb = ds.pixel_array
     >>> ybr = convert_color_space(rgb, 'RGB', 'YBR_FULL')

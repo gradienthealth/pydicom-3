@@ -1,11 +1,11 @@
 # Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""Unit tests for the pydicom.multival module."""
+"""Unit tests for the pydicom3.multival module."""
 
 import pytest
 
 from pydicom import config
-from pydicom.multival import MultiValue, ConstrainedList
-from pydicom.valuerep import DS, DSfloat, DSdecimal, IS, ISfloat
+from pydicom3.multival import MultiValue, ConstrainedList
+from pydicom3.valuerep import DS, DSfloat, DSdecimal, IS, ISfloat
 from copy import deepcopy
 
 import sys

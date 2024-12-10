@@ -13,13 +13,13 @@ import pytest
 
 import pydicom
 from pydicom import config, valuerep
-from pydicom.config import settings
-from pydicom.data import get_testdata_file
-from pydicom.dataset import Dataset
-from pydicom._dicom_dict import DicomDictionary, RepeatersDictionary
-from pydicom.filereader import read_dataset
-from pydicom.tag import Tag
-from pydicom.valuerep import (
+from pydicom3.config import settings
+from pydicom3.data import get_testdata_file
+from pydicom3.dataset import Dataset
+from pydicom3._dicom_dict import DicomDictionary, RepeatersDictionary
+from pydicom3.filereader import read_dataset
+from pydicom3.tag import Tag
+from pydicom3.valuerep import (
     DS,
     IS,
     DSfloat,
@@ -35,7 +35,7 @@ from pydicom.valuerep import (
     INT_VR,
     LIST_VR,
 )
-from pydicom.values import convert_value
+from pydicom3.values import convert_value
 
 
 badvr_name = get_testdata_file("badVR.dcm")
@@ -58,7 +58,7 @@ class TestTM:
 
     def test_pickling(self):
         # Check that a pickled TM is read back properly
-        tm = pydicom.valuerep.TM("212223")
+        tm = pydicom3.valuerep.TM("212223")
         assert tm == time(21, 22, 23)
         assert tm.original_string == "212223"
         assert tm == time(21, 22, 23)
@@ -68,7 +68,7 @@ class TestTM:
         assert str(loaded_tm) == str(tm)
 
     def test_pickling_tm_from_time(self):
-        tm = pydicom.valuerep.TM(time(21, 22, 23))
+        tm = pydicom3.valuerep.TM(time(21, 22, 23))
         assert tm.original_string == "212223"
         time_string = pickle.dumps(tm)
         loaded_tm = pickle.loads(time_string)
@@ -77,41 +77,41 @@ class TestTM:
         assert str(loaded_tm) == str(tm)
 
     def test_str_and_repr(self):
-        assert str(pydicom.valuerep.TM("212223.1234")) == "212223.1234"
-        assert repr(pydicom.valuerep.TM("212223.1234")) == '"212223.1234"'
-        assert str(pydicom.valuerep.TM("212223")) == "212223"
-        assert repr(pydicom.valuerep.TM("212223")) == '"212223"'
-        assert str(pydicom.valuerep.TM("2122")) == "2122"
-        assert repr(pydicom.valuerep.TM("2122")) == '"2122"'
-        assert str(pydicom.valuerep.TM("21")) == "21"
-        assert str(pydicom.valuerep.TM(time(21, 22, 23))) == "212223"
-        assert str(pydicom.valuerep.TM(time(21, 22, 23, 24))) == "212223.000024"
-        assert str(pydicom.valuerep.TM(time(1, 2, 3))) == "010203"
-        assert repr(pydicom.valuerep.TM(time(1, 2, 3))) == '"010203"'
+        assert str(pydicom3.valuerep.TM("212223.1234")) == "212223.1234"
+        assert repr(pydicom3.valuerep.TM("212223.1234")) == '"212223.1234"'
+        assert str(pydicom3.valuerep.TM("212223")) == "212223"
+        assert repr(pydicom3.valuerep.TM("212223")) == '"212223"'
+        assert str(pydicom3.valuerep.TM("2122")) == "2122"
+        assert repr(pydicom3.valuerep.TM("2122")) == '"2122"'
+        assert str(pydicom3.valuerep.TM("21")) == "21"
+        assert str(pydicom3.valuerep.TM(time(21, 22, 23))) == "212223"
+        assert str(pydicom3.valuerep.TM(time(21, 22, 23, 24))) == "212223.000024"
+        assert str(pydicom3.valuerep.TM(time(1, 2, 3))) == "010203"
+        assert repr(pydicom3.valuerep.TM(time(1, 2, 3))) == '"010203"'
 
     def test_new_empty_str(self):
         """Test converting an empty string."""
-        assert pydicom.valuerep.TM("") is None
+        assert pydicom3.valuerep.TM("") is None
 
     def test_new_str_conversion(self):
         """Test converting strings to times."""
-        tm = pydicom.valuerep.TM("00")
+        tm = pydicom3.valuerep.TM("00")
         assert tm == time(0, 0, 0)
-        tm = pydicom.valuerep.TM("23")
+        tm = pydicom3.valuerep.TM("23")
         assert tm == time(23, 0, 0)
         msg = r"Unable to convert non-conformant value '24' to 'TM' object"
         with pytest.raises(ValueError, match=msg):
-            pydicom.valuerep.TM("24")
+            pydicom3.valuerep.TM("24")
 
-        tm = pydicom.valuerep.TM("0000")
+        tm = pydicom3.valuerep.TM("0000")
         assert tm == time(0, 0, 0)
-        tm = pydicom.valuerep.TM("2359")
+        tm = pydicom3.valuerep.TM("2359")
         assert tm == time(23, 59, 0)
         msg = r"Unable to convert non-conformant value '2360' to 'TM' object"
         with pytest.raises(ValueError, match=msg):
-            pydicom.valuerep.TM("2360")
+            pydicom3.valuerep.TM("2360")
 
-        tm = pydicom.valuerep.TM("000000")
+        tm = pydicom3.valuerep.TM("000000")
         assert tm == time(0, 0, 0)
         # Valid DICOM TM seconds range is 0..60, but time is 0..59
         msg = (
@@ -119,43 +119,43 @@ class TestTM:
             r"seconds component, changing to '59'"
         )
         with pytest.warns(UserWarning, match=msg):
-            tm = pydicom.valuerep.TM("235960")
+            tm = pydicom3.valuerep.TM("235960")
         assert tm == time(23, 59, 59)
 
         msg = r"Unable to convert non-conformant value '235' to 'TM' object"
         with pytest.raises(ValueError, match=msg):
-            pydicom.valuerep.TM("235")
+            pydicom3.valuerep.TM("235")
 
     def test_new_obj_conversion(self):
         """Test other conversion attempts."""
-        assert pydicom.valuerep.TM(None) is None
-        tm = pydicom.valuerep.TM("010203.123456")
-        assert pydicom.valuerep.TM(tm) == time(1, 2, 3, 123456)
-        assert tm == pydicom.valuerep.TM(tm)
-        tm = pydicom.valuerep.TM(time(1, 2, 3))
-        assert isinstance(tm, pydicom.valuerep.TM)
+        assert pydicom3.valuerep.TM(None) is None
+        tm = pydicom3.valuerep.TM("010203.123456")
+        assert pydicom3.valuerep.TM(tm) == time(1, 2, 3, 123456)
+        assert tm == pydicom3.valuerep.TM(tm)
+        tm = pydicom3.valuerep.TM(time(1, 2, 3))
+        assert isinstance(tm, pydicom3.valuerep.TM)
         assert tm == time(1, 2, 3)
 
         msg = r"Unable to convert '123456' to 'TM' object"
         with pytest.raises(ValueError, match=msg):
-            pydicom.valuerep.TM(123456)
+            pydicom3.valuerep.TM(123456)
 
     def test_comparison(self):
-        tm = pydicom.valuerep.TM("010203.123456")
+        tm = pydicom3.valuerep.TM("010203.123456")
         tm_object = time(1, 2, 3, 123456)
         assert tm == tm  # noqa: PLR0124 Need to check equality with self
         assert tm != 1
         assert tm == tm_object
         assert tm_object == tm
         assert hash(tm) == hash(tm_object)
-        assert tm == pydicom.valuerep.TM(tm_object)
+        assert tm == pydicom3.valuerep.TM(tm_object)
         assert tm < time(1, 2, 3, 123457)
         assert tm != time(1, 2, 3, 123457)
-        assert tm < pydicom.valuerep.TM(time(1, 2, 3, 123457))
+        assert tm < pydicom3.valuerep.TM(time(1, 2, 3, 123457))
         assert tm <= time(1, 2, 3, 123457)
         assert tm <= tm_object
         assert tm > time(1, 2, 3)
-        assert tm > pydicom.valuerep.TM(time(1, 2, 3))
+        assert tm > pydicom3.valuerep.TM(time(1, 2, 3))
         assert tm >= time(1, 2, 3)
         assert time(1, 2, 3, 123457) > tm
         assert tm_object >= tm
@@ -165,7 +165,7 @@ class TestTM:
 
     def test_time_behavior(self):
         """Test that TM behaves like time."""
-        tm = pydicom.valuerep.TM("010203.123456")
+        tm = pydicom3.valuerep.TM("010203.123456")
         assert tm.hour == 1
         assert tm.second == 3
         assert tm.microsecond == 123456
@@ -179,7 +179,7 @@ class TestDT:
 
     def test_pickling(self):
         # Check that a pickled DT is read back properly
-        dt = pydicom.valuerep.DT("19111213212123")
+        dt = pydicom3.valuerep.DT("19111213212123")
         assert dt == datetime(1911, 12, 13, 21, 21, 23)
         data1_string = pickle.dumps(dt)
         loaded_dt = pickle.loads(data1_string)
@@ -188,14 +188,14 @@ class TestDT:
         assert str(loaded_dt) == str(dt)
 
     def test_pickling_with_timezone(self):
-        dt = pydicom.valuerep.DT("19111213212123-0630")
+        dt = pydicom3.valuerep.DT("19111213212123-0630")
         loaded_dt = pickle.loads(pickle.dumps(dt))
         assert loaded_dt == dt
         assert loaded_dt.original_string == dt.original_string
         assert str(loaded_dt) == str(dt)
 
     def test_pickling_dt_from_datetime(self):
-        dt = pydicom.valuerep.DT(datetime(2222, 11, 23, 1, 2, 3, 4))
+        dt = pydicom3.valuerep.DT(datetime(2222, 11, 23, 1, 2, 3, 4))
         assert dt.original_string == "22221123010203.000004"
         loaded_dt = pickle.loads(pickle.dumps(dt))
         assert loaded_dt == dt
@@ -205,7 +205,7 @@ class TestDT:
     def test_pickling_dt_from_datetime_with_timezone(self):
         tz_info = timezone(timedelta(seconds=-23400), "-0630")
         dt_object = datetime(2022, 12, 31, 23, 59, 59, 42, tzinfo=tz_info)
-        dt = pydicom.valuerep.DT(dt_object)
+        dt = pydicom3.valuerep.DT(dt_object)
         assert dt.original_string == "20221231235959.000042-0630"
         loaded_dt = pickle.loads(pickle.dumps(dt))
         assert dt == loaded_dt
@@ -214,21 +214,21 @@ class TestDT:
 
     def test_new_empty_str(self):
         """Test converting an empty string."""
-        assert pydicom.valuerep.DT("") is None
+        assert pydicom3.valuerep.DT("") is None
 
     def test_new_obj_conversion(self):
         """Test other conversion attempts."""
-        assert pydicom.valuerep.DT(None) is None
-        dt = pydicom.valuerep.DT("10010203")
-        assert pydicom.valuerep.DT(dt) == datetime(1001, 2, 3)
-        assert dt == pydicom.valuerep.DT(dt)
-        dt = pydicom.valuerep.DT(datetime(1001, 2, 3))
-        assert isinstance(dt, pydicom.valuerep.DT)
+        assert pydicom3.valuerep.DT(None) is None
+        dt = pydicom3.valuerep.DT("10010203")
+        assert pydicom3.valuerep.DT(dt) == datetime(1001, 2, 3)
+        assert dt == pydicom3.valuerep.DT(dt)
+        dt = pydicom3.valuerep.DT(datetime(1001, 2, 3))
+        assert isinstance(dt, pydicom3.valuerep.DT)
         assert dt == datetime(1001, 2, 3)
 
         msg = r"Unable to convert '123456' to 'DT' object"
         with pytest.raises(ValueError, match=msg):
-            pydicom.valuerep.DT(123456)
+            pydicom3.valuerep.DT(123456)
 
     def test_new_str_conversion(self):
         """Test string conversion."""
@@ -238,46 +238,46 @@ class TestDT:
             r"seconds component, changing to '59'"
         )
         with pytest.warns(UserWarning, match=msg):
-            dt = pydicom.valuerep.DT("20010101235960")
+            dt = pydicom3.valuerep.DT("20010101235960")
         assert str(dt) == "20010101235960"
         assert dt == datetime(2001, 1, 1, 23, 59, 59)
 
         msg = r"Unable to convert non-conformant value 'a2000,00,00' to 'DT' object"
         with pytest.raises(ValueError, match=msg):
-            pydicom.valuerep.DT("a2000,00,00")
+            pydicom3.valuerep.DT("a2000,00,00")
 
     def test_str_and_repr(self):
         dt = datetime(1911, 12, 13, 21, 21, 23)
-        assert str(pydicom.valuerep.DT(dt)) == "19111213212123"
-        assert repr(pydicom.valuerep.DT(dt)) == '"19111213212123"'
-        assert str(pydicom.valuerep.DT("19111213212123")) == "19111213212123"
-        assert str(pydicom.valuerep.DA("1001.02.03")) == "1001.02.03"
-        assert repr(pydicom.valuerep.DA("1001.02.03")) == '"1001.02.03"'
+        assert str(pydicom3.valuerep.DT(dt)) == "19111213212123"
+        assert repr(pydicom3.valuerep.DT(dt)) == '"19111213212123"'
+        assert str(pydicom3.valuerep.DT("19111213212123")) == "19111213212123"
+        assert str(pydicom3.valuerep.DA("1001.02.03")) == "1001.02.03"
+        assert repr(pydicom3.valuerep.DA("1001.02.03")) == '"1001.02.03"'
         tz_info = timezone(timedelta(seconds=21600), "+0600")
         dt = datetime(2022, 1, 2, 8, 9, 7, 123456, tzinfo=tz_info)
-        assert str(pydicom.valuerep.DT(dt)) == "20220102080907.123456+0600"
-        assert repr(pydicom.valuerep.DT(dt)) == '"20220102080907.123456+0600"'
+        assert str(pydicom3.valuerep.DT(dt)) == "20220102080907.123456+0600"
+        assert repr(pydicom3.valuerep.DT(dt)) == '"20220102080907.123456+0600"'
         tz_info = timezone(timedelta(seconds=-23400), "-0630")
         dt = datetime(2022, 12, 31, 23, 59, 59, 42, tzinfo=tz_info)
-        assert str(pydicom.valuerep.DT(dt)) == "20221231235959.000042-0630"
-        assert repr(pydicom.valuerep.DT(dt)) == '"20221231235959.000042-0630"'
+        assert str(pydicom3.valuerep.DT(dt)) == "20221231235959.000042-0630"
+        assert repr(pydicom3.valuerep.DT(dt)) == '"20221231235959.000042-0630"'
 
     def test_comparison(self):
-        dt = pydicom.valuerep.DT("19111213212123")
+        dt = pydicom3.valuerep.DT("19111213212123")
         dt_object = datetime(1911, 12, 13, 21, 21, 23)
         assert dt == dt  # noqa: PLR0124 Need to check equality with self
         assert dt != 1
         assert dt == dt_object
         assert dt_object == dt
         assert hash(dt) == hash(dt_object)
-        assert dt == pydicom.valuerep.DT(dt_object)
+        assert dt == pydicom3.valuerep.DT(dt_object)
         assert dt < datetime(1911, 12, 13, 21, 21, 23, 123)
         assert dt != datetime(1911, 12, 13, 21, 21, 24)
-        assert dt < pydicom.valuerep.DT(datetime(1911, 12, 13, 21, 21, 24))
+        assert dt < pydicom3.valuerep.DT(datetime(1911, 12, 13, 21, 21, 24))
         assert dt <= datetime(1911, 12, 13, 21, 21, 23)
         assert dt <= dt_object
         assert dt > datetime(1911, 12, 13, 21, 21, 22)
-        assert dt > pydicom.valuerep.DT(datetime(1911, 12, 13, 21, 21, 22))
+        assert dt > pydicom3.valuerep.DT(datetime(1911, 12, 13, 21, 21, 22))
         assert dt >= datetime(1911, 12, 13, 21, 21, 23)
         assert datetime(1911, 12, 13, 21, 21, 24) > dt
         assert dt_object >= dt
@@ -289,7 +289,7 @@ class TestDT:
         """Test that DT behaves like datetime."""
         tz_info = timezone(timedelta(seconds=-23400), "-0630")
         dt_object = datetime(2022, 12, 31, 23, 59, 59, 42, tzinfo=tz_info)
-        dt = pydicom.valuerep.DT(dt_object)
+        dt = pydicom3.valuerep.DT(dt_object)
         assert dt == dt_object
         assert dt_object == dt
         assert dt.year == 2022
@@ -308,7 +308,7 @@ class TestDA:
 
     def test_pickling(self):
         # Check that a pickled DA is read back properly
-        x = pydicom.valuerep.DA("19111213")
+        x = pydicom3.valuerep.DA("19111213")
         assert date(1911, 12, 13) == x
         x.original_string = "hello"
         data1_string = pickle.dumps(x)
@@ -319,42 +319,42 @@ class TestDA:
 
     def test_new_obj_conversion(self):
         """Test other conversion attempts."""
-        assert pydicom.valuerep.DA(None) is None
-        x = pydicom.valuerep.DA("10010203")
-        assert date(1001, 2, 3) == pydicom.valuerep.DA(x)
-        assert x == pydicom.valuerep.DA(x)
-        x = pydicom.valuerep.DA(date(1001, 2, 3))
-        assert isinstance(x, pydicom.valuerep.DA)
+        assert pydicom3.valuerep.DA(None) is None
+        x = pydicom3.valuerep.DA("10010203")
+        assert date(1001, 2, 3) == pydicom3.valuerep.DA(x)
+        assert x == pydicom3.valuerep.DA(x)
+        x = pydicom3.valuerep.DA(date(1001, 2, 3))
+        assert isinstance(x, pydicom3.valuerep.DA)
         assert date(1001, 2, 3) == x
 
         msg = r"Unable to convert '123456' to 'DA' object"
         with pytest.raises(ValueError, match=msg):
-            pydicom.valuerep.DA(123456)
+            pydicom3.valuerep.DA(123456)
 
     def test_str_and_repr(self):
-        assert str(pydicom.valuerep.DA(date(1001, 2, 3))) == "10010203"
-        assert repr(pydicom.valuerep.DA(date(1001, 2, 3))) == '"10010203"'
-        assert str(pydicom.valuerep.DA("10010203")) == "10010203"
-        assert repr(pydicom.valuerep.DA("10010203")) == '"10010203"'
-        assert str(pydicom.valuerep.DA("1001.02.03")) == "1001.02.03"
-        assert repr(pydicom.valuerep.DA("1001.02.03")) == '"1001.02.03"'
+        assert str(pydicom3.valuerep.DA(date(1001, 2, 3))) == "10010203"
+        assert repr(pydicom3.valuerep.DA(date(1001, 2, 3))) == '"10010203"'
+        assert str(pydicom3.valuerep.DA("10010203")) == "10010203"
+        assert repr(pydicom3.valuerep.DA("10010203")) == '"10010203"'
+        assert str(pydicom3.valuerep.DA("1001.02.03")) == "1001.02.03"
+        assert repr(pydicom3.valuerep.DA("1001.02.03")) == '"1001.02.03"'
 
     def test_comparison(self):
-        da = pydicom.valuerep.DA("19111213")
+        da = pydicom3.valuerep.DA("19111213")
         da_object = date(1911, 12, 13)
         assert da == da  # noqa: PLR0124 Need to check equality with self
         assert da != 1
         assert da == da_object
         assert hash(da) == hash(da_object)
         assert da_object == da
-        assert da == pydicom.valuerep.DA(da_object)
+        assert da == pydicom3.valuerep.DA(da_object)
         assert da < date(1911, 12, 14)
         assert da != date(1901, 12, 13)
-        assert da < pydicom.valuerep.DA(date(1912, 12, 13))
+        assert da < pydicom3.valuerep.DA(date(1912, 12, 13))
         assert da <= date(1911, 12, 13)
         assert da <= da_object
         assert da > date(1911, 12, 12)
-        assert da > pydicom.valuerep.DA(date(1911, 12, 12))
+        assert da > pydicom3.valuerep.DA(date(1911, 12, 12))
         assert da >= date(1911, 12, 13)
         assert date(1911, 12, 14) > da
         assert da_object >= da
@@ -363,7 +363,7 @@ class TestDA:
             da > 5
 
     def test_date_behavior(self):
-        da = pydicom.valuerep.DA("10010203")
+        da = pydicom3.valuerep.DA("10010203")
         da_object = date(1001, 2, 3)
         assert da == da_object
         assert da_object == da
@@ -393,7 +393,7 @@ class TestIsValidDS:
     )
     def test_valid(self, s: str):
         """Various valid decimal strings."""
-        assert pydicom.valuerep.is_valid_ds(s)
+        assert pydicom3.valuerep.is_valid_ds(s)
 
     @pytest.mark.parametrize(
         "s",
@@ -409,7 +409,7 @@ class TestIsValidDS:
     )
     def test_invalid(self, s: str):
         """Various invalid decimal strings."""
-        assert not pydicom.valuerep.is_valid_ds(s)
+        assert not pydicom3.valuerep.is_valid_ds(s)
 
 
 class TestTruncateFloatForDS:
@@ -417,7 +417,7 @@ class TestTruncateFloatForDS:
 
     def check_valid(self, s: str) -> bool:
         # Use the pydicom test function
-        if not pydicom.valuerep.is_valid_ds(s):
+        if not pydicom3.valuerep.is_valid_ds(s):
             return False
 
         # Disallow floats ending in '.' since this may not be correctly
@@ -448,20 +448,20 @@ class TestTruncateFloatForDS:
     )
     def test_auto_format(self, val: float, expected_str: str):
         """Test truncation of some basic values."""
-        assert pydicom.valuerep.format_number_as_ds(val) == expected_str
+        assert pydicom3.valuerep.format_number_as_ds(val) == expected_str
 
     @pytest.mark.parametrize("exp", [-101, -100, 100, 101] + list(range(-16, 17)))
     def test_powers_of_pi(self, exp: int):
         """Raise pi to various powers to test truncation."""
         val = math.pi * 10**exp
-        s = pydicom.valuerep.format_number_as_ds(val)
+        s = pydicom3.valuerep.format_number_as_ds(val)
         assert self.check_valid(s)
 
     @pytest.mark.parametrize("exp", [-101, -100, 100, 101] + list(range(-16, 17)))
     def test_powers_of_negative_pi(self, exp: int):
         """Raise negative pi to various powers to test truncation."""
         val = -math.pi * 10**exp
-        s = pydicom.valuerep.format_number_as_ds(val)
+        s = pydicom3.valuerep.format_number_as_ds(val)
         assert self.check_valid(s)
 
     @pytest.mark.parametrize(
@@ -470,14 +470,14 @@ class TestTruncateFloatForDS:
     def test_invalid(self, val: float):
         """Test non-finite floating point numbers raise an error"""
         with pytest.raises(ValueError):
-            pydicom.valuerep.format_number_as_ds(val)
+            pydicom3.valuerep.format_number_as_ds(val)
 
     def test_wrong_type(self):
         """Test calling with a string raises an error"""
         with pytest.raises(
             TypeError, match="'val' must be of type float or decimal.Decimal"
         ):
-            pydicom.valuerep.format_number_as_ds("1.0")
+            pydicom3.valuerep.format_number_as_ds("1.0")
 
 
 class TestDS:
@@ -1059,10 +1059,10 @@ class TestBadValueRead:
         self.tag.is_implicit_VR = False
         self.tag.tag = Tag(0x0010, 0x0020)
         self.tag.length = 2
-        self.default_retry_order = pydicom.values.convert_retry_VR_order
+        self.default_retry_order = pydicom3.values.convert_retry_VR_order
 
     def teardown_method(self):
-        pydicom.values.convert_retry_VR_order = self.default_retry_order
+        pydicom3.values.convert_retry_VR_order = self.default_retry_order
 
     def test_read_bad_value_in_VR_default(self, disable_value_validation):
         # found a conversion
@@ -1070,7 +1070,7 @@ class TestBadValueRead:
         # converted with fallback vr "SH"
         assert "1A" == convert_value("IS", self.tag)
 
-        pydicom.values.convert_retry_VR_order = ["FL", "UL"]
+        pydicom3.values.convert_retry_VR_order = ["FL", "UL"]
         # no fallback VR succeeded, returned original value untranslated
         assert b"1A" == convert_value("IS", self.tag)
 
@@ -1245,7 +1245,7 @@ class TestPersonName:
     def test_not_equal(self):
         """PN3: Not equal works correctly (issue 121)..."""
         # Meant to only be used in python 3 but doing simple check here
-        from pydicom.valuerep import PersonName
+        from pydicom3.valuerep import PersonName
 
         pn = PersonName("John^Doe")
         assert not pn != "John^Doe"
@@ -1253,7 +1253,7 @@ class TestPersonName:
     def test_encoding_carried(self):
         """Test encoding is carried over to a new PN3 object"""
         # Issue 466
-        from pydicom.valuerep import PersonName
+        from pydicom3.valuerep import PersonName
 
         pn = PersonName("John^Doe", encodings="iso_ir_126")
         assert pn.encodings == ("iso_ir_126",)

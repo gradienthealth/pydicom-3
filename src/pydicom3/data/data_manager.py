@@ -17,7 +17,7 @@ should register:
     setup(
         ...,
         entry_points={
-            "pydicom.data.external_sources": "mydata = mydata:MyInterface",
+            "pydicom3.data.external_sources": "mydata = mydata:MyInterface",
         },
     )
 
@@ -94,7 +94,7 @@ def _check_data_hash(fpath: str) -> bool:
 
     Raises
     ------
-    pydicom.data.download.NoHashFound
+    pydicom3.data.download.NoHashFound
         If the file is missing from ``hashes.json``.
     """
     p = Path(fpath)
@@ -118,7 +118,7 @@ def get_external_sources() -> dict:
     # Prefer pydicom-data as the source
     sources = {
         vv.name: vv.load()()
-        for vv in entry_points(group="pydicom.data.external_sources")
+        for vv in entry_points(group="pydicom3.data.external_sources")
     }
     out = {}
     if "pydicom-data" in sources:
@@ -311,15 +311,15 @@ def get_testdata_file(
     name : str
         The full file name (without path)
     read : bool, optional
-        If ``True`` then use :func:`~pydicom.filereader.dcmread` to read the
+        If ``True`` then use :func:`~pydicom3.filereader.dcmread` to read the
         file and return the corresponding
-        :class:`~pydicom.dataset.FileDataset`. Default ``False``.
+        :class:`~pydicom3.dataset.FileDataset`. Default ``False``.
     download : bool, optional
         If ``True`` (default) download the file if missed locally.
 
     Returns
     -------
-    str, pydicom.dataset.Dataset or None
+    str, pydicom3.dataset.Dataset or None
         The absolute path of the file if found, the dataset itself if `read` is
         ``True``, or ``None`` if the file is not found.
 

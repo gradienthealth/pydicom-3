@@ -2,8 +2,8 @@
 [![type-hints](https://github.com/pydicom/pydicom/workflows/type-hints/badge.svg)](https://github.com/pydicom/pydicom/actions?query=workflow%3Atype-hints)
 [![doc-build](https://circleci.com/gh/pydicom/pydicom/tree/main.svg?style=shield)](https://circleci.com/gh/pydicom/pydicom/tree/main)
 [![test-coverage](https://codecov.io/gh/pydicom/pydicom/branch/main/graph/badge.svg)](https://codecov.io/gh/pydicom/pydicom)
-[![Python version](https://img.shields.io/pypi/pyversions/pydicom.svg)](https://img.shields.io/pypi/pyversions/pydicom.svg)
-[![PyPI version](https://badge.fury.io/py/pydicom.svg)](https://badge.fury.io/py/pydicom)
+[![Python version](https://img.shields.io/pypi/pyversions/pydicom3.svg)](https://img.shields.io/pypi/pyversions/pydicom3.svg)
+[![PyPI version](https://badge.fury.io/py/pydicom3.svg)](https://badge.fury.io/py/pydicom)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8034250.svg)](https://doi.org/10.5281/zenodo.8034250)
 
 # *pydicom*
@@ -37,12 +37,12 @@ Using [conda](https://docs.conda.io/en/latest/):
 conda install -c conda-forge pydicom
 ```
 
-For more information, including installation instructions for the development version, see the [installation guide](https://pydicom.github.io/pydicom/stable/tutorials/installation.html).
+For more information, including installation instructions for the development version, see the [installation guide](https://pydicom3.github.io/pydicom/stable/tutorials/installation.html).
 
 
 ## Documentation
 
-The *pydicom* [user guide](https://pydicom.github.io/pydicom/stable/guides/user/index.html), [tutorials](https://pydicom.github.io/pydicom/stable/tutorials/index.html), [examples](https://pydicom.github.io/pydicom/stable/auto_examples/index.html) and [API reference](https://pydicom.github.io/pydicom/stable/reference/index.html) documentation is available for both the [current release](https://pydicom.github.io/pydicom/stable) and the [development version](https://pydicom.github.io/pydicom/dev) on GitHub Pages.
+The *pydicom* [user guide](https://pydicom3.github.io/pydicom/stable/guides/user/index.html), [tutorials](https://pydicom3.github.io/pydicom/stable/tutorials/index.html), [examples](https://pydicom3.github.io/pydicom/stable/auto_examples/index.html) and [API reference](https://pydicom3.github.io/pydicom/stable/reference/index.html) documentation is available for both the [current release](https://pydicom3.github.io/pydicom/stable) and the [development version](https://pydicom3.github.io/pydicom/dev) on GitHub Pages.
 
 ## *Pixel Data*
 
@@ -50,7 +50,7 @@ Compressed and uncompressed *Pixel Data* is always available to
 be read, changed and written as [bytes](https://docs.python.org/3/library/stdtypes.html#bytes-objects):
 ```python
 >>> from pydicom import dcmread
->>> from pydicom.data import get_testdata_file
+>>> from pydicom3.data import get_testdata_file
 >>> path = get_testdata_file("CT_small.dcm")
 >>> ds = dcmread(path)
 >>> type(ds.PixelData)
@@ -62,7 +62,7 @@ b'\xaf\x00'
 
 ```
 
-If [NumPy](https://www.numpy.org) is installed, *Pixel Data* can be converted to an [ndarray](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) using the [Dataset.pixel_array](https://pydicom.github.io/pydicom/stable/reference/generated/pydicom.dataset.Dataset.html#pydicom.dataset.Dataset.pixel_array) property:
+If [NumPy](https://www.numpy.org) is installed, *Pixel Data* can be converted to an [ndarray](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) using the [Dataset.pixel_array](https://pydicom3.github.io/pydicom/stable/reference/generated/pydicom3.dataset.Dataset.html#pydicom3.dataset.Dataset.pixel_array) property:
 
 ```python
 >>> arr = ds.pixel_array
@@ -79,13 +79,13 @@ array([[175, 180, 166, ..., 203, 207, 216],
 ```
 ### Decompressing *Pixel Data*
 #### JPEG, JPEG-LS and JPEG 2000
-Converting JPEG, JPEG-LS or JPEG 2000 compressed *Pixel Data* to an ``ndarray`` requires installing one or more additional Python libraries. For information on which libraries are required, see the [pixel data handler documentation](https://pydicom.github.io/pydicom/stable/guides/user/image_data_handlers.html#guide-compressed).
+Converting JPEG, JPEG-LS or JPEG 2000 compressed *Pixel Data* to an ``ndarray`` requires installing one or more additional Python libraries. For information on which libraries are required, see the [pixel data handler documentation](https://pydicom3.github.io/pydicom/stable/guides/user/image_data_handlers.html#guide-compressed).
 
 #### RLE
-Decompressing RLE *Pixel Data* only requires NumPy, however it can be quite slow. You may want to consider [installing one or more additional Python libraries](https://pydicom.github.io/pydicom/stable/guides/user/image_data_compression.html) to speed up the process.
+Decompressing RLE *Pixel Data* only requires NumPy, however it can be quite slow. You may want to consider [installing one or more additional Python libraries](https://pydicom3.github.io/pydicom/stable/guides/user/image_data_compression.html) to speed up the process.
 
 ### Compressing *Pixel Data*
-Information on compressing *Pixel Data* using one of the below formats can be found in the corresponding [encoding guides](https://pydicom.github.io/pydicom/stable/guides/encoding/index.html). These guides cover the specific requirements for each encoding method and we recommend you be familiar with them when performing image compression.
+Information on compressing *Pixel Data* using one of the below formats can be found in the corresponding [encoding guides](https://pydicom3.github.io/pydicom/stable/guides/encoding/index.html). These guides cover the specific requirements for each encoding method and we recommend you be familiar with them when performing image compression.
 
 #### JPEG-LS, JPEG 2000
 Compressing image data from an ``ndarray`` or ``bytes`` object to JPEG-LS or JPEG 2000 requires installing the following:
@@ -98,7 +98,7 @@ Compressing using RLE requires no additional packages but can be quite slow. It 
 
 
 ## Examples
-More [examples](https://pydicom.github.io/pydicom/stable/auto_examples/index.html) are available in the documentation.
+More [examples](https://pydicom3.github.io/pydicom/stable/auto_examples/index.html) are available in the documentation.
 
 **Change a patient's ID**
 ```python

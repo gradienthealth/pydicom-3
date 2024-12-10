@@ -1,9 +1,9 @@
 .. _api_misc:
 
-Miscellaneous (:mod:`pydicom.misc`)
+Miscellaneous (:mod:`pydicom3.misc`)
 ===================================
 
-.. currentmodule:: pydicom.misc
+.. currentmodule:: pydicom3.misc
 
 Miscellaneous functions.
 

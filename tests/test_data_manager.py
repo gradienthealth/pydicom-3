@@ -1,5 +1,5 @@
 # Copyright 2008-2020 pydicom authors. See LICENSE file for details.
-"""Unit tests for pydicom.data_manager"""
+"""Unit tests for pydicom3.data_manager"""
 
 import json
 import os
@@ -10,19 +10,19 @@ from tempfile import TemporaryDirectory
 
 import pytest
 
-from pydicom.data import (
+from pydicom3.data import (
     get_charset_files,
     get_testdata_files,
     get_palette_files,
     fetch_data_files,
 )
-from pydicom.data.data_manager import (
+from pydicom3.data.data_manager import (
     DATA_ROOT,
     get_testdata_file,
     external_data_sources,
 )
-from pydicom.data import download
-from pydicom.data.download import get_data_dir, calculate_file_hash, get_cached_filehash
+from pydicom3.data import download
+from pydicom3.data.download import get_data_dir, calculate_file_hash, get_cached_filehash
 
 
 EXT_PYDICOM = "pydicom-data" in external_data_sources()

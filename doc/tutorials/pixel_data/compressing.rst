@@ -8,7 +8,7 @@
 In part 1 of this tutorial you learned how to :doc:`access the pixel data
 </tutorials/pixel_data/introduction>` as either the raw :class:`bytes` or a NumPy
 :class:`~numpy.ndarray` and in part 2 you learned how to :doc:`create new pixel data
-</tutorials/pixel_data/creation>` and add it to a :class:`~pydicom.dataset.Dataset`.
+</tutorials/pixel_data/creation>` and add it to a :class:`~pydicom3.dataset.Dataset`.
 In this final part you'll learn how to compress and decompress datasets containing
 *Pixel Data*.
 
@@ -61,14 +61,14 @@ Compressing a dataset (with *RLE Lossless*)
 
 Compression of an existing uncompressed dataset can be performed by passing the *Transfer
 Syntax UID* of the compression method you'd like to use to :meth:`Dataset.compress()
-<pydicom.dataset.Dataset.compress>`, or by using the :func:`~pydicom.pixels.compress`
+<pydicom3.dataset.Dataset.compress>`, or by using the :func:`~pydicom3.pixels.compress`
 function. We'll be using *RLE Lossless* to start with, which is based on the
 `PackBits <https://en.wikipedia.org/wiki/PackBits>`_ compression scheme:
 
 .. code-block:: python
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import RLELossless
+    >>> from pydicom3.uid import RLELossless
     >>> ds = examples.ct
     >>> ds.file_meta.TransferSyntaxUID.is_compressed
     False
@@ -80,7 +80,7 @@ Syntax UID*::
 
     import numpy as np
     from pydicom import Dataset
-    from pydicom.uid import RLELossless
+    from pydicom3.uid import RLELossless
 
     ds = Dataset()
     ds.Rows = 320
@@ -98,7 +98,7 @@ Syntax UID*::
     assert ds.file_meta.TransferSyntaxUID == RLELossless
     assert isinstance(ds.PixelData, bytes)
 
-In both cases this will compress the :class:`~pydicom.dataset.Dataset` in-place:
+In both cases this will compress the :class:`~pydicom3.dataset.Dataset` in-place:
 
 * The *Pixel Data* will be set with the encapsulated RLE codestream
 * The *Transfer Syntax UID* will be set to *RLE Lossless*
@@ -113,7 +113,7 @@ such as *Rows*, *Columns*, *Samples per Pixel*, etc. If they don't match you'll 
 .. code-block:: python
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import RLELossless
+    >>> from pydicom3.uid import RLELossless
     >>> ds = examples.ct
     >>> arr = np.zeros((ds.Rows, ds.Columns + 1), dtype='<i2')
     >>> ds.compress(RLELossless, arr)
@@ -159,7 +159,7 @@ well supported by third-party applications, so keep that in mind if you decide t
 Performing lossless compression is straightforward::
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import JPEGLSLossless
+    >>> from pydicom3.uid import JPEGLSLossless
     >>> ds = examples.ct
     >>> ds.compress(JPEGLSLossless)
 
@@ -177,7 +177,7 @@ uses signed integers. First up though, we'll use an example with unsigned pixel 
 .. code-block:: python
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import JPEGLSNearLossless
+    >>> from pydicom3.uid import JPEGLSNearLossless
     >>> ds = examples.rgb_color
     >>> ds.PixelRepresentation
     0
@@ -203,7 +203,7 @@ range [-125, 124].
 .. code-block:: python
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import JPEGLSNearLossless
+    >>> from pydicom3.uid import JPEGLSNearLossless
     >>> ds = examples.ct
     >>> ds.PixelRepresentation
     1
@@ -241,7 +241,7 @@ order to simplify its usage.
 As with RLE and JPEG-LS, performing lossless compression is straightforward::
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import JPEG2000Lossless
+    >>> from pydicom3.uid import JPEG2000Lossless
     >>> ds = examples.ct
     >>> ds.compress(JPEG2000Lossless)
 
@@ -257,7 +257,7 @@ prior to compression:
 .. code-block:: python
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import JPEG2000Lossless
+    >>> from pydicom3.uid import JPEG2000Lossless
     >>> ds = examples.rgb_color
     >>> ds.PhotometricInterpretation
     "RGB"
@@ -285,7 +285,7 @@ the image quality is less intuitive.
 .. code-block:: python
 
     >>> from pydicom import examples
-    >>> from pydicom.uid import JPEG2000
+    >>> from pydicom3.uid import JPEG2000
     >>> ds = examples.ct
     >>> ds.compress(JPEG2000, j2k_cr=[5, 2])  # 2 quality layers
 
@@ -316,15 +316,15 @@ Encapsulating data compressed by third-party packages
 
 You can also use *pydicom* with third-party compression packages to encapsulate
 the compressed *Pixel Data*, provided they meet the requirements of the
-corresponding transfer syntax. The :func:`~pydicom.encaps.encapsulate` or
-:func:`~pydicom.encaps.encapsulate_extended` functions are used to encapsulate the
+corresponding transfer syntax. The :func:`~pydicom3.encaps.encapsulate` or
+:func:`~pydicom3.encaps.encapsulate_extended` functions are used to encapsulate the
 compressed data.
 
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.encaps import encapsulate, encapsulate_extended
-    from pydicom.uid import JPEGBaseline8Bit
+    from pydicom3.encaps import encapsulate, encapsulate_extended
+    from pydicom3.uid import JPEGBaseline8Bit
 
     # Fetch an example dataset
     ds = examples.ct
@@ -354,8 +354,8 @@ Decompression of *Pixel Data*
 =============================
 
 Datasets with a compressed *Transfer Syntax UID* can be decompressed with
-:meth:`Dataset.decompress()<pydicom.dataset.Dataset.decompress>` or the
-:func:`~pydicom.pixels.decompress` function.
+:meth:`Dataset.decompress()<pydicom3.dataset.Dataset.decompress>` or the
+:func:`~pydicom3.pixels.decompress` function.
 
 .. code-block:: python
 
@@ -363,7 +363,7 @@ Datasets with a compressed *Transfer Syntax UID* can be decompressed with
     >>> ds = examples.jpeg2k
     >>> ds.decompress()
 
-This will decompress the :class:`~pydicom.dataset.Dataset` in-place:
+This will decompress the :class:`~pydicom3.dataset.Dataset` in-place:
 
 * The *Pixel Data* will be set using the uncompressed pixel data.
 * The *Transfer Syntax UID* will be changed to *Explicit VR Little Endian*.
@@ -387,8 +387,8 @@ to RGB by default. This can be disabled by passing ``as_rgb=False``::
     import numpy as np
 
     from pydicom import examples
-    from pydicom.pixels import convert_color_space, pixel_array
-    from pydicom.uid import JPEG2000Lossless
+    from pydicom3.pixels import convert_color_space, pixel_array
+    from pydicom3.uid import JPEG2000Lossless
 
     # Original dataset in RGB
     ds = examples.rgb_color

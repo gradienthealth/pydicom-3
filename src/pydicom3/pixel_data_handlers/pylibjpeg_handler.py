@@ -148,7 +148,7 @@ def supports_transfer_syntax(tsyntax: UID) -> bool:
 
     Parameters
     ----------
-    tsyntax : pydicom.uid.UID
+    tsyntax : pydicom3.uid.UID
         The *Transfer Syntax UID* of the *Pixel Data* that is to be used with
         the handler.
     """
@@ -180,7 +180,7 @@ def as_array(ds: "Dataset") -> "np.ndarray":
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The :class:`Dataset` containing an :dcm:`Image Pixel
         <part03/sect_C.7.6.3.html>` module and the *Pixel Data* to be
         converted.
@@ -203,7 +203,7 @@ def generate_frames(ds: "Dataset", reshape: bool = True) -> Iterable["np.ndarray
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The :class:`Dataset` containing an :dcm:`Image Pixel
         <part03/sect_C.7.6.3.html>` module and the *Pixel Data* to be
         converted.
@@ -312,7 +312,7 @@ def get_pixeldata(ds: "Dataset") -> "np.ndarray":
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The :class:`Dataset` containing an :dcm:`Image Pixel
         <part03/sect_C.7.6.3.html>` module and the *Pixel Data* to be
         converted.

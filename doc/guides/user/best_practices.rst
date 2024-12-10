@@ -22,13 +22,13 @@ Enforcing Valid DICOM
 ---------------------
 
 *pydicom* has configuration options to help enforce valid DICOM:
-:attr:`~pydicom.config.Settings.reading_validation_mode` and
-:attr:`~pydicom.config.Settings.writing_validation_mode`.
+:attr:`~pydicom3.config.Settings.reading_validation_mode` and
+:attr:`~pydicom3.config.Settings.writing_validation_mode`.
 The first setting is about validation of values read from existing DICOM data,
 the second about validation of newly created and written values.
 
-Both can have the values :attr:`~pydicom.config.IGNORE`,
-:attr:`~pydicom.config.WARN` and :attr:`~pydicom.config.RAISE`.
+Both can have the values :attr:`~pydicom3.config.IGNORE`,
+:attr:`~pydicom3.config.WARN` and :attr:`~pydicom3.config.RAISE`.
 
 As the name suggests, some non-standard DICOM datasets may result in a warning
 (this is the default for ``reading_validation_mode``) or in a raised exception
@@ -58,7 +58,7 @@ To change a flag in your code:
   config.settings.reading_validation_mode = config.RAISE
 
 Note that you *must not* use
-:code:`from pydicom.config.settings import reading_validation_mode`.
+:code:`from pydicom3.config.settings import reading_validation_mode`.
 That makes the ``reading_validation_mode`` variable local only to that module,
 so *pydicom* would not see your change to its value.
 
@@ -93,7 +93,7 @@ operating system documentation for more details on setting or removing
 environment variables.
 
 The other way to enable the future behavior is to turn it on at run-time
-using the :func:`~pydicom.config.future_behavior` function:
+using the :func:`~pydicom3.config.future_behavior` function:
 
 .. code-block:: python
 
@@ -101,7 +101,7 @@ using the :func:`~pydicom.config.future_behavior` function:
   config.future_behavior()
 
 If you needed to turn the future behavior off again at run-time, call
-:func:`~pydicom.config.future_behavior` with False:
+:func:`~pydicom3.config.future_behavior` with False:
 
 .. code-block:: python
 

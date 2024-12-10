@@ -6,12 +6,12 @@ from pathlib import Path
 import pytest
 
 import pydicom
-from pydicom.data import get_testdata_file
-from pydicom.encaps import get_frame
-from pydicom.filereader import dcmread
-from pydicom.pixels.processing import convert_color_space
-from pydicom.pixels.utils import get_j2k_parameters, get_expected_length
-from pydicom.uid import (
+from pydicom3.data import get_testdata_file
+from pydicom3.encaps import get_frame
+from pydicom3.filereader import dcmread
+from pydicom3.pixels.processing import convert_color_space
+from pydicom3.pixels.utils import get_j2k_parameters, get_expected_length
+from pydicom3.uid import (
     JPEGBaseline8Bit,
     JPEGExtended12Bit,
     JPEGLossless,
@@ -26,7 +26,7 @@ from pydicom.uid import (
 
 try:
     import numpy as np
-    from pydicom.pixel_data_handlers import numpy_handler as NP_HANDLER
+    from pydicom3.pixel_data_handlers import numpy_handler as NP_HANDLER
 
     HAVE_NP = True
 except ImportError:
@@ -34,8 +34,8 @@ except ImportError:
     HAVE_NP = False
 
 try:
-    from pydicom.pixel_data_handlers import pylibjpeg_handler as LJ_HANDLER
-    from pydicom.pixel_data_handlers.pylibjpeg_handler import (
+    from pydicom3.pixel_data_handlers import pylibjpeg_handler as LJ_HANDLER
+    from pydicom3.pixel_data_handlers.pylibjpeg_handler import (
         get_pixeldata,
         as_array,
         generate_frames,
@@ -402,12 +402,12 @@ class TestHandler:
 
     def setup_method(self):
         """Setup the test datasets and the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = [NP_HANDLER, LJ_HANDLER]
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = [NP_HANDLER, LJ_HANDLER]
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     def test_environment(self):
         """Check that the testing environment is as expected."""
@@ -417,7 +417,7 @@ class TestHandler:
 
     def test_unsupported_syntax_raises(self):
         """Test pixel_array raises exception for unsupported syntaxes."""
-        pydicom.config.pixel_data_handlers = [LJ_HANDLER]
+        pydicom3.config.pixel_data_handlers = [LJ_HANDLER]
 
         ds = dcmread(EXPL)
         ds.pixel_array_options(use_v2_backend=True)
@@ -468,12 +468,12 @@ class TestHandler:
 class TestJPEG:
     def setup_method(self):
         """Setup the test datasets and the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = [NP_HANDLER, LJ_HANDLER]
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = [NP_HANDLER, LJ_HANDLER]
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     @pytest.mark.parametrize("fpath, data", JPG_REFERENCE_DATA)
     def test_properties(self, fpath, data):
@@ -569,12 +569,12 @@ class TestJPEG:
 class TestJPEGLS:
     def setup_method(self):
         """Setup the test datasets and the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = [NP_HANDLER, LJ_HANDLER]
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = [NP_HANDLER, LJ_HANDLER]
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     @pytest.mark.parametrize("fpath, data", JLS_REFERENCE_DATA)
     def test_properties(self, fpath, data):
@@ -609,12 +609,12 @@ class TestJPEGLS:
 class TestJPEG2K:
     def setup_method(self):
         """Setup the test datasets and the environment."""
-        self.original_handlers = pydicom.config.pixel_data_handlers
-        pydicom.config.pixel_data_handlers = [NP_HANDLER, LJ_HANDLER]
+        self.original_handlers = pydicom3.config.pixel_data_handlers
+        pydicom3.config.pixel_data_handlers = [NP_HANDLER, LJ_HANDLER]
 
     def teardown_method(self):
         """Restore the environment."""
-        pydicom.config.pixel_data_handlers = self.original_handlers
+        pydicom3.config.pixel_data_handlers = self.original_handlers
 
     @pytest.mark.parametrize("fpath, data", J2K_REFERENCE_DATA)
     def test_properties_as_array(self, fpath, data):

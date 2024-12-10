@@ -26,8 +26,8 @@ A simple example of using the ``codify`` command would be::
     # Coded version of DICOM file 'C:\git\pydicom\pydicom\data\test_files\rtplan.dcm'
     # Produced by pydicom codify utility script
     import pydicom
-    from pydicom.dataset import Dataset, FileMetaDataset
-    from pydicom.sequence import Sequence
+    from pydicom3.dataset import Dataset, FileMetaDataset
+    from pydicom3.sequence import Sequence
 
     # Main data elements
     ds = Dataset()
@@ -125,8 +125,8 @@ rather than the whole file::
     refd_beam1.BeamDoseSpecificationPoint = [239.531250000000, 239.531250000000, -751.87000000000]
     ...
 
-Currently, only a data element which is a :class:`~pydicom.dataset.Dataset`
-(an item within a :class:`~pydicom.sequence.Sequence`) is accepted.
+Currently, only a data element which is a :class:`~pydicom3.dataset.Dataset`
+(an item within a :class:`~pydicom3.sequence.Sequence`) is accepted.
 The resulting code would not on its own produce a correct DICOM file,
 but could be useful as a model when creating
 more complete code.  For example, issuing code for one item in a

@@ -127,7 +127,7 @@ submit a pull request:
    more example scripts in the ``examples/`` folder. Have a look at other
    examples for reference. Examples should demonstrate why the new
    functionality is useful in practice and, if possible, compare it
-   to other methods available in pydicom.
+   to other methods available in pydicom3.
 
 -  Documentation and high-coverage tests are necessary for enhancements to be
    accepted. Bug-fixes shall be provided with
@@ -203,7 +203,7 @@ following rules before submitting:
    Please use the `pydicom_env_info` module to gather this information :
 
    ```bash
-   $ python -m pydicom.env_info
+   $ python -m pydicom3.env_info
    ```
 
 -  Please include a

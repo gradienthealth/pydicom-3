@@ -18,7 +18,7 @@ Getting the path to the example dataset
 
 In the tutorial we're going to be using one of the example DICOM datasets included with
 *pydicom*: :gh:`CT_small.dcm<pydicom/blob/main/src/pydicom/data/test_files/CT_small.dcm>`.
-You can get the file path to the dataset by using the :func:`~pydicom.examples.get_path`
+You can get the file path to the dataset by using the :func:`~pydicom3.examples.get_path`
 function to return the path as a :class:`pathlib.Path` (your path may vary)::
 
     >>> from pydicom import examples
@@ -30,14 +30,14 @@ Reading
 =======
 
 To read the DICOM dataset at a given file path (as a :class:`str` or :class:`pathlib.Path`)
-we use :func:`~pydicom.filereader.dcmread`, which returns a
-:class:`~pydicom.dataset.FileDataset` instance::
+we use :func:`~pydicom3.filereader.dcmread`, which returns a
+:class:`~pydicom3.dataset.FileDataset` instance::
 
     >>> from pydicom import dcmread, examples
     >>> path = get_path("ct")
     >>> ds = dcmread(path)
 
-:func:`~pydicom.filereader.dcmread` can also handle file-likes::
+:func:`~pydicom3.filereader.dcmread` can also handle file-likes::
 
     >>> with open(path, 'rb') as infile:
     ...     ds = dcmread(infile)
@@ -47,9 +47,9 @@ And can even be used as a context manager::
     >>> with dcmread(path) as ds:
     ...    type(ds)
     ...
-    <class 'pydicom.dataset.FileDataset'>
+    <class 'pydicom3.dataset.FileDataset'>
 
-By default, :func:`~pydicom.filereader.dcmread` will read any DICOM dataset
+By default, :func:`~pydicom3.filereader.dcmread` will read any DICOM dataset
 stored in accordance with the :dcm:`DICOM File Format<part10/chapter_7.html>`.
 However, occasionally you may try to read a file that gives you the following
 exception:
@@ -66,7 +66,7 @@ exception:
         preamble = read_preamble(fileobj, force)
       File ".../pydicom/filereader.py", line 631, in read_preamble
         raise InvalidDicomError("File is missing DICOM File Meta Information "
-      pydicom.errors.InvalidDicomError: File is missing DICOM File Meta Information header or the 'DICM' prefix is missing from the header. Use force=True to force reading.
+      pydicom3.errors.InvalidDicomError: File is missing DICOM File Meta Information header or the 'DICM' prefix is missing from the header. Use force=True to force reading.
 
 This indicates that either:
 
@@ -114,7 +114,7 @@ The ``CT_small.dcm`` dataset is also included as an example dataset:
     >>> from pydicom import examples
     >>> ds = examples.ct
     >>> type(ds)
-    <class 'pydicom.dataset.FileDataset'>
+    <class 'pydicom3.dataset.FileDataset'>
 
 You can view the contents of the entire dataset by using :func:`print`::
 
@@ -186,7 +186,7 @@ There are three categories of elements:
     shown.
 
 For all element categories, we can access a particular element in the dataset
-through its tag, which returns a :class:`~pydicom.dataelem.DataElement`
+through its tag, which returns a :class:`~pydicom3.dataelem.DataElement`
 instance::
 
     >>> elem = ds[0x0008, 0x0016]
@@ -288,13 +288,13 @@ Sequence elements can be accessed in the same manner as non-sequence ones::
     >>> seq = ds['OtherPatientIDsSequence']
 
 The main difference between sequence and non-sequence elements is that their
-value is a list of zero or more  :class:`~pydicom.dataset.Dataset` objects,
+value is a list of zero or more  :class:`~pydicom3.dataset.Dataset` objects,
 which can be accessed using the standard Python :class:`list` methods::
 
     >>> len(ds.OtherPatientIDsSequence)
     2
     >>> type(ds.OtherPatientIDsSequence[0])
-    <class 'pydicom.dataset.Dataset'>
+    <class 'pydicom3.dataset.Dataset'>
     >>> ds.OtherPatientIDsSequence[0]
     (0010, 0020) Patient ID                          LO: 'ABCD1234'
     (0010, 0022) Type of Patient ID                  CS: 'TEXT'
@@ -305,7 +305,7 @@ which can be accessed using the standard Python :class:`list` methods::
 file_meta
 ---------
 
-Earlier we saw that by default :func:`~pydicom.filereader.dcmread` only reads
+Earlier we saw that by default :func:`~pydicom3.filereader.dcmread` only reads
 files that are in the DICOM File Format. So what's the difference between a
 DICOM dataset written to file and one written in the DICOM File Format?
 The answer is a file header containing:
@@ -318,8 +318,8 @@ The answer is a file header containing:
 * Followed by a 4 byte ``DICM`` prefix
 * Followed by the required DICOM :dcm:`File Meta Information
   <part10/chapter_7.html#table_7.1-1>` elements, which in *pydicom* are
-  stored in a :class:`~pydicom.dataset.FileMetaDataset` instance in the
-  :attr:`~pydicom.dataset.FileDataset.file_meta` attribute::
+  stored in a :class:`~pydicom3.dataset.FileMetaDataset` instance in the
+  :attr:`~pydicom3.dataset.FileDataset.file_meta` attribute::
 
     >>> ds.file_meta
     (0002, 0000) File Meta Information Group Length  UL: 192
@@ -384,14 +384,14 @@ Multi-valued elements can be set using a :class:`list` or modified using the
 
 Similarly, for sequence elements::
 
-    >>> from pydicom.dataset import Dataset
+    >>> from pydicom3.dataset import Dataset
     >>> ds.OtherPatientIDsSequence = [Dataset(), Dataset()]
     >>> ds.OtherPatientIDsSequence.append(Dataset())
     >>> len(ds.OtherPatientIDsSequence)
     3
 
 As mentioned before, the items in a sequence are
-:class:`~pydicom.dataset.Dataset` instances. If you try to add any other type
+:class:`~pydicom3.dataset.Dataset` instances. If you try to add any other type
 to a sequence you'll get an exception::
 
     >>> ds.OtherPatientIDsSequence.append('Hello world?')
@@ -423,7 +423,7 @@ Adding elements
 Any category
 ~~~~~~~~~~~~
 New elements of any category can be added to the dataset with the
-:meth:`~pydicom.dataset.Dataset.add_new` method, which takes the tag, VR and
+:meth:`~pydicom3.dataset.Dataset.add_new` method, which takes the tag, VR and
 value to use for the new element.
 
 Let's say we wanted to add the (0028,1050) *Window Center* standard element. We
@@ -434,12 +434,12 @@ There are two ways to get an element's VR:
 
 * You can use :dcm:`Part 6 of the DICOM Standard<part06/chapter_6.html>`
   and search for the element
-* Alternatively, you can use the :func:`~pydicom.datadict.dictionary_VR`
+* Alternatively, you can use the :func:`~pydicom3.datadict.dictionary_VR`
   function to look it up
 
 ::
 
-    >>> from pydicom.datadict import dictionary_VR
+    >>> from pydicom3.datadict import dictionary_VR
     >>> dictionary_VR([0x0028, 0x1050])
     'DS'
 
@@ -455,7 +455,7 @@ The Python type to use for a given VR is given by :doc:`this table
 
 Standard elements
 ~~~~~~~~~~~~~~~~~
-Adding elements with :meth:`~pydicom.dataset.Dataset.add_new` is a lot of
+Adding elements with :meth:`~pydicom3.dataset.Dataset.add_new` is a lot of
 work, so for standard elements you can just use the keyword
 and *pydicom* will do the lookup for you::
 
@@ -475,7 +475,7 @@ elements are also covered::
 
 Sequences
 ~~~~~~~~~
-Because sequence items are also :class:`~pydicom.dataset.Dataset` instances,
+Because sequence items are also :class:`~pydicom3.dataset.Dataset` instances,
 you can use the same methods on them as well.
 
     >>> seq = ds.OtherPatientIDsSequence
@@ -523,7 +523,7 @@ Writing
 =======
 
 After changing the dataset, the final step is to write the modifications back
-to file. This can be done by using :meth:`~pydicom.dataset.Dataset.save_as` to
+to file. This can be done by using :meth:`~pydicom3.dataset.Dataset.save_as` to
 write the dataset to the supplied path::
 
     >>> ds.save_as('out.dcm')
@@ -540,7 +540,7 @@ You can also write to any Python file-like::
     >>> out = BytesIO()
     >>> ds.save_as(out)
 
-By default, :meth:`~pydicom.dataset.Dataset.save_as` will write the dataset
+By default, :meth:`~pydicom3.dataset.Dataset.save_as` will write the dataset
 as-is. This means that even if your dataset is not conformant to the
 :dcm:`DICOM File Format<part10/chapter_7.html>` it will
 still be written exactly as given. To be certain you're writing the
@@ -560,7 +560,7 @@ required). If it's unable to do so then an exception will be raised:
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
       File ".../pydicom/dataset.py", line 2452, in save_as
-        pydicom.dcmwrite(
+        pydicom3.dcmwrite(
       File ".../pydicom/filewriter.py", line 1311, in dcmwrite
         validate_file_meta(file_meta, enforce_standard=True)
       File ".../pydicom/dataset.py", line 3204, in validate_file_meta
@@ -572,7 +572,7 @@ The exception message contains the required element(s) that need to be added,
 usually this will only be the *Transfer Syntax UID*. It's an important element,
 so get in the habit of making sure it's there and correct.
 
-Because we deleted the :attr:`~pydicom.dataset.FileDataset.file_meta` dataset
+Because we deleted the :attr:`~pydicom3.dataset.FileDataset.file_meta` dataset
 we need to add it back::
 
     >>> ds.file_meta = FileMetaDataset()

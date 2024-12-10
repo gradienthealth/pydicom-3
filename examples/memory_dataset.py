@@ -14,7 +14,7 @@ datasets saved as blobs in a database.
 from io import BytesIO
 
 from pydicom import dcmread, dcmwrite, Dataset
-from pydicom.filebase import DicomFileLike
+from pydicom3.filebase import DicomFileLike
 
 print(__doc__)
 

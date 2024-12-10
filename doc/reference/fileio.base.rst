@@ -1,9 +1,9 @@
 .. _api_fileio_filebase:
 
-IO Base Classes (:mod:`pydicom.filebase`)
+IO Base Classes (:mod:`pydicom3.filebase`)
 =========================================
 
-.. currentmodule:: pydicom.filebase
+.. currentmodule:: pydicom3.filebase
 
 Basic I/O support classes.
 

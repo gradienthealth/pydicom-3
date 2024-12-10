@@ -50,17 +50,17 @@ DEPENDENCIES = {
 }
 
 SUPPORTED_TRANSFER_SYNTAXES = [
-    pydicom.uid.JPEGBaseline8Bit,
-    pydicom.uid.JPEGExtended12Bit,
-    pydicom.uid.JPEGLossless,
-    pydicom.uid.JPEGLosslessSV1,
-    pydicom.uid.JPEGLSLossless,
-    pydicom.uid.JPEGLSNearLossless,
-    pydicom.uid.JPEG2000Lossless,
-    pydicom.uid.JPEG2000,
+    pydicom3.uid.JPEGBaseline8Bit,
+    pydicom3.uid.JPEGExtended12Bit,
+    pydicom3.uid.JPEGLossless,
+    pydicom3.uid.JPEGLosslessSV1,
+    pydicom3.uid.JPEGLSLossless,
+    pydicom3.uid.JPEGLSNearLossless,
+    pydicom3.uid.JPEG2000Lossless,
+    pydicom3.uid.JPEG2000,
 ]
 
-should_convert_these_syntaxes_to_RGB = [pydicom.uid.JPEGBaseline8Bit]
+should_convert_these_syntaxes_to_RGB = [pydicom3.uid.JPEGBaseline8Bit]
 
 
 def is_available() -> bool:
@@ -109,7 +109,7 @@ def create_data_element(ds: "Dataset") -> "DataElement":
     Parameters
     ----------
     ds : dataset.Dataset
-        The :class:`~pydicom.dataset.Dataset` containing the *Pixel
+        The :class:`~pydicom3.dataset.Dataset` containing the *Pixel
         Data*.
 
     Returns
@@ -144,7 +144,7 @@ def create_image(ds: "Dataset", data_element: "DataElement") -> "gdcm.Image":
     Parameters
     ----------
     ds : dataset.Dataset
-        The :class:`~pydicom.dataset.Dataset` containing the Image
+        The :class:`~pydicom3.dataset.Dataset` containing the Image
         Pixel module.
     data_element : gdcm.DataElement
         The ``gdcm.DataElement`` *Pixel Data* element.
@@ -186,7 +186,7 @@ def _get_pixel_str_fileio(ds: "Dataset") -> str:
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The dataset to create the str from.
 
     Returns

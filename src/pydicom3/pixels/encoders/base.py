@@ -68,7 +68,7 @@ class EncodeRunner(RunnerBase):
     .. versionadded:: 3.0
 
     This class is not intended to be used directly. For encoding pixel data
-    use the :class:`~pydicom.pixels.encoders.base.Encoder` instance
+    use the :class:`~pydicom3.pixels.encoders.base.Encoder` instance
     corresponding to the transfer syntax of the pixel data.
     """
 
@@ -77,7 +77,7 @@ class EncodeRunner(RunnerBase):
 
         Parameters
         ----------
-        tsyntax : pydicom.uid.UID
+        tsyntax : pydicom3.uid.UID
             The transfer syntax UID corresponding to the pixel data to be
             encoded.
         """
@@ -259,10 +259,10 @@ class EncodeRunner(RunnerBase):
 
         Parameters
         ----------
-        src : bytes | bytearray | memoryview | pydicom.dataset.Dataset | numpy.ndarray
+        src : bytes | bytearray | memoryview | pydicom3.dataset.Dataset | numpy.ndarray
 
             * If a buffer-like then the encoded pixel data
-            * If a :class:`~pydicom.dataset.Dataset` then a dataset containing
+            * If a :class:`~pydicom3.dataset.Dataset` then a dataset containing
               the pixel data and associated group ``0x0028`` elements.
             * If a :class:`numpy.ndarray` then an array containing the image data.
         """
@@ -291,7 +291,7 @@ class EncodeRunner(RunnerBase):
             self._src_type = "Array"
         else:
             raise TypeError(
-                "'src' must be bytes, numpy.ndarray or pydicom.dataset.Dataset, "
+                "'src' must be bytes, numpy.ndarray or pydicom3.dataset.Dataset, "
                 f"not '{src.__class__.__name__}'"
             )
 
@@ -491,7 +491,7 @@ class Encoder(CoderBase):
 
         Parameters
         ----------
-        uid : pydicom.uid.UID
+        uid : pydicom3.uid.UID
             The *Transfer Syntax UID* that the encoder supports.
         """
         super().__init__(uid, decoder=False)
@@ -517,7 +517,7 @@ class Encoder(CoderBase):
 
         Parameters
         ----------
-        src : bytes, numpy.ndarray or pydicom.dataset.Dataset
+        src : bytes, numpy.ndarray or pydicom3.dataset.Dataset
             Single or multi-frame pixel data as one of the following:
 
             * :class:`~numpy.ndarray`: the uncompressed pixel data, should be
@@ -529,7 +529,7 @@ class Encoder(CoderBase):
               * (frames, rows, columns, planes) for multi-frame and
                 multi-sample data.
 
-            * :class:`~pydicom.dataset.Dataset`: the dataset containing
+            * :class:`~pydicom3.dataset.Dataset`: the dataset containing
               the uncompressed *Pixel Data* to be encoded.
             * :class:`bytes`: the uncompressed little-endian ordered pixel
               data. `src` should use 1, 2, 4 or 8 bytes per pixel, whichever
@@ -546,7 +546,7 @@ class Encoder(CoderBase):
             `encoding_plugin` is not specified then all available
             plugins will be tried (default). For information on the available
             plugins for each encoder see the
-            :mod:`API documentation<pydicom.pixels.encoders>`.
+            :mod:`API documentation<pydicom3.pixels.encoders>`.
         **kwargs
             The following keyword parameters are required when `src` is
             :class:`bytes` or :class:`~numpy.ndarray`:
@@ -626,7 +626,7 @@ class Encoder(CoderBase):
 
         Parameters
         ----------
-        src : bytes, numpy.ndarray or pydicom.dataset.Dataset
+        src : bytes, numpy.ndarray or pydicom3.dataset.Dataset
             Single or multi-frame pixel data as one of the following:
 
             * :class:`~numpy.ndarray`: the uncompressed pixel data, should be
@@ -638,7 +638,7 @@ class Encoder(CoderBase):
               * (frames, rows, columns, planes) for multi-frame and
                 multi-sample data.
 
-            * :class:`~pydicom.dataset.Dataset`: the dataset containing
+            * :class:`~pydicom3.dataset.Dataset`: the dataset containing
               the uncompressed *Pixel Data* to be encoded.
             * :class:`bytes`: the uncompressed little-endian ordered pixel
               data. `src` should use 1, 2, 4 or 8 bytes per pixel, whichever
@@ -652,7 +652,7 @@ class Encoder(CoderBase):
             `encoding_plugin` is not specified then all available
             plugins will be tried (default). For information on the available
             plugins for each encoder see the
-            :mod:`API documentation<pydicom.pixels.encoders>`.
+            :mod:`API documentation<pydicom3.pixels.encoders>`.
         **kwargs
             The following keyword parameters are required when `src` is
             :class:`bytes` or :class:`~numpy.ndarray`:
@@ -786,30 +786,30 @@ ENCODING_PROFILES: dict[UID, list[ProfileType]] = {
 RLELosslessEncoder = Encoder(RLELossless)
 RLELosslessEncoder.add_plugins(
     [
-        ("gdcm", ("pydicom.pixels.encoders.gdcm", "encode_pixel_data")),
-        ("pylibjpeg", ("pydicom.pixels.encoders.pylibjpeg", "_encode_frame")),
-        ("pydicom", ("pydicom.pixels.encoders.native", "_encode_frame")),
+        ("gdcm", ("pydicom3.pixels.encoders.gdcm", "encode_pixel_data")),
+        ("pylibjpeg", ("pydicom3.pixels.encoders.pylibjpeg", "_encode_frame")),
+        ("pydicom", ("pydicom3.pixels.encoders.native", "_encode_frame")),
     ],
 )
 
 JPEGLSLosslessEncoder = Encoder(JPEGLSLossless)
 JPEGLSLosslessEncoder.add_plugin(
-    "pyjpegls", ("pydicom.pixels.encoders.pyjpegls", "_encode_frame")
+    "pyjpegls", ("pydicom3.pixels.encoders.pyjpegls", "_encode_frame")
 )
 
 JPEGLSNearLosslessEncoder = Encoder(JPEGLSNearLossless)
 JPEGLSNearLosslessEncoder.add_plugin(
-    "pyjpegls", ("pydicom.pixels.encoders.pyjpegls", "_encode_frame")
+    "pyjpegls", ("pydicom3.pixels.encoders.pyjpegls", "_encode_frame")
 )
 
 JPEG2000LosslessEncoder = Encoder(JPEG2000Lossless)
 JPEG2000LosslessEncoder.add_plugin(
-    "pylibjpeg", ("pydicom.pixels.encoders.pylibjpeg", "_encode_frame")
+    "pylibjpeg", ("pydicom3.pixels.encoders.pylibjpeg", "_encode_frame")
 )
 
 JPEG2000Encoder = Encoder(JPEG2000)
 JPEG2000Encoder.add_plugin(
-    "pylibjpeg", ("pydicom.pixels.encoders.pylibjpeg", "_encode_frame")
+    "pylibjpeg", ("pydicom3.pixels.encoders.pylibjpeg", "_encode_frame")
 )
 
 
@@ -848,7 +848,7 @@ def _build_encoder_docstrings() -> None:
         s.append(f"Encoding plugins: {', '.join(plugins)}")
         s.append("")
         s.append(
-            "See the :class:`~pydicom.pixels.encoders.base.Encoder` "
+            "See the :class:`~pydicom3.pixels.encoders.base.Encoder` "
             "reference for instance methods and attributes."
         )
         enc.__doc__ = "\n".join(s)

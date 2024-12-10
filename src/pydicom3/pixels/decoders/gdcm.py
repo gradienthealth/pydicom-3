@@ -49,7 +49,7 @@ def _decode_frame(src: bytes, runner: DecodeRunner) -> bytes:
     ----------
     src : bytes
         An encoded pixel data frame.
-    runner : pydicom.pixels.decoders.base.DecodeRunner
+    runner : pydicom3.pixels.decoders.base.DecodeRunner
         The runner managing the decoding.
 
     Returns

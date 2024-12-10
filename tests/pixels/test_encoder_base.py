@@ -1,4 +1,4 @@
-"""Tests for pydicom.pixels.encoders.base and Dataset.compress()."""
+"""Tests for pydicom3.pixels.encoders.base and Dataset.compress()."""
 
 import importlib
 import logging
@@ -13,13 +13,13 @@ except ImportError:
     HAVE_NP = False
 
 from pydicom import config, examples
-from pydicom.data import get_testdata_file
-from pydicom.dataset import Dataset
-from pydicom.pixels.encoders import RLELosslessEncoder
-from pydicom.pixels.common import PhotometricInterpretation as PI
-from pydicom.pixels.encoders.base import Encoder, EncodeRunner
-from pydicom.pixels.utils import get_expected_length
-from pydicom.uid import (
+from pydicom3.data import get_testdata_file
+from pydicom3.dataset import Dataset
+from pydicom3.pixels.encoders import RLELosslessEncoder
+from pydicom3.pixels.common import PhotometricInterpretation as PI
+from pydicom3.pixels.encoders.base import Encoder, EncodeRunner
+from pydicom3.pixels.utils import get_expected_length
+from pydicom3.uid import (
     UID,
     RLELossless,
     JPEGLSLossless,
@@ -124,7 +124,7 @@ class TestEncodeRunner:
         """Test runner.set_source() raises if unknown type."""
         runner = EncodeRunner(RLELossless)
         msg = (
-            "'src' must be bytes, numpy.ndarray or pydicom.dataset.Dataset, "
+            "'src' must be bytes, numpy.ndarray or pydicom3.dataset.Dataset, "
             "not 'NoneType'"
         )
         with pytest.raises(TypeError, match=msg):
@@ -1510,7 +1510,7 @@ class TestEncoder:
         """Test exception raised if passing invalid type."""
         enc = RLELosslessEncoder
         msg = (
-            r"'src' must be bytes, numpy.ndarray or pydicom.dataset.Dataset, "
+            r"'src' must be bytes, numpy.ndarray or pydicom3.dataset.Dataset, "
             r"not 'str'"
         )
         with pytest.raises(TypeError, match=msg):
@@ -1520,7 +1520,7 @@ class TestEncoder:
         """Test exception raised if passing invalid type."""
         enc = RLELosslessEncoder
         msg = (
-            r"'src' must be bytes, numpy.ndarray or pydicom.dataset.Dataset, "
+            r"'src' must be bytes, numpy.ndarray or pydicom3.dataset.Dataset, "
             r"not 'str'"
         )
         with pytest.raises(TypeError, match=msg):
@@ -1809,16 +1809,16 @@ class TestFuture:
 
     def test_imports_raise(self, use_future):
         with pytest.raises(ImportError):
-            from pydicom.encoders import get_encoder
+            from pydicom3.encoders import get_encoder
 
         with pytest.raises(ImportError):
-            from pydicom.encoders import RLELosslessEncoder
+            from pydicom3.encoders import RLELosslessEncoder
 
 
 def test_deprecation_warning():
     msg = (
-        "The 'pydicom.encoders' module will be removed in v4.0, please use "
-        "'from pydicom.pixels import get_encoder' instead"
+        "The 'pydicom3.encoders' module will be removed in v4.0, please use "
+        "'from pydicom3.pixels import get_encoder' instead"
     )
     with pytest.warns(DeprecationWarning, match=msg):
-        from pydicom.encoders import get_encoder as get_foo
+        from pydicom3.encoders import get_encoder as get_foo

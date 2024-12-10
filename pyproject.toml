@@ -76,7 +76,7 @@ gpl-license = ["pylibjpeg[libjpeg]"]
 
 
 [project.urls]
-documentation = "https://pydicom.github.io/pydicom"
+documentation = "https://pydicom3.github.io/pydicom"
 download = "https://github.com/pydicom/pydicom/archive/main.zip"
 homepage = "https://github.com/pydicom/pydicom"
 repository = "https://github.com/pydicom/pydicom"
@@ -84,12 +84,12 @@ repository = "https://github.com/pydicom/pydicom"
 
 
 [project.scripts]
-pydicom = "pydicom.cli.main:main"
+pydicom = "pydicom3.cli.main:main"
 
 
 [project.entry-points.pydicom_subcommands]
-codify = "pydicom.cli.codify:add_subparser"
-show = "pydicom.cli.show:add_subparser"
+codify = "pydicom3.cli.codify:add_subparser"
+show = "pydicom3.cli.show:add_subparser"
 
 
 [tool.black]
@@ -155,5 +155,5 @@ disable_error_code = ["method-assign", "ignore-without-code", "redundant-expr", 
 [[tool.mypy.overrides]]
 # 2023-06: mypy complains for a line in this file if ignore used or not.
 # Override unused ignores for that one file
-module = "pydicom.encoders.base"
+module = "pydicom3.encoders.base"
 warn_unused_ignores = false

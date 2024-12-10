@@ -113,14 +113,14 @@ class DataElement:
     --------
 
     While its possible to create a new :class:`DataElement` directly and add
-    it to a :class:`~pydicom.dataset.Dataset`:
+    it to a :class:`~pydicom3.dataset.Dataset`:
 
     >>> from pydicom import Dataset
     >>> elem = DataElement(0x00100010, 'PN', 'CITIZEN^Joan')
     >>> ds = Dataset()
     >>> ds.add(elem)
 
-    Its far more convenient to use a :class:`~pydicom.dataset.Dataset`
+    Its far more convenient to use a :class:`~pydicom3.dataset.Dataset`
     to add a new :class:`DataElement`, as the VR and tag are determined
     automatically from the DICOM dictionary:
 
@@ -156,12 +156,12 @@ class DataElement:
     showVR : bool
         For string display, include the element's VR just before it's value
         (default ``True``).
-    tag : pydicom.tag.BaseTag
+    tag : pydicom3.tag.BaseTag
         The element's tag.
     validation_mode : int
         The mode used to validate the element's value. See
         :attr:`Settings.writing_validation_mode
-        <pydicom.config.Settings.writing_validation_mode>` for more information.
+        <pydicom3.config.Settings.writing_validation_mode>` for more information.
     VR : str
         The element's Value Representation.
     """
@@ -187,7 +187,7 @@ class DataElement:
         ----------
         tag : int | str | tuple[int, int]
             The DICOM (group, element) tag in any form accepted by
-            :func:`~pydicom.tag.Tag` such as ``'PatientName'``,
+            :func:`~pydicom3.tag.Tag` such as ``'PatientName'``,
             ``(0x10, 0x10)``, ``0x00100010``, etc.
         VR : str
             The 2 character DICOM value representation (see DICOM Standard,
@@ -248,7 +248,7 @@ class DataElement:
 
     def validate(self, value: Any) -> None:
         """Validate the current value against the DICOM standard.
-        See :func:`~pydicom.valuerep.validate_value` for details.
+        See :func:`~pydicom3.valuerep.validate_value` for details.
         """
         validate_value(self.VR, value, self.validation_mode)
 
@@ -333,7 +333,7 @@ class DataElement:
         ----------
         bulk_data_element_handler : callable or None
             Callable that accepts a bulk :class`data element
-            <pydicom.dataelem.DataElement>` and returns the
+            <pydicom3.dataelem.DataElement>` and returns the
             "BulkDataURI" as a :class:`str` for retrieving the value of the
             data element via DICOMweb WADO-RS.
         bulk_data_threshold : int
@@ -421,7 +421,7 @@ class DataElement:
             Ignored if no `bulk_data_element_handler` is given.
         bulk_data_element_handler : callable, optional
             Callable that accepts a bulk :class`data element
-            <pydicom.dataelem.DataElement>` and returns the
+            <pydicom3.dataelem.DataElement>` and returns the
             "BulkDataURI" as a :class:`str` for retrieving the value of the
             data element via DICOMweb WADO-RS.
         dump_handler : callable, optional
@@ -618,19 +618,19 @@ class DataElement:
             val = val.decode()
 
         if self.VR == VR_.IS:
-            return pydicom.valuerep.IS(val, self.validation_mode)
+            return pydicom3.valuerep.IS(val, self.validation_mode)
 
         if self.VR == VR_.DA and config.datetime_conversion:
-            return pydicom.valuerep.DA(val, validation_mode=self.validation_mode)
+            return pydicom3.valuerep.DA(val, validation_mode=self.validation_mode)
 
         if self.VR == VR_.DS:
-            return pydicom.valuerep.DS(val, False, self.validation_mode)
+            return pydicom3.valuerep.DS(val, False, self.validation_mode)
 
         if self.VR == VR_.DT and config.datetime_conversion:
-            return pydicom.valuerep.DT(val, validation_mode=self.validation_mode)
+            return pydicom3.valuerep.DT(val, validation_mode=self.validation_mode)
 
         if self.VR == VR_.TM and config.datetime_conversion:
-            return pydicom.valuerep.TM(val, validation_mode=self.validation_mode)
+            return pydicom3.valuerep.TM(val, validation_mode=self.validation_mode)
 
         if self.VR == VR_.UI:
             return UID(val, self.validation_mode) if val is not None else None
@@ -868,7 +868,7 @@ def convert_raw_data_element(
             data: dict[str, Any],
             *,
             encoding: str | MutableSequence[str] | None = None,
-            ds: pydicom.dataset.Dataset | None = None,
+            ds: pydicom3.dataset.Dataset | None = None,
             **kwargs: dict[str, Any],
         ) -> None:
             ...
@@ -877,9 +877,9 @@ def convert_raw_data_element(
     `data` is a :class:`dict` that's persistent for each raw element and is used
     to store the results of the corresponding callback functions, and `kwargs`
     are keyword arguments passed by setting the ``"raw_element_kwargs"`` hook
-    via :meth:`~pydicom.hooks.Hooks.register_kwargs`.
+    via :meth:`~pydicom3.hooks.Hooks.register_kwargs`.
 
-    Available :class:`hooks<pydicom.hooks.Hooks>` are (in order of execution):
+    Available :class:`hooks<pydicom3.hooks.Hooks>` are (in order of execution):
 
     * ``"raw_element_vr"``: a function to perform the VR lookup for the raw element,
       required to add ``{"VR": str}`` to `data`.
@@ -887,22 +887,22 @@ def convert_raw_data_element(
       :class:`bytes` value to an appropriate type (such as :class:`int` for VR
       **US**), required to add ``{"value": Any}`` to `data`.
 
-    :meth:`~pydicom.hooks.Hooks.register_callback` is used to set the callback
+    :meth:`~pydicom3.hooks.Hooks.register_callback` is used to set the callback
     function for a given hook, and only one callback can be set per hook.
 
     Parameters
     ----------
-    raw : pydicom.dataelem.RawDataElement
+    raw : pydicom3.dataelem.RawDataElement
         The raw data to convert to a :class:`DataElement`.
     encoding : str | MutableSequence[str] | None
         The character set encodings for the raw data element.
-    ds : pydicom.dataset.Dataset | None
+    ds : pydicom3.dataset.Dataset | None
         The parent dataset of `raw`.
 
     Returns
     -------
-    pydicom.dataelem.DataElement
-        A :class:`~pydicom.dataelem.DataElement` instance created from `raw`.
+    pydicom3.dataelem.DataElement
+        A :class:`~pydicom3.dataelem.DataElement` instance created from `raw`.
     """
     data: dict[str, Any] = {}
     if config.data_element_callback:
@@ -940,28 +940,28 @@ def _DataElement_from_raw(
     .. deprecated:: 3.0
 
         ``DataElement_from_raw`` will be removed in v4.0, use
-        :func:`~pydicom.dataelem.convert_raw_data_element` instead.
+        :func:`~pydicom3.dataelem.convert_raw_data_element` instead.
 
     Call the configured data_element_callbacks to do relevant
     pre/post-processing and convert values from raw to native types
 
     Parameters
     ----------
-    raw_data_element : pydicom.dataelem.RawDataElement
+    raw_data_element : pydicom3.dataelem.RawDataElement
         The raw data to convert to a :class:`DataElement`.
     encoding : str | list[str] | None
         The character encoding of the raw data.
-    dataset : pydicom.dataset.Dataset | None
+    dataset : pydicom3.dataset.Dataset | None
         If given, used to resolve the VR for known private tags.
 
     Returns
     -------
     DataElement
-        A :class:`~pydicom.dataelem.DataElement` instance created from `raw`.
+        A :class:`~pydicom3.dataelem.DataElement` instance created from `raw`.
     """
     msg = (
-        "'pydicom.dataelem.DataElement_from_raw' is deprecated and will be removed "
-        "in v4.0, please use 'pydicom.dataelem.convert_raw_data_element' instead"
+        "'pydicom3.dataelem.DataElement_from_raw' is deprecated and will be removed "
+        "in v4.0, please use 'pydicom3.dataelem.convert_raw_data_element' instead"
     )
     warn_and_log(msg, DeprecationWarning)
 

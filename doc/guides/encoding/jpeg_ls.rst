@@ -46,7 +46,7 @@ by the way lossy JPEG-LS encoding works:
 * JPEG-LS uses the specified absolute pixel value error as the constraint when
   performing lossy encoding (the NEAR parameter - in *pydicom* this is the
   `jls_error` parameter passed to the :meth:`encoding functions
-  <pydicom.dataset.Dataset.compress>`)
+  <pydicom3.dataset.Dataset.compress>`)
 
 Because of this, even though a NEAR value of ``1`` should limit the absolute
 pixel value error to 1 intensity unit, it's possible to have pixels with an
@@ -100,7 +100,7 @@ pixel data should already be in the corresponding color space:
 
     * For *Bits Allocated* and *Bits Stored* less than or equal to 8: pixel
       data must be :func:`converted into YCbCr color space
-      <pydicom.pixels.processing.convert_color_space>`. However
+      <pydicom3.pixels.processing.convert_color_space>`. However
       you should keep in mind that the conversion operation is lossy.
     * For *Bits Allocated* and *Bits Stored* between 9 and 16 (inclusive):
       pixel data should be downscaled to 8-bit (with *Bits Stored*, *Bits
@@ -113,7 +113,7 @@ pixel data should already be in the corresponding color space:
 
   * For *Photometric Interpretation* ``RGB`` the pixel data must first be
     :func:`converted into RGB color space
-    <pydicom.pixels.processing.convert_color_space>`. However the conversion
+    <pydicom3.pixels.processing.convert_color_space>`. However the conversion
     operation is lossy.
   * For *Photometric Interpretation* ``YBR_FULL`` nothing else is required.
 
@@ -156,7 +156,7 @@ Losslessly compress unsigned RGB pixel data in-place:
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPEGLSLossless
+    from pydicom3.uid import JPEGLSLossless
 
     ds = examples.rgb_color
     assert ds.SamplesPerPixel == 1
@@ -176,7 +176,7 @@ Losslessly compress signed greyscale pixel data in-place:
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPEGLSLossless
+    from pydicom3.uid import JPEGLSLossless
 
     ds = examples.ct
     assert ds.SamplesPerPixel == 1
@@ -202,7 +202,7 @@ JPEG-LS Near-lossless
 
 When using the *JPEG-LS Near-lossless* transfer syntax, image quality is
 controlled by passing the `jls_error` parameter to the :meth:`encoding function
-<pydicom.dataset.Dataset.compress>`. `jls_error` is directly related to the JPEG-LS
+<pydicom3.dataset.Dataset.compress>`. `jls_error` is directly related to the JPEG-LS
 NEAR parameter, which is the allowed absolute error in pixel intensity units from
 the compression process and should be in the range ``(0, 2**BitsStored - 1)``.
 
@@ -212,7 +212,7 @@ intensity units:
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPEGLSNearLossless
+    from pydicom3.uid import JPEGLSNearLossless
 
     ds = examples.rgb_color
     assert ds.SamplesPerPixel == 1
@@ -233,7 +233,7 @@ intensity units:
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.uid import JPEGLSNearLossless
+    from pydicom3.uid import JPEGLSNearLossless
 
     ds = examples.ct
     assert ds.SamplesPerPixel == 1
@@ -279,7 +279,7 @@ Available Plugins
 |                                                          +---------+--------------------+-----+
 |                                                          | Name    | Requires           |Added|
 +==========================================================+=========+====================+=====+
-|:attr:`~pydicom.pixels.encoders.JPEGLSLosslessEncoder`    | pyjpegls| `numpy <np_>`_,    |v3.0 |
+|:attr:`~pydicom3.pixels.encoders.JPEGLSLosslessEncoder`    | pyjpegls| `numpy <np_>`_,    |v3.0 |
 +----------------------------------------------------------+         | `pyjpegls <jls_>`_ |     |
-|:attr:`~pydicom.pixels.encoders.JPEGLSNearLosslessEncoder`|         |                    |     |
+|:attr:`~pydicom3.pixels.encoders.JPEGLSNearLosslessEncoder`|         |                    |     |
 +----------------------------------------------------------+---------+--------------------+-----+

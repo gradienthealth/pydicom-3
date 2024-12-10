@@ -5,9 +5,9 @@ from io import BytesIO
 
 import pytest
 
-from pydicom.data import get_testdata_file
-from pydicom.filebase import DicomIO, DicomFileLike, DicomFile, DicomBytesIO
-from pydicom.tag import Tag
+from pydicom3.data import get_testdata_file
+from pydicom3.filebase import DicomIO, DicomFileLike, DicomFile, DicomBytesIO
+from pydicom3.tag import Tag
 
 
 TEST_FILE = get_testdata_file("CT_small.dcm")

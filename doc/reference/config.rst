@@ -1,9 +1,9 @@
 .. _api_config:
 
-Configuration Options (:mod:`pydicom.config`)
+Configuration Options (:mod:`pydicom3.config`)
 =============================================
 
-.. currentmodule:: pydicom.config
+.. currentmodule:: pydicom3.config
 
 *pydicom* configuration options
 

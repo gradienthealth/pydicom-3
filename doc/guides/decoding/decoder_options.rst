@@ -4,7 +4,7 @@
 Pixel Data Decoder Options
 ==========================
 
-.. currentmodule:: pydicom.pixels.decoders.base
+.. currentmodule:: pydicom3.pixels.decoders.base
 
 The following applies to the functions and class methods that use the
 :doc:`pixels</reference/pixels>` backend for decoding pixel data.
@@ -12,27 +12,27 @@ The following applies to the functions and class methods that use the
 
 When decoding to a NumPy :class:`~numpy.ndarray`:
 
-* The :attr:`Dataset.pixel_array<pydicom.dataset.Dataset.pixel_array>` property
-  (configurable via :meth:`Dataset.pixel_array_options()<pydicom.dataset.Dataset.pixel_array_options>`)
-* :func:`~pydicom.pixels.pixel_array`
-* :func:`~pydicom.pixels.iter_pixels`
-* :func:`~pydicom.pixels.decompress`
-* :meth:`Decoder.as_array()<pydicom.pixels.decoders.base.Decoder.as_array>`
-* :meth:`Decoder.iter_array()<pydicom.pixels.decoders.base.Decoder.iter_array>`
+* The :attr:`Dataset.pixel_array<pydicom3.dataset.Dataset.pixel_array>` property
+  (configurable via :meth:`Dataset.pixel_array_options()<pydicom3.dataset.Dataset.pixel_array_options>`)
+* :func:`~pydicom3.pixels.pixel_array`
+* :func:`~pydicom3.pixels.iter_pixels`
+* :func:`~pydicom3.pixels.decompress`
+* :meth:`Decoder.as_array()<pydicom3.pixels.decoders.base.Decoder.as_array>`
+* :meth:`Decoder.iter_array()<pydicom3.pixels.decoders.base.Decoder.iter_array>`
 
 
 When decoding to a buffer (such as :class:`bytes`, :class:`bytearray` or :class:`memoryview`):
 
-* :meth:`Decoder.as_buffer()<pydicom.pixels.decoders.base.Decoder.as_buffer>`
-* :meth:`Decoder.iter_buffer()<pydicom.pixels.decoders.base.Decoder.iter_buffer>`
+* :meth:`Decoder.as_buffer()<pydicom3.pixels.decoders.base.Decoder.as_buffer>`
+* :meth:`Decoder.iter_buffer()<pydicom3.pixels.decoders.base.Decoder.iter_buffer>`
 
 *Image Pixel* Options
 =====================
 
 The following options are required when the decoding source `src` is not a
-:class:`~pydicom.dataset.Dataset` and are used to describe the encoded pixel data.
+:class:`~pydicom3.dataset.Dataset` and are used to describe the encoded pixel data.
 They may also be used to override the corresponding element values when `src`
-is a :class:`~pydicom.dataset.Dataset`:
+is a :class:`~pydicom3.dataset.Dataset`:
 
 
 +------------------------------+------------+-----------+---------------+----------------------------------------------------------+
@@ -117,7 +117,7 @@ The following options may be used with native (uncompressed) transfer syntaxes
 when decoding to a NumPy :class:`~numpy.ndarray`:
 
 * `view_only`: :class:`bool` - if ``True`` and `src` is a
-  :class:`~pydicom.dataset.Dataset` or buffer-like then make a best effort
+  :class:`~pydicom3.dataset.Dataset` or buffer-like then make a best effort
   attempt to return an :class:`~numpy.ndarray` that's a `view
   <https://numpy.org/doc/stable/user/basics.copies.html#view>`_ on the original
   buffer (default ``False``). Note that if the original buffer is immutable then

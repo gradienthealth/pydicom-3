@@ -52,7 +52,7 @@ Additional type hints
 ---------------------
 
 The default *pydicom* type hinting doesn't cover standard element keywords accessed
-through :class:`~pydicom.dataset.Dataset`::
+through :class:`~pydicom3.dataset.Dataset`::
 
     # foo.py
     from pydicom import Dataset
@@ -88,7 +88,7 @@ testing and example files you can either install the *pydicom-data* repository::
 
 Or download the missing files to the local cache (after installing *pydicom*)::
 
-    python -c "import pydicom; pydicom.data.fetch_data_files()"
+    python -c "import pydicom; pydicom3.data.fetch_data_files()"
 
 
 .. _tut_install_libs:
@@ -204,7 +204,7 @@ If you want to keep up-to-date with the latest code, make sure you have
 `Git <https://git-scm.com/>`_ installed and then clone the ``main``
 branch (this will create a ``pydicom`` directory in your current directory)::
 
-  git clone --depth=1 https://github.com/pydicom/pydicom.git
+  git clone --depth=1 https://github.com/pydicom/pydicom3.git
 
 Then install using pip in editable (``-e``) mode::
 

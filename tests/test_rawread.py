@@ -1,14 +1,14 @@
 # Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""Unit tests for the pydicom.filereader module using raw data elements."""
+"""Unit tests for the pydicom3.filereader module using raw data elements."""
 
 from io import BytesIO
 
 import pytest
 
-from pydicom.filereader import data_element_generator
-from pydicom.values import convert_value
-from pydicom.sequence import Sequence
-from pydicom.util.hexutil import hex2bytes
+from pydicom3.filereader import data_element_generator
+from pydicom3.values import convert_value
+from pydicom3.sequence import Sequence
+from pydicom3.util.hexutil import hex2bytes
 
 
 class TestRawReaderExplVRTests:

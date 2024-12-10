@@ -61,8 +61,8 @@ Infrastructure
 * added automatic `code coverage builds <https://codecov.io/gh/pydicom/pydicom>`_
   and PEP-8 checks
 * added automatic `documentation builds <https://circleci.com/gh/pydicom/pydicom>`_
-  on GitHub Pages for `development <https://pydicom.github.io/pydicom/dev>`_
-  and `release <https://pydicom.github.io/pydicom/stable/>`_ builds
+  on GitHub Pages for `development <https://pydicom3.github.io/pydicom/dev>`_
+  and `release <https://pydicom3.github.io/pydicom/stable/>`_ builds
 * added PyPy support
 * removed support for Python 2.6, added support for Python 3.6
 

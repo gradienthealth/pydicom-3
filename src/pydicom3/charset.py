@@ -314,7 +314,7 @@ def decode_bytes(value: bytes, encodings: Sequence[str], delimiters: set[int]) -
     -------
     str
         The decoded unicode string. If the value could not be decoded,
-        and :attr:`~pydicom.config.settings.reading_validation_mode`
+        and :attr:`~pydicom3.config.settings.reading_validation_mode`
         is not ``RAISE``, a warning is issued, and `value` is
         decoded using the first encoding with replacement characters,
         resulting in data loss.
@@ -322,11 +322,11 @@ def decode_bytes(value: bytes, encodings: Sequence[str], delimiters: set[int]) -
     Raises
     ------
     UnicodeDecodeError
-        If :attr:`~pydicom.config.settings.reading_validation_mode`
+        If :attr:`~pydicom3.config.settings.reading_validation_mode`
         is ``RAISE`` and `value` could not be decoded with the given
         encodings.
     LookupError
-        If :attr:`~pydicom.config.settings.reading_validation_mode`
+        If :attr:`~pydicom3.config.settings.reading_validation_mode`
         is ``RAISE`` and the given encodings are invalid.
     """
     # shortcut for the common case - no escape sequences present
@@ -403,7 +403,7 @@ def _decode_fragment(
     -------
     str
         The decoded unicode string. If the value could not be decoded,
-        and :attr:`~pydicom.config.settings.reading_validation_mode` is not
+        and :attr:`~pydicom3.config.settings.reading_validation_mode` is not
         set to ``RAISE``, a warning is issued, and the value is
         decoded using the first encoding with replacement characters,
         resulting in data loss.
@@ -411,7 +411,7 @@ def _decode_fragment(
     Raises
     ------
     UnicodeDecodeError
-        If :attr:`~pydicom.config.settings.reading_validation_mode` is set
+        If :attr:`~pydicom3.config.settings.reading_validation_mode` is set
         to ``RAISE`` and `value` could not be decoded with the given
         encodings.
 
@@ -499,14 +499,14 @@ def encode_string(value: str, encodings: Sequence[str]) -> bytes:
     bytes
         The encoded string. If `value` could not be encoded with any of
         the given encodings, and
-        :attr:`~pydicom.config.settings.reading_validation_mode` is not
+        :attr:`~pydicom3.config.settings.reading_validation_mode` is not
         ``RAISE``, a warning is issued, and `value` is encoded using
         the first encoding with replacement characters, resulting in data loss.
 
     Raises
     ------
     UnicodeEncodeError
-        If  :attr:`~pydicom.config.settings.writing_validation_mode`
+        If  :attr:`~pydicom3.config.settings.writing_validation_mode`
         is set to ``RAISE`` and `value` could not be encoded with the
         supplied encodings.
     """
@@ -652,7 +652,7 @@ def convert_encodings(encodings: None | str | MutableSequence[str]) -> list[str]
 
     Invalid encodings are replaced with the default encoding with a
     respective warning issued, if
-    :attr:`~pydicom.config.settings.reading_validation_mode` is
+    :attr:`~pydicom3.config.settings.reading_validation_mode` is
     ``WARN``, or an exception is raised if it is set to
     ``RAISE``.
 
@@ -669,14 +669,14 @@ def convert_encodings(encodings: None | str | MutableSequence[str]) -> list[str]
         encodings. If an encoding is already a Python encoding, it is returned
         unchanged. Encodings with common spelling errors are replaced by the
         correct encoding, and invalid encodings are replaced with the default
-        encoding if :attr:`~pydicom.config.settings.reading_validation_mode`
+        encoding if :attr:`~pydicom3.config.settings.reading_validation_mode`
         is not set to ``RAISE``.
 
     Raises
     ------
     LookupError
         If `encodings` contains a value that could not be converted and
-        :attr:`~pydicom.config.settings.reading_validation_mode` is
+        :attr:`~pydicom3.config.settings.reading_validation_mode` is
         ``RAISE``.
     """
 
@@ -746,7 +746,7 @@ def _warn_about_invalid_encoding(
     If patched_encoding is given, it is mentioned as the
     replacement encoding, other the default encoding.
     If no replacement encoding is given, and
-    :attr:`~pydicom.config.settings.reading_validation_mode` is set to
+    :attr:`~pydicom3.config.settings.reading_validation_mode` is set to
     ``RAISE``, `LookupError` is raised.
     """
     if patched_encoding is None:
@@ -799,7 +799,7 @@ def decode_element(
     Parameters
     ----------
     elem : dataelem.DataElement
-        The :class:`DataElement<pydicom.dataelem.DataElement>` instance
+        The :class:`DataElement<pydicom3.dataelem.DataElement>` instance
         containing an encoded byte string value to decode.
     dicom_character_set : str or list of str or None
         The value of (0008,0005) *Specific Character Set*, which may be a

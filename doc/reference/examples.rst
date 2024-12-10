@@ -1,10 +1,10 @@
 .. _api_examples:
 
-Example Datasets (:mod:`pydicom.examples`)
+Example Datasets (:mod:`pydicom3.examples`)
 ==========================================
 
-.. module:: pydicom.examples
-.. currentmodule:: pydicom.examples
+.. module:: pydicom3.examples
+.. currentmodule:: pydicom3.examples
 
 The ``examples`` module contains the following DICOM datasets:
 
@@ -48,17 +48,17 @@ As well as the utility function:
 Usage
 -----
 
-The module attributes are all normal :class:`~pydicom.dataset.FileDataset`
+The module attributes are all normal :class:`~pydicom3.dataset.FileDataset`
 instances::
 
   >>> from pydicom import examples
   >>> type(examples.ct)
-  <class 'pydicom.dataset.FileDataset'>
+  <class 'pydicom3.dataset.FileDataset'>
   >>> examples.ct.PatientName
   'CompressedSamples^CT1'
 
 Each time the module attribute is accessed a new
-:class:`~pydicom.dataset.FileDataset` instance  of the dataset will be returned::
+:class:`~pydicom3.dataset.FileDataset` instance  of the dataset will be returned::
 
   >>> examples.ct is examples.ct
   False
@@ -70,7 +70,7 @@ variable::
 
    >>> ds = examples.ct
 
-The :func:`~pydicom.examples.get_path` function can be used to return the path
+The :func:`~pydicom3.examples.get_path` function can be used to return the path
 to an example dataset as a :class:`pathlib.Path` instance::
 
    >>> examples.get_path("ct")

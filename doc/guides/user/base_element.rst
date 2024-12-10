@@ -9,7 +9,7 @@ Dataset
 .. currentmodule:: pydicom
 
 The main class in *pydicom* is :class:`~dataset.Dataset` which emulates the behavior
-of a Python :class:`dict` whose keys are DICOM tags (:class:`~pydicom.tag.BaseTag` instances),
+of a Python :class:`dict` whose keys are DICOM tags (:class:`~pydicom3.tag.BaseTag` instances),
 and values are the corresponding :class:`~dataelem.DataElement` instances.
 
 .. warning::
@@ -20,7 +20,7 @@ and values are the corresponding :class:`~dataelem.DataElement` instances.
 
 A :class:`~dataset.Dataset` can be created directly, but you'll
 usually get one by reading an existing DICOM dataset from file using
-:func:`~pydicom.filereader.dcmread`::
+:func:`~pydicom3.filereader.dcmread`::
 
     >>> from pydicom import dcmread, examples
     >>> # Returns the path to pydicom's examples.rt_plan dataset
@@ -161,7 +161,7 @@ you can use the access the item using either the keyword (for official DICOM
 elements) or tag number::
 
   >>> # reload the data
-  >>> ds = pydicom.dcmread(path)
+  >>> ds = pydicom3.dcmread(path)
   >>> elem = ds['PatientName']
   >>> elem.VR, elem.value
   ('PN', 'Last^First^mid^pre')
@@ -213,7 +213,7 @@ code, but is used extensively by :class:`~dataset.Dataset`.
 things:
 
   * :attr:`~dataelem.DataElement.tag` -- the element's tag (as a
-    :class:`~pydicom.tag.BaseTag` object).
+    :class:`~pydicom3.tag.BaseTag` object).
   * :attr:`~dataelem.DataElement.VR` -- the element's Value Representation
     -- a two letter :class:`str` that describes to the format of the stored
     value.
@@ -239,7 +239,7 @@ so in effect it's just a number with some extra behavior:
   * A :class:`~tag.BaseTag` instance can be created from an :class:`int` or a
     :class:`tuple` containing the (group, element), or from the DICOM keyword::
 
-      >>> from pydicom.tag import Tag
+      >>> from pydicom3.tag import Tag
       >>> t1 = Tag(0x00100010) # all of these are equivalent
       >>> t2 = Tag(0x10, 0x10)
       >>> t3 = Tag((0x10, 0x10))
@@ -247,7 +247,7 @@ so in effect it's just a number with some extra behavior:
       >>> t1
       (0010,0010)
       >>> type(t1)
-      <class `pydicom.tag.BaseTag`>
+      <class `pydicom3.tag.BaseTag`>
       >>> t1==t2, t1==t3, t1==t4
       (True, True, True)
 

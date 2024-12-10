@@ -24,7 +24,7 @@ Download the documentation
    local copy of *pydicom* to live. The documentation can then be downloaded
    using::
 
-     git clone https://github.com/YourUsername/pydicom.git
+     git clone https://github.com/YourUsername/pydicom3.git
 
 4. Install the cloned copy of *pydicom* and the dependencies requires for
    building the documentation (using ``-e`` for an editable install)::
@@ -151,11 +151,11 @@ markup::
     Your Python version may be different
 
   *pydicom* includes a number of files which can be accessed through the
-  :func:`~pydicom.data.get_testdata_file` function. To read the file
-  ``CT_small.dcm`` we use :func:`~pydicom.filereader.dcmread`::
+  :func:`~pydicom3.data.get_testdata_file` function. To read the file
+  ``CT_small.dcm`` we use :func:`~pydicom3.filereader.dcmread`::
 
     >>> from pydicom import dcmread
-    >>> from pydicom.data import get_testdata_file
+    >>> from pydicom3.data import get_testdata_file
     >>> path = get_testdata_file("CT_small.dcm")
     >>> path
     '[path/to]/pydicom/data/test_files/CT_small.dcm'

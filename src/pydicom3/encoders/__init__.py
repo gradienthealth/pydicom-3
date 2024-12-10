@@ -16,8 +16,8 @@ _DEPRECATED = {
 def __getattr__(name: str) -> Any:
     if name in _DEPRECATED and not config._use_future:
         msg = (
-            f"The 'pydicom.encoders' module will be removed in v4.0, please use "
-            f"'from pydicom.pixels import {name}' instead"
+            f"The 'pydicom3.encoders' module will be removed in v4.0, please use "
+            f"'from pydicom3.pixels import {name}' instead"
         )
         warn_and_log(msg, DeprecationWarning)
         return _DEPRECATED[name]

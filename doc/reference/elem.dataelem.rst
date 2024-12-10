@@ -1,9 +1,9 @@
 .. _api_elem_dataelem:
 
-Data Elements (:mod:`pydicom.dataelem`)
+Data Elements (:mod:`pydicom3.dataelem`)
 =======================================
 
-.. currentmodule:: pydicom.dataelem
+.. currentmodule:: pydicom3.dataelem
 
 Representation of DICOM data elements
 

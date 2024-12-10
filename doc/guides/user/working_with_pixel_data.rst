@@ -6,7 +6,7 @@ Working with Pixel Data
 
 .. currentmodule:: pydicom
 
-.. rubric:: How to work with pixel data in pydicom.
+.. rubric:: How to work with pixel data in pydicom3.
 
 Introduction
 ------------
@@ -51,7 +51,7 @@ stored in a variety of different ways:
 
 Because of the complexity in interpreting the pixel data, *pydicom* provides
 an easy way to get it in a convenient form:
-:attr:`Dataset.pixel_array<pydicom.dataset.Dataset.pixel_array>`.
+:attr:`Dataset.pixel_array<pydicom3.dataset.Dataset.pixel_array>`.
 
 
 ``Dataset.pixel_array``
@@ -59,10 +59,10 @@ an easy way to get it in a convenient form:
 
 .. warning::
 
-    :attr:`Dataset.pixel_array<pydicom.dataset.Dataset.pixel_array>`
+    :attr:`Dataset.pixel_array<pydicom3.dataset.Dataset.pixel_array>`
     requires `NumPy <https://numpy.org/>`_.
 
-:attr:`Dataset.pixel_array<pydicom.dataset.Dataset.pixel_array>` returns a
+:attr:`Dataset.pixel_array<pydicom3.dataset.Dataset.pixel_array>` returns a
 :class:`numpy.ndarray` containing the pixel data::
 
   >>> arr = ds.pixel_array # doctest: +NORMALIZE_WHITESPACE
@@ -78,7 +78,7 @@ an easy way to get it in a convenient form:
   (64, 64)
 
 If the pixel data is compressed then
-:attr:`~pydicom.dataset.Dataset.pixel_array` will return the uncompressed data,
+:attr:`~pydicom3.dataset.Dataset.pixel_array` will return the uncompressed data,
 provided the dependencies of the required pixel data decoder have been met. See
 :doc:`handling compressed image data </guides/user/image_data_handlers>` for more
 information.
@@ -109,7 +109,7 @@ automatically.
 See :ref:`sphx_glr_auto_examples_image_processing_plot_downsize_image.py` for
 an example.
 
-:attr:`~pydicom.dataset.Dataset.pixel_array` can also be used to pass image
+:attr:`~pydicom3.dataset.Dataset.pixel_array` can also be used to pass image
 data to graphics libraries for viewing. See :doc:`viewing_images` for details.
 
 
@@ -118,7 +118,7 @@ data to graphics libraries for viewing. See :doc:`viewing_images` for details.
 Color space
 -----------
 
-When using :attr:`~pydicom.dataset.Dataset.pixel_array`
+When using :attr:`~pydicom3.dataset.Dataset.pixel_array`
 with *Pixel Data* that has an (0028,0002) *Samples per Pixel* value
 of ``3`` then the returned pixel data will be in the color space as given by
 (0028,0004) *Photometric Interpretation* (e.g. ``RGB``, ``YBR_FULL``,
@@ -126,7 +126,7 @@ of ``3`` then the returned pixel data will be in the color space as given by
 
 *pydicom* offers a limited ability to convert between 8-bits/channel YBR and
 RGB color spaces through the
-:func:`~pydicom.pixels.processing.convert_color_space`
+:func:`~pydicom3.pixels.processing.convert_color_space`
 function. When changing the color space you should also change the value
 of *Photometric Interpretation* to match.
 
@@ -143,13 +143,13 @@ Some DICOM datasets store their output image pixel values in a lookup table
 (LUT), where the values in *Pixel Data* are the index to a corresponding
 LUT entry. When a dataset's (0028,0004) *Photometric Interpretation* value is
 ``PALETTE COLOR`` then the
-:func:`~pydicom.pixels.processing.apply_color_lut` function can be used
+:func:`~pydicom3.pixels.processing.apply_color_lut` function can be used
 to apply a palette color LUT to the pixel data to produce an RGB image.
 
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.pixels import apply_color_lut
+    from pydicom3.pixels import apply_color_lut
 
     # Fetch an example PALETTE COLOR dataset
     ds = examples.palette_color
@@ -164,7 +164,7 @@ of the pixel data is 8-bit.
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.pixels import apply_color_lut
+    from pydicom3.pixels import apply_color_lut
 
     ds = examples.palette_color
     arr = ds.pixel_array
@@ -185,7 +185,7 @@ Modality LUT or Rescale Operation
 The DICOM :dcm:`Modality LUT<part03/sect_C.11.html#sect_C.11.1>` module
 converts raw pixel data values to a specific (possibly unitless) physical
 quantity, such as Hounsfield units for CT. The
-:func:`~pydicom.pixels.processing.apply_modality_lut` function can be
+:func:`~pydicom3.pixels.processing.apply_modality_lut` function can be
 used with an input array of raw values and a dataset containing a Modality LUT
 module to return the converted values. When a dataset requires multiple
 grayscale transformations, the Modality LUT transformation is always applied
@@ -194,7 +194,7 @@ first.
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.pixels import apply_modality_lut
+    from pydicom3.pixels import apply_modality_lut
 
     ds = examples.ct
     arr = ds.pixel_array
@@ -206,7 +206,7 @@ VOI LUT or Windowing Operation
 
 The DICOM :dcm:`VOI LUT<part03/sect_C.11.2.html>` module applies a
 VOI or windowing operation to input values. The
-:func:`~pydicom.pixels.processing.apply_voi_lut` function
+:func:`~pydicom3.pixels.processing.apply_voi_lut` function
 can be used with an input array and a dataset containing a VOI LUT module to
 return values with applied VOI LUT or windowing. When a dataset contains
 multiple VOI or windowing views then a particular view can be returned by
@@ -218,7 +218,7 @@ that the modality LUT or rescale operation has already been applied.
 .. code-block:: python
 
     from pydicom import examples
-    from pydicom.pixels import apply_voi_lut
+    from pydicom3.pixels import apply_voi_lut
 
     ds = examples.overlay
     arr = ds.pixel_array

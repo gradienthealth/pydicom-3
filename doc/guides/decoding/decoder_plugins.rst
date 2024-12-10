@@ -9,7 +9,7 @@ Pixel Data Decoder Plugins
     This guide is intended for advanced users who need support for something
     not provided by the :doc:`existing decoder plugins </reference/pixels.decoders>`.
 
-*Pixel Data* decoding in *pydicom* uses a :class:`~pydicom.pixels.decoders.base.Decoder`
+*Pixel Data* decoding in *pydicom* uses a :class:`~pydicom3.pixels.decoders.base.Decoder`
 instance to manage plugins that perform the actual decoding work. This guide covers
 the requirements for those plugins and how to add them to *pydicom*.
 
@@ -28,19 +28,19 @@ An decoding plugin must implement three objects within the same module:
 
   .. code-block:: python
 
-      def is_available(uid: pydicom.uid.UID) -> bool:
+      def is_available(uid: pydicom3.uid.UID) -> bool:
 
   Where `uid` is the *Transfer Syntax UID* for the corresponding decoder as
-  a :class:`~pydicom.uid.UID`. If the plugin supports the `uid` and has
+  a :class:`~pydicom3.uid.UID`. If the plugin supports the `uid` and has
   its dependencies met then it should return ``True``, otherwise it should
   return ``False``.
 
 * A :class:`dict` named ``DECODER_DEPENDENCIES`` with the type
-  ``dict[pydicom.uid.UID, tuple[str, ...]``, such as:
+  ``dict[pydicom3.uid.UID, tuple[str, ...]``, such as:
 
   .. code-block:: python
 
-      from pydicom.uid import RLELossless, JPEG2000
+      from pydicom3.uid import RLELossless, JPEG2000
 
       DECODER_DEPENDENCIES = {
           RLELossless: ('numpy', 'pillow', 'imagecodecs'),
@@ -59,14 +59,14 @@ An decoding plugin must implement three objects within the same module:
   Where
 
   * `src` is a single frame's worth of raw compressed data to be decoded.
-  * `runner` is a :class:`~pydicom.pixels.decoders.base.DecodeRunner` instance
+  * `runner` is a :class:`~pydicom3.pixels.decoders.base.DecodeRunner` instance
     that manages the decoding process and has access to the decoding options,
     either directly through the class properties or indirectly with the
-    :meth:`~pydicom.pixels.decoders.base.DecodeRunner.get_option` method.
+    :meth:`~pydicom3.pixels.decoders.base.DecodeRunner.get_option` method.
 
   At a minimum the following decoding options should be available:
 
-  * ``transfer_syntax_uid``: :class:`~pydicom.uid.UID` - the *Transfer
+  * ``transfer_syntax_uid``: :class:`~pydicom3.uid.UID` - the *Transfer
     Syntax UID* of the encoded data.
   * ``rows``: :class:`int` - the number of rows of pixels in decoded data.
   * ``columns``: :class:`int` -  the number of columns of pixels in the
@@ -95,7 +95,7 @@ An decoding plugin must implement three objects within the same module:
 
   If your decoder needs to signal that one of the decoding option values needs
   to be modified then this can be done with the
-  :meth:`~pydicom.pixels.decoders.base.DecodeRunner.set_option` method. This
+  :meth:`~pydicom3.pixels.decoders.base.DecodeRunner.set_option` method. This
   should only be done after successfully decoding the frame, as if the
   decoding fails changing the option value may cause issues with
   other decoding plugins that may also attempt to decode the same frame. It's also
@@ -113,7 +113,7 @@ Adding Plugins to a Decoder
 ===========================
 
 Additional plugins can be added to an existing decoder with the
-:meth:`~pydicom.pixels.decoders.base.Decoder.add_plugin` method, which takes the
+:meth:`~pydicom3.pixels.decoders.base.Decoder.add_plugin` method, which takes the
 a unique :class:`str` `plugin_label`, and a :class:`tuple` of ``('the import
 path to the decoder function's module', 'decoder function name')``. For
 example, if you'd import your decoder function `my_decoder_func` with
@@ -122,7 +122,7 @@ following:
 
 .. code-block:: python
 
-    from pydicom.pixels.decoders import RLELosslessDecoder
+    from pydicom3.pixels.decoders import RLELosslessDecoder
 
     RLELosslessDecoder.add_plugin(
         'my_decoder',  # the plugin's label

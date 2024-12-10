@@ -51,7 +51,7 @@ import xml.etree.ElementTree as ET
 import urllib.request as urllib2
 
 from pydicom import _version
-from pydicom.values import converters
+from pydicom3.values import converters
 
 
 _PKG_DIRECTORY = Path(__file__).parent.parent.parent / "src" / "pydicom"
@@ -259,7 +259,7 @@ if __name__ == "__main__":
     lib_version = getattr(_version, "__dicom_version__", None)
     if lib_version != dcm_version:
         print(
-            "Warning: 'pydicom._version.__dicom_version__' needs to be "
+            "Warning: 'pydicom3._version.__dicom_version__' needs to be "
             f"updated to '{dcm_version}'"
         )
 

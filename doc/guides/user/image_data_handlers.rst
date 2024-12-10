@@ -101,10 +101,10 @@ Usage
 To get uncompressed pixel data as a NumPy :class:`~numpy.ndarray` you have a number of options, depending on your requirements:
 
 * To access the pixel data without modifying the dataset you can use
-  the :attr:`Dataset.pixel_array<pydicom.dataset.Dataset.pixel_array>` property, or the
-  :func:`~pydicom.pixels.pixel_array` and :func:`~pydicom.pixels.iter_pixels` functions with a
-  :class:`~pydicom.dataset.Dataset` instance.
-* To access the pixel data while minimizing memory usage you can use the :func:`~pydicom.pixels.pixel_array` or
-  :func:`~pydicom.pixels.iter_pixels` functions with the path to the dataset.
-* To decompress a dataset in-place you can use :meth:`Dataset.decompress()<pydicom.dataset.Dataset.decompress>` or
-  the :func:`~pydicom.pixels.decompress` function.
+  the :attr:`Dataset.pixel_array<pydicom3.dataset.Dataset.pixel_array>` property, or the
+  :func:`~pydicom3.pixels.pixel_array` and :func:`~pydicom3.pixels.iter_pixels` functions with a
+  :class:`~pydicom3.dataset.Dataset` instance.
+* To access the pixel data while minimizing memory usage you can use the :func:`~pydicom3.pixels.pixel_array` or
+  :func:`~pydicom3.pixels.iter_pixels` functions with the path to the dataset.
+* To decompress a dataset in-place you can use :meth:`Dataset.decompress()<pydicom3.dataset.Dataset.decompress>` or
+  the :func:`~pydicom3.pixels.decompress` function.

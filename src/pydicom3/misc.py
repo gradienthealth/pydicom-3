@@ -22,7 +22,7 @@ _size_factors = {
 
 def size_in_bytes(expr: int | float | str | None) -> None | float | int:
     """Return the number of bytes for `defer_size` argument in
-    :func:`~pydicom.filereader.dcmread`.
+    :func:`~pydicom3.filereader.dcmread`.
     """
     if expr is None or expr == float("inf"):
         return None
@@ -46,7 +46,7 @@ def is_dicom(file_path: str | Path) -> bool:
     """Return ``True`` if the file at `file_path` is a DICOM file.
 
     This function is a pared down version of
-    :func:`~pydicom.filereader.read_preamble` meant for a fast return. The
+    :func:`~pydicom3.filereader.read_preamble` meant for a fast return. The
     file is read for a conformant preamble ('DICM'), returning
     ``True`` if so, and ``False`` otherwise. This is a conservative approach.
 

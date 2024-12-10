@@ -5,7 +5,7 @@ Create UIDs for the Storage SOP Classes taken from the generated ``_uids.py``.
 from pathlib import Path
 import re
 
-from pydicom._uid_dict import UID_dictionary
+from pydicom3._uid_dict import UID_dictionary
 
 
 STORAGE_REGEX = re.compile(
@@ -31,7 +31,7 @@ def uid_line(uid, keyword):
 
 
 def update_uids(path: Path) -> None:
-    """Update pydicom.uid with Storage SOP Class UID definitions."""
+    """Update pydicom3.uid with Storage SOP Class UID definitions."""
     retained_lines = []
     with open(path) as f:
         for line in f:

@@ -1,4 +1,4 @@
-"""Tests for pydicom.pixels.decoder.base."""
+"""Tests for pydicom3.pixels.decoder.base."""
 
 from io import BytesIO
 import logging
@@ -9,15 +9,15 @@ from sys import byteorder
 import pytest
 
 from pydicom import config, dcmread
-from pydicom.dataset import Dataset
-from pydicom.encaps import get_frame, generate_frames, encapsulate
-from pydicom.pixels import get_decoder
-from pydicom.pixels.common import PhotometricInterpretation as PI
-from pydicom.pixels.decoders import ExplicitVRLittleEndianDecoder
-from pydicom.pixels.decoders.base import DecodeRunner, Decoder
-from pydicom.pixels.processing import convert_color_space
+from pydicom3.dataset import Dataset
+from pydicom3.encaps import get_frame, generate_frames, encapsulate
+from pydicom3.pixels import get_decoder
+from pydicom3.pixels.common import PhotometricInterpretation as PI
+from pydicom3.pixels.decoders import ExplicitVRLittleEndianDecoder
+from pydicom3.pixels.decoders.base import DecodeRunner, Decoder
+from pydicom3.pixels.processing import convert_color_space
 
-from pydicom.uid import (
+from pydicom3.uid import (
     ExplicitVRLittleEndian,
     ImplicitVRLittleEndian,
     DeflatedExplicitVRLittleEndian,

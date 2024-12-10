@@ -38,7 +38,7 @@ which takes a single argument ``subparsers``, and a ``do_command`` function,
 which will take the call when you subcommand is actually used at the command
 line::
 
-    from pydicom.cli.main import filespec_help, filespec_parser
+    from pydicom3.cli.main import filespec_help, filespec_parser
 
     def add_subparser(subparsers):
         # Register the sub-parser
@@ -81,5 +81,5 @@ arg with the type set to ``argparse.FileType`` to open files yourself.
 The above has been shown in relation to a different package than *pydicom*;
 however, if you think your command has general use, please consider contributing
 it to *pydicom*: in that case, change the entry points in the *pydicom*
-``setup.py`` script, and add a module under ``pydicom.cli`` and create a
+``setup.py`` script, and add a module under ``pydicom3.cli`` and create a
 pull request.

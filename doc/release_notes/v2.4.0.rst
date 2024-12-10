@@ -8,14 +8,14 @@ Changes
 
 Enhancements
 ------------
-* Added attribute :attr:`~pydicom.valuerep.PersonName.alphabetic` (:pr:`1634`)
-* Added attribute :attr:`~pydicom.tag.BaseTag.json_key` (:pr:`1648`)
+* Added attribute :attr:`~pydicom3.valuerep.PersonName.alphabetic` (:pr:`1634`)
+* Added attribute :attr:`~pydicom3.tag.BaseTag.json_key` (:pr:`1648`)
 * Added value validation for numerical VRs, add type validation for all
   validated VRs (:issue:`1414`)
 * CLI commands now accept *pydicom* charset test files and CLI help shows
   Python Version (:pr:`1674`)
 * Added support for Python 3.11 (:issue:`1658`)
-* Added :class:`~pydicom.valuerep.ISfloat` to allow non-strict reading of
+* Added :class:`~pydicom3.valuerep.ISfloat` to allow non-strict reading of
   existing files with float IS values (:issue:`1661`)
 * Improved speed of creating and accessing highly nested structures
   (:issue:`1728`, :pr:`1734`)
@@ -32,7 +32,7 @@ Fixes
 * In codify, ensure unique variable names for DICOM keywords repeated
   in sequences, and handle unicode characters correctly (:issue:`1670`)
 * Fixed handling of some invalid values in
-  :meth:`~pydicom.dataset.Dataset.to_json_dict` if `suppress_invalid_tags` is
+  :meth:`~pydicom3.dataset.Dataset.to_json_dict` if `suppress_invalid_tags` is
   set to `True` (:issue:`1693`)
 * Fixed reading of data with 8 bits allocated, encoded in Big Endian transfer
   syntax using VR ``OW`` (:issue:`1680`)

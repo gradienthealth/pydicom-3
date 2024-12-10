@@ -415,7 +415,7 @@ def read_dataset(
     specific_tags: list[BaseTag | int] | None = None,
     at_top_level: bool = True,
 ) -> Dataset:
-    """Return a :class:`~pydicom.dataset.Dataset` instance containing the next
+    """Return a :class:`~pydicom3.dataset.Dataset` instance containing the next
     dataset in the file.
 
     Parameters
@@ -451,9 +451,9 @@ def read_dataset(
 
     See Also
     --------
-    :class:`~pydicom.dataset.Dataset`
+    :class:`~pydicom3.dataset.Dataset`
         A collection (dictionary) of DICOM
-        :class:`~pydicom.dataelem.DataElement` instances.
+        :class:`~pydicom3.dataelem.DataElement` instances.
     """
     raw_data_elements: dict[BaseTag, RawDataElement | DataElement] = {}
     fp_tell = fp.tell
@@ -512,8 +512,8 @@ def read_sequence(
     encoding: str | MutableSequence[str],
     offset: int = 0,
 ) -> Sequence:
-    """Read and return a :class:`~pydicom.sequence.Sequence` -- i.e. a
-    :class:`list` of :class:`Datasets<pydicom.dataset.Dataset>`.
+    """Read and return a :class:`~pydicom3.sequence.Sequence` -- i.e. a
+    :class:`list` of :class:`Datasets<pydicom3.dataset.Dataset>`.
     """
     seq = []  # use builtin list to start for speed, convert to Sequence at end
     is_undefined_length = False
@@ -547,8 +547,8 @@ def read_sequence_item(
     encoding: str | MutableSequence[str],
     offset: int = 0,
 ) -> Dataset | None:
-    """Read and return a single :class:`~pydicom.sequence.Sequence` item, i.e.
-    a :class:`~pydicom.dataset.Dataset`.
+    """Read and return a single :class:`~pydicom3.sequence.Sequence` item, i.e.
+    a :class:`~pydicom3.dataset.Dataset`.
     """
     seq_item_tell = fp.tell() + offset
     tag_length_format = "<HHL" if is_little_endian else ">HHL"
@@ -881,14 +881,14 @@ def read_partial(
             #   and hope for the best (big endian is retired anyway)
             if group >= 1024:
                 is_little_endian = False
-    elif transfer_syntax == pydicom.uid.ImplicitVRLittleEndian:
+    elif transfer_syntax == pydicom3.uid.ImplicitVRLittleEndian:
         pass
-    elif transfer_syntax == pydicom.uid.ExplicitVRLittleEndian:
+    elif transfer_syntax == pydicom3.uid.ExplicitVRLittleEndian:
         is_implicit_VR = False
-    elif transfer_syntax == pydicom.uid.ExplicitVRBigEndian:
+    elif transfer_syntax == pydicom3.uid.ExplicitVRBigEndian:
         is_implicit_VR = False
         is_little_endian = False
-    elif transfer_syntax == pydicom.uid.DeflatedExplicitVRLittleEndian:
+    elif transfer_syntax == pydicom3.uid.DeflatedExplicitVRLittleEndian:
         # See PS3.5 section A.5
         # when written, the entire dataset following
         #     the file metadata was prepared the normal way,
@@ -905,10 +905,10 @@ def read_partial(
         buffer.name = name
         fileobj = cast(BinaryIO, buffer)  # a file-like object
         is_implicit_VR = False
-    elif transfer_syntax in pydicom.uid.PrivateTransferSyntaxes:
+    elif transfer_syntax in pydicom3.uid.PrivateTransferSyntaxes:
         # Replace with the registered UID as it has the encoding information
-        index = pydicom.uid.PrivateTransferSyntaxes.index(transfer_syntax)
-        transfer_syntax = pydicom.uid.PrivateTransferSyntaxes[index]
+        index = pydicom3.uid.PrivateTransferSyntaxes.index(transfer_syntax)
+        transfer_syntax = pydicom3.uid.PrivateTransferSyntaxes[index]
         is_implicit_VR = transfer_syntax.is_implicit_VR
         is_little_endian = transfer_syntax.is_little_endian
     else:
@@ -971,17 +971,17 @@ def dcmread(
     --------
     Read and return a dataset stored in accordance with the DICOM File Format:
 
-    >>> ds = pydicom.dcmread("CT_small.dcm")
+    >>> ds = pydicom3.dcmread("CT_small.dcm")
     >>> ds.PatientName
 
     Read and return a dataset not in accordance with the DICOM File Format:
 
-    >>> ds = pydicom.dcmread("rtplan.dcm", force=True)
+    >>> ds = pydicom3.dcmread("rtplan.dcm", force=True)
     >>> ds.PatientName
 
     Use within a context manager:
 
-    >>> with pydicom.dcmread("rtplan.dcm") as ds:
+    >>> with pydicom3.dcmread("rtplan.dcm") as ds:
     ...     ds.PatientName
 
     Parameters
@@ -1003,7 +1003,7 @@ def dcmread(
         subsequent elements).
     force : bool, optional
         If ``False`` (default), raises an
-        :class:`~pydicom.errors.InvalidDicomError` if the file is
+        :class:`~pydicom3.errors.InvalidDicomError` if the file is
         missing the *File Meta Information* header. Set to ``True`` to force
         reading even if no *File Meta Information* header is found.
     specific_tags : list of (int or str or 2-tuple of int), optional
@@ -1015,7 +1015,7 @@ def dcmread(
     Returns
     -------
     FileDataset
-        An instance of :class:`~pydicom.dataset.FileDataset` that represents
+        An instance of :class:`~pydicom3.dataset.FileDataset` that represents
         a parsed DICOM file.
 
     Raises
@@ -1027,9 +1027,9 @@ def dcmread(
 
     See Also
     --------
-    pydicom.dataset.FileDataset
+    pydicom3.dataset.FileDataset
         Data class that is returned.
-    pydicom.filereader.read_partial
+    pydicom3.filereader.read_partial
         Only read part of a DICOM file, stopping on given conditions.
     """
     # Open file if not already a file object

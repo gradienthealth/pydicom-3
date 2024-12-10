@@ -2,8 +2,8 @@
 """Benchmarks for the encaps module."""
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
-from pydicom.encaps import (
+from pydicom3.data import get_testdata_file
+from pydicom3.encaps import (
     fragment_frame,
     itemise_frame,
     encapsulate,

@@ -9,18 +9,18 @@ import pytest
 
 from pydicom import config, dcmread, Dataset, Sequence
 from pydicom import filereader
-from pydicom._private_dict import private_dictionaries
-from pydicom.data import get_testdata_file
-from pydicom.dataelem import DataElement
-from pydicom.tag import Tag
-from pydicom.uid import (
+from pydicom3._private_dict import private_dictionaries
+from pydicom3.data import get_testdata_file
+from pydicom3.dataelem import DataElement
+from pydicom3.tag import Tag
+from pydicom3.uid import (
     ImplicitVRLittleEndian,
     ExplicitVRBigEndian,
     ExplicitVRLittleEndian,
 )
-from pydicom.util import fixer
-from pydicom.util import hexutil
-from pydicom.util.codify import (
+from pydicom3.util import fixer
+from pydicom3.util import hexutil
+from pydicom3.util.codify import (
     camel_to_underscore,
     tag_repr,
     default_name_filter,
@@ -30,15 +30,15 @@ from pydicom.util.codify import (
     main as codify_main,
     code_file_from_dataset,
 )
-from pydicom.util.dump import (
+from pydicom3.util.dump import (
     print_character,
     filedump,
     datadump,
     hexdump,
     pretty_print,
 )
-from pydicom.util.hexutil import hex2bytes, bytes2hex
-from pydicom.util.leanread import dicomfile
+from pydicom3.util.hexutil import hex2bytes, bytes2hex
+from pydicom3.util.leanread import dicomfile
 
 have_numpy = True
 try:
@@ -96,8 +96,8 @@ class TestCodify:
     def test_code_imports(self):
         """Test utils.codify.code_imports"""
         out = ["import pydicom"]
-        out.append("from pydicom.dataset import Dataset, FileMetaDataset")
-        out.append("from pydicom.sequence import Sequence")
+        out.append("from pydicom3.dataset import Dataset, FileMetaDataset")
+        out.append("from pydicom3.sequence import Sequence")
         assert "\n".join(out) == code_imports()
 
     def test_code_dataelem_standard(self):

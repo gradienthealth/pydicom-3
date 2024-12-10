@@ -5,7 +5,7 @@ from argparse import ArgumentTypeError
 
 import pytest
 
-from pydicom.cli.main import filespec_parser, eval_element, main, filespec_parts
+from pydicom3.cli.main import filespec_parser, eval_element, main, filespec_parts
 
 
 bad_elem_specs = (

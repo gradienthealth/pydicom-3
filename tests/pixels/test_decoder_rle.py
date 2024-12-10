@@ -6,16 +6,16 @@ from struct import pack, unpack
 import pytest
 
 from pydicom import dcmread
-from pydicom.config import debug
-from pydicom.encaps import get_frame, generate_frames, encapsulate
-from pydicom.pixels import get_decoder
-from pydicom.pixels.decoders import RLELosslessDecoder
-from pydicom.pixels.decoders.rle import (
+from pydicom3.config import debug
+from pydicom3.encaps import get_frame, generate_frames, encapsulate
+from pydicom3.pixels import get_decoder
+from pydicom3.pixels.decoders import RLELosslessDecoder
+from pydicom3.pixels.decoders.rle import (
     _rle_parse_header,
     _rle_decode_segment,
     _rle_decode_frame,
 )
-from pydicom.uid import RLELossless, ExplicitVRLittleEndian
+from pydicom3.uid import RLELossless, ExplicitVRLittleEndian
 
 try:
     import numpy as np

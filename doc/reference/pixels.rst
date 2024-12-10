@@ -1,10 +1,10 @@
 .. _api_pixels:
 
-Pixel Data (:mod:`pydicom.pixels`)
+Pixel Data (:mod:`pydicom3.pixels`)
 ==================================
 
-.. module:: pydicom.pixels
-.. currentmodule:: pydicom.pixels
+.. module:: pydicom3.pixels
+.. currentmodule:: pydicom3.pixels
 
 
 Image processing functions

@@ -12,10 +12,10 @@ except ImportError:
     HAVE_NP = False
 
 from pydicom import dcmread
-from pydicom.encaps import get_frame, encapsulate
-from pydicom.pixels import get_decoder
-from pydicom.pixels.decoders.pylibjpeg import is_available
-from pydicom.uid import (
+from pydicom3.encaps import get_frame, encapsulate
+from pydicom3.pixels import get_decoder
+from pydicom3.pixels.decoders.pylibjpeg import is_available
+from pydicom3.uid import (
     JPEGBaseline8Bit,
     JPEGExtended12Bit,
     JPEGLossless,
@@ -29,7 +29,7 @@ from pydicom.uid import (
     HTJ2K,
     RLELossless,
 )
-from pydicom.pixels.utils import get_j2k_parameters
+from pydicom3.pixels.utils import get_j2k_parameters
 
 from .pixels_reference import (
     PIXEL_REFERENCE,

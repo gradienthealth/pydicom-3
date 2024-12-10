@@ -4,13 +4,13 @@ Structured Reporting
 
 Starting in *pydicom* version 1.4, some support for DICOM Structured Reporting (SR) began to be added,
 as alpha code; the API for this is subject to change in future *pydicom* versions. At this point the
-code is limited to code dictionaries and one class :class:`~pydicom.sr.coding.Code`
+code is limited to code dictionaries and one class :class:`~pydicom3.sr.coding.Code`
 as a foundational step for future work.
 
-Most access is through a ``codes`` class instance provided in ``pydicom.sr.codedict``. This can be used
+Most access is through a ``codes`` class instance provided in ``pydicom3.sr.codedict``. This can be used
 with a ``dir()`` method on a particular scheme designator ('DCM' here) or CID (see further below)::
 
-    >>> from pydicom.sr.codedict import codes
+    >>> from pydicom3.sr.codedict import codes
     >>> codes.DCM.dir("Modality")
     ['IncorrectModalityWorklistEntry', 'MixedModality3DCAMModel', 'Modality', 'ModalityToRead', 'OtherModality']
 
@@ -33,7 +33,7 @@ Codes can also be accessed by CID::
 
 If the CID number is unknown, it is possible to find it through a CID name dictionary::
 
-    >>> from pydicom.sr.codedict import cid_for_name
+    >>> from pydicom3.sr.codedict import cid_for_name
     >>> [name for name in cid_for_name if 'Observ' in name]
     ['ObservationSubjectClass', 'ObserverType', 'EchoFindingObservationTypes']
     >>> cid_for_name['ObserverType']

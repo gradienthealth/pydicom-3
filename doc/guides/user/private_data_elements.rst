@@ -5,7 +5,7 @@ Private Data Elements
 
 .. rubric:: Accessing or creating private data elements
 
-.. currentmodule:: pydicom.dataset
+.. currentmodule:: pydicom3.dataset
 
 Introduction
 ------------
@@ -13,7 +13,7 @@ Introduction
 The DICOM standard allows DICOM file creators to use `private data elements`
 to store information that is not defined by the DICOM standard itself.
 
-Private data elements are stored in a :class:`~pydicom.dataset.Dataset` just
+Private data elements are stored in a :class:`~pydicom3.dataset.Dataset` just
 like other data elements. When reading files with *pydicom*, they will automatically be read
 and available for display.  *pydicom* knows descriptive names for some
 'well-known' private data elements, but for others it may not be able to
@@ -64,7 +64,7 @@ text in square brackets, to make it clear it is different from DICOM
 standard descriptors.
 
 You can still access the private data elements using the tag, remembering that
-data elements access by tag number return a full :class:`~pydicom.dataelem.DataElement`
+data elements access by tag number return a full :class:`~pydicom3.dataelem.DataElement`
 instance, and the `value` attribute is needed to get the value::
 
     >>> ds[0x00091001].value
@@ -147,13 +147,13 @@ In this case, you can add these tags to the DICOM dictionary before reading or w
 containing these tags. After that, *pydicom* will correctly handle the type of these tags, and
 can display their description if needed.
 
-For standard tags, you can use :func:`~pydicom.datadict.add_dict_entry` or
-:func:`~pydicom.datadict.add_dict_entries` (to add multiple tags at once)::
+For standard tags, you can use :func:`~pydicom3.datadict.add_dict_entry` or
+:func:`~pydicom3.datadict.add_dict_entries` (to add multiple tags at once)::
 
     >>> add_dict_entry(tag=0x888800001, VR="SH", keyword="SomeNewTag", description="Some New Tag")
 
 For private tags, the analogous functions are
-:func:`~pydicom.datadict.add_private_dict_entry` and :func:`~pydicom.datadict.add_private_dict_entries`::
+:func:`~pydicom3.datadict.add_private_dict_entry` and :func:`~pydicom3.datadict.add_private_dict_entries`::
 
     >>> add_private_dict_entry(private_creator="ACME 1.1", tag=0x004100001, VR="DA", description="Release Date")
 
@@ -161,5 +161,5 @@ Note that private tags do not have a keyword, as they are not registered in the
 standard DICOM data dictionary. As a private tag is defined by the tuple of private creator, group ID and tag offset,
 you always have to provide the private creator to define a new private tag.
 
-An example of how to use :func:`~pydicom.datadict.add_private_dict_entries` can
+An example of how to use :func:`~pydicom3.datadict.add_private_dict_entries` can
 be found in :ref:`this code snippet <sphx_glr_auto_examples_metadata_processing_plot_add_dict_entries.py>`.

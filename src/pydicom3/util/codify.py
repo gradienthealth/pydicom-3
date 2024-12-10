@@ -73,8 +73,8 @@ def code_imports() -> str:
 
     """
     line1 = "import pydicom"
-    line2 = "from pydicom.dataset import Dataset, FileMetaDataset"
-    line3 = "from pydicom.sequence import Sequence"
+    line2 = "from pydicom3.dataset import Dataset, FileMetaDataset"
+    line3 = "from pydicom3.sequence import Sequence"
     return line_term.join((line1, line2, line3))
 
 
@@ -274,7 +274,7 @@ def code_dataset(
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The dataset to codify.
     dataset_name : str, optional
         The Python variable name to use for the dataset, default ``'ds'``.
@@ -347,7 +347,7 @@ def code_file(
         A string containing code lines to recreate the entire DICOM file
 
     """
-    ds = pydicom.dcmread(filename, force=True)
+    ds = pydicom3.dcmread(filename, force=True)
     return code_file_from_dataset(ds, exclude_size, include_private)
 
 

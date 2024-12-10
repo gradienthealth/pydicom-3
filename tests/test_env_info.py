@@ -1,7 +1,7 @@
 # Copyright 2020 pydicom authors. See LICENSE file for details.
 """Unit tests for the env_info module."""
 
-import pydicom.env_info
+import pydicom3.env_info
 
 
 class TestEnvInfo:
@@ -9,7 +9,7 @@ class TestEnvInfo:
 
     def test_report_looks_like_a_table(self, capsys):
         """Test that the report looks like a table"""
-        pydicom.env_info.main()
+        pydicom3.env_info.main()
 
         out, err = capsys.readouterr()
         table_start = """
@@ -20,7 +20,7 @@ platform     |""".lstrip()
 
     def test_all_modules_reported(self, capsys):
         """Test that all modules are reported"""
-        pydicom.env_info.main()
+        pydicom3.env_info.main()
 
         out, err = capsys.readouterr()
         lines = out.split("\n")

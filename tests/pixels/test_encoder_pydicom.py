@@ -12,15 +12,15 @@ except ImportError:
     HAVE_NP = False
 
 from pydicom import dcmread, Dataset
-from pydicom.data import get_testdata_file
-from pydicom.dataset import FileMetaDataset
-from pydicom.encaps import get_frame
-from pydicom.pixels.encoders import RLELosslessEncoder
-from pydicom.pixels.encoders.base import EncodeRunner
-from pydicom.pixels.encoders.native import _encode_frame, _encode_segment, _encode_row
-from pydicom.pixels.decoders.rle import _rle_decode_frame, _rle_decode_segment
-from pydicom.pixels.utils import reshape_pixel_array
-from pydicom.uid import RLELossless
+from pydicom3.data import get_testdata_file
+from pydicom3.dataset import FileMetaDataset
+from pydicom3.encaps import get_frame
+from pydicom3.pixels.encoders import RLELosslessEncoder
+from pydicom3.pixels.encoders.base import EncodeRunner
+from pydicom3.pixels.encoders.native import _encode_frame, _encode_segment, _encode_row
+from pydicom3.pixels.decoders.rle import _rle_decode_frame, _rle_decode_segment
+from pydicom3.pixels.utils import reshape_pixel_array
+from pydicom3.uid import RLELossless
 
 
 # EXPL: Explicit VR Little Endian

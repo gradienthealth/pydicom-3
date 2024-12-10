@@ -3,8 +3,8 @@
 
 import pytest
 
-from pydicom.data import get_testdata_file
-from pydicom.filereader import dcmread
+from pydicom3.data import get_testdata_file
+from pydicom3.filereader import dcmread
 
 try:
     import numpy as np
@@ -14,8 +14,8 @@ except ImportError:
     HAVE_NP = False
 
 try:
-    from pydicom.waveforms import numpy_handler as NP_HANDLER
-    from pydicom.waveforms.numpy_handler import generate_multiplex, multiplex_array
+    from pydicom3.waveforms import numpy_handler as NP_HANDLER
+    from pydicom3.waveforms.numpy_handler import generate_multiplex, multiplex_array
 except ImportError:
     NP_HANDLER = None
 

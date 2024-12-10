@@ -13,20 +13,20 @@ except ImportError:
     HAVE_NP = False
 
 from pydicom import dcmread, examples
-from pydicom.data import get_testdata_file
-from pydicom.encaps import encapsulate, get_frame
-from pydicom.pixels.encoders import (
+from pydicom3.data import get_testdata_file
+from pydicom3.encaps import encapsulate, get_frame
+from pydicom3.pixels.encoders import (
     JPEG2000LosslessEncoder,
     JPEG2000Encoder,
 )
-from pydicom.pixels.decoders import (
+from pydicom3.pixels.decoders import (
     JPEG2000LosslessDecoder,
     JPEG2000Decoder,
 )
-from pydicom.pixels.encoders.pylibjpeg import is_available
-from pydicom.pixels.utils import as_pixel_options
-from pydicom.pixels.utils import get_expected_length, get_j2k_parameters
-from pydicom.uid import RLELossless, JPEG2000
+from pydicom3.pixels.encoders.pylibjpeg import is_available
+from pydicom3.pixels.utils import as_pixel_options
+from pydicom3.pixels.utils import get_expected_length, get_j2k_parameters
+from pydicom3.uid import RLELossless, JPEG2000
 
 
 HAVE_PYLJ = bool(importlib.util.find_spec("pylibjpeg"))

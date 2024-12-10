@@ -181,7 +181,7 @@ class RecordNode(Iterable["RecordNode"]):
         The current node's child nodes (if any)
     instance : FileInstance or None
         If the current node is a leaf node, a
-        :class:`~pydicom.fileset.FileInstance` for the corresponding SOP
+        :class:`~pydicom3.fileset.FileInstance` for the corresponding SOP
         Instance.
     """
 
@@ -190,7 +190,7 @@ class RecordNode(Iterable["RecordNode"]):
 
         Parameters
         ----------
-        record : pydicom.dataset.Dataset, optional
+        record : pydicom3.dataset.Dataset, optional
             A *Directory Record Sequence's* directory record.
         """
         self.children: list[RecordNode] = []
@@ -216,9 +216,9 @@ class RecordNode(Iterable["RecordNode"]):
 
         Parameters
         ----------
-        leaf : pydicom.fileset.RecordNode
+        leaf : pydicom3.fileset.RecordNode
             A leaf node (i.e. one with a
-            :class:`~pydicom.fileset.FileInstance`) to be added to the tree
+            :class:`~pydicom3.fileset.FileInstance`) to be added to the tree
             (if not already present).
         """
         # Move up to the branch's furthest ancestor with a directory record
@@ -321,7 +321,7 @@ class RecordNode(Iterable["RecordNode"]):
 
         See Also
         --------
-        :meth:`~pydicom.fileset.RecordNode._update_record_offsets`
+        :meth:`~pydicom3.fileset.RecordNode._update_record_offsets`
         """
         fp = DicomBytesIO()
         fp.is_little_endian = True
@@ -369,12 +369,12 @@ class RecordNode(Iterable["RecordNode"]):
 
     @property
     def file_set(self) -> "FileSet":
-        """Return the tree's :class:`~pydicom.fileset.FileSet`."""
+        """Return the tree's :class:`~pydicom3.fileset.FileSet`."""
         return self.root.file_set
 
     def __getitem__(self, key: Union[str, "RecordNode"]) -> "RecordNode":
         """Return the current node's child using it's
-        :attr:`~pydicom.fileset.RecordNode.key`
+        :attr:`~pydicom3.fileset.RecordNode.key`
         """
         if isinstance(key, RecordNode):
             key = key.key
@@ -563,7 +563,7 @@ class RecordNode(Iterable["RecordNode"]):
 
         Parameters
         ----------
-        ds : pydicom.dataset.Dataset
+        ds : pydicom3.dataset.Dataset
             Set the node's initial directory record dataset, must be conformant
             to :dcm:`Part 3, Annex F of the DICOM Standard
             <part03/chapter_F.html>`.
@@ -603,9 +603,9 @@ class RecordNode(Iterable["RecordNode"]):
 
         Parameters
         ----------
-        node : pydicom.fileset.RecordNode
+        node : pydicom3.fileset.RecordNode
             The leaf node (i.e. one with a
-            :class:`~pydicom.fileset.FileInstance`) to remove.
+            :class:`~pydicom3.fileset.FileInstance`) to remove.
         """
         if not node.has_instance:
             raise ValueError("Only leaf nodes can be removed")
@@ -682,7 +682,7 @@ class RootNode(RecordNode):
 
         Parameters
         ----------
-        fs : pydicom.fileset.FileSet
+        fs : pydicom3.fileset.FileSet
             The File-set the record tree belongs to.
         """
         super().__init__()
@@ -691,7 +691,7 @@ class RootNode(RecordNode):
 
     @property
     def file_set(self) -> "FileSet":
-        """Return the tree's :class:`~pydicom.fileset.FileSet`."""
+        """Return the tree's :class:`~pydicom3.fileset.FileSet`."""
         return self._fs
 
     @property
@@ -705,7 +705,7 @@ class FileInstance:
 
     Attributes
     ----------
-    node : pydicom.fileset.RecordNode
+    node : pydicom3.fileset.RecordNode
         The leaf record that references this instance.
     """
 
@@ -714,7 +714,7 @@ class FileInstance:
 
         Parameters
         ----------
-        node : pydicom.fileset.RecordNode
+        node : pydicom3.fileset.RecordNode
             The record that references this instance.
         """
 
@@ -792,7 +792,7 @@ class FileInstance:
 
     @property
     def file_set(self) -> "FileSet":
-        """Return the :class:`~pydicom.fileset.FileSet` this instance belongs
+        """Return the :class:`~pydicom3.fileset.FileSet` this instance belongs
         to.
         """
         return self.node.file_set
@@ -862,7 +862,7 @@ class FileInstance:
 
         Returns
         -------
-        pydicom.dataelem.DataElement
+        pydicom3.dataelem.DataElement
             The DataElement corresponding to `key`, if present in one of the
             directory records. Directory records are searched
             from the lowest (i.e. an IMAGE or similar record type) to the
@@ -904,7 +904,7 @@ class FileInstance:
 
     def load(self) -> Dataset:
         """Return the referenced instance as a
-        :class:`~pydicom.dataset.Dataset`.
+        :class:`~pydicom3.dataset.Dataset`.
         """
         if self.for_addition:
             return dcmread(cast(Path, self._stage_path))
@@ -957,7 +957,7 @@ class FileSet:
 
         Parameters
         ----------
-        ds : pydicom.dataset.Dataset, str or PathLike, optional
+        ds : pydicom3.dataset.Dataset, str or PathLike, optional
             If loading a File-set, the DICOMDIR dataset or the path
             to the DICOMDIR file.
         """
@@ -1005,23 +1005,23 @@ class FileSet:
         """Stage an instance for addition to the File-set.
 
         If the instance has been staged for removal then calling
-        :meth:`~pydicom.fileset.FileSet.add` will cancel the staging
+        :meth:`~pydicom3.fileset.FileSet.add` will cancel the staging
         and the instance will not be removed.
 
         Parameters
         ----------
-        ds_or_path : pydicom.dataset.Dataset, str or PathLike
+        ds_or_path : pydicom3.dataset.Dataset, str or PathLike
             The instance to add to the File-set, either as a
-            :class:`~pydicom.dataset.Dataset` or the path to the instance.
+            :class:`~pydicom3.dataset.Dataset` or the path to the instance.
 
         Returns
         -------
         FileInstance
-            The :class:`~pydicom.fileset.FileInstance` that was added.
+            The :class:`~pydicom3.fileset.FileInstance` that was added.
 
         See Also
         --------
-        :meth:`~pydicom.fileset.FileSet.add_custom`
+        :meth:`~pydicom3.fileset.FileSet.add_custom`
         """
         ds: Dataset | FileDataset
         if isinstance(ds_or_path, str | os.PathLike):
@@ -1078,7 +1078,7 @@ class FileSet:
         This method allows you to add a SOP instance and customize the
         directory records that will be used when writing the DICOMDIR file. It
         must be used when you require PRIVATE records and may be used instead
-        of modifying :attr:`~pydicom.fileset.DIRECTORY_RECORDERS` with your
+        of modifying :attr:`~pydicom3.fileset.DIRECTORY_RECORDERS` with your
         own record definition functions when the default functions aren't
         suitable.
 
@@ -1094,7 +1094,7 @@ class FileSet:
         * (0004,1512) *Referenced Transfer Syntax UID in File*
 
         If the instance has been staged for removal then calling
-        :meth:`~pydicom.fileset.FileSet.add_custom` will cancel the staging
+        :meth:`~pydicom3.fileset.FileSet.add_custom` will cancel the staging
         and the instance will not be removed.
 
         Examples
@@ -1105,8 +1105,8 @@ class FileSet:
         .. code-block:: python
 
             from pydicom import Dataset, examples
-            from pydicom.fileset import FileSet, RecordNode
-            from pydicom.uid import generate_uid
+            from pydicom3.fileset import FileSet, RecordNode
+            from pydicom3.uid import generate_uid
 
             # The instance to be added
             ds = examples.ct
@@ -1133,24 +1133,24 @@ class FileSet:
 
         Parameters
         ----------
-        ds_or_path : pydicom.dataset.Dataset, str or PathLike
+        ds_or_path : pydicom3.dataset.Dataset, str or PathLike
             The instance to add to the File-set, either as a
-            :class:`~pydicom.dataset.Dataset` or the path to the instance.
-        leaf : pydicom.fileset.RecordNode
+            :class:`~pydicom3.dataset.Dataset` or the path to the instance.
+        leaf : pydicom3.fileset.RecordNode
             The leaf node for the instance, should have its ancestors nodes set
             correctly as well as their corresponding directory records. Should
             have no more than 7 ancestors due to the semantics used by
-            :class:`~pydicom.fileset.FileSet` when creating the directory
+            :class:`~pydicom3.fileset.FileSet` when creating the directory
             structure.
 
         Returns
         -------
         FileInstance
-            The :class:`~pydicom.fileset.FileInstance` that was added.
+            The :class:`~pydicom3.fileset.FileInstance` that was added.
 
         See Also
         --------
-        :meth:`~pydicom.fileset.FileSet.add`
+        :meth:`~pydicom3.fileset.FileSet.add`
         """
         ds: Dataset | FileDataset
         if isinstance(ds_or_path, str | os.PathLike):
@@ -1223,9 +1223,9 @@ class FileSet:
         """Copy the File-set to a new root directory and return the copied
         File-set.
 
-        Changes staged to the original :class:`~pydicom.fileset.FileSet` will
+        Changes staged to the original :class:`~pydicom3.fileset.FileSet` will
         be applied to the new File-set. The original
-        :class:`~pydicom.fileset.FileSet` will remain staged.
+        :class:`~pydicom3.fileset.FileSet` will remain staged.
 
         Parameters
         ----------
@@ -1238,8 +1238,8 @@ class FileSet:
 
         Returns
         -------
-        pydicom.fileset.FileSet
-            The copied File-set as a :class:`~pydicom.fileset.FileSet`.
+        pydicom3.fileset.FileSet
+            The copied File-set as a :class:`~pydicom3.fileset.FileSet`.
         """
         # !! We can't change anything public in the original FileSet !!
 
@@ -1341,7 +1341,7 @@ class FileSet:
 
         See Also
         --------
-        :attr:`~pydicom.fileset.FileSet.descriptor_file_id` set the descriptor
+        :attr:`~pydicom3.fileset.FileSet.descriptor_file_id` set the descriptor
         file ID for the file that uses the character set.
         """
         if val == self._charset:
@@ -1380,7 +1380,7 @@ class FileSet:
 
         See Also
         --------
-        :attr:`~pydicom.fileset.FileSet.descriptor_character_set` the
+        :attr:`~pydicom3.fileset.FileSet.descriptor_character_set` the
         character set used in the descriptor file, required if an expanded or
         replaced character set is used.
         """
@@ -1444,7 +1444,7 @@ class FileSet:
 
         Returns
         -------
-        list of pydicom.fileset.FileInstance
+        list of pydicom3.fileset.FileInstance
             A list of matching instances.
         """
         if not kwargs:
@@ -1491,9 +1491,9 @@ class FileSet:
 
         Parameters
         ----------
-        elements : str, int or pydicom.tag.BaseTag, or list of these
+        elements : str, int or pydicom3.tag.BaseTag, or list of these
             The keyword or tag of the element(s) to search for.
-        instances : list of pydicom.fileset.FileInstance, optional
+        instances : list of pydicom3.fileset.FileInstance, optional
             Search within the given instances. If not used then all available
             instances will be searched.
         load : bool, optional
@@ -1580,7 +1580,7 @@ class FileSet:
         return any(self._stage[c] for c in "+-^~")
 
     def __iter__(self) -> Iterator[FileInstance]:
-        """Yield :class:`~pydicom.fileset.FileInstance` from the File-set."""
+        """Yield :class:`~pydicom3.fileset.FileInstance` from the File-set."""
         yield from self._instances[:]
 
     def __len__(self) -> int:
@@ -1603,9 +1603,9 @@ class FileSet:
 
         Parameters
         ----------
-        ds_or_path : pydicom.dataset.Dataset, str or PathLike
+        ds_or_path : pydicom3.dataset.Dataset, str or PathLike
             An existing File-set's DICOMDIR, either as a
-            :class:`~pydicom.dataset.Dataset` or the path to the DICOMDIR file
+            :class:`~pydicom3.dataset.Dataset` or the path to the DICOMDIR file
             as :class:`str` or pathlike.
         include_orphans : bool, optional
             If ``True`` (default) include instances referenced by orphaned
@@ -1702,7 +1702,7 @@ class FileSet:
 
         Parameters
         ----------
-        ds : pydicom.dataset.Dataset
+        ds : pydicom3.dataset.Dataset
             The File-set's DICOMDIR dataset.
         include_orphans : bool
             If ``True`` then include within the File-set orphaned records that
@@ -1810,12 +1810,12 @@ class FileSet:
 
         Parameters
         ----------
-        ds : pydicom.dataset.Dataset
+        ds : pydicom3.dataset.Dataset
             The SOP Instance to create DICOMDIR directory records for.
 
         Yields
         ------
-        ds : pydicom.dataset.Dataset
+        ds : pydicom3.dataset.Dataset
             A directory record for the instance, ordered from highest to
             lowest level.
 
@@ -1888,12 +1888,12 @@ class FileSet:
         """Stage instance(s) for removal from the File-set.
 
         If the instance has been staged for addition to the File-set, calling
-        :meth:`~pydicom.fileset.FileSet.remove` will cancel the staging and
+        :meth:`~pydicom3.fileset.FileSet.remove` will cancel the staging and
         the instance will not be added.
 
         Parameters
         ----------
-        instance : pydicom.fileset.FileInstance or a list of FileInstance
+        instance : pydicom3.fileset.FileInstance or a list of FileInstance
             The instance(s) to remove from the File-set.
         """
         if isinstance(instance, list):
@@ -1977,7 +1977,7 @@ class FileSet:
 
         Parameters
         ----------
-        uid : pydicom.uid.UID
+        uid : pydicom3.uid.UID
             The UID to use as the new File-set UID.
         """
         if uid == self._uid:
@@ -2160,7 +2160,7 @@ class FileSet:
             have ``write()``, ``tell()`` and ``seek()`` methods.
         copy_safe : bool, optional
             If ``True`` then the function doesn't make any changes to the
-            public parts of the current :class:`~pydicom.fileset.FileSet`
+            public parts of the current :class:`~pydicom3.fileset.FileSet`
             instance.
         force_implicit : bool, optional
             Force encoding the DICOMDIR with 'Implicit VR Little Endian' which
@@ -2252,7 +2252,7 @@ def _check_dataset(ds: Dataset, keywords: list[str]) -> None:
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The dataset to check.
     keywords : list of str
         The DICOM keywords for Type 1 elements that are to be checked.
@@ -2711,7 +2711,7 @@ Example
 
 .. code-block:: python
 
-    from pydicom.fileset import DIRECTORY_RECORDERS, FileSet
+    from pydicom3.fileset import DIRECTORY_RECORDERS, FileSet
 
     def my_recorder(ds: Dataset) -> Dataset:
         record = Dataset()
@@ -2734,13 +2734,13 @@ Example
     fs.add('my_instance.dcm')
 
 The function should take a single parameter which is the SOP Instance to be
-added to the File-set as a :class:`~pydicom.dataset.Dataset` and return a
-:class:`~pydicom.dataset.Dataset` with a single directory record matching the
+added to the File-set as a :class:`~pydicom3.dataset.Dataset` and return a
+:class:`~pydicom3.dataset.Dataset` with a single directory record matching the
 directory record type. See :dcm:`Annex F.3.2.2<chtml/part03/sect_F.3.2.2.html>`
 for possible record types.
 
 For PRIVATE records you must use the
-:meth:`~pydicom.fileset.FileSet.add_custom` method instead.
+:meth:`~pydicom3.fileset.FileSet.add_custom` method instead.
 """
 _SINGLE_LEVEL_SOP_CLASSES = {
     sop.HangingProtocolStorage: "HANGING PROTOCOL",

@@ -1,9 +1,9 @@
 .. _api_data:
 
-Getting Included Datasets (:mod:`pydicom.data`)
+Getting Included Datasets (:mod:`pydicom3.data`)
 ===============================================
 
-.. currentmodule:: pydicom.data
+.. currentmodule:: pydicom3.data
 
 Getting datasets included with *pydicom*
 

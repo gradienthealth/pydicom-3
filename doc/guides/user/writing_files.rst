@@ -6,7 +6,7 @@ Writing DICOM Files
 
 .. currentmodule:: pydicom
 
-.. rubric:: How to write DICOM files using pydicom.
+.. rubric:: How to write DICOM files using pydicom3.
 
 Introduction
 ------------
@@ -18,7 +18,7 @@ alter some items, and write it back out again. The :doc:`Dataset basics tutorial
 If you need to create a DICOM file from scratch then you can either:
 
 * Use the ``codify`` script to create Python code from an existing dataset.
-* Create a new :class:`~pydicom.dataset.Dataset` instance and populate it.
+* Create a new :class:`~pydicom3.dataset.Dataset` instance and populate it.
 
 .. Warning::
 

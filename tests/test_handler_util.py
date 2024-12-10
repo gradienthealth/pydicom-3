@@ -15,7 +15,7 @@ except ImportError:
 from pydicom import config
 
 with pytest.warns(DeprecationWarning):
-    from pydicom.pixel_data_handlers.util import dtype_corrected_for_endianness
+    from pydicom3.pixel_data_handlers.util import dtype_corrected_for_endianness
 
 
 @pytest.mark.skipif(not HAVE_NP, reason="Numpy is not available")
@@ -48,28 +48,28 @@ class TestNumpy_DtypeCorrectedForEndianness:
 
 def test_deprecation_warnings():
     msg = (
-        "The 'pydicom.pixel_data_handlers' module will be removed in v4.0, "
-        "please use 'from pydicom.pixels import convert_color_space' instead"
+        "The 'pydicom3.pixel_data_handlers' module will be removed in v4.0, "
+        "please use 'from pydicom3.pixels import convert_color_space' instead"
     )
     with pytest.warns(DeprecationWarning, match=msg):
-        from pydicom.pixel_data_handlers import convert_color_space
+        from pydicom3.pixel_data_handlers import convert_color_space
 
     with pytest.warns(DeprecationWarning, match=msg):
-        from pydicom.pixel_data_handlers.util import convert_color_space as x
+        from pydicom3.pixel_data_handlers.util import convert_color_space as x
 
     msg = (
-        "The 'pydicom.pixel_data_handlers' module will be removed in v4.0, "
-        "please use 'from pydicom.pixels.utils import expand_ybr422' instead"
+        "The 'pydicom3.pixel_data_handlers' module will be removed in v4.0, "
+        "please use 'from pydicom3.pixels.utils import expand_ybr422' instead"
     )
     with pytest.warns(DeprecationWarning, match=msg):
-        from pydicom.pixel_data_handlers import expand_ybr422
+        from pydicom3.pixel_data_handlers import expand_ybr422
 
     with pytest.warns(DeprecationWarning, match=msg):
-        from pydicom.pixel_data_handlers.util import expand_ybr422 as y
+        from pydicom3.pixel_data_handlers.util import expand_ybr422 as y
 
     msg = "'dtype_corrected_for_endianness' is deprecated and will be removed in v4.0"
     with pytest.warns(DeprecationWarning, match=msg):
-        from pydicom.pixel_data_handlers.util import dtype_corrected_for_endianness
+        from pydicom3.pixel_data_handlers.util import dtype_corrected_for_endianness
 
 
 @pytest.fixture
@@ -83,55 +83,55 @@ def use_future():
 class TestFuture:
     def test_imports_raise(self, use_future):
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers import apply_color_lut as x
+            from pydicom3.pixel_data_handlers import apply_color_lut as x
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import apply_color_lut
+            from pydicom3.pixel_data_handlers.util import apply_color_lut
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import apply_modality_lut
+            from pydicom3.pixel_data_handlers.util import apply_modality_lut
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import apply_voi_lut
+            from pydicom3.pixel_data_handlers.util import apply_voi_lut
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import apply_voi
+            from pydicom3.pixel_data_handlers.util import apply_voi
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import apply_windowing
+            from pydicom3.pixel_data_handlers.util import apply_windowing
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import convert_color_space
+            from pydicom3.pixel_data_handlers.util import convert_color_space
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers import expand_ybr422 as y
+            from pydicom3.pixel_data_handlers import expand_ybr422 as y
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import expand_ybr422
+            from pydicom3.pixel_data_handlers.util import expand_ybr422
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import get_expected_length
+            from pydicom3.pixel_data_handlers.util import get_expected_length
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import get_image_pixel_ids
+            from pydicom3.pixel_data_handlers.util import get_image_pixel_ids
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import get_j2k_parameters
+            from pydicom3.pixel_data_handlers.util import get_j2k_parameters
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import get_nr_frames
+            from pydicom3.pixel_data_handlers.util import get_nr_frames
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import pack_bits
+            from pydicom3.pixel_data_handlers.util import pack_bits
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import pixel_dtype
+            from pydicom3.pixel_data_handlers.util import pixel_dtype
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import reshape_pixel_array
+            from pydicom3.pixel_data_handlers.util import reshape_pixel_array
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import unpack_bits
+            from pydicom3.pixel_data_handlers.util import unpack_bits
 
         with pytest.raises(ImportError):
-            from pydicom.pixel_data_handlers.util import dtype_corrected_for_endianness
+            from pydicom3.pixel_data_handlers.util import dtype_corrected_for_endianness

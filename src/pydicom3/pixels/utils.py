@@ -189,7 +189,7 @@ def as_pixel_options(ds: "Dataset", **kwargs: Any) -> dict[str, Any]:
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         A dataset containing Image Pixel module elements.
     **kwargs
         A :class:`dict` containing (key, value) pairs to be used to override the
@@ -324,17 +324,17 @@ def compress(
     Compress the existing uncompressed *Pixel Data* in place:
 
     >>> from pydicom import examples
-    >>> from pydicom.pixels import compress
-    >>> from pydicom.uid import RLELossless
+    >>> from pydicom3.pixels import compress
+    >>> from pydicom3.uid import RLELossless
     >>> ds = examples.ct
     >>> compress(ds, RLELossless)
     >>> ds.save_as("ct_rle_lossless.dcm")
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The dataset to be compressed.
-    transfer_syntax_uid : pydicom.uid.UID
+    transfer_syntax_uid : pydicom3.uid.UID
         The UID of the :dcm:`transfer syntax<part05/chapter_10.html>` to
         use when compressing the pixel data.
     arr : numpy.ndarray, optional
@@ -355,7 +355,7 @@ def compress(
         Data*, otherwise just the basic offset table will be used.
     generate_instance_uid : bool, optional
         If ``True`` then  always generate a new (0008,0018) *SOP Instance UID*
-        using :func:`~pydicom.uid.generate_uid`, otherwise ``False`` to always keep the
+        using :func:`~pydicom3.uid.generate_uid`, otherwise ``False`` to always keep the
         original. The default behavior is to only generate a new *SOP Instance UID*
         when performing lossy compression.
     jls_error : int, optional
@@ -563,7 +563,7 @@ def decompress(
     * The *Pixel Data* element's VR will be set to **OB** if *Bits
       Allocated* <= 8, otherwise it will be set to **OW**.
     * The :attr:`DataElement.is_undefined_length
-      <pydicom.dataelem.DataElement.is_undefined_length>` attribute for the
+      <pydicom3.dataelem.DataElement.is_undefined_length>` attribute for the
       *Pixel Data* element will be set to ``False``.
     * Any :dcm:`image pixel<part03/sect_C.7.6.3.html>` module elements may be
       modified as required to match the uncompressed *Pixel Data*.
@@ -573,10 +573,10 @@ def decompress(
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         A dataset containing compressed *Pixel Data* to be decoded and the
         corresponding *Image Pixel* module elements, along with a
-        :attr:`~pydicom.dataset.FileDataset.file_meta` attribute containing a
+        :attr:`~pydicom3.dataset.FileDataset.file_meta` attribute containing a
         suitable (0002,0010) *Transfer Syntax UID*.
     as_rgb : bool, optional
         if ``True`` (default) then convert pixel data with a YCbCr
@@ -584,7 +584,7 @@ def decompress(
         ``"YBR_FULL_422"`` to RGB.
     generate_instance_uid : bool, optional
         If ``True`` then  always generate a new (0008,0018) *SOP Instance UID*,
-        using :func:`~pydicom.uid.generate_uid`, otherwise ``False`` to always keep the
+        using :func:`~pydicom3.uid.generate_uid`, otherwise ``False`` to always keep the
         original. The default behavior is to only generate a new *SOP Instance UID*
         when the image data has had a YCbCr to RGB conversion applied.
     decoding_plugin : str, optional
@@ -600,7 +600,7 @@ def decompress(
 
     Returns
     -------
-    pydicom.dataset.Dataset
+    pydicom3.dataset.Dataset
         The dataset `ds` decompressed in-place.
     """
     # TODO: v4.0 remove support for `pixel_data_handlers` module
@@ -763,7 +763,7 @@ def get_expected_length(ds: "Dataset", unit: str = "bytes") -> int:
     Parameters
     ----------
     ds : Dataset
-        The :class:`~pydicom.dataset.Dataset` containing the Image Pixel module
+        The :class:`~pydicom3.dataset.Dataset` containing the Image Pixel module
         and *Pixel Data*.
     unit : str, optional
         If ``'bytes'`` then returns the expected length of the *Pixel Data* in
@@ -840,7 +840,7 @@ def get_image_pixel_ids(ds: "Dataset") -> dict[str, int]:
     Parameters
     ----------
     ds : Dataset
-        The :class:`~pydicom.dataset.Dataset` containing the pixel data.
+        The :class:`~pydicom3.dataset.Dataset` containing the pixel data.
 
     Returns
     -------
@@ -1038,7 +1038,7 @@ def get_nr_frames(ds: "Dataset", warn: bool = True) -> int:
     Parameters
     ----------
     ds : dataset.Dataset
-        The :class:`~pydicom.dataset.Dataset` containing the Image Pixel module
+        The :class:`~pydicom3.dataset.Dataset` containing the Image Pixel module
         corresponding to the data in `arr`.
     warn : bool
         If ``True`` (the default), a warning is issued if NumberOfFrames
@@ -1118,7 +1118,7 @@ def iter_pixels(
     Read a DICOM dataset then iterate through all the pixel data frames::
 
         from pydicom import dcmread
-        from pydicom.pixels import iter_pixels
+        from pydicom3.pixels import iter_pixels
 
         ds = dcmread("path/to/dataset.dcm")
         for arr in iter_pixels(ds):
@@ -1127,14 +1127,14 @@ def iter_pixels(
     Iterate through all the pixel data frames in a dataset while minimizing
     memory usage::
 
-        from pydicom.pixels import iter_pixels
+        from pydicom3.pixels import iter_pixels
 
         for arr in iter_pixels("path/to/dataset.dcm"):
             print(arr.shape)
 
     Iterate through the even frames for a dataset with 10 frames::
 
-        from pydicom.pixels import iter_pixels
+        from pydicom3.pixels import iter_pixels
 
         with open("path/to/dataset.dcm", "rb") as f:
             for arr in iter_pixels(f, indices=range(0, 10, 2)):
@@ -1142,20 +1142,20 @@ def iter_pixels(
 
     Parameters
     ----------
-    src : str | PathLike[str] | file-like | pydicom.dataset.Dataset
+    src : str | PathLike[str] | file-like | pydicom3.dataset.Dataset
 
         * :class:`str` | :class:`os.PathLike`: the path to a DICOM dataset
           containing pixel data, or
         * file-like: a `file-like object
           <https://docs.python.org/3/glossary.html#term-file-object>`_ in
           'rb' mode containing the dataset.
-        * :class:`~pydicom.dataset.Dataset`: a dataset instance
-    ds_out : pydicom.dataset.Dataset, optional
-        A :class:`~pydicom.dataset.Dataset` that will be updated with the
+        * :class:`~pydicom3.dataset.Dataset`: a dataset instance
+    ds_out : pydicom3.dataset.Dataset, optional
+        A :class:`~pydicom3.dataset.Dataset` that will be updated with the
         non-retired group ``0x0028`` image pixel module elements and the group
         ``0x0002`` file meta information elements from the dataset in `src`.
         **Only available when `src` is a path or file-like.**
-    specific_tags : list[int | pydicom.tag.BaseTag], optional
+    specific_tags : list[int | pydicom3.tag.BaseTag], optional
         A list of additional tags from the dataset in `src` to be added to the
         `ds_out` dataset.
     indices : Iterable[int] | None, optional
@@ -1411,41 +1411,41 @@ def pixel_array(
      Read a DICOM dataset and return the entire pixel data::
 
         from pydicom import dcmread
-        from pydicom.pixels import pixel_array
+        from pydicom3.pixels import pixel_array
 
         ds = dcmread("path/to/dataset.dcm")
         arr = pixel_array(ds)
 
     Return the entire pixel data from a dataset while minimizing memory usage::
 
-        from pydicom.pixels import pixel_array
+        from pydicom3.pixels import pixel_array
 
         arr = pixel_array("path/to/dataset.dcm")
 
     Return the 3rd frame of a dataset containing at least 3 frames while
     minimizing memory usage::
 
-        from pydicom.pixels import pixel_array
+        from pydicom3.pixels import pixel_array
 
         with open("path/to/dataset.dcm", "rb") as f:
             arr = pixel_array(f, index=2)  # 'index' starts at 0
 
     Parameters
     ----------
-    src : str | PathLike[str] | file-like | pydicom.dataset.Dataset
+    src : str | PathLike[str] | file-like | pydicom3.dataset.Dataset
 
         * :class:`str` | :class:`os.PathLike`: the path to a DICOM dataset
           containing pixel data, or
         * file-like: a `file-like object
           <https://docs.python.org/3/glossary.html#term-file-object>`_ in
           'rb' mode containing the dataset.
-        * :class:`~pydicom.dataset.Dataset`: a dataset instance
-    ds_out : pydicom.dataset.Dataset, optional
-        A :class:`~pydicom.dataset.Dataset` that will be updated with the
+        * :class:`~pydicom3.dataset.Dataset`: a dataset instance
+    ds_out : pydicom3.dataset.Dataset, optional
+        A :class:`~pydicom3.dataset.Dataset` that will be updated with the
         non-retired group ``0x0028`` image pixel module elements and the group
         ``0x0002`` file meta information elements from the dataset in `src`.
         **Only available when `src` is a path or file-like.**
-    specific_tags : list[int | pydicom.tag.BaseTag], optional
+    specific_tags : list[int | pydicom3.tag.BaseTag], optional
         A list of additional tags from the dataset in `src` to be added to the
         `ds_out` dataset.
     index : int | None, optional
@@ -1582,7 +1582,7 @@ def pixel_dtype(ds: "Dataset", as_float: bool = False) -> "np.dtype":
     Parameters
     ----------
     ds : Dataset
-        The :class:`~pydicom.dataset.Dataset` containing the pixel data you
+        The :class:`~pydicom3.dataset.Dataset` containing the pixel data you
         wish to get the data type for.
     as_float : bool, optional
         If ``True`` then return a float dtype, otherwise return an integer
@@ -1725,7 +1725,7 @@ def reshape_pixel_array(ds: "Dataset", arr: "np.ndarray") -> "np.ndarray":
     Parameters
     ----------
     ds : dataset.Dataset
-        The :class:`~pydicom.dataset.Dataset` containing the Image Pixel module
+        The :class:`~pydicom3.dataset.Dataset` containing the Image Pixel module
         corresponding to the data in `arr`.
     arr : numpy.ndarray
         The 1D array containing the pixel data.
@@ -1852,7 +1852,7 @@ def set_pixel_data(
     * If `generate_instance_uid` is ``True`` (default) then the *SOP Instance UID*
       will be added or updated.
     * If a ``bool`` array is used then the pixel data will be bit-packed using
-      :func:`~pydicom.pixels.pack_bits`.
+      :func:`~pydicom3.pixels.pack_bits`.
 
     .. versionchanged:: 3.1
 
@@ -1861,7 +1861,7 @@ def set_pixel_data(
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The little endian encoded dataset to be modified.
     arr : np.ndarray
         An array with :class:`~numpy.dtype` bool, uint8, uint16, int8 or int16.
@@ -1885,7 +1885,7 @@ def set_pixel_data(
         or 1 in the case of an array of dtype bool.
     generate_instance_uid : bool, optional
         If ``True`` (default) then add or update the (0008,0018) *SOP Instance
-        UID* element with a value generated using :func:`~pydicom.uid.generate_uid`.
+        UID* element with a value generated using :func:`~pydicom3.uid.generate_uid`.
     """
     from pydicom3.dataset import FileMetaDataset
     from pydicom3.pixels.common import PhotometricInterpretation as PI

@@ -4,8 +4,8 @@
 import pytest
 
 from pydicom import DataElement
-from pydicom.dataset import Dataset
-from pydicom.datadict import (
+from pydicom3.dataset import Dataset
+from pydicom3.datadict import (
     keyword_for_tag,
     dictionary_description,
     dictionary_has_tag,
@@ -19,7 +19,7 @@ from pydicom.datadict import (
     add_private_dict_entry,
     _dictionary_vr_fast,
 )
-from pydicom.datadict import add_dict_entry, add_dict_entries
+from pydicom3.datadict import add_dict_entry, add_dict_entries
 from .test_util import save_private_dict
 
 

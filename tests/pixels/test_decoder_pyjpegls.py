@@ -11,8 +11,8 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom.pixels import get_decoder
-from pydicom.uid import JPEGLSLossless, JPEGLSNearLossless
+from pydicom3.pixels import get_decoder
+from pydicom3.uid import JPEGLSLossless, JPEGLSNearLossless
 
 from .pixels_reference import PIXEL_REFERENCE, JLSN_08_01_1_0_1F
 

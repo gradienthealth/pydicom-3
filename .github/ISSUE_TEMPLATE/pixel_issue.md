@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 <!--
-If your issue is that the pixel data "looks green/teal", or has strange colors, you probably need to apply a YCbCr to RGB color space conversion using `pydicom.pixel_data_handlers.convert_color_space()`.
+If your issue is that the pixel data "looks green/teal", or has strange colors, you probably need to apply a YCbCr to RGB color space conversion using `pydicom3.pixel_data_handlers.convert_color_space()`.
 
 See also: https://github.com/pydicom/pydicom/discussions/1577
 -->
@@ -18,7 +18,7 @@ See also: https://github.com/pydicom/pydicom/discussions/1577
 Please include:
 * A clear description of what the issue is
 * (If relevant) **anonymized** screenshots that demonstrate the issue
-* The output from `python -m pydicom.env_info`
+* The output from `python -m pydicom3.env_info`
 
 
 **Steps to reproduce**
@@ -34,7 +34,7 @@ It's also extremely helpful if you can include one of the following:
   For **pydicom >= 2.3**:
   ```python
   from pydicom import dcmread
-  from pydicom.util import debug_pixel_data
+  from pydicom3.util import debug_pixel_data
 
   ds = dcmread("/path/to/the/dataset")
   debug_pixel_data(ds)

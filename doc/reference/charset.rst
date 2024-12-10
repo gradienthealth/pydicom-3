@@ -1,9 +1,9 @@
 .. _api_charset:
 
-Character Encoding and Decoding (:mod:`pydicom.charset`)
+Character Encoding and Decoding (:mod:`pydicom3.charset`)
 ========================================================
 
-.. currentmodule:: pydicom.charset
+.. currentmodule:: pydicom3.charset
 
 Character encoding and decoding functions.
 

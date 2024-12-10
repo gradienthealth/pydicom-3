@@ -12,12 +12,12 @@ Given an RTPLAN DICOM file, list basic info for the beams in it.
 # license : MIT
 
 import pydicom
-from pydicom.data import get_testdata_file
+from pydicom3.data import get_testdata_file
 
 print(__doc__)
 
 
-def list_beams(ds: pydicom.Dataset) -> str:
+def list_beams(ds: pydicom3.Dataset) -> str:
     """Summarizes the RTPLAN beam information in the dataset."""
     lines = [f"{'Beam name':^13s} {'Number':^8s} {'Gantry':^8s} {'SSD (cm)':^11s}"]
     for beam in ds.BeamSequence:
@@ -30,5 +30,5 @@ def list_beams(ds: pydicom.Dataset) -> str:
 
 
 path = get_testdata_file("rtplan.dcm")
-ds = pydicom.dcmread(path)
+ds = pydicom3.dcmread(path)
 print(list_beams(ds))

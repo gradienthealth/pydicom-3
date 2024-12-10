@@ -57,7 +57,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
 HANDLER_NAME = "RLE Lossless"
 DEPENDENCIES = {"numpy": ("https://numpy.org/", "NumPy")}
-SUPPORTED_TRANSFER_SYNTAXES = [pydicom.uid.RLELossless]
+SUPPORTED_TRANSFER_SYNTAXES = [pydicom3.uid.RLELossless]
 
 
 def is_available() -> bool:

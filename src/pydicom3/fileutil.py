@@ -131,7 +131,7 @@ def read_undefined_length_value(
         Tag used as end marker for reading
     defer_size : int or None, optional
         Size to avoid loading large elements in memory. See
-        :func:`~pydicom.filereader.dcmread` for more parameter info.
+        :func:`~pydicom3.filereader.dcmread` for more parameter info.
     read_size : int, optional
         Number of bytes to read at one time.
 
@@ -244,7 +244,7 @@ def _try_read_encapsulated_pixel_data(
         ``True`` if the file transfer syntax is little endian, else ``False``.
     defer_size : int or None, optional
         Size to avoid loading large elements in memory. See
-        :func:`~pydicom.filereader.dcmread` for more parameter info.
+        :func:`~pydicom3.filereader.dcmread` for more parameter info.
 
     Returns
     -------

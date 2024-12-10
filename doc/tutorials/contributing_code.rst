@@ -26,7 +26,7 @@ Download the current source code
    local copy of *pydicom* to live. The source code can then be downloaded
    using::
 
-     $ git clone https://github.com/YourUsername/pydicom.git
+     $ git clone https://github.com/YourUsername/pydicom3.git
 
 4. Install the cloned copy of *pydicom* (``-e`` for editable mode)::
 
@@ -40,7 +40,7 @@ install `NumPy <https://numpy.org/>`_ as well as the library the handler is
 based on.
 
 For example, if you're working on the
-:mod:`~pydicom.pixel_data_handlers.pillow_handler`
+:mod:`~pydicom3.pixel_data_handlers.pillow_handler`
 you'll also need to install `Pillow <https://pillow.readthedocs.io/>`_::
 
   $ pip install numpy pillow
@@ -117,13 +117,13 @@ work as intended.
    asking for help.
 
 Let's say we wanted to add a new `pre-defined UID
-<https://pydicom.github.io/pydicom/dev/reference/uid.html#predefined-uids>`_
+<https://pydicom3.github.io/pydicom/dev/reference/uid.html#predefined-uids>`_
 to *pydicom* with a value of ``1.2.3.4.500``. We'd first add a new test at the
 bottom of :gh:`test_uid.py <pydicom/blob/main/tests/test_uid.py>`::
 
   def test_new_uid():
       """Test uid.NewDefinedUID."""
-      from pydicom.uid import NewDefinedUID
+      from pydicom3.uid import NewDefinedUID
       assert '1.2.3.4.500' == NewDefinedUID
 
 Since we haven't made any modification to the actual source code, when we
@@ -135,7 +135,7 @@ run the tests we should get a failure::
 
       def test_new_uid():
           """Test uid.NewDefinedUID."""
-  >       from pydicom.uid import NewDefinedUID
+  >       from pydicom3.uid import NewDefinedUID
   E       ImportError: cannot import name 'NewDefinedUID'
 
   test_uid.py:380: ImportError

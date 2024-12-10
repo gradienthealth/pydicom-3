@@ -1076,8 +1076,8 @@ def encapsulate(
     :dcm:`Basic Offset Table<part05/sect_A.4.html>` (2**31 - 1 bytes). Under
     these circumstances you can:
 
-    * Pass ``has_bot=False`` to :func:`~pydicom.encaps.encapsulate`
-    * Use :func:`~pydicom.encaps.encapsulate_extended` and add the
+    * Pass ``has_bot=False`` to :func:`~pydicom3.encaps.encapsulate`
+    * Use :func:`~pydicom3.encaps.encapsulate_extended` and add the
       :dcm:`Extended Offset Table<part03/sect_C.7.6.3.html>` elements to your
       dataset (recommended)
 
@@ -1108,9 +1108,9 @@ def encapsulate(
 
     See Also
     --------
-    :func:`~pydicom.encaps.encapsulate_buffer`
-    :func:`~pydicom.encaps.encapsulate_extended`
-    :func:`~pydicom.encaps.encapsulate_extended_buffer`
+    :func:`~pydicom3.encaps.encapsulate_buffer`
+    :func:`~pydicom3.encaps.encapsulate_extended`
+    :func:`~pydicom3.encaps.encapsulate_extended_buffer`
     """
     nr_frames = len(frames)
     output = bytearray()
@@ -1159,7 +1159,7 @@ def encapsulate(
 def encapsulate_buffer(
     buffers: list[BufferedIOBase], has_bot: bool = True
 ) -> EncapsulatedBuffer:
-    """Return an :class:`~pydicom.encaps.EncapsulatedBuffer` instance from `buffers`.
+    """Return an :class:`~pydicom3.encaps.EncapsulatedBuffer` instance from `buffers`.
 
     .. versionadded:: 3.0
 
@@ -1169,8 +1169,8 @@ def encapsulate_buffer(
     .. code-block:: python
 
         from pydicom import Dataset, FileMetaDataset
-        from pydicom.encaps import encapsulate_buffer
-        from pydicom.uid import JPEG2000Lossless
+        from pydicom3.encaps import encapsulate_buffer
+        from pydicom3.uid import JPEG2000Lossless
 
         # Open the compressed image frames as io.BufferedReader instances
         frame1 = open("frame1.j2k", "rb")
@@ -1200,14 +1200,14 @@ def encapsulate_buffer(
     Returns
     -------
     EncapsulatedBuffer
-        A :class:`~pydicom.encaps.EncapsulatedBuffer` instance that can be used as
+        A :class:`~pydicom3.encaps.EncapsulatedBuffer` instance that can be used as
         the value for a *Pixel Data* element.
 
     See Also
     --------
-    :func:`~pydicom.encaps.encapsulate`
-    :func:`~pydicom.encaps.encapsulate_extended`
-    :func:`~pydicom.encaps.encapsulate_extended_buffer`
+    :func:`~pydicom3.encaps.encapsulate`
+    :func:`~pydicom3.encaps.encapsulate_extended`
+    :func:`~pydicom3.encaps.encapsulate_extended_buffer`
     """
     return EncapsulatedBuffer(buffers, use_bot=has_bot)
 
@@ -1223,10 +1223,10 @@ def encapsulate_extended(frames: list[bytes]) -> tuple[bytes, bytes, bytes]:
     with the :dcm:`Basic Offset Table<part05/sect_A.4.html>` (2**32 - 1 bytes).
     Under these circumstances you can:
 
-    * Use :func:`~pydicom.encaps.encapsulate_extended` and add the
+    * Use :func:`~pydicom3.encaps.encapsulate_extended` and add the
       :dcm:`Extended Offset Table<part03/sect_C.7.6.3.html>` elements to your
       dataset (recommended)
-    * Pass ``has_bot=False`` to :func:`~pydicom.encaps.encapsulate`
+    * Pass ``has_bot=False`` to :func:`~pydicom3.encaps.encapsulate`
 
     Examples
     --------
@@ -1234,8 +1234,8 @@ def encapsulate_extended(frames: list[bytes]) -> tuple[bytes, bytes, bytes]:
     .. code-block:: python
 
         from pydicom import Dataset, FileMetaDataset
-        from pydicom.encaps import encapsulate_extended
-        from pydicom.uid import JPEG2000Lossless
+        from pydicom3.encaps import encapsulate_extended
+        from pydicom3.uid import JPEG2000Lossless
 
         # 'frames' is a list of image frames that have been each been encoded
         # separately using the compression method corresponding to the Transfer
@@ -1264,9 +1264,9 @@ def encapsulate_extended(frames: list[bytes]) -> tuple[bytes, bytes, bytes]:
 
     See Also
     --------
-    :func:`~pydicom.encaps.encapsulate`
-    :func:`~pydicom.encaps.encapsulate_buffer`
-    :func:`~pydicom.encaps.encapsulate_extended_buffer`
+    :func:`~pydicom3.encaps.encapsulate`
+    :func:`~pydicom3.encaps.encapsulate_buffer`
+    :func:`~pydicom3.encaps.encapsulate_extended_buffer`
     """
     nr_frames = len(frames)
     frame_lengths = [len(frame) for frame in frames]
@@ -1286,7 +1286,7 @@ def encapsulate_extended(frames: list[bytes]) -> tuple[bytes, bytes, bytes]:
 def encapsulate_extended_buffer(
     buffers: list[BufferedIOBase],
 ) -> tuple[EncapsulatedBuffer, bytes, bytes]:
-    """Return :class:`~pydicom.encaps.EncapsulatedBuffer` as well as encoded offsets
+    """Return :class:`~pydicom3.encaps.EncapsulatedBuffer` as well as encoded offsets
     and lengths for the Extended Offset Table elements.
 
     .. versionadded:: 3.0
@@ -1297,8 +1297,8 @@ def encapsulate_extended_buffer(
     .. code-block:: python
 
         from pydicom import Dataset, FileMetaDataset
-        from pydicom.encaps import encapsulate_extended_buffer
-        from pydicom.uid import JPEG2000Lossless
+        from pydicom3.encaps import encapsulate_extended_buffer
+        from pydicom3.uid import JPEG2000Lossless
 
         # Open the compressed image frames as io.BufferedReader instances
         frame1 = open("frame1.j2k", "rb")
@@ -1334,14 +1334,14 @@ def encapsulate_extended_buffer(
     Returns
     -------
     tuple[EncapsulatedBuffer, bytes, bytes]
-        The (:class:`~pydicom.encaps.EncapsulatedBuffer`, extended offset table,
+        The (:class:`~pydicom3.encaps.EncapsulatedBuffer`, extended offset table,
         extended offset table lengths).
 
     See Also
     --------
-    :func:`~pydicom.encaps.encapsulate`
-    :func:`~pydicom.encaps.encapsulate_buffer`
-    :func:`~pydicom.encaps.encapsulate_extended`
+    :func:`~pydicom3.encaps.encapsulate`
+    :func:`~pydicom3.encaps.encapsulate_buffer`
+    :func:`~pydicom3.encaps.encapsulate_extended`
     """
     eb = EncapsulatedBuffer(buffers)
     return eb, eb.extended_offsets, eb.extended_lengths
@@ -1354,7 +1354,7 @@ def _get_frame_offsets(fp: DicomIO) -> tuple[bool, list[int]]:
     .. deprecated:: 3.0
 
         This function will be removed in v4.0, please use
-        :func:`~pydicom.encaps.parse_basic_offsets` instead.
+        :func:`~pydicom3.encaps.parse_basic_offsets` instead.
 
     **Basic Offset Table**
 
@@ -1445,7 +1445,7 @@ def _get_nr_fragments(fp: DicomIO) -> int:
     .. deprecated:: 3.0
 
         This function will be removed in v4.0, please use
-        :func:`~pydicom.encaps.parse_fragments` instead.
+        :func:`~pydicom3.encaps.parse_fragments` instead.
     """
     if not fp.is_little_endian:
         raise ValueError("'fp.is_little_endian' must be True")
@@ -1459,7 +1459,7 @@ def _generate_pixel_data_fragment(fp: DicomIO) -> Iterator[bytes]:
     .. deprecated:: 3.0
 
         This function will be remove in v4.0, please use
-        :func:`~pydicom.encaps.generate_fragments` instead.
+        :func:`~pydicom3.encaps.generate_fragments` instead.
 
     For compressed (encapsulated) Transfer Syntaxes, the (7FE0,0010) *Pixel
     Data* element is encoded in an encapsulated format.
@@ -1528,7 +1528,7 @@ def _generate_pixel_data_frame(
     .. deprecated:: 3.0
 
         This function will be remove in v4.0, please use
-        :func:`~pydicom.encaps.generate_frames` instead
+        :func:`~pydicom3.encaps.generate_frames` instead
 
     Parameters
     ----------
@@ -1561,7 +1561,7 @@ def _generate_pixel_data(
 
     .. deprecated:: 3.0
 
-        Please use :func:`~pydicom.encaps.generate_fragmented_frames` instead.
+        Please use :func:`~pydicom3.encaps.generate_fragmented_frames` instead.
 
     For the following transfer syntaxes, a fragment may not contain encoded
     data from more than one frame. However data from one frame may span
@@ -1624,8 +1624,8 @@ def _decode_data_sequence(data: bytes) -> list[bytes]:
     .. deprecated:: 3.0
 
         This function will be removed in v4.0, Please use
-        :func:`~pydicom.encaps.generate_frames` for generating frame
-        data or :func:`~pydicom.encaps.generate_fragments` for generating
+        :func:`~pydicom3.encaps.generate_frames` for generating frame
+        data or :func:`~pydicom3.encaps.generate_fragments` for generating
         fragment data.
 
     Parameters
@@ -1663,8 +1663,8 @@ def _defragment_data(data: bytes) -> bytes:
     .. deprecated:: 3.0
 
         This function will be removed in v4.0, Please use
-        :func:`~pydicom.encaps.generate_frames` for generating frame
-        data or :func:`~pydicom.encaps.generate_fragments` for generating
+        :func:`~pydicom3.encaps.generate_frames` for generating frame
+        data or :func:`~pydicom3.encaps.generate_fragments` for generating
         fragment data.
 
     Parameters
@@ -1686,7 +1686,7 @@ def _read_item(fp: DicomIO) -> bytes | None:
     .. deprecated:: 3.0
 
         This function will be removed in v4.0, please use
-        :func:`~pydicom.encaps.generate_fragments` instead.
+        :func:`~pydicom3.encaps.generate_fragments` instead.
 
     Parameters
     ----------

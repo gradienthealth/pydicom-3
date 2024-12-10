@@ -2,9 +2,9 @@
 """Encoding benchmarks for the rle_handler module."""
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
-from pydicom.pixel_data_handlers.rle_handler import rle_encode_frame
-from pydicom.uid import RLELossless
+from pydicom3.data import get_testdata_file
+from pydicom3.pixel_data_handlers.rle_handler import rle_encode_frame
+from pydicom3.uid import RLELossless
 
 
 # 8/8-bit, 1 sample/pixel, 1 frame

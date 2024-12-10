@@ -85,16 +85,16 @@ Default ``False``.
 
 data_element_callback: Optional["ElementCallback"] = None
 """Set to a callable function to be called from
-:func:`~pydicom.filereader.dcmread` every time a
-:class:`~pydicom.dataelem.RawDataElement` has been returned,
-before it is added to the :class:`~pydicom.dataset.Dataset`.
+:func:`~pydicom3.filereader.dcmread` every time a
+:class:`~pydicom3.dataelem.RawDataElement` has been returned,
+before it is added to the :class:`~pydicom3.dataset.Dataset`.
 
 Default ``None``.
 
 .. deprecated:: 3.0
 
     ``data_element_callback`` will be removed in v4.0, use
-    :meth:`~pydicom.hooks.Hooks.register_callback` instead.
+    :meth:`~pydicom3.hooks.Hooks.register_callback` instead.
 """
 
 data_element_callback_kwargs: dict[str, Any] = {}
@@ -105,7 +105,7 @@ Default ``{}``.
 .. deprecated:: 3.0
 
     ``data_element_callback_kwargs`` will be removed in v4.0, use
-    :meth:`~pydicom.hooks.Hooks.register_kwargs` instead.
+    :meth:`~pydicom3.hooks.Hooks.register_kwargs` instead.
 """
 
 
@@ -115,7 +115,7 @@ def reset_data_element_callback() -> None:
     .. deprecated:: 3.0
 
         ``reset_data_element_callback()`` will be removed in v4.0, use
-        :meth:`pydicom.hooks.Hooks.reset` instead.
+        :meth:`pydicom3.hooks.Hooks.reset` instead.
     """
     global data_element_callback
     global data_element_callback_kwargs
@@ -164,7 +164,7 @@ def DS_decimal(use_Decimal_boolean: bool = True) -> None:
     Parameters
     ----------
     use_Decimal_boolean : bool, optional
-        ``True`` (default) to derive :class:`~pydicom.valuerep.DS` from
+        ``True`` (default) to derive :class:`~pydicom3.valuerep.DS` from
         :class:`decimal.Decimal`, ``False`` to derive it from :class:`float`.
 
     Raises
@@ -183,9 +183,9 @@ def DS_decimal(use_Decimal_boolean: bool = True) -> None:
     import pydicom3.valuerep
 
     if use_DS_decimal:
-        pydicom.valuerep.DSclass = pydicom.valuerep.DSdecimal
+        pydicom3.valuerep.DSclass = pydicom3.valuerep.DSdecimal
     else:
-        pydicom.valuerep.DSclass = pydicom.valuerep.DSfloat
+        pydicom3.valuerep.DSclass = pydicom3.valuerep.DSfloat
 
 
 # Configuration flags
@@ -205,7 +205,7 @@ Default: ``False``.
 """
 
 allow_DS_float = False
-"""Set to ``True`` to allow :class:`~pydicom.valuerep.DSdecimal`
+"""Set to ``True`` to allow :class:`~pydicom3.valuerep.DSdecimal`
 instances to be created using :class:`floats<float>`; otherwise, they must be
 explicitly converted to :class:`str`, with the user explicitly setting the
 precision of digits and rounding.
@@ -257,7 +257,7 @@ class Settings:
     @property
     def buffered_read_size(self) -> int:
         """Get or set the chunk size when reading from buffered
-        :class:`~pydicom.dataelem.DataElement` values.
+        :class:`~pydicom3.dataelem.DataElement` values.
 
         Parameters
         ----------
@@ -398,7 +398,7 @@ not DICOM conformant and would lead to a failure if accessing it.
 show_file_meta = True
 """
 If ``True`` (default), the 'str' and 'repr' methods
-of :class:`~pydicom.dataset.Dataset` begin with a separate section
+of :class:`~pydicom3.dataset.Dataset` begin with a separate section
 displaying the file meta information data elements
 
 .. versionadded:: 2.0
@@ -421,7 +421,7 @@ pixel_data_handlers = [
 ]
 """Handlers for converting (7FE0,0010) *Pixel Data*.
 
-.. currentmodule:: pydicom.dataset
+.. currentmodule:: pydicom3.dataset
 
 This is an ordered list of *Pixel Data* handlers that the
 :meth:`~Dataset.convert_pixel_data` method will use to try to extract a
@@ -483,7 +483,7 @@ the VR is a valid DICOM VR, just that it has valid characters.
 
 
 INVALID_KEYWORD_BEHAVIOR = "WARN"
-"""Control the behavior when setting a :class:`~pydicom.dataset.Dataset`
+"""Control the behavior when setting a :class:`~pydicom3.dataset.Dataset`
 attribute that's not a known element keyword.
 
 .. versionadded:: 2.1
@@ -507,12 +507,12 @@ used which is not in the element keyword data dictionary
 
 INVALID_KEY_BEHAVIOR = "WARN"
 """Control the behavior when invalid keys are used with
-:meth:`~pydicom.dataset.Dataset.__contains__` (e.g. ``'invalid' in ds``).
+:meth:`~pydicom3.dataset.Dataset.__contains__` (e.g. ``'invalid' in ds``).
 
 .. versionadded:: 2.1
 
 Invalid keys are objects that cannot be converted to a
-:class:`~pydicom.tag.BaseTag`, such as unknown element keywords or invalid
+:class:`~pydicom3.tag.BaseTag`, such as unknown element keywords or invalid
 element tags like ``0x100100010``.
 
 If ``"WARN"`` (default), then warn when an invalid key is used, if ``"RAISE"``

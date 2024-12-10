@@ -1,14 +1,14 @@
 .. _api_handlers_pixeldata:
 
-Pixel Data Handlers (:mod:`pydicom.pixel_data_handlers`)
+Pixel Data Handlers (:mod:`pydicom3.pixel_data_handlers`)
 ========================================================
 
 .. deprecated:: 3.0
 
-    The ``pydicom.pixel_data_handlers`` module is deprecated and will be removed
-    in v4.0. Use the :mod:`~pydicom.pixels` module instead.
+    The ``pydicom3.pixel_data_handlers`` module is deprecated and will be removed
+    in v4.0. Use the :mod:`~pydicom3.pixels` module instead.
 
-.. currentmodule:: pydicom.pixel_data_handlers
+.. currentmodule:: pydicom3.pixel_data_handlers
 
 .. autosummary::
    :toctree: generated/
@@ -20,5 +20,5 @@ Pixel Data Handlers (:mod:`pydicom.pixel_data_handlers`)
    pylibjpeg_handler
    rle_handler
 
-.. automodule:: pydicom.pixel_data_handlers
+.. automodule:: pydicom3.pixel_data_handlers
    :members:

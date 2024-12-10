@@ -13,7 +13,7 @@ information, and show it using matplotlib.
 
 import matplotlib.pyplot as plt
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
+from pydicom3.data import get_testdata_file
 
 path = get_testdata_file("CT_small.dcm")
 ds = dcmread(path)

@@ -1,9 +1,9 @@
 .. _api_elem_tag:
 
-Element Tags (:mod:`pydicom.tag`)
+Element Tags (:mod:`pydicom3.tag`)
 =================================
 
-.. currentmodule:: pydicom.tag
+.. currentmodule:: pydicom3.tag
 
 Representation of the data element tag and utilities.
 

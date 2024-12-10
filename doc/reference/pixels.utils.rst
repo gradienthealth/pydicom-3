@@ -1,10 +1,10 @@
 .. _api_pixel_utils:
 
-Pixel Data Utilities (:mod:`pydicom.pixels.utils`)
+Pixel Data Utilities (:mod:`pydicom3.pixels.utils`)
 ==================================================
 
-.. module:: pydicom.pixels.utils
-.. currentmodule:: pydicom.pixels.utils
+.. module:: pydicom3.pixels.utils
+.. currentmodule:: pydicom3.pixels.utils
 
 Pixel data related utility functions.
 

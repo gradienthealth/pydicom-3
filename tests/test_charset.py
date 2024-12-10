@@ -1,14 +1,14 @@
 # Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""Unit tests for the pydicom.charset module."""
+"""Unit tests for the pydicom3.charset module."""
 
 import pytest
 
-import pydicom.charset
+import pydicom3.charset
 from pydicom import dcmread
-from pydicom.data import get_charset_files, get_testdata_file
-from pydicom.dataelem import DataElement
-from pydicom.filebase import DicomBytesIO
-from pydicom.valuerep import PersonName
+from pydicom3.data import get_charset_files, get_testdata_file
+from pydicom3.dataelem import DataElement
+from pydicom3.filebase import DicomBytesIO
+from pydicom3.valuerep import PersonName
 
 # The file names (without '.dcm' extension) of most of the character test
 # files, together with the respective decoded PatientName tag values.
@@ -84,7 +84,7 @@ ENCODED_NAMES = [
 class TestCharset:
     def test_encodings(self):
         test_string = "Hello World"
-        for x in pydicom.charset.python_encoding.items():
+        for x in pydicom3.charset.python_encoding.items():
             test_string.encode(x[1])
 
     def test_nested_character_sets(self):
@@ -151,20 +151,20 @@ class TestCharset:
         """Test bad charset defaults to ISO IR 6"""
         # elem.value is PersonName
         elem = DataElement(0x00100010, "PN", "CITIZEN")
-        pydicom.charset.decode_element(elem, ["ISO 2022 IR 126"])
+        pydicom3.charset.decode_element(elem, ["ISO 2022 IR 126"])
         assert "iso_ir_126" in elem.value.encodings
         assert "iso8859" not in elem.value.encodings
         # default encoding is iso8859
-        pydicom.charset.decode_element(elem, [])
+        pydicom3.charset.decode_element(elem, [])
         assert "iso8859" in elem.value.encodings
 
     def test_empty_charset(self):
         """Empty charset defaults to ISO IR 6"""
         elem = DataElement(0x00100010, "PN", "CITIZEN")
-        pydicom.charset.decode_element(elem, [""])
+        pydicom3.charset.decode_element(elem, [""])
         assert ("iso8859",) == elem.value.encodings
         elem = DataElement(0x00100010, "PN", "CITIZEN")
-        pydicom.charset.decode_element(elem, None)
+        pydicom3.charset.decode_element(elem, None)
         assert ("iso8859",) == elem.value.encodings
 
     def test_bad_encoded_single_encoding(self, allow_reading_invalid_values):
@@ -174,7 +174,7 @@ class TestCharset:
         with pytest.warns(
             UserWarning, match="Failed to decode byte string with encoding 'UTF8'"
         ):
-            pydicom.charset.decode_element(elem, ["ISO_IR 192"])
+            pydicom3.charset.decode_element(elem, ["ISO_IR 192"])
             assert "���������" == elem.value
 
     def test_bad_encoded_single_encoding_enforce_standard(self, enforce_valid_values):
@@ -186,7 +186,7 @@ class TestCharset:
             "invalid continuation byte"
         )
         with pytest.raises(UnicodeDecodeError, match=msg):
-            pydicom.charset.decode_element(elem, ["ISO_IR 192"])
+            pydicom3.charset.decode_element(elem, ["ISO_IR 192"])
 
     def test_code_extensions_not_allowed(self):
         """Test that UTF8 does not allow code extensions"""
@@ -198,7 +198,7 @@ class TestCharset:
             "ISO 2022 IR 144"
         )
         with pytest.warns(UserWarning, match=msg):
-            pydicom.charset.decode_element(
+            pydicom3.charset.decode_element(
                 elem, ["ISO_IR 192", "ISO 2022 IR 100", "ISO 2022 IR 144"]
             )
             assert "Buc^Jérôme" == elem.value
@@ -209,7 +209,7 @@ class TestCharset:
         msg_gbk = "Value 'GBK' cannot be used as code extension, ignoring it"
         with pytest.warns(UserWarning, match=msg_iso):
             with pytest.warns(UserWarning, match=msg_gbk):
-                encodings = pydicom.charset.convert_encodings(
+                encodings = pydicom3.charset.convert_encodings(
                     ["ISO_IR 126", "GBK", "ISO 2022 IR 144", "ISO_IR 192"]
                 )
                 assert ["iso_ir_126", "iso_ir_144"] == encodings
@@ -218,16 +218,16 @@ class TestCharset:
         """Test that unknown encodings are returned unchanged by
         `convert_encodings`"""
         encodings = ["iso_ir_126", "iso_ir_144"]
-        assert encodings == pydicom.charset.convert_encodings(encodings)
+        assert encodings == pydicom3.charset.convert_encodings(encodings)
 
     def test_convert_empty_encoding(self):
         """Test that empty encodings are handled as default encoding"""
         encodings = ""
-        assert ["iso8859"] == pydicom.charset.convert_encodings(encodings)
+        assert ["iso8859"] == pydicom3.charset.convert_encodings(encodings)
         encodings = [""]
-        assert ["iso8859"] == pydicom.charset.convert_encodings(encodings)
+        assert ["iso8859"] == pydicom3.charset.convert_encodings(encodings)
         encodings = None
-        assert ["iso8859"] == pydicom.charset.convert_encodings(encodings)
+        assert ["iso8859"] == pydicom3.charset.convert_encodings(encodings)
 
     def test_bad_decoded_multi_byte_encoding(self, allow_reading_invalid_values):
         """Test handling bad encoding for single encoding"""
@@ -239,7 +239,7 @@ class TestCharset:
             UserWarning,
             match="Failed to decode byte string with encodings: iso2022_jp_2",
         ):
-            pydicom.charset.decode_element(elem, ["ISO 2022 IR 159"])
+            pydicom3.charset.decode_element(elem, ["ISO 2022 IR 159"])
             assert "���������" == elem.value
 
     def test_bad_decoded_multi_byte_encoding_enforce_standard(
@@ -255,7 +255,7 @@ class TestCharset:
             "illegal multibyte sequence"
         )
         with pytest.raises(UnicodeDecodeError, match=msg):
-            pydicom.charset.decode_element(elem, ["ISO 2022 IR 159"])
+            pydicom3.charset.decode_element(elem, ["ISO 2022 IR 159"])
 
     def test_unknown_escape_sequence(self, allow_reading_invalid_values):
         """Test handling bad encoding for single encoding"""
@@ -267,7 +267,7 @@ class TestCharset:
             UserWarning,
             match="Found unknown escape sequence in encoded string value",
         ):
-            pydicom.charset.decode_element(elem, ["ISO_IR 100"])
+            pydicom3.charset.decode_element(elem, ["ISO_IR 100"])
             assert "\x1b-FÄéïíõóéïò" == elem.value
 
     def test_unknown_escape_sequence_enforce_standard(self, enforce_valid_values):
@@ -279,12 +279,12 @@ class TestCharset:
         with pytest.raises(
             ValueError, match="Found unknown escape sequence in encoded string value"
         ):
-            pydicom.charset.decode_element(elem, ["ISO_IR 100"])
+            pydicom3.charset.decode_element(elem, ["ISO_IR 100"])
 
     def test_patched_charset(self, allow_reading_invalid_values):
         """Test some commonly misspelled charset values"""
         elem = DataElement(0x00100010, "PN", b"Buc^J\xc3\xa9r\xc3\xb4me")
-        pydicom.charset.decode_element(elem, ["ISO_IR 192"])
+        pydicom3.charset.decode_element(elem, ["ISO_IR 192"])
         # correct encoding
         assert "Buc^Jérôme" == elem.value
 
@@ -295,7 +295,7 @@ class TestCharset:
             match="Incorrect value for Specific Character Set "
             "'ISO IR 192' - assuming 'ISO_IR 192'",
         ):
-            pydicom.charset.decode_element(elem, ["ISO IR 192"])
+            pydicom3.charset.decode_element(elem, ["ISO IR 192"])
             assert "Buc^Jérôme" == elem.value
 
         elem = DataElement(0x00100010, "PN", b"Buc^J\xe9r\xf4me")
@@ -304,7 +304,7 @@ class TestCharset:
             match="Incorrect value for Specific Character Set "
             "'ISO-IR 144' - assuming 'ISO_IR 144'",
         ) as w:
-            pydicom.charset.decode_element(elem, ["ISO_IR 100", "ISO-IR 144"])
+            pydicom3.charset.decode_element(elem, ["ISO_IR 100", "ISO-IR 144"])
             # make sure no warning is issued for the correct value
             assert 1 == len(w)
 
@@ -314,11 +314,11 @@ class TestCharset:
             UserWarning,
             match="Unknown encoding 'ISOIR 192' - using default encoding instead",
         ):
-            pydicom.charset.decode_element(elem, ["ISOIR 192"])
+            pydicom3.charset.decode_element(elem, ["ISOIR 192"])
 
         # Python encoding also can be used directly
         elem = DataElement(0x00100010, "PN", b"Buc^J\xc3\xa9r\xc3\xb4me")
-        pydicom.charset.decode_element(elem, ["utf8"])
+        pydicom3.charset.decode_element(elem, ["utf8"])
         assert "Buc^Jérôme" == elem.value
 
     def test_patched_code_extension_charset(self):
@@ -329,7 +329,7 @@ class TestCharset:
             b"Dionysios=\x1b\x2d\x46\xc4\xe9\xef\xed\xf5\xf3\xe9\xef\xf2",
         )
         # correct encoding
-        pydicom.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 126"])
+        pydicom3.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 126"])
         assert "Dionysios=Διονυσιος" == elem.value
 
         # patched encoding shall behave correctly, but a warning is issued
@@ -344,7 +344,7 @@ class TestCharset:
                 "PN",
                 b"Dionysios=\x1b\x2d\x46\xc4\xe9\xef\xed\xf5\xf3\xe9\xef\xf2",
             )
-            pydicom.charset.decode_element(elem, ["ISO_2022-IR 100", "ISO 2022 IR 126"])
+            pydicom3.charset.decode_element(elem, ["ISO_2022-IR 100", "ISO 2022 IR 126"])
 
             assert "Dionysios=Διονυσιος" == elem.value
 
@@ -359,18 +359,18 @@ class TestCharset:
                 "PN",
                 b"Dionysios=\x1b\x2d\x46\xc4\xe9\xef\xed\xf5\xf3\xe9\xef\xf2",
             )
-            pydicom.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO_2022_IR+126"])
+            pydicom3.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO_2022_IR+126"])
             assert "Dionysios=Διονυσιος" == elem.value
 
     def test_multi_charset_default_value(self):
         """Test that the first value is used if no escape code is given"""
         # regression test for #707
         elem = DataElement(0x00100010, "PN", b"Buc^J\xe9r\xf4me")
-        pydicom.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 144"])
+        pydicom3.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 144"])
         assert "Buc^Jérôme" == elem.value
 
         elem = DataElement(0x00081039, "LO", b"R\xf6ntgenaufnahme")
-        pydicom.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 144"])
+        pydicom3.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 144"])
         assert "Röntgenaufnahme" == elem.value
 
     def test_single_byte_multi_charset_personname(self):
@@ -380,7 +380,7 @@ class TestCharset:
             "PN",
             b"Dionysios=\x1b\x2d\x46\xc4\xe9\xef\xed\xf5\xf3\xe9\xef\xf2",
         )
-        pydicom.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 126"])
+        pydicom3.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 126"])
         assert "Dionysios=Διονυσιος" == elem.value
 
         # multiple values with different encodings
@@ -391,7 +391,7 @@ class TestCharset:
             b"\xbb\xee\xda\x63\x65\xdc\xd1\x79\x70\xd3"
         )
         elem = DataElement(0x00100060, "PN", encoded)
-        pydicom.charset.decode_element(
+        pydicom3.charset.decode_element(
             elem, ["ISO 2022 IR 100", "ISO 2022 IR 144", "ISO 2022 IR 126"]
         )
         assert ["Buc^Jérôme", "Διονυσιος", "Люкceмбypг"] == elem.value
@@ -403,7 +403,7 @@ class TestCharset:
             "LO",
             b"Dionysios is \x1b\x2d\x46\xc4\xe9\xef\xed\xf5\xf3\xe9\xef\xf2",
         )
-        pydicom.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 126"])
+        pydicom3.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 126"])
         assert "Dionysios is Διονυσιος" == elem.value
 
         # multiple values with different encodings
@@ -415,7 +415,7 @@ class TestCharset:
             b"\x1b\x2d\x4C"
             b"\xbb\xee\xda\x63\x65\xdc\xd1\x79\x70\xd3",
         )
-        pydicom.charset.decode_element(
+        pydicom3.charset.decode_element(
             elem, ["ISO 2022 IR 100", "ISO 2022 IR 144", "ISO 2022 IR 126"]
         )
         assert ["Buc^Jérôme", "Διονυσιος", "Люкceмбypг"] == elem.value
@@ -424,14 +424,14 @@ class TestCharset:
     def test_single_byte_code_extensions(self, encoding, decoded, raw_data):
         # single-byte encoding as code extension
         elem = DataElement(0x00100010, "PN", b"ASCII+" + raw_data)
-        pydicom.charset.decode_element(elem, ["", encoding])
+        pydicom3.charset.decode_element(elem, ["", encoding])
         assert "ASCII+" + decoded == elem.value
 
     def test_missing_escape_for_single_byte_code_extensions(self):
         # missing escape sequence after component delimiter
         raw_data = b"\x1b\x29\x49\xd4\xcf\xc0\xde\x5e\xc0\xdb\xb3"
         elem = DataElement(0x00100010, "PN", b"ASCII+" + raw_data)
-        pydicom.charset.decode_element(elem, ["", "ISO 2022 IR 13"])
+        pydicom3.charset.decode_element(elem, ["", "ISO 2022 IR 13"])
         # the last part is decoded as Latin1
         assert "ASCII+ﾔﾏﾀﾞ^ÀÛ³" == elem.value
 
@@ -466,7 +466,7 @@ class TestCharset:
         multiPN_name = get_charset_files("chrFrenMulti.dcm")[0]
         ds = dcmread(multiPN_name)  # is Latin-1
         ds.SpecificCharacterSet = "ISO_IR 192"
-        from pydicom.filebase import DicomBytesIO
+        from pydicom3.filebase import DicomBytesIO
 
         fp = DicomBytesIO()
         ds.save_as(fp, enforce_file_format=True)
@@ -483,12 +483,12 @@ class TestCharset:
             match="Unknown encoding 'ISO 2022 IR 146' "
             "- using default encoding instead",
         ):
-            pydicom.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 146"])
+            pydicom3.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 146"])
 
     def test_invalid_second_encoding_strict(self, enforce_valid_values):
         elem = DataElement(0x00100010, "PN", "CITIZEN")
         with pytest.raises(LookupError, match="Unknown encoding 'ISO 2022 IR 146'"):
-            pydicom.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 146"])
+            pydicom3.charset.decode_element(elem, ["ISO 2022 IR 100", "ISO 2022 IR 146"])
 
     def test_japanese_multi_byte_personname(self):
         """Test japanese person name which has multi byte strings are
@@ -507,7 +507,7 @@ class TestCharset:
             assert original_string == ds_out.PatientName.original_string
 
         japanese_pn = PersonName("Mori^Ogai=森^鷗外=もり^おうがい")
-        pyencs = pydicom.charset.convert_encodings(
+        pyencs = pydicom3.charset.convert_encodings(
             ["ISO 2022 IR 6", "ISO 2022 IR 87", "ISO 2022 IR 159"]
         )
         actual_encoded = bytes(japanese_pn.encode(pyencs))
@@ -522,7 +522,7 @@ class TestCharset:
 
     def test_japanese_multi_byte_encoding(self):
         """Test japanese multi byte strings are correctly encoded."""
-        encoded = pydicom.charset.encode_string(
+        encoded = pydicom3.charset.encode_string(
             "あaｱア齩", ["shift_jis", "iso2022_jp", "iso2022_jp_2"]
         )
         expect = b'\x1b$B$"\x1b(Ja\x1b)I\xb1\x1b$B%"\x1b$(DmN\x1b(J'
@@ -536,5 +536,5 @@ class TestCharset:
             ": shift_jis - using replacement character"
             "s in encoded string",
         ):
-            encoded = pydicom.charset.encode_string("あaｱア", ["shift_jis"])
+            encoded = pydicom3.charset.encode_string("あaｱア", ["shift_jis"])
             assert b"?a??" == encoded

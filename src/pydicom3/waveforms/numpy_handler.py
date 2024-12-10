@@ -76,7 +76,7 @@ def generate_multiplex(
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The :class:`Dataset` containing a :dcm:`Waveform
         <part03/sect_C.10.9.html>` module and the *Waveform Sequence* to be
         converted.
@@ -149,7 +149,7 @@ def multiplex_array(ds: "Dataset", index: int, as_raw: bool = True) -> "np.ndarr
 
     Parameters
     ----------
-    ds : pydicom.dataset.Dataset
+    ds : pydicom3.dataset.Dataset
         The :class:`Dataset` containing a :dcm:`Waveform
         <part03/sect_C.10.9.html>` module and the *Waveform Sequence* to be
         converted.

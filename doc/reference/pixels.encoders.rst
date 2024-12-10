@@ -1,14 +1,14 @@
 .. _api_encoders:
 
-Pixel Data Encoders (:mod:`pydicom.pixels.encoders`)
+Pixel Data Encoders (:mod:`pydicom3.pixels.encoders`)
 ====================================================
 
-.. module:: pydicom.pixels.encoders
+.. module:: pydicom3.pixels.encoders
 
-:class:`~pydicom.pixels.encoders.base.Encoder` class instances for compressing
+:class:`~pydicom3.pixels.encoders.base.Encoder` class instances for compressing
 (7FE0,0010) *Pixel Data*.
 
-.. currentmodule:: pydicom.pixels.encoders
+.. currentmodule:: pydicom3.pixels.encoders
 
 .. autosummary::
    :toctree: generated/
@@ -22,7 +22,7 @@ Pixel Data Encoders (:mod:`pydicom.pixels.encoders`)
 
 Base encoder classes used by all encoders
 
-.. currentmodule:: pydicom.pixels.encoders.base
+.. currentmodule:: pydicom3.pixels.encoders.base
 
 .. autosummary::
    :toctree: generated/

@@ -1,9 +1,9 @@
 .. _api_datadict:
 
-Data Dictionary Utilities (:mod:`pydicom.datadict`)
+Data Dictionary Utilities (:mod:`pydicom3.datadict`)
 ===================================================
 
-.. currentmodule:: pydicom.datadict
+.. currentmodule:: pydicom3.datadict
 
 Data dictionary functions
 

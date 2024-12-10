@@ -9,7 +9,7 @@ Pixel Data Encoder Plugins
     This guide is intended for advanced users who need support for something
     not provided by the :doc:`existing encoder plugins </reference/pixels.encoders>`.
 
-*Pixel Data* encoding in *pydicom* uses an :class:`~pydicom.pixels.encoders.base.Encoder`
+*Pixel Data* encoding in *pydicom* uses an :class:`~pydicom3.pixels.encoders.base.Encoder`
 instance for the specific *Transfer Syntax* as a manager for plugins that
 perform the encoding work. This guide covers the requirements for those plugins
 and how to add them to *pydicom*. For a more general introduction to compression
@@ -46,12 +46,12 @@ An encoding plugin must implement three objects within the same module:
     * 4 bytes per sample for 16 < *Bits Stored* <= 32
     * 8 bytes per sample for 32 < *Bits Stored* <= 64
 
-  * `runner` is an :class:`~pydicom.pixels.encoders.base.EncodeRunner` instance
+  * `runner` is an :class:`~pydicom3.pixels.encoders.base.EncodeRunner` instance
     that manages the encoding process and has access to the encoding options,
     either directly through the class properties or indirectly with the
-    :meth:`~pydicom.pixels.encoders.base.EncodeRunner.get_option` method.
+    :meth:`~pydicom3.pixels.encoders.base.EncodeRunner.get_option` method.
 
-    * ``'transfer_syntax_uid'``: :class:`~pydicom.uid.UID` - the intended
+    * ``'transfer_syntax_uid'``: :class:`~pydicom3.uid.UID` - the intended
       *Transfer Syntax UID* of the encoded data.
     * ``'byteorder'``: :class:`str` - the byte ordering used by `src`, ``'<'``
       for little-endian (the default), ``'>'`` for big-endian.
@@ -75,7 +75,7 @@ An encoding plugin must implement three objects within the same module:
 
     If your encoder needs to signal that one of the encoding option values needs
     to be modified then this can be done with the
-    :meth:`~pydicom.pixels.encoders.base.EncodeRunner.set_option` method. This
+    :meth:`~pydicom3.pixels.encoders.base.EncodeRunner.set_option` method. This
     should only be done after successfully encoding the frame, as if the
     encoding fails changing the option value may cause issues with
     other encoding plugins that may also attempt to encode the same frame. It's also
@@ -91,19 +91,19 @@ An encoding plugin must implement three objects within the same module:
 
   .. code-block:: python
 
-      def is_available(uid: pydicom.uid.UID) -> bool:
+      def is_available(uid: pydicom3.uid.UID) -> bool:
 
   Where `uid` is the *Transfer Syntax UID* for the corresponding encoder as
-  a :class:`~pydicom.uid.UID`. If the plugin supports the `uid` and has
+  a :class:`~pydicom3.uid.UID`. If the plugin supports the `uid` and has
   its dependencies met then it should return ``True``, otherwise it should
   return ``False``.
 
 * A :class:`dict` named ``ENCODER_DEPENDENCIES`` with the type
-  ``Dict[pydicom.uid.UID, Tuple[str, ...]``, such as:
+  ``Dict[pydicom3.uid.UID, Tuple[str, ...]``, such as:
 
   .. code-block:: python
 
-      from pydicom.uid import RLELossless, JPEG2000
+      from pydicom3.uid import RLELossless, JPEG2000
 
       ENCODER_DEPENDENCIES = {
           RLELossless: ('numpy', 'pillow', 'imagecodecs'),
@@ -120,7 +120,7 @@ Adding Plugins to an Encoder
 ============================
 
 Additional plugins can be added to an existing encoder with the
-:meth:`~pydicom.pixels.encoders.base.Encoder.add_plugin` method, which takes the
+:meth:`~pydicom3.pixels.encoders.base.Encoder.add_plugin` method, which takes the
 a unique :class:`str` `plugin_label`, and a :class:`tuple` of ``('the import
 path to the encoder function's module', 'encoder function name')``. For
 example, if you'd import your encoder function `my_encoder_func` with
@@ -129,7 +129,7 @@ following:
 
 .. code-block:: python
 
-    from pydicom.pixels.encoders import RLELosslessEncoder
+    from pydicom3.pixels.encoders import RLELosslessEncoder
 
     RLELosslessEncoder.add_plugin(
         'my_encoder',  # the plugin's label

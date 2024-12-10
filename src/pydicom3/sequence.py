@@ -15,16 +15,16 @@ Self = TypeVar("Self", bound="Sequence")
 
 
 class Sequence(ConstrainedList[Dataset]):
-    """Class to hold multiple :class:`~pydicom.dataset.Dataset` in a :class:`list`."""
+    """Class to hold multiple :class:`~pydicom3.dataset.Dataset` in a :class:`list`."""
 
     def __init__(self, iterable: Iterable[Dataset] | None = None) -> None:
-        """Initialize a list of :class:`~pydicom.dataset.Dataset`.
+        """Initialize a list of :class:`~pydicom3.dataset.Dataset`.
 
         Parameters
         ----------
         iterable : Iterable[Dataset] | None
             An iterable object (e.g. :class:`list`, :class:`tuple`) containing
-            :class:`~pydicom.dataset.Dataset`. If not used then an empty
+            :class:`~pydicom3.dataset.Dataset`. If not used then an empty
             :class:`Sequence` is generated.
         """
         # We add this extra check to throw a relevant error. Without it, the
@@ -41,8 +41,8 @@ class Sequence(ConstrainedList[Dataset]):
         super().__init__(iterable)
 
     def extend(self, val: Iterable[Dataset]) -> None:
-        """Extend the :class:`~pydicom.sequence.Sequence` using an iterable
-        of :class:`~pydicom.dataset.Dataset` instances.
+        """Extend the :class:`~pydicom3.sequence.Sequence` using an iterable
+        of :class:`~pydicom3.dataset.Dataset` instances.
         """
         if isinstance(val, Dataset):
             raise TypeError("An iterable of 'Dataset' is required")
@@ -76,7 +76,7 @@ class Sequence(ConstrainedList[Dataset]):
 
     @staticmethod
     def _validate(item: Any) -> Dataset:
-        """Check that `item` is a :class:`~pydicom.dataset.Dataset` instance."""
+        """Check that `item` is a :class:`~pydicom3.dataset.Dataset` instance."""
         if isinstance(item, Dataset):
             return item
 

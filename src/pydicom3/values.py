@@ -52,13 +52,13 @@ def multi_string(
     val : str
         The string to split up.
     valtype : type or callable, optional
-        Default :class:`str`, but can be e.g. :class:`~pydicom.uid.UID` to
+        Default :class:`str`, but can be e.g. :class:`~pydicom3.uid.UID` to
         overwrite to a specific type.
 
     Returns
     -------
     valtype or MultiValue[valtype]
-        The split value as `valtype` or a :class:`~pydicom.multival.MultiValue`
+        The split value as `valtype` or a :class:`~pydicom3.multival.MultiValue`
         of `valtype`.
     """
     if valtype is None:
@@ -71,7 +71,7 @@ def multi_string(
 
 
 def convert_tag(byte_string: bytes, is_little_endian: bool, offset: int = 0) -> BaseTag:
-    """Return a decoded :class:`BaseTag<pydicom.tag.BaseTag>` from the encoded
+    """Return a decoded :class:`BaseTag<pydicom3.tag.BaseTag>` from the encoded
     `byte_string`. `byte_string` must be at least 4 bytes long.
 
     Parameters
@@ -190,8 +190,8 @@ def convert_DA_string(
     -------
     str or MultiValue of str or valuerep.DA or MultiValue of valuerep.DA
         If
-        :attr:`~pydicom.config.datetime_conversion` is ``True`` then returns
-        either :class:`~pydicom.valuerep.DA` or a :class:`list` of ``DA``,
+        :attr:`~pydicom3.config.datetime_conversion` is ``True`` then returns
+        either :class:`~pydicom3.valuerep.DA` or a :class:`list` of ``DA``,
         otherwise returns :class:`str` or ``list`` of ``str``.
     """
     if config.datetime_conversion:
@@ -207,8 +207,8 @@ def convert_DA_string(
 def convert_DS_string(
     byte_string: bytes, is_little_endian: bool, struct_format: str | None = None
 ) -> Union[
-    pydicom.valuerep.DSclass,
-    MutableSequence[pydicom.valuerep.DSclass],
+    pydicom3.valuerep.DSclass,
+    MutableSequence[pydicom3.valuerep.DSclass],
     "numpy.float64",
     "numpy.ndarray",
 ]:
@@ -229,25 +229,25 @@ def convert_DS_string(
 
     Returns
     -------
-    :class:`~pydicom.valuerep.DSfloat`, :class:`~pydicom.valuerep.DSdecimal`, :class:`numpy.float64`, MultiValue of DSfloat/DSdecimal or :class:`numpy.ndarray` of :class:`numpy.float64`
+    :class:`~pydicom3.valuerep.DSfloat`, :class:`~pydicom3.valuerep.DSdecimal`, :class:`numpy.float64`, MultiValue of DSfloat/DSdecimal or :class:`numpy.ndarray` of :class:`numpy.float64`
 
-        If :attr:`~pydicom.config.use_DS_decimal` is ``False`` (default),
-        returns a :class:`~pydicom.valuerep.DSfloat` or list of them
+        If :attr:`~pydicom3.config.use_DS_decimal` is ``False`` (default),
+        returns a :class:`~pydicom3.valuerep.DSfloat` or list of them
 
-        If :attr:`~pydicom.config.use_DS_decimal` is ``True``,
-        returns a :class:`~pydicom.valuerep.DSdecimal` or list of them
+        If :attr:`~pydicom3.config.use_DS_decimal` is ``True``,
+        returns a :class:`~pydicom3.valuerep.DSdecimal` or list of them
 
-        If :data:`~pydicom.config.use_DS_numpy` is ``True``,
+        If :data:`~pydicom3.config.use_DS_numpy` is ``True``,
         returns a :class:`numpy.float64` or a :class:`numpy.ndarray` of them
 
     Raises
     ------
     ValueError
-        If :data:`~pydicom.config.use_DS_numpy` is ``True`` and the string
+        If :data:`~pydicom3.config.use_DS_numpy` is ``True`` and the string
         contains non-valid characters
 
     ImportError
-        If :data:`~pydicom.config.use_DS_numpy` is ``True`` and numpy is not
+        If :data:`~pydicom3.config.use_DS_numpy` is ``True`` and numpy is not
         available
     """
     num_string = byte_string.decode(default_encoding)
@@ -272,7 +272,7 @@ def convert_DS_string(
 
         return value
 
-    return multi_string(num_string.strip(), valtype=pydicom.valuerep.DSclass)
+    return multi_string(num_string.strip(), valtype=pydicom3.valuerep.DSclass)
 
 
 def _DT_from_str(value: str) -> DT:
@@ -302,8 +302,8 @@ def convert_DT_string(
     -------
     str or MultiValue of str or valuerep.DT or MultiValue of DT
         If
-        :attr:`~pydicom.config.datetime_conversion` is ``True`` then returns
-        :class:`~pydicom.valuerep.DT` or a :class:`list` of ``DT``, otherwise
+        :attr:`~pydicom3.config.datetime_conversion` is ``True`` then returns
+        :class:`~pydicom3.valuerep.DT` or a :class:`list` of ``DT``, otherwise
         returns :class:`str` or ``list`` of ``str``.
     """
     if config.datetime_conversion:
@@ -336,21 +336,21 @@ def convert_IS_string(
 
     Returns
     -------
-    :class:`~pydicom.valuerep.IS` or MultiValue of them, or :class:`numpy.int64` or :class:`~numpy.ndarray` of them
+    :class:`~pydicom3.valuerep.IS` or MultiValue of them, or :class:`numpy.int64` or :class:`~numpy.ndarray` of them
 
-        If :data:`~pydicom.config.use_IS_numpy` is ``False`` (default), returns
-        a single :class:`~pydicom.valuerep.IS` or a list of them
+        If :data:`~pydicom3.config.use_IS_numpy` is ``False`` (default), returns
+        a single :class:`~pydicom3.valuerep.IS` or a list of them
 
-        If :data:`~pydicom.config.use_IS_numpy` is ``True``, returns
+        If :data:`~pydicom3.config.use_IS_numpy` is ``True``, returns
         a single :class:`numpy.int64` or a :class:`~numpy.ndarray` of them
 
     Raises
     ------
     ValueError
-        If :data:`~pydicom.config.use_IS_numpy` is ``True`` and the string
+        If :data:`~pydicom3.config.use_IS_numpy` is ``True`` and the string
         contains non-valid characters
     ImportError
-        If :data:`~pydicom.config.use_IS_numpy` is ``True`` and numpy is not
+        If :data:`~pydicom3.config.use_IS_numpy` is ``True`` and numpy is not
         available
     """
     num_string = byte_string.decode(default_encoding)
@@ -372,7 +372,7 @@ def convert_IS_string(
 
         return cast("numpy.ndarray", value)
 
-    return multi_string(num_string, valtype=pydicom.valuerep.IS)
+    return multi_string(num_string, valtype=pydicom3.valuerep.IS)
 
 
 def convert_numbers(
@@ -505,7 +505,7 @@ def convert_string(
     """Return a decoded string VR value.
 
     String VRs are 'AE', AS', 'CS' and optionally (depending on
-    :ref:`pydicom.config <api_config>`) 'DA', 'DT', and 'TM'.
+    :ref:`pydicom3.config <api_config>`) 'DA', 'DT', and 'TM'.
 
     Parameters
     ----------
@@ -651,8 +651,8 @@ def convert_TM_string(
     -------
     str or list of str or valuerep.TM or list of valuerep.TM
         If
-        :attr:`~pydicom.config.datetime_conversion` is ``True`` then returns
-        either :class:`~pydicom.valuerep.TM` or a :class:`list` of ``TM``,
+        :attr:`~pydicom3.config.datetime_conversion` is ``True`` then returns
+        either :class:`~pydicom3.valuerep.TM` or a :class:`list` of ``TM``,
         otherwise returns :class:`str` or ``list`` of ``str``.
     """
     if config.datetime_conversion:
@@ -667,7 +667,7 @@ def convert_TM_string(
 
 def convert_UI(
     byte_string: bytes, is_little_endian: bool, struct_format: str | None = None
-) -> pydicom.uid.UID | MutableSequence[pydicom.uid.UID]:
+) -> pydicom3.uid.UID | MutableSequence[pydicom3.uid.UID]:
     """Return a decoded 'UI' value.
 
     Elements with VR of 'UI' may have a non-significant trailing null ``0x00``.
@@ -688,7 +688,7 @@ def convert_UI(
     """
     # Convert to str and remove any trailing nulls or spaces
     value = byte_string.decode(default_encoding)
-    return multi_string(value.rstrip("\0 "), pydicom.uid.UID)
+    return multi_string(value.rstrip("\0 "), pydicom3.uid.UID)
 
 
 def convert_UN(
@@ -734,7 +734,7 @@ def convert_value(
     ----------
     VR : str
         The element's VR.
-    raw_data_element : pydicom.dataelem.RawDataElement
+    raw_data_element : pydicom3.dataelem.RawDataElement
         The encoded element value.
     encodings : list of str, optional
         A list of the character encoding schemes used to encode any text

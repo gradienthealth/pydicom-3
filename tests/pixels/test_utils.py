@@ -19,15 +19,15 @@ except ImportError:
     HAVE_NP = False
 
 from pydicom import dcmread, config
-from pydicom.dataset import Dataset, FileMetaDataset
-from pydicom.encaps import get_frame, encapsulate
-from pydicom.pixels import pixel_array, iter_pixels, convert_color_space
-from pydicom.pixels.decoders.base import _PIXEL_DATA_DECODERS
-from pydicom.pixels.encoders import RLELosslessEncoder
-from pydicom.pixels.encoders.base import EncodeRunner
-from pydicom.pixels.encoders.native import _encode_frame
-from pydicom.pixels.decoders.rle import _rle_decode_frame
-from pydicom.pixels.utils import (
+from pydicom3.dataset import Dataset, FileMetaDataset
+from pydicom3.encaps import get_frame, encapsulate
+from pydicom3.pixels import pixel_array, iter_pixels, convert_color_space
+from pydicom3.pixels.decoders.base import _PIXEL_DATA_DECODERS
+from pydicom3.pixels.encoders import RLELosslessEncoder
+from pydicom3.pixels.encoders.base import EncodeRunner
+from pydicom3.pixels.encoders.native import _encode_frame
+from pydicom3.pixels.decoders.rle import _rle_decode_frame
+from pydicom3.pixels.utils import (
     as_pixel_options,
     _passes_version_check,
     _get_jpg_parameters,
@@ -44,7 +44,7 @@ from pydicom.pixels.utils import (
     decompress,
     _convert_rle_endianness,
 )
-from pydicom.uid import (
+from pydicom3.uid import (
     EnhancedMRImageStorage,
     ExplicitVRLittleEndian,
     ExplicitVRBigEndian,
