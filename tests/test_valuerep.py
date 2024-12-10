@@ -11,7 +11,7 @@ import math
 
 import pytest
 
-import pydicom
+import pydicom3
 from pydicom3 import config, valuerep
 from pydicom3.config import settings
 from pydicom3.data import get_testdata_file

@@ -17,7 +17,7 @@ import os
 import sys
 
 import sphinx_rtd_theme
-import pydicom
+import pydicom3
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -322,7 +322,7 @@ linkcode_resolve = make_linkcode_resolve(
 )
 
 doctest_global_setup = """
-import pydicom
+import pydicom3
 import os, os.path
 testfile_path = os.path.join(pydicom3.__path__[0], '../tests/test_files')
 save_dir = os.getcwd()

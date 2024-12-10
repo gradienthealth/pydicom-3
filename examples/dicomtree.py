@@ -12,7 +12,7 @@ import sys
 import tkinter as tk
 from tkinter import ttk
 
-import pydicom
+import pydicom3
 
 
 print(__doc__)

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-import pydicom
+import pydicom3
 from pydicom3 import examples, FileDataset
 from pydicom3.examples import ct
 

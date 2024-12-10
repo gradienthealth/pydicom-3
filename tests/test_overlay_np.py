@@ -28,7 +28,7 @@ There are the following possibilities:
 
 import pytest
 
-import pydicom
+import pydicom3
 from pydicom3.data import get_testdata_file
 from pydicom3.filereader import dcmread
 from pydicom3.uid import ImplicitVRLittleEndian, ExplicitVRLittleEndian

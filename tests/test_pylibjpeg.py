@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-import pydicom
+import pydicom3
 from pydicom3.data import get_testdata_file
 from pydicom3.encaps import get_frame
 from pydicom3.filereader import dcmread

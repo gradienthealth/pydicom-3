@@ -16,7 +16,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-import pydicom
+import pydicom3
 from pydicom3.filereader import dcmread
 from pydicom3.data import get_testdata_file
 from pydicom3.encaps import get_frame

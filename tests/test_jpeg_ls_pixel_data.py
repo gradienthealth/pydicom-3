@@ -13,7 +13,7 @@ except ImportError:
 
 import pytest
 
-import pydicom
+import pydicom3
 from pydicom3.data import get_testdata_file
 from pydicom3.encaps import encapsulate, generate_frames
 from pydicom3.filereader import dcmread

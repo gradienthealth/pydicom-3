@@ -23,7 +23,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-import pydicom
+import pydicom3
 from pydicom3 import config
 from pydicom3 import dcmread
 from pydicom3.data import get_testdata_file

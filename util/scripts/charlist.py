@@ -4,7 +4,7 @@
 import logging
 import os
 
-import pydicom
+import pydicom3
 from pydicom3.data import get_charset_files
 
 

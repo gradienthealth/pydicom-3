@@ -16,7 +16,7 @@ Converting a dataset into JSON format
 *pydicom* supports the conversion of a DICOM dataset both into a JSON string
 and into a deserialized JSON dictionary:
 
-  >>> import pydicom
+  >>> import pydicom3
   >>> ds = pydicom3.examples.ct
   >>> ds.to_json()
   '{"00080005": {"Value": ["ISO_IR 100"], "vr": "CS"}, "00080008": {"Value":...
@@ -44,7 +44,7 @@ dictionary. There is only a single function to handle both cases:
 
 The conversion in both directions is symmetric:
 
-  >>> import pydicom
+  >>> import pydicom3
   >>> ds = pydicom3.examples.ct
   >>> ds_json = ds.to_json()
   >>> ds1 = pydicom3.dataset.Dataset.from_json(ds_json)
@@ -70,7 +70,7 @@ so it can be retrieved via the ``BulkDataURI`` saved in the JSON dataset.
 Note that only data greater than ``bulk_data_threshold`` (by default set to
 1024) is handled by the bulk data handler - smaller data is encoded inline.
 
-  >>> import pydicom
+  >>> import pydicom3
   >>> def bulk_data_handler(data_element):
   >>>     uri = store_data_and_return_uri(data_element)
   >>>     return uri

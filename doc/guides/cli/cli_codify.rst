@@ -25,7 +25,7 @@ A simple example of using the ``codify`` command would be::
 
     # Coded version of DICOM file 'C:\git\pydicom\pydicom\data\test_files\rtplan.dcm'
     # Produced by pydicom3 codify utility script
-    import pydicom
+    import pydicom3
     from pydicom3.dataset import Dataset, FileMetaDataset
     from pydicom3.sequence import Sequence
 

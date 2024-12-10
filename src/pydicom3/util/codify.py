@@ -22,7 +22,7 @@ from typing import cast
 from collections.abc import Callable
 from collections import deque
 
-import pydicom
+import pydicom3
 from pydicom3.datadict import dictionary_keyword
 from pydicom3.dataelem import DataElement
 from pydicom3.dataset import Dataset

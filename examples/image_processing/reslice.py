@@ -22,7 +22,7 @@ location, building a 3D image and reslicing it in different planes.
    https://www.pcir.org/researchers/54879843_20060101.html
 """
 
-import pydicom
+import pydicom3
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
