@@ -45,7 +45,7 @@ from pydicom3.uid import (
 )
 
 
-logger = logging.getLogger("pydicom")
+logger = logging.getLogger("pydicom3")
 
 
 PillowJPEG2000TransferSyntaxes = [JPEG2000, JPEG2000Lossless]

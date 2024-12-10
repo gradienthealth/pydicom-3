@@ -1411,7 +1411,7 @@ class TestEncodeRunner_Encode:
     def test_specify_plugin(self):
         """Test with specific plugin"""
         enc = RLELosslessEncoder
-        enc.encode(EXPL_16_16_1F.ds, encoding_plugin="pydicom")
+        enc.encode(EXPL_16_16_1F.ds, encoding_plugin="pydicom3")
 
     def test_specify_invalid_plugin_raises(self):
         """Test an invalid plugin raises exception"""
@@ -1444,7 +1444,7 @@ class TestEncodeRunner_Encode:
             "plugins:\n  pydicom: Unsupported option \"byteorder = '>'\""
         )
         with pytest.raises(RuntimeError, match=msg):
-            enc.encode(EXPL_16_16_1F.ds, encoding_plugin="pydicom", byteorder=">")
+            enc.encode(EXPL_16_16_1F.ds, encoding_plugin="pydicom3", byteorder=">")
 
     @pytest.mark.skipif(not HAVE_NP or HAVE_RLE, reason="Numpy unavailable")
     def test_encoding_exceptions(self):
@@ -1494,14 +1494,14 @@ class TestEncoder:
 
     def test_logging(self, enable_logging, caplog):
         """Test that the logging works during encode"""
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             self.enc.encode(self.bytes, **self.kwargs)
             assert "EncodeRunner for 'RLE Lossless'" in caplog.text
             assert "  byteorder: <" in caplog.text
 
         caplog.clear()
 
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             next(self.enc.iter_encode(self.bytes, **self.kwargs))
             assert "EncodeRunner for 'RLE Lossless'" in caplog.text
             assert "Encoders" in caplog.text
@@ -1535,7 +1535,7 @@ class TestEncoder:
 
     def test_bytes_specific(self):
         """Test encoding bytes with a specific encoder"""
-        out = self.enc.encode(self.bytes, encoding_plugin="pydicom", **self.kwargs)
+        out = self.enc.encode(self.bytes, encoding_plugin="pydicom3", **self.kwargs)
         assert len(out) == 21350
 
     def test_bytes_short_raises(self):
@@ -1550,7 +1550,7 @@ class TestEncoder:
     def test_bytes_padded(self):
         """Test encoding bytes with padded data"""
         out = self.enc.encode(
-            self.bytes + b"\x00\x00", encoding_plugin="pydicom", **self.kwargs
+            self.bytes + b"\x00\x00", encoding_plugin="pydicom3", **self.kwargs
         )
         assert len(out) == 21350
 
@@ -1558,7 +1558,7 @@ class TestEncoder:
         """Test encoding multiframe bytes with idx"""
         self.kwargs["number_of_frames"] = 2
         out = self.enc.encode(
-            self.bytes * 2, index=0, encoding_plugin="pydicom", **self.kwargs
+            self.bytes * 2, index=0, encoding_plugin="pydicom3", **self.kwargs
         )
         assert len(out) == 21350
 
@@ -1575,14 +1575,14 @@ class TestEncoder:
         msg = "'index' must be greater than or equal to 0"
         with pytest.raises(ValueError, match=msg):
             self.enc.encode(
-                self.bytes * 2, index=-1, encoding_plugin="pydicom", **self.kwargs
+                self.bytes * 2, index=-1, encoding_plugin="pydicom3", **self.kwargs
             )
 
     def test_bytes_iter_encode(self):
         """Test encoding multiframe bytes with iter_encode"""
         self.kwargs["number_of_frames"] = 2
         gen = self.enc.iter_encode(
-            self.bytes * 2, encoding_plugin="pydicom", **self.kwargs
+            self.bytes * 2, encoding_plugin="pydicom3", **self.kwargs
         )
         assert len(next(gen)) == 21350
         assert len(next(gen)) == 21350
@@ -1597,7 +1597,7 @@ class TestEncoder:
 
     def test_array_specific(self):
         """Test encoding with a specific plugin"""
-        out = self.enc.encode(self.arr, encoding_plugin="pydicom", **self.kwargs)
+        out = self.enc.encode(self.arr, encoding_plugin="pydicom3", **self.kwargs)
         assert len(out) == 21350
 
     def test_array_multiframe(self):
@@ -1605,7 +1605,7 @@ class TestEncoder:
         arr = np.stack((self.arr, self.arr))
         assert arr.shape == (2, 128, 128)
         self.kwargs["number_of_frames"] = 2
-        out = self.enc.encode(arr, index=0, encoding_plugin="pydicom", **self.kwargs)
+        out = self.enc.encode(arr, index=0, encoding_plugin="pydicom3", **self.kwargs)
         assert len(out) == 21350
 
     def test_array_invalid_dims_raises(self):
@@ -1630,14 +1630,14 @@ class TestEncoder:
 
         msg = "'index' must be greater than or equal to 0"
         with pytest.raises(ValueError, match=msg):
-            self.enc.encode(arr, index=-1, encoding_plugin="pydicom", **self.kwargs)
+            self.enc.encode(arr, index=-1, encoding_plugin="pydicom3", **self.kwargs)
 
     def test_array_iter_encode(self):
         """Test encoding a multiframe array with iter_encode"""
         arr = np.stack((self.arr, self.arr))
         assert arr.shape == (2, 128, 128)
         self.kwargs["number_of_frames"] = 2
-        gen = self.enc.iter_encode(arr, encoding_plugin="pydicom", **self.kwargs)
+        gen = self.enc.iter_encode(arr, encoding_plugin="pydicom3", **self.kwargs)
         assert len(next(gen)) == 21350
         assert len(next(gen)) == 21350
         with pytest.raises(StopIteration):
@@ -1653,7 +1653,7 @@ class TestEncoder:
     def test_unc_dataset_specific(self):
         """Test encoding an uncompressed dataset with specific plugin"""
         assert not self.ds.file_meta.TransferSyntaxUID.is_compressed
-        out = self.enc.encode(self.ds, encoding_plugin="pydicom")
+        out = self.enc.encode(self.ds, encoding_plugin="pydicom3")
         assert len(out) == 21350
 
     def test_unc_dataset_multiframe(self):
@@ -1680,7 +1680,7 @@ class TestEncoder:
         """Test iter_encode with an uncompressed dataset"""
         self.ds.NumberOfFrames = 2
         self.ds.PixelData = self.ds.PixelData * 2
-        gen = self.enc.iter_encode(self.ds, encoding_plugin="pydicom")
+        gen = self.enc.iter_encode(self.ds, encoding_plugin="pydicom3")
         out = next(gen)
         assert len(self.ds.PixelData) > len(out)
         out = next(gen)
@@ -1696,7 +1696,7 @@ class TestDatasetCompress:
         """Test encode with a dataset."""
         ds = get_testdata_file("CT_small.dcm", read=True)
         assert ds["PixelData"].VR == "OW"
-        ds.compress(RLELossless, encoding_plugin="pydicom")
+        ds.compress(RLELossless, encoding_plugin="pydicom3")
         assert ds.SamplesPerPixel == 1
         assert ds.file_meta.TransferSyntaxUID == RLELossless
         assert len(ds.PixelData) == 21370
@@ -1713,7 +1713,7 @@ class TestDatasetCompress:
         del ds.PixelData
         del ds.file_meta
 
-        ds.compress(RLELossless, arr, encoding_plugin="pydicom")
+        ds.compress(RLELossless, arr, encoding_plugin="pydicom3")
         assert ds.file_meta.TransferSyntaxUID == RLELossless
         assert len(ds.PixelData) == 21370
 
@@ -1721,7 +1721,7 @@ class TestDatasetCompress:
     def test_encoder_unavailable(self, monkeypatch):
         """Test the required encoder being unavailable."""
         ds = get_testdata_file("CT_small.dcm", read=True)
-        monkeypatch.delitem(RLELosslessEncoder._available, "pydicom")
+        monkeypatch.delitem(RLELosslessEncoder._available, "pydicom3")
         msg = (
             r"The pixel data encoder for 'RLE Lossless' is unavailable because all "
             r"of its plugins are missing dependencies:\n"
@@ -1740,7 +1740,7 @@ class TestDatasetCompress:
             r"'JPEG 2000 Part 2 Multi-component Image Compression'"
         )
         with pytest.raises(NotImplementedError, match=msg):
-            ds.compress(JPEG2000MC, encoding_plugin="pydicom")
+            ds.compress(JPEG2000MC, encoding_plugin="pydicom3")
 
     def test_encapsulate_extended(self):
         """Test forcing extended encapsulation."""
@@ -1748,7 +1748,7 @@ class TestDatasetCompress:
         assert "ExtendedOffsetTable" not in ds
         assert "ExtendedOffsetTableLengths" not in ds
 
-        ds.compress(RLELossless, encapsulate_ext=True, encoding_plugin="pydicom")
+        ds.compress(RLELossless, encapsulate_ext=True, encoding_plugin="pydicom3")
         assert ds.file_meta.TransferSyntaxUID == RLELossless
         assert len(ds.PixelData) == 21366
         assert ds.ExtendedOffsetTable == b"\x00" * 8
@@ -1763,7 +1763,7 @@ class TestDatasetCompress:
         #   sometimes be reused, causes the _pixel_id check to fail
         ds.PixelData = None
         ds._pixel_array = None
-        ds.compress(RLELossless, arr, encoding_plugin="pydicom")
+        ds.compress(RLELossless, arr, encoding_plugin="pydicom3")
         assert ds.PixelData is not None
         assert np.array_equal(arr, ds.pixel_array)
 
@@ -1776,7 +1776,7 @@ class TestDatasetCompress:
         with pytest.raises(ValueError, match=msg):
             ds.compress(
                 RLELossless,
-                encoding_plugin="pydicom",
+                encoding_plugin="pydicom3",
                 samples_per_pixel=3,
                 planar_configuration=0,
             )
@@ -1787,7 +1787,7 @@ class TestDatasetCompress:
         assert ds.SamplesPerPixel == 3
         assert ds.PlanarConfiguration == 0
 
-        ds.compress(RLELossless, encoding_plugin="pydicom")
+        ds.compress(RLELossless, encoding_plugin="pydicom3")
         assert ds.PlanarConfiguration == 0
         assert ds.file_meta.TransferSyntaxUID == RLELossless
 
@@ -1803,7 +1803,7 @@ def use_future():
 class TestFuture:
     def test_compress(self, use_future):
         ds = get_testdata_file("CT_small.dcm", read=True)
-        ds.compress(RLELossless, encoding_plugin="pydicom")
+        ds.compress(RLELossless, encoding_plugin="pydicom3")
         assert not hasattr(ds, "_is_little_endian")
         assert not hasattr(ds, "_is_implicit_VR")
 

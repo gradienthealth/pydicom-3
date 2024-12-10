@@ -377,10 +377,10 @@ class TestDecodeRunner:
             runner.decode(0)
 
         decoder = get_decoder(RLELossless)
-        runner.set_decoders(decoder._validate_plugins("pydicom"))
+        runner.set_decoders(decoder._validate_plugins("pydicom3"))
         buffer = runner.decode(0)
 
-        assert runner._previous[1] == runner._decoders["pydicom"]
+        assert runner._previous[1] == runner._decoders["pydicom3"]
 
         arr = np.frombuffer(buffer, dtype=runner.pixel_dtype)
         arr = runner.reshape(arr, as_frame=True)
@@ -419,12 +419,12 @@ class TestDecodeRunner:
             runner.decode(0)
 
         decoder = get_decoder(RLELossless)
-        plugins = decoder._validate_plugins("pydicom")
+        plugins = decoder._validate_plugins("pydicom3")
         runner.set_decoders(plugins)
         data = runner.iter_decode()
         buffer = next(data)
 
-        assert runner._previous[1] == runner._decoders["pydicom"]
+        assert runner._previous[1] == runner._decoders["pydicom3"]
 
         arr = np.frombuffer(buffer, dtype=runner.pixel_dtype)
         arr = runner.reshape(arr, as_frame=True)
@@ -478,7 +478,7 @@ class TestDecodeRunner:
             "decoding process - you may get inconsistent inter-frame results, "
             "consider passing 'decoding_plugin=\"bar\"' instead"
         )
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             with pytest.warns(UserWarning, match=msg):
                 assert next(frame_generator) == b"\x03\x02\x01\x00"
 
@@ -950,12 +950,12 @@ class TestDecoder_Array:
         """Test that the logging works during decode"""
         decoder = get_decoder(ExplicitVRLittleEndian)
 
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             decoder.as_array(EXPL_1_1_1F.ds)
             assert "DecodeRunner for 'Explicit VR Little Endian'" in caplog.text
             assert "  as_rgb: True" in caplog.text
 
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             next(decoder.iter_array(EXPL_1_1_1F.ds, as_rgb=False))
             assert "DecodeRunner for 'Explicit VR Little Endian'" in caplog.text
             assert "  as_rgb: False" in caplog.text
@@ -979,11 +979,11 @@ class TestDecoder_Array:
     def test_native_bitpacked_view_warns(self, caplog):
         """Test warning for bit packed data with `view_only`"""
         decoder = get_decoder(ExplicitVRLittleEndian)
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             decoder.as_array(EXPL_1_1_1F.ds)
             assert not caplog.text
 
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             decoder.as_array(EXPL_1_1_1F.ds, view_only=True)
 
             assert (
@@ -994,11 +994,11 @@ class TestDecoder_Array:
     def test_native_ybr422_view_warns(self, caplog):
         """Test warning for YBR_FULL_422 data with `view_only`"""
         decoder = get_decoder(ExplicitVRLittleEndian)
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             decoder.as_array(EXPL_8_3_1F_YBR422.ds)
             assert not caplog.text
 
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             decoder.as_array(EXPL_8_3_1F_YBR422.ds, view_only=True, raw=True)
 
             assert (
@@ -1010,7 +1010,7 @@ class TestDecoder_Array:
     def test_colorspace_change_view_warns(self, caplog):
         """Test warning for color space change with `view_only`"""
         decoder = get_decoder(ExplicitVRLittleEndian)
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             decoder.as_array(EXPL_8_3_1F_YBR.ds, view_only=True)
 
             assert (
@@ -1154,7 +1154,7 @@ class TestDecoder_Array:
         reference = RLE_16_1_10F
         for index in [0, 4, 9]:
             arr, meta = decoder.as_array(
-                reference.ds, index=index, decoding_plugin="pydicom"
+                reference.ds, index=index, decoding_plugin="pydicom3"
             )
             reference.test(arr, index=index)
             assert arr.shape == reference.shape[1:]
@@ -1167,7 +1167,7 @@ class TestDecoder_Array:
         decoder = get_decoder(RLELossless)
 
         reference = RLE_16_1_10F
-        arr, meta = decoder.as_array(reference.ds, decoding_plugin="pydicom")
+        arr, meta = decoder.as_array(reference.ds, decoding_plugin="pydicom3")
         reference.test(arr)
         assert arr.shape == reference.shape
         assert arr.dtype == reference.dtype
@@ -1268,7 +1268,7 @@ class TestDecoder_Array:
             "Unable to return an ndarray that's a view on the original buffer "
             "for 8-bit pixel data encoded as OW with 'Explicit VR Big Endian'"
         )
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             decoder.as_array(reference.ds, view_only=True)
             assert msg in caplog.text
 
@@ -1365,7 +1365,7 @@ class TestDecoder_Array:
             "'correct_unused_bits=False' instead to get a view if the uncorrected "
             "array is equivalent to the corrected one."
         )
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             arr, _ = next(func)
             reference.test(arr, index=0)
             assert arr.shape == reference.shape[1:]
@@ -1459,7 +1459,7 @@ class TestDecoder_Array:
 
         indices = [0, 4, 9]
         func = decoder.iter_array(
-            reference.ds, raw=True, indices=indices, decoding_plugin="pydicom"
+            reference.ds, raw=True, indices=indices, decoding_plugin="pydicom3"
         )
         for idx, (arr, meta) in enumerate(func):
             reference.test(arr, index=indices[idx])
@@ -1476,7 +1476,7 @@ class TestDecoder_Array:
         decoder = get_decoder(RLELossless)
 
         reference = RLE_16_1_10F
-        func = decoder.iter_array(reference.ds, decoding_plugin="pydicom")
+        func = decoder.iter_array(reference.ds, decoding_plugin="pydicom3")
         for index, (arr, _) in enumerate(func):
             reference.test(arr, index=index)
             assert arr.dtype == reference.dtype
@@ -1679,8 +1679,8 @@ class TestDecoder_Buffer:
         """Test `decoding_plugin` with an encapsulated pixel data."""
         decoder = get_decoder(RLELossless)
         reference = RLE_16_1_10F
-        arr, _ = decoder.as_array(reference.ds, decoding_plugin="pydicom")
-        buffer, _ = decoder.as_buffer(reference.ds, decoding_plugin="pydicom")
+        arr, _ = decoder.as_array(reference.ds, decoding_plugin="pydicom3")
+        buffer, _ = decoder.as_buffer(reference.ds, decoding_plugin="pydicom3")
         assert isinstance(buffer, bytes | bytearray)
         assert arr.tobytes() == buffer
 
@@ -1859,8 +1859,8 @@ class TestDecoder_Buffer:
         """Test `decoding_plugin` with an encapsulated pixel data."""
         decoder = get_decoder(RLELossless)
         reference = RLE_16_1_10F
-        arr, _ = next(decoder.iter_array(reference.ds, decoding_plugin="pydicom"))
-        buffer, _ = next(decoder.iter_buffer(reference.ds, decoding_plugin="pydicom"))
+        arr, _ = next(decoder.iter_array(reference.ds, decoding_plugin="pydicom3"))
+        buffer, _ = next(decoder.iter_buffer(reference.ds, decoding_plugin="pydicom3"))
         assert isinstance(buffer, bytes | bytearray)
         assert arr.tobytes() == buffer
 

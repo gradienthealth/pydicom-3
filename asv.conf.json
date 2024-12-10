@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "project": "pydicom",
+    "project": "pydicom3",
     "project_url": "https://github.com/pydicom/pydicom3.git",
 
     // The URL or local path of the repo for the project being benchmarked

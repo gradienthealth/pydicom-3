@@ -24,7 +24,7 @@ import zipfile
 LOGGER = logging.getLogger(__name__)
 
 
-PYDICOM_SRC = Path(__file__).parent.parent.parent / "src" / "pydicom"
+PYDICOM_SRC = Path(__file__).parent.parent.parent / "src" / "pydicom3"
 SR_DIRECTORY = PYDICOM_SRC / "sr"
 
 FTP_HOST = "medical.nema.org"

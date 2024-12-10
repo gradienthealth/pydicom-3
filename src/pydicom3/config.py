@@ -32,7 +32,7 @@ _use_future_env = os.getenv("PYDICOM_FUTURE")
 
 
 # Logging system and debug function to change logging level
-logger = logging.getLogger("pydicom")
+logger = logging.getLogger("pydicom3")
 logger.addHandler(logging.NullHandler())
 
 debugging: bool

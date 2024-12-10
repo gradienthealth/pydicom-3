@@ -59,11 +59,11 @@ class TestFilespec:
         expected = ("", r"c:\test.dcm", "")
         assert expected == filespec_parts(r"c:\test.dcm")
 
-        expected = ("pydicom", r"c:\test.dcm", "")
+        expected = ("pydicom3", r"c:\test.dcm", "")
         assert expected == filespec_parts(r"pydicom::c:\test.dcm")
 
         filespec = r"pydicom::c:\test.dcm::StudyDate"
-        expected = ("pydicom", r"c:\test.dcm", "StudyDate")
+        expected = ("pydicom3", r"c:\test.dcm", "StudyDate")
         assert expected == filespec_parts(filespec)
 
         filespec = r"c:\test.dcm::StudyDate"

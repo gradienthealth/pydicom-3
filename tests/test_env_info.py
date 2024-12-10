@@ -29,7 +29,7 @@ platform     |""".lstrip()
         assert modules == [
             "platform",
             "Python",
-            "pydicom",
+            "pydicom3",
             "gdcm",
             "jpeg_ls",
             "numpy",

@@ -85,7 +85,7 @@ class TimeDatasetCompress:
     def time_pydicom(self):
         """Time the native RLE encoder."""
         for _ in range(self.no_runs):
-            self.ds.compress(RLELossless, self.arr8_1, encoding_plugin="pydicom")
+            self.ds.compress(RLELossless, self.arr8_1, encoding_plugin="pydicom3")
 
     def time_pylibjpeg(self):
         """Time the pylibjpeg-rle Rust RLE encoder."""

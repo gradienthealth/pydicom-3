@@ -175,7 +175,7 @@ class TestPixelArray:
     @pytest.mark.skipif(SKIP_RLE, reason="pylibjpeg-rle not available")
     def test_decoding_plugin(self):
         """Test the `decoding_plugin` kwarg."""
-        arr1 = pixel_array(RLE_16_1_10F.path, decoding_plugin="pydicom")
+        arr1 = pixel_array(RLE_16_1_10F.path, decoding_plugin="pydicom3")
         arr2 = pixel_array(RLE_16_1_10F.path, decoding_plugin="pylibjpeg")
         assert np.array_equal(arr1, arr2)
 
@@ -448,7 +448,7 @@ class TestIterPixels:
     @pytest.mark.skipif(SKIP_RLE, reason="pylibjpeg-rle not available")
     def test_decoding_plugin(self):
         """Test the `decoding_plugin` kwarg."""
-        pydicom_gen = iter_pixels(RLE_16_1_10F.path, decoding_plugin="pydicom")
+        pydicom_gen = iter_pixels(RLE_16_1_10F.path, decoding_plugin="pydicom3")
         pylibjpeg_gen = iter_pixels(RLE_16_1_10F.path, decoding_plugin="pylibjpeg")
         for frame1, frame2 in zip(pydicom_gen, pylibjpeg_gen):
             assert np.array_equal(frame1, frame2)
@@ -492,7 +492,7 @@ class TestIterPixels:
 
 def test_version_check_debugging(caplog):
     """Test _passes_version_check() when the package is absent and debugging on"""
-    with caplog.at_level(logging.DEBUG, logger="pydicom"):
+    with caplog.at_level(logging.DEBUG, logger="pydicom3"):
         assert _passes_version_check("foo", (3, 0)) is False
         assert "No module named 'foo'" in caplog.text
 
@@ -1453,7 +1453,7 @@ class TestCompressRLE:
         ds = dcmread(EXPL_16_16_1F.path)
         assert not ds["PixelData"].is_undefined_length
         assert ds["PixelData"].VR == "OW"
-        compress(ds, RLELossless, encoding_plugin="pydicom")
+        compress(ds, RLELossless, encoding_plugin="pydicom3")
 
         assert ds.SamplesPerPixel == 1
         assert ds.file_meta.TransferSyntaxUID == RLELossless
@@ -1477,7 +1477,7 @@ class TestCompressRLE:
             "'file_meta' attribute"
         )
         with pytest.raises(AttributeError, match=msg):
-            compress(ds, RLELossless, encoding_plugin="pydicom")
+            compress(ds, RLELossless, encoding_plugin="pydicom3")
 
     @pytest.mark.skipif(not HAVE_NP, reason="Numpy not available")
     def test_already_compressed(self):
@@ -1488,10 +1488,10 @@ class TestCompressRLE:
 
         msg = "Only uncompressed datasets may be compressed"
         with pytest.raises(ValueError, match=msg):
-            compress(ds, RLELossless, encoding_plugin="pydicom")
+            compress(ds, RLELossless, encoding_plugin="pydicom3")
 
         # Skip compression state check if passing arr
-        compress(ds, RLELossless, arr, encoding_plugin="pydicom")
+        compress(ds, RLELossless, arr, encoding_plugin="pydicom3")
         assert ds.file_meta.TransferSyntaxUID == RLELossless
         assert ds["PixelData"].is_undefined_length
         assert ds["PixelData"].VR == "OB"
@@ -1508,7 +1508,7 @@ class TestCompressRLE:
         del ds.PixelData
         del ds.file_meta
 
-        compress(ds, RLELossless, arr, encoding_plugin="pydicom")
+        compress(ds, RLELossless, arr, encoding_plugin="pydicom3")
         assert ds.file_meta.TransferSyntaxUID == RLELossless
         assert len(ds.PixelData) == 21370
 
@@ -1519,7 +1519,7 @@ class TestCompressRLE:
     def test_encoder_unavailable(self, monkeypatch):
         """Test the required encoder being unavailable."""
         ds = dcmread(EXPL_16_16_1F.path)
-        monkeypatch.delitem(RLELosslessEncoder._available, "pydicom")
+        monkeypatch.delitem(RLELosslessEncoder._available, "pydicom3")
         msg = (
             r"The pixel data encoder for 'RLE Lossless' is unavailable because "
             r"all of its plugins are missing dependencies:\n"
@@ -1538,7 +1538,7 @@ class TestCompressRLE:
             r"'JPEG 2000 Part 2 Multi-component Image Compression'"
         )
         with pytest.raises(NotImplementedError, match=msg):
-            compress(ds, JPEG2000MC, encoding_plugin="pydicom")
+            compress(ds, JPEG2000MC, encoding_plugin="pydicom3")
 
     def test_encapsulate_extended(self):
         """Test forcing extended encapsulation."""
@@ -1546,7 +1546,7 @@ class TestCompressRLE:
         assert "ExtendedOffsetTable" not in ds
         assert "ExtendedOffsetTableLengths" not in ds
 
-        compress(ds, RLELossless, encapsulate_ext=True, encoding_plugin="pydicom")
+        compress(ds, RLELossless, encapsulate_ext=True, encoding_plugin="pydicom3")
         assert ds.file_meta.TransferSyntaxUID == RLELossless
         assert len(ds.PixelData) == 21366
         assert ds.ExtendedOffsetTable == b"\x00" * 8
@@ -1561,7 +1561,7 @@ class TestCompressRLE:
         #   sometimes be reused, causes the _pixel_id check to fail
         ds.PixelData = None
         ds._pixel_array = None
-        compress(ds, RLELossless, arr, encoding_plugin="pydicom")
+        compress(ds, RLELossless, arr, encoding_plugin="pydicom3")
         assert ds.PixelData is not None
         assert np.array_equal(arr, ds.pixel_array)
 
@@ -1574,7 +1574,7 @@ class TestCompressRLE:
         compress(
             ds,
             RLELossless,
-            encoding_plugin="pydicom",
+            encoding_plugin="pydicom3",
             samples_per_pixel=1,
         )
 
@@ -1587,20 +1587,20 @@ class TestCompressRLE:
         original = ds.SOPInstanceUID
 
         # Default for lossless compression is no change to UID
-        compress(ds, RLELossless, encoding_plugin="pydicom")
+        compress(ds, RLELossless, encoding_plugin="pydicom3")
         assert ds.SOPInstanceUID == original
         assert ds.SOPInstanceUID == ds.file_meta.MediaStorageSOPInstanceUID
 
         ds = dcmread(EXPL_16_16_1F.path)
         compress(
-            ds, RLELossless, encoding_plugin="pydicom", generate_instance_uid=False
+            ds, RLELossless, encoding_plugin="pydicom3", generate_instance_uid=False
         )
         assert ds.SOPInstanceUID == original
         assert ds.SOPInstanceUID == ds.file_meta.MediaStorageSOPInstanceUID
 
         # Forced changed to UID
         ds = dcmread(EXPL_16_16_1F.path)
-        compress(ds, RLELossless, encoding_plugin="pydicom", generate_instance_uid=True)
+        compress(ds, RLELossless, encoding_plugin="pydicom3", generate_instance_uid=True)
         assert ds.SOPInstanceUID != original
         assert ds.SOPInstanceUID == ds.file_meta.MediaStorageSOPInstanceUID
 
@@ -1816,7 +1816,7 @@ class TestDecompress:
         ref = ds.pixel_array
         assert ds.BitsAllocated == 8
         assert ds.PhotometricInterpretation == "RGB"
-        decompress(ds, decoding_plugin="pydicom")
+        decompress(ds, decoding_plugin="pydicom3")
 
         assert ds.file_meta.TransferSyntaxUID == ExplicitVRLittleEndian
         elem = ds["PixelData"]
@@ -1837,7 +1837,7 @@ class TestDecompress:
         ds = dcmread(RLE_16_1_1F.path)
         ref = ds.pixel_array
         assert ds.BitsAllocated == 16
-        decompress(ds, decoding_plugin="pydicom")
+        decompress(ds, decoding_plugin="pydicom3")
 
         assert ds.file_meta.TransferSyntaxUID == ExplicitVRLittleEndian
         elem = ds["PixelData"]
@@ -1859,7 +1859,7 @@ class TestDecompress:
         assert ds.BitsAllocated == 16
         assert ds.NumberOfFrames == 10
         # `index` should be ignored
-        decompress(ds, decoding_plugin="pydicom", index=1)
+        decompress(ds, decoding_plugin="pydicom3", index=1)
 
         assert ds.file_meta.TransferSyntaxUID == ExplicitVRLittleEndian
         elem = ds["PixelData"]
@@ -1883,7 +1883,7 @@ class TestDecompress:
         assert ds.BitsAllocated == 32
         assert ds.NumberOfFrames == 2
         assert ds.PhotometricInterpretation == "RGB"
-        decompress(ds, decoding_plugin="pydicom")
+        decompress(ds, decoding_plugin="pydicom3")
 
         assert ds.file_meta.TransferSyntaxUID == ExplicitVRLittleEndian
         elem = ds["PixelData"]
@@ -1905,9 +1905,9 @@ class TestDecompress:
         """Test odd length Pixel Data gets padded to even length."""
         ds = dcmread(EXPL_8_3_1F_ODD.path)
         assert ds.Rows * ds.Columns * ds.SamplesPerPixel % 2 == 1
-        compress(ds, RLELossless, encoding_plugin="pydicom")
+        compress(ds, RLELossless, encoding_plugin="pydicom3")
         assert ds.file_meta.TransferSyntaxUID == RLELossless
-        decompress(ds, decoding_plugin="pydicom")
+        decompress(ds, decoding_plugin="pydicom3")
         assert ds.file_meta.TransferSyntaxUID == ExplicitVRLittleEndian
         assert len(ds.PixelData) % 2 == 0
 
@@ -1982,17 +1982,17 @@ class TestDecompress:
         ds = dcmread(RLE_8_3_1F.path)
         original = ds.SOPInstanceUID
 
-        decompress(ds, decoding_plugin="pydicom")
+        decompress(ds, decoding_plugin="pydicom3")
         assert ds.SOPInstanceUID == original
         assert ds.SOPInstanceUID == ds.file_meta.MediaStorageSOPInstanceUID
 
         ds = dcmread(RLE_8_3_1F.path)
-        decompress(ds, decoding_plugin="pydicom", generate_instance_uid=True)
+        decompress(ds, decoding_plugin="pydicom3", generate_instance_uid=True)
         assert ds.SOPInstanceUID != original
         assert ds.SOPInstanceUID == ds.file_meta.MediaStorageSOPInstanceUID
 
         ds = dcmread(RLE_8_3_1F.path)
-        decompress(ds, decoding_plugin="pydicom", generate_instance_uid=False)
+        decompress(ds, decoding_plugin="pydicom3", generate_instance_uid=False)
         assert ds.SOPInstanceUID == original
         assert ds.SOPInstanceUID == ds.file_meta.MediaStorageSOPInstanceUID
 

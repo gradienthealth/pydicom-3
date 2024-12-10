@@ -116,7 +116,7 @@ from pydicom3.uid import (
 )
 
 
-LOGGER = logging.getLogger("pydicom")
+LOGGER = logging.getLogger("pydicom3")
 
 
 HANDLER_NAME = "pylibjpeg"

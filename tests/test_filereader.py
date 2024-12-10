@@ -929,7 +929,7 @@ class TestReader:
         assert isinstance(ds[0x00100010].value, pydicom3.valuerep.PersonName)
 
     def test_explicit_undefined_length_logged(self, enable_debugging, caplog):
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             read_dataset(
                 BytesIO(
                     b"\x08\x00\x05\x00CS\x0a\x00ISO_IR 100"
@@ -944,7 +944,7 @@ class TestReader:
         assert "Reading undefined length data element" in caplog.text
 
     def test_sequence_undefined_length_logged(self, enable_debugging, caplog):
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             read_dataset(
                 BytesIO(
                     b"\x08\x00\x05\x00CS\x0a\x00ISO_IR 100"
@@ -962,7 +962,7 @@ class TestReader:
         assert "Finished sequence item" in caplog.text
 
     def test_sequence_delimiter_with_length(self, enable_debugging, caplog):
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             read_dataset(
                 BytesIO(
                     b"\x08\x00\x05\x00CS\x0a\x00ISO_IR 100"
@@ -979,7 +979,7 @@ class TestReader:
         ) in caplog.text
 
     def test_sequence_missing_item_tag(self, enable_debugging, caplog):
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             read_dataset(
                 BytesIO(
                     b"\x08\x00\x05\x00CS\x0a\x00ISO_IR 100"
@@ -1009,7 +1009,7 @@ class TestReader:
         ds.save_as(buffer)
 
         buffer.seek(0)
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             msg = "Expected explicit VR, but found implicit VR"
             with pytest.warns(UserWarning, match=msg):
                 dcmread(buffer)
@@ -1020,7 +1020,7 @@ class TestReader:
         register_transfer_syntax(uid)
 
         buffer.seek(0)
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             ds = dcmread(buffer)
             assert "Expected explicit VR, but found implicit VR" not in caplog.text
 
@@ -1195,7 +1195,7 @@ class TestUnknownVR:
             print(ds)
 
     def test_unknown_explicit(self, enable_debugging, caplog):
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             read_dataset(
                 BytesIO(
                     b"\x08\x00\x05\x00CS\x0a\x00ISO_IR 100"
@@ -1210,7 +1210,7 @@ class TestUnknownVR:
         ) in caplog.text
 
     def test_unknown_implicit(self, enable_debugging_and_implicit, caplog):
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             read_dataset(
                 BytesIO(
                     b"\x08\x00\x05\x00CS\x0a\x00ISO_IR 100"
@@ -1639,7 +1639,7 @@ class TestDeferredRead:
     def test_values_identical(self, enable_debugging, caplog):
         """Deferred values exactly matches normal read."""
         ds_norm = dcmread(self.testfile_name)
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             ds_defer = dcmread(self.testfile_name, defer_size=2000)
 
         for data_elem in ds_norm:

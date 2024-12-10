@@ -7,7 +7,7 @@ from pathlib import Path
 import warnings
 
 
-LOGGER = logging.getLogger("pydicom")
+LOGGER = logging.getLogger("pydicom3")
 
 
 _size_factors = {

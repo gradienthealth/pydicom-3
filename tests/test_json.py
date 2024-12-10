@@ -310,7 +310,7 @@ class TestDataSetToJson:
             Tag(0x00082128), "IS", 4, b"5.25", 0, True, True
         )
 
-        with caplog.at_level(logging.WARNING, logger="pydicom"):
+        with caplog.at_level(logging.WARNING, logger="pydicom3"):
             ds_json = ds.to_json_dict(suppress_invalid_tags=True)
             assert "00082128" not in ds_json
 

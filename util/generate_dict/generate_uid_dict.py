@@ -23,7 +23,7 @@ import xml.etree.ElementTree as ET
 from pydicom3 import _version
 
 
-_PKG_DIRECTORY = Path(__file__).parent.parent.parent / "src" / "pydicom"
+_PKG_DIRECTORY = Path(__file__).parent.parent.parent / "src" / "pydicom3"
 PYDICOM_DICT_FILENAME = _PKG_DIRECTORY / "_uid_dict.py"
 DICT_NAME = "UID_dictionary"
 BR = "{http://docbook.org/ns/docbook}"

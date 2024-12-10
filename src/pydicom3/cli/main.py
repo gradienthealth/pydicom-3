@@ -68,7 +68,7 @@ def filespec_parts(filespec: str) -> tuple[str, str, str]:
     if not prefix_file:  # then only the filename component
         return "", last, ""
 
-    prefix = "pydicom" if prefix_file[0] == "pydicom" else ""
+    prefix = "pydicom3" if prefix_file[0] == "pydicom3" else ""
     if prefix:
         prefix_file.pop(0)
 
@@ -139,7 +139,7 @@ def filespec_parser(filespec: str) -> list[tuple[Dataset, Any]]:
         except NotImplementedError:  # will get this if absolute path passed
             pass
 
-    if prefix == "pydicom":
+    if prefix == "pydicom3":
         filename = pydicom_filename
 
     # Check element syntax first to avoid unnecessary load of file
@@ -209,7 +209,7 @@ def main(args: list[str] | None = None) -> None:
     py_version = sys.version.split()[0]
 
     parser = argparse.ArgumentParser(
-        prog="pydicom",
+        prog="pydicom3",
         description=f"pydicom3 command line utilities (Python {py_version})",
     )
     subparsers = parser.add_subparsers(help="subcommand help")

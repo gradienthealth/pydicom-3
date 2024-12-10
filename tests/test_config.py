@@ -22,7 +22,7 @@ class TestDebug:
     """Tests for config.debug()."""
 
     def setup_method(self):
-        self.logger = logging.getLogger("pydicom")
+        self.logger = logging.getLogger("pydicom3")
 
     def teardown_method(self):
         # Reset to just NullHandler
@@ -33,7 +33,7 @@ class TestDebug:
         assert 1 == len(self.logger.handlers)
         assert isinstance(self.logger.handlers[0], logging.NullHandler)
 
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             dcmread(DS_PATH)
 
             assert "Call to dcmread()" not in caplog.text
@@ -47,7 +47,7 @@ class TestDebug:
         assert 1 == len(self.logger.handlers)
         assert isinstance(self.logger.handlers[0], logging.NullHandler)
 
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             dcmread(DS_PATH)
 
             assert "Call to dcmread()" in caplog.text
@@ -66,7 +66,7 @@ class TestDebug:
         assert 1 == len(self.logger.handlers)
         assert isinstance(self.logger.handlers[0], logging.NullHandler)
 
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             dcmread(DS_PATH)
 
             assert "Call to dcmread()" not in caplog.text
@@ -81,7 +81,7 @@ class TestDebug:
         assert isinstance(self.logger.handlers[0], logging.NullHandler)
         assert isinstance(self.logger.handlers[1], logging.StreamHandler)
 
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             dcmread(DS_PATH)
 
             assert "Call to dcmread()" in caplog.text
@@ -101,7 +101,7 @@ class TestDebug:
         assert isinstance(self.logger.handlers[0], logging.NullHandler)
         assert isinstance(self.logger.handlers[1], logging.StreamHandler)
 
-        with caplog.at_level(logging.DEBUG, logger="pydicom"):
+        with caplog.at_level(logging.DEBUG, logger="pydicom3"):
             dcmread(DS_PATH)
 
             assert "Call to dcmread()" not in caplog.text

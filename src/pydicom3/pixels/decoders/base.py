@@ -1938,7 +1938,7 @@ RLELosslessDecoder = Decoder(RLELossless)
 RLELosslessDecoder.add_plugins(
     [
         ("pylibjpeg", ("pydicom3.pixels.decoders.pylibjpeg", "_decode_frame")),
-        ("pydicom", ("pydicom3.pixels.decoders.rle", "_decode_frame")),
+        ("pydicom3", ("pydicom3.pixels.decoders.rle", "_decode_frame")),
     ]
 )
 

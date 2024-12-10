@@ -109,8 +109,8 @@ sphinx_gallery_conf = {
     "gallery_dirs": "auto_examples",
     "backreferences_dir": os.path.join("generated"),
     # to make references clickable
-    "doc_module": "pydicom",
-    "reference_url": {"pydicom": None},
+    "doc_module": "pydicom3",
+    "reference_url": {"pydicom3": None},
 }
 
 napoleon_google_docstring = False
@@ -129,7 +129,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "pydicom"
+project = "pydicom3"
 year = datetime.now().strftime("%Y")
 copyright = f"2008-{year}, Darcy Mason and pydicom3 contributors"
 
@@ -317,7 +317,7 @@ def setup(app):
 
 # The following is used by sphinx.ext.linkcode to provide links to github
 linkcode_resolve = make_linkcode_resolve(
-    "pydicom",
+    "pydicom3",
     "https://github.com/pydicom/pydicom/blob/{revision}/{package}/{path}#L{lineno}",
 )
 

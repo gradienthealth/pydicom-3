@@ -21,7 +21,7 @@ def main() -> None:
     version_rows = [("platform", platform.platform()), ("Python", sys.version)]
 
     modules = (
-        "pydicom",
+        "pydicom3",
         "gdcm",
         "jpeg_ls",
         "numpy",

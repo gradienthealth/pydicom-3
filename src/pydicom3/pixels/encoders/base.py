@@ -788,7 +788,7 @@ RLELosslessEncoder.add_plugins(
     [
         ("gdcm", ("pydicom3.pixels.encoders.gdcm", "encode_pixel_data")),
         ("pylibjpeg", ("pydicom3.pixels.encoders.pylibjpeg", "_encode_frame")),
-        ("pydicom", ("pydicom3.pixels.encoders.native", "_encode_frame")),
+        ("pydicom3", ("pydicom3.pixels.encoders.native", "_encode_frame")),
     ],
 )
 
@@ -827,7 +827,7 @@ _PIXEL_DATA_ENCODERS = {
 def _build_encoder_docstrings() -> None:
     """Override the default Encoder docstring."""
     plugin_doc_links = {
-        "pydicom": ":ref:`pydicom3 <encoder_plugin_pydicom>`",
+        "pydicom3": ":ref:`pydicom3 <encoder_plugin_pydicom>`",
         "pylibjpeg": ":ref:`pylibjpeg <encoder_plugin_pylibjpeg>`",
         "gdcm": ":ref:`gdcm <encoder_plugin_gdcm>`",
         "pyjpegls": ":ref:`pyjpegls <encoder_plugin_pyjpegls>`",
