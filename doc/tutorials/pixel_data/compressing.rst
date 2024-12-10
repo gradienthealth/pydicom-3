@@ -18,7 +18,7 @@ Installing using pip:
 
 .. code-block:: bash
 
-    python -m pip install -U pydicom numpy pylibjpeg[all] pyjpegls
+    python -m pip install -U pydicom3 numpy pylibjpeg[all] pyjpegls
 
 Installing on conda:
 
@@ -67,7 +67,7 @@ function. We'll be using *RLE Lossless* to start with, which is based on the
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import RLELossless
     >>> ds = examples.ct
     >>> ds.file_meta.TransferSyntaxUID.is_compressed
@@ -79,7 +79,7 @@ existing dataset, you can pass an :class:`~numpy.ndarray` along with the *Transf
 Syntax UID*::
 
     import numpy as np
-    from pydicom import Dataset
+    from pydicom3 import Dataset
     from pydicom3.uid import RLELossless
 
     ds = Dataset()
@@ -112,7 +112,7 @@ such as *Rows*, *Columns*, *Samples per Pixel*, etc. If they don't match you'll 
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import RLELossless
     >>> ds = examples.ct
     >>> arr = np.zeros((ds.Rows, ds.Columns + 1), dtype='<i2')
@@ -158,7 +158,7 @@ well supported by third-party applications, so keep that in mind if you decide t
 
 Performing lossless compression is straightforward::
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import JPEGLSLossless
     >>> ds = examples.ct
     >>> ds.compress(JPEGLSLossless)
@@ -176,7 +176,7 @@ uses signed integers. First up though, we'll use an example with unsigned pixel 
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import JPEGLSNearLossless
     >>> ds = examples.rgb_color
     >>> ds.PixelRepresentation
@@ -202,7 +202,7 @@ range [-125, 124].
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import JPEGLSNearLossless
     >>> ds = examples.ct
     >>> ds.PixelRepresentation
@@ -240,7 +240,7 @@ order to simplify its usage.
 
 As with RLE and JPEG-LS, performing lossless compression is straightforward::
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import JPEG2000Lossless
     >>> ds = examples.ct
     >>> ds.compress(JPEG2000Lossless)
@@ -256,7 +256,7 @@ prior to compression:
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import JPEG2000Lossless
     >>> ds = examples.rgb_color
     >>> ds.PhotometricInterpretation
@@ -284,7 +284,7 @@ the image quality is less intuitive.
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import JPEG2000
     >>> ds = examples.ct
     >>> ds.compress(JPEG2000, j2k_cr=[5, 2])  # 2 quality layers
@@ -322,7 +322,7 @@ compressed data.
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.encaps import encapsulate, encapsulate_extended
     from pydicom3.uid import JPEGBaseline8Bit
 
@@ -359,7 +359,7 @@ Datasets with a compressed *Transfer Syntax UID* can be decompressed with
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> ds = examples.jpeg2k
     >>> ds.decompress()
 
@@ -377,7 +377,7 @@ so the same :doc:`customization options</guides/decoding/decoder_options>` of th
 process apply. For example, to use a :doc:`specific plugin</guides/plugin_table>`
 you can pass its name via the `decoding_plugin` argument::
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> ds = examples.jpeg2k
     >>> ds.decompress(decoding_plugin="pylibjpeg")
 
@@ -386,7 +386,7 @@ to RGB by default. This can be disabled by passing ``as_rgb=False``::
 
     import numpy as np
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import convert_color_space, pixel_array
     from pydicom3.uid import JPEG2000Lossless
 

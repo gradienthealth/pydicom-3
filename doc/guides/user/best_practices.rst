@@ -53,7 +53,7 @@ To change a flag in your code:
 
 .. code-block:: python
 
-  from pydicom import config
+  from pydicom3 import config
 
   config.settings.reading_validation_mode = config.RAISE
 
@@ -97,7 +97,7 @@ using the :func:`~pydicom3.config.future_behavior` function:
 
 .. code-block:: python
 
-  from pydicom import config
+  from pydicom3 import config
   config.future_behavior()
 
 If you needed to turn the future behavior off again at run-time, call
@@ -120,7 +120,7 @@ version to the current major version.  E.g. a line like:
 
 .. code-block::
 
-  pydicom >=2.0,<3.0
+  pydicom3 >=2.0,<3.0
 
 in the ``requirements.txt`` file will ensure that those installing your package
 will get the same major version (in the example, version 2) of *pydicom*

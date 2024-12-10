@@ -32,7 +32,7 @@ Displaying Private Data Elements in *pydicom*
 Here is an example of some private tags displayed for *pydicom's* example CT
 dataset::
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> ds = examples.ct
     >>> ds
     Dataset.file_meta -------------------------------

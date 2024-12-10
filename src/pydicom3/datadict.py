@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Access dicom dictionary information"""
 
 # the actual dict of {tag: (VR, VM, name, is_retired, keyword), ...}
@@ -87,7 +87,7 @@ def add_dict_entry(
     Examples
     --------
 
-    >>> from pydicom import Dataset
+    >>> from pydicom3 import Dataset
     >>> add_dict_entry(0x10021001, "UL", "TestOne", "Test One")
     >>> add_dict_entry(0x10021002, "DS", "TestTwo", "Test Two", VM='3')
     >>> ds = Dataset()
@@ -123,7 +123,7 @@ def add_dict_entries(
     Examples
     --------
 
-    >>> from pydicom import Dataset
+    >>> from pydicom3 import Dataset
     >>> new_dict_items = {
     ...        0x10021001: ('UL', '1', "Test One", '', 'TestOne'),
     ...        0x10021002: ('DS', '3', "Test Two", '', 'TestTwo'),

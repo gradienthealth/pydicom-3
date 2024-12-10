@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Miscellaneous utility routines relating to hex and byte strings"""
 
 from binascii import a2b_hex, b2a_hex

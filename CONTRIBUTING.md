@@ -145,7 +145,7 @@ new lines of code must be covered:
   ```bash
   $ pip install pytest pytest-cov
   $ cd pydicom/
-  $ pytest --cov=pydicom tests/
+  $ pytest --cov=pydicom3 tests/
   ```
 
 - The type hints, code syntax, spelling and formatting should be checked:
@@ -198,7 +198,7 @@ following rules before submitting:
    See [Creating and highlighting code blocks](https://help.github.com/articles/creating-and-highlighting-code-blocks).
 
 -  Please include your operating system type and version number, as well
-   as your Python and pydicom versions.
+   as your Python and pydicom3 versions.
 
    Please use the `pydicom_env_info` module to gather this information :
 

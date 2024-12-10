@@ -21,7 +21,7 @@ Alternatively, you can use something along the lines of:
 
 .. code-block:: text
 
-  Mason, D. L., et al, pydicom: An open source DICOM library, https://github.com/pydicom/pydicom [Online; accessed YYYY-MM-DD].
+  Mason, D. L., et al, pydicom: An open source DICOM library, https://github.com/pydicom/pydicom3 [Online; accessed YYYY-MM-DD].
 
 
 .. _faq_install:
@@ -49,7 +49,7 @@ What version of Python can I use?
 ---------------------------------
 
 +-----------------+------------------+---------------------------+
-| pydicom version |  Release date    | Python versions           |
+| pydicom3 version |  Release date    | Python versions           |
 +=================+==================+===========================+
 | 1.0             | March 2018       | 2.7, 3.4, 3.5, 3.6        |
 +-----------------+------------------+---------------------------+
@@ -75,7 +75,7 @@ What version of Python can I use?
 +-----------------+------------------+---------------------------+
 
 
-What license does pydicom use?
+What license does pydicom3 use?
 ==============================
 
 *pydicom* has an MIT-based :gh:`license <pydicom/blob/main/LICENSE>`.

@@ -1,12 +1,12 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Code to fix non-standard dicom issues in files
 """
 
 from typing import TYPE_CHECKING, Any
 
-from pydicom import config
-from pydicom import datadict
-from pydicom import values
+from pydicom3 import config
+from pydicom3 import datadict
+from pydicom3 import values
 from pydicom3.valuerep import VR
 
 if TYPE_CHECKING:  # pragma: no cover

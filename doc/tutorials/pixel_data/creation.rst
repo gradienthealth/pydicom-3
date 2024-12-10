@@ -22,7 +22,7 @@ Installing using pip:
 
 .. code-block:: bash
 
-    python -m pip install -U pydicom numpy matplotlib pylibjpeg[all]
+    python -m pip install -U pydicom3 numpy matplotlib pylibjpeg[all]
 
 Installing on conda:
 
@@ -103,7 +103,7 @@ unused bytes with ``ds.PixelData == arr.tobytes()[1::2]``.
 
     import matplotlib.pyplot as plt
 
-    from pydicom import Dataset, FileMetaDataset
+    from pydicom3 import Dataset, FileMetaDataset
     from pydicom3.uid import ExplicitVRLittleEndian
 
     ds = Dataset()
@@ -175,7 +175,7 @@ separately then all the encoded pixels are concatenated together. This matches h
 
     import matplotlib.pyplot as plt
 
-    from pydicom import Dataset, FileMetaDataset
+    from pydicom3 import Dataset, FileMetaDataset
     from pydicom3.pixels import iter_pixels
     from pydicom3.uid import ExplicitVRLittleEndian
 
@@ -247,7 +247,7 @@ of ``16`` to match.
 
     import matplotlib.pyplot as plt
 
-    from pydicom import Dataset, FileMetaDataset
+    from pydicom3 import Dataset, FileMetaDataset
     from pydicom3.uid import ExplicitVRLittleEndian
 
     ds = Dataset()
@@ -300,7 +300,7 @@ that of *Pixel Data*, the main differences being:
 
 The example below demonstrates creating *Float Pixel Data*::
 
-    from pydicom import Dataset, FileMetaDataset
+    from pydicom3 import Dataset, FileMetaDataset
     from pydicom3.uid import ExplicitVRLittleEndian
 
     ds = Dataset()

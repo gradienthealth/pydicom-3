@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Use the `pillow <https://python-pillow.org/>`_ Python package
 to decode *Pixel Data*.
 """
@@ -28,7 +28,7 @@ except ImportError:
     HAVE_JPEG = False
     HAVE_JPEG2K = False
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.encaps import generate_frames
 from pydicom3.misc import warn_and_log
 from pydicom3.pixels.utils import (

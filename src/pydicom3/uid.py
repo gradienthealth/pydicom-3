@@ -1,4 +1,4 @@
-# Copyright 2008-2022 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2022 pydicom3 authors. See LICENSE file for details.
 """Functions for handling DICOM unique identifiers (UIDs)"""
 
 import hashlib
@@ -6,7 +6,7 @@ import re
 import secrets
 import uuid
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3._uid_dict import UID_dictionary
 from pydicom3.config import disable_value_validation
 from pydicom3.valuerep import STR_VR_REGEXES, validate_value

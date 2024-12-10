@@ -20,7 +20,7 @@ include multiple overlays, where the related elements for each overlay use the
 same group number. Because of this, the only way to access a particular
 element from an overlay is to use the ``Dataset[group, elem]`` method::
 
-  >>> from pydicom import examples
+  >>> from pydicom3 import examples
   >>> ds = examples.overlay
   >>> elem = ds[0x6000, 0x3000]  # returns a DataElement
   >>> print(elem)

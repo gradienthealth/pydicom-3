@@ -5,7 +5,7 @@ Major changes
 -------------
 
 * Renamed Attribute class and related modules to !DataElement. Old code will
-  continue to work until pydicom 1.0, but with a !DeprecationWarning (issue22,
+  continue to work until pydicom3 1.0, but with a !DeprecationWarning (issue22,
   r72, r73)
 * Added support for character sets through Specific Character Set (0008,0005),
   using Python unicode. Thus foreign languages can display names in Greek,

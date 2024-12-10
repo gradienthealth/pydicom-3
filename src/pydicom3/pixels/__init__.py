@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 
 from pydicom3.pixels.decoders.base import get_decoder
 from pydicom3.pixels.encoders.base import get_encoder

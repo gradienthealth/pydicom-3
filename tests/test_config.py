@@ -1,4 +1,4 @@
-# Copyright 2008-2019 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2019 pydicom3 authors. See LICENSE file for details.
 """Unit tests for the pydicom3.config module."""
 
 import logging
@@ -6,10 +6,10 @@ import importlib
 
 import pytest
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.config import debug
 from pydicom3.data import get_testdata_file
-from pydicom import config
+from pydicom3 import config
 from pydicom3.dataelem import RawDataElement, convert_raw_data_element
 from pydicom3.dataset import Dataset
 from pydicom3.tag import Tag

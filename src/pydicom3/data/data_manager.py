@@ -1,4 +1,4 @@
-# Copyright 2008-2020 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2020 pydicom3 authors. See LICENSE file for details.
 """Management of pydicom's data files.
 
 
@@ -61,7 +61,7 @@ from pydicom3.data.download import (
 from pydicom3.misc import warn_and_log
 
 if TYPE_CHECKING:  # pragma: no cover
-    from pydicom import Dataset
+    from pydicom3 import Dataset
 
 
 DATA_ROOT = os.fspath(Path(__file__).parent.resolve())
@@ -287,7 +287,7 @@ def get_testdata_file(
     download: bool = True,
 ) -> "str | Dataset | None":
     """Return an absolute path to the first matching dataset with filename
-    `name` that is found in a local or external pydicom datastore.
+    `name` that is found in a local or external pydicom3 datastore.
 
     First searches the local *pydicom* data store, then any locally available
     external sources, and finally the files available in the
@@ -339,13 +339,13 @@ def get_testdata_file(
 
 
 def _get_testdata_file(name: str, download: bool = True) -> str | None:
-    # Check pydicom local
+    # Check pydicom3 local
     data_path = Path(DATA_ROOT) / "test_files"
 
     if Path(name).anchor:
         raise ValueError(
             f"'get_testdata_file' does not support absolute paths, as it only works"
-            f" with internal pydicom test data - did you mean 'dcmread(\"{name}\")'?"
+            f" with internal pydicom3 test data - did you mean 'dcmread(\"{name}\")'?"
         )
     matches = [m for m in data_path.rglob(name)]
     if matches:
@@ -405,7 +405,7 @@ def get_testdata_files(pattern: str = "**/*") -> list[str]:
     if Path(pattern).anchor:
         raise ValueError(
             "'get_testdata_files' does not support absolute paths, as it only works"
-            " with internal pydicom test data."
+            " with internal pydicom3 test data."
         )
     data_path = Path(DATA_ROOT) / "test_files"
 

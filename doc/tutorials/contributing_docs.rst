@@ -14,7 +14,7 @@ This tutorial will take you through the process of:
 Download the documentation
 ==========================
 
-1. Sign up to `GitHub <https://github.com>`_ and :gh:`fork pydicom <pydicom/fork>`
+1. Sign up to `GitHub <https://github.com>`_ and :gh:`fork pydicom3 <pydicom/fork>`
 2. Install `Git <https://git-scm.com/downloads>`_. If you're new to Git,
    the Django project has a good introduction on `working with Git and GitHub
    <https://docs.djangoproject.com/en/3.0/internals/contributing/writing-code/working-with-git/>`_.
@@ -125,7 +125,7 @@ markup::
   ===================
 
   In this tutorial we will be reading a DICOM file using
-  `pydicom <https://github.com/pydicom/pydicom>`_. The tasks you'll be doing
+  `pydicom3 <https://github.com/pydicom/pydicom>`_. The tasks you'll be doing
   will include:
 
   * Installing *pydicom*
@@ -154,7 +154,7 @@ markup::
   :func:`~pydicom3.data.get_testdata_file` function. To read the file
   ``CT_small.dcm`` we use :func:`~pydicom3.filereader.dcmread`::
 
-    >>> from pydicom import dcmread
+    >>> from pydicom3 import dcmread
     >>> from pydicom3.data import get_testdata_file
     >>> path = get_testdata_file("CT_small.dcm")
     >>> path
@@ -209,7 +209,7 @@ After committing the changes, send them to your fork::
 
   git push origin doc-tut
 
-You can create a pull request by visiting the :gh:`pydicom GitHub page
+You can create a pull request by visiting the :gh:`pydicom3 GitHub page
 <pydicom>` where you should see your branch under *"Your recently push
 branches"*. Click *"Compare & pull request"* and fill out the title (with a
 ``[WIP]`` prefix, i.e. ``[WIP] Add documentation of reading a DICOM file``)

@@ -1,4 +1,4 @@
-# Copyright 2008-2023 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2023 pydicom3 authors. See LICENSE file for details.
 """Unit tests for the pydicom3.dataset module."""
 
 import copy
@@ -24,8 +24,8 @@ except ImportError:
     HAVE_NP = False
 
 import pydicom
-from pydicom import config
-from pydicom import dcmread
+from pydicom3 import config
+from pydicom3 import dcmread
 from pydicom3.data import get_testdata_file
 from pydicom3.dataelem import DataElement, RawDataElement
 from pydicom3.dataset import Dataset, FileDataset, validate_file_meta, FileMetaDataset

@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Handle alternate character sets for character strings."""
 
 import codecs
@@ -9,7 +9,7 @@ from typing import (
 )
 from collections.abc import MutableSequence, Sequence
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.misc import warn_and_log
 from pydicom3.valuerep import TEXT_VR_DELIMS, PersonName, VR, CUSTOMIZABLE_CHARSET_VR
 

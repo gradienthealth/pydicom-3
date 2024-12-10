@@ -4,7 +4,7 @@ Test Files used for testing pydicom
 and are downloaded as needed.
 
 -----------------------------------
-I obtained images to test the pydicom code, and revised them as follow:
+I obtained images to test the pydicom3 code, and revised them as follow:
   * images were often downsized to keep the total file size quite small (typically <50K-ish). I wanted unittests for the code where I could run a number of tests quickly, and with files I could include in the source (and binary) distributions without bloating them too much
   * In some cases, the original files have been binary edited to replace anything that looks like a real patient name
 

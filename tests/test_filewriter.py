@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """test cases for pydicom3.filewriter module"""
 import tempfile
 from copy import deepcopy
@@ -24,7 +24,7 @@ except ImportError:
 
 import pytest
 
-from pydicom import config, __version_info__, uid
+from pydicom3 import config, __version_info__, uid
 from pydicom3.data import get_testdata_file, get_charset_files
 from pydicom3.dataset import Dataset, FileDataset, FileMetaDataset
 from pydicom3.dataelem import DataElement, RawDataElement

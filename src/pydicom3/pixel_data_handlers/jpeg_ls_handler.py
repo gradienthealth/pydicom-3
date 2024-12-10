@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """
 Use the `jpeg_ls (pyjpegls) <https://github.com/pydicom/pyjpegls>`_ Python
 package to decode *Pixel Data*.

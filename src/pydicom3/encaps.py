@@ -1,4 +1,4 @@
-# Copyright 2008-2020 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2020 pydicom3 authors. See LICENSE file for details.
 """Functions for working with encapsulated (compressed) pixel data."""
 
 from collections.abc import Iterator
@@ -7,7 +7,7 @@ import os
 from struct import pack, unpack
 from typing import Any
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.misc import warn_and_log
 from pydicom3.filebase import DicomBytesIO, DicomIO, ReadableBuffer
 from pydicom3.fileutil import buffer_length, reset_buffer_position
@@ -1168,7 +1168,7 @@ def encapsulate_buffer(
 
     .. code-block:: python
 
-        from pydicom import Dataset, FileMetaDataset
+        from pydicom3 import Dataset, FileMetaDataset
         from pydicom3.encaps import encapsulate_buffer
         from pydicom3.uid import JPEG2000Lossless
 
@@ -1233,7 +1233,7 @@ def encapsulate_extended(frames: list[bytes]) -> tuple[bytes, bytes, bytes]:
 
     .. code-block:: python
 
-        from pydicom import Dataset, FileMetaDataset
+        from pydicom3 import Dataset, FileMetaDataset
         from pydicom3.encaps import encapsulate_extended
         from pydicom3.uid import JPEG2000Lossless
 
@@ -1296,7 +1296,7 @@ def encapsulate_extended_buffer(
 
     .. code-block:: python
 
-        from pydicom import Dataset, FileMetaDataset
+        from pydicom3 import Dataset, FileMetaDataset
         from pydicom3.encaps import encapsulate_extended_buffer
         from pydicom3.uid import JPEG2000Lossless
 

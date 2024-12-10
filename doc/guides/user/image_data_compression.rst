@@ -38,7 +38,7 @@ transfer syntaxes:
 +-----------------------+------------------------+                  | `pylibjpeg <pylj_>`_,       |
 | JPEG 2000             | 1.2.840.10008.1.2.4.91 |                  | `pylibjpeg-openjpeg <oj_>`_ |
 +-----------------------+------------------------+------------------+-----------------------------+
-| RLE Lossless          | 1.2.840.10008.1.2.5    | pydicom :sup:`1` |                             |
+| RLE Lossless          | 1.2.840.10008.1.2.5    | pydicom3 :sup:`1` |                             |
 |                       |                        +------------------+-----------------------------+
 |                       |                        | pylibjpeg        | `numpy <np_>`_,             |
 |                       |                        |                  | `pylibjpeg <pylj_>`_,       |
@@ -76,7 +76,7 @@ dataset in-place:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import RLELossless
 
     ds = examples.ct
@@ -133,7 +133,7 @@ for more information.
 
     from typing import List, Tuple
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.encaps import encapsulate, encapsulate_extended
     from pydicom3.uid import JPEGBaseline8Bit
 

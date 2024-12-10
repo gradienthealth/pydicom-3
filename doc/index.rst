@@ -1,6 +1,6 @@
 
 =====================
-pydicom documentation
+pydicom3 documentation
 =====================
 
 .. toctree::

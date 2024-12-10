@@ -24,7 +24,7 @@ common sampling frequency (in Hz), which is given by the (003A,001A) *Sampling
 Frequency*. The waveform data for each multiplex is encoded in the
 corresponding (5400,1010) *Waveform Data* element.
 
->>> from pydicom import examples
+>>> from pydicom3 import examples
 >>> ds = examples.waveform
 >>> ds.WaveformSequence
 <Sequence, length 2>

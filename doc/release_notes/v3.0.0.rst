@@ -166,7 +166,7 @@ Enhancements
 * Added the ability to register private transfer syntaxes with
   :func:`~pydicom3.uid.register_transfer_syntax` so they can be used when reading
   datasets with :func:`~pydicom3.filereader.dcmread`.
-* Warning messages are also sent to the pydicom logger (:issue:`1529`).
+* Warning messages are also sent to the pydicom3 logger (:issue:`1529`).
 * Added the following to the :mod:`~pydicom3.encaps` module:
 
   * :func:`~pydicom3.encaps.parse_basic_offsets` for parsing the Basic Offset Table.
@@ -236,7 +236,7 @@ Enhancements
   dataset's *Pixel Data* and related Image Pixel module elements using an
   :class:`~numpy.ndarray` (:issue:`50`).
 * Added typing support for :class:`~pydicom3.dataset.Dataset` element access using the
-  `types-pydicom <https://github.com/pydicom/types-pydicom>`_ package. (:issue:`1485`).
+  `types-pydicom3 <https://github.com/pydicom/types-pydicom>`_ package. (:issue:`1485`).
 * Added :func:`~pydicom3.pixels.apply_presentation_lut` for applying a Presentation LUT
   to an :class:`~numpy.ndarray` (:issue:`1265`).
 * Added :func:`~pydicom3.pixels.apply_icc_profile` and :func:`~pydicom3.pixels.create_icc_transform`
@@ -264,7 +264,7 @@ Fixes
 * Fixed the GDCM and pylibjpeg handlers changing the *Pixel Representation* value to 0
   when the J2K stream disagrees with the dataset and
   :attr:`~pydicom3.config.APPLY_J2K_CORRECTIONS` is ``True`` (:issue:`1689`).
-* Fixed pydicom codify error when relative path did not exist.
+* Fixed pydicom3 codify error when relative path did not exist.
 * Fixed the VR enum sometimes returning invalid values for Python 3.11+ (:issue:`1874`).
 * Fixed pixel data handler for Pillow 10.1 raising an AttributeError (:issue:`1907`).
 * Fixed a possible security issue with :class:`~pydicom3.fileset.FileInstance` instances

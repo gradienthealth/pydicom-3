@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Common objects for pixel data handling."""
 
 from enum import Enum, unique

@@ -1,7 +1,7 @@
 .. _pydicom_user_guide:
 
 ==================
-pydicom User Guide
+pydicom3 User Guide
 ==================
 
 .. toctree::

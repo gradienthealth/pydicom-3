@@ -1,4 +1,4 @@
-# Copyright 2008-2020 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2020 pydicom3 authors. See LICENSE file for details.
 """Unit tests for the pydicom3.sequence module."""
 
 import copy

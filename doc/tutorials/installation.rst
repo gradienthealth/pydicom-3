@@ -55,7 +55,7 @@ The default *pydicom* type hinting doesn't cover standard element keywords acces
 through :class:`~pydicom3.dataset.Dataset`::
 
     # foo.py
-    from pydicom import Dataset
+    from pydicom3 import Dataset
 
     ds = Dataset()
     ds.PatientName = 1234
@@ -65,7 +65,7 @@ through :class:`~pydicom3.dataset.Dataset`::
     $ mypy foo.py
     Success: no issues found in 1 source file
 
-To add extra type hints for these attributes you can install the `types-pydicom <https://github.com/pydicom/types-pydicom>`_ package::
+To add extra type hints for these attributes you can install the `types-pydicom3 <https://github.com/pydicom/types-pydicom>`_ package::
 
     pip install types-pydicom
 

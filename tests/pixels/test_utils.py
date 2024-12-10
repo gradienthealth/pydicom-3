@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Tests for the pixels.utils module."""
 
 import importlib
@@ -18,7 +18,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import dcmread, config
+from pydicom3 import dcmread, config
 from pydicom3.dataset import Dataset, FileMetaDataset
 from pydicom3.encaps import get_frame, encapsulate
 from pydicom3.pixels import pixel_array, iter_pixels, convert_color_space

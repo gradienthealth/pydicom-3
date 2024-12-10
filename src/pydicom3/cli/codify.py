@@ -1,4 +1,4 @@
-# Copyright 2020 pydicom authors. See LICENSE file for details.
+# Copyright 2020 pydicom3 authors. See LICENSE file for details.
 """Pydicom command line interface program for codify"""
 
 import argparse
@@ -13,7 +13,7 @@ def add_subparser(subparsers: argparse._SubParsersAction) -> None:
     codify_parser = subparsers.add_parser(
         "codify",
         description=(
-            "Read a DICOM file and produce the pydicom (Python) "
+            "Read a DICOM file and produce the pydicom3 (Python) "
             "code which can create that file"
         ),
         epilog=(

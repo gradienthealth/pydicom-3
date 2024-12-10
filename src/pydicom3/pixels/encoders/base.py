@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Pixel data encoding."""
 
 from collections.abc import Callable, Iterator, Iterable
@@ -12,7 +12,7 @@ try:
 except ImportError:
     pass
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.pixels.common import Buffer, RunnerBase, CoderBase, RunnerOptions
 from pydicom3.uid import (
     UID,
@@ -827,7 +827,7 @@ _PIXEL_DATA_ENCODERS = {
 def _build_encoder_docstrings() -> None:
     """Override the default Encoder docstring."""
     plugin_doc_links = {
-        "pydicom": ":ref:`pydicom <encoder_plugin_pydicom>`",
+        "pydicom": ":ref:`pydicom3 <encoder_plugin_pydicom>`",
         "pylibjpeg": ":ref:`pylibjpeg <encoder_plugin_pylibjpeg>`",
         "gdcm": ":ref:`gdcm <encoder_plugin_gdcm>`",
         "pyjpegls": ":ref:`pyjpegls <encoder_plugin_pyjpegls>`",

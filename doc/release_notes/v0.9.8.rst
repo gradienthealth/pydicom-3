@@ -1,9 +1,9 @@
 Version 0.9.8
 =============
 
-pydicom 0.9.8 is mainly a consolidation step before moving to official Python 3
-compatibility in pydicom 1.0.  It also reverts the change to using Decimal for
-VR of DS (in pydicom 0.9.7), due to performance issues. DS as Decimal is still
+pydicom3 0.9.8 is mainly a consolidation step before moving to official Python 3
+compatibility in pydicom3 1.0.  It also reverts the change to using Decimal for
+VR of DS (in pydicom3 0.9.7), due to performance issues. DS as Decimal is still
 available, but is off by default.
 
 Major changes
@@ -15,7 +15,7 @@ Major changes
   issues list.
 * DS values reverted to using float as default (issue 114) due to slow
   performance using Python Decimal. Speed tests show approx factor of 10
-  improvement compared with pydicom 0.9.7 (several revisions up to
+  improvement compared with pydicom3 0.9.7 (several revisions up to
   r78ba350a3eb8)
 * streamlined much code internally taking advantage of modern Python
   constructs: decorators, generators, etc

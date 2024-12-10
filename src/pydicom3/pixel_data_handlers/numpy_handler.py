@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Use the `numpy <https://numpy.org/>`_ package to convert supported pixel
 data to a :class:`numpy.ndarray`.
 

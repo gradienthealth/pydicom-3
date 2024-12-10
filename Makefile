@@ -10,7 +10,7 @@ test-doc:
 
 test-coverage:
 	rm -rf coverage .coverage
-	pytest pydicom --cov-report term-missing --cov=pydicom
+	pytest pydicom3 --cov-report term-missing --cov=pydicom
 
 test: test-code test-doc
 

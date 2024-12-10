@@ -1,4 +1,4 @@
-# Copyright 2008-2020 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2020 pydicom3 authors. See LICENSE file for details.
 """DICOM File-set handling."""
 
 from collections.abc import Iterator, Iterable, Callable
@@ -1104,7 +1104,7 @@ class FileSet:
 
         .. code-block:: python
 
-            from pydicom import Dataset, examples
+            from pydicom3 import Dataset, examples
             from pydicom3.fileset import FileSet, RecordNode
             from pydicom3.uid import generate_uid
 
@@ -1252,7 +1252,7 @@ class FileSet:
 
         if len(self) > 35**6:
             raise NotImplementedError(
-                "pydicom doesn't support writing File-sets with more than "
+                "pydicom3 doesn't support writing File-sets with more than "
                 "1838265625 managed instances"
             )
 
@@ -1688,7 +1688,7 @@ class FileSet:
                 continue
 
             # If the instance's existing directory structure doesn't match
-            #   the pydicom semantics then stage for movement
+            #   the pydicom3 semantics then stage for movement
             if instance.for_moving:
                 self._stage["~"] = True
 
@@ -2089,7 +2089,7 @@ class FileSet:
 
         if len(self) > 35**6:
             raise NotImplementedError(
-                "pydicom doesn't support writing File-sets with more than "
+                "pydicom3 doesn't support writing File-sets with more than "
                 "1838265625 managed instances"
             )
 

@@ -4,7 +4,7 @@ import sys
 
 import pytest
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.data import get_testdata_file
 from pydicom3.pixels.encoders import RLELosslessEncoder
 from pydicom3.pixels.encoders.base import EncodeRunner

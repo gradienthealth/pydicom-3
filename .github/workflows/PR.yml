@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         # One Python version per OS, one combo does coverage
-        # PyPy only has one line in pydicom (as of 2003-07) so cover in merge only
+        # PyPy only has one line in pydicom3 (as of 2003-07) so cover in merge only
         # Macos unlikely to fail if ubuntu okay so also cover in merge
         os: [windows]
         python-version: ["3.12", "3.13"]

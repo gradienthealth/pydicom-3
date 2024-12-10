@@ -1,4 +1,4 @@
-# Copyright 2024 pydicom authors. See LICENSE file for details.
+# Copyright 2024 pydicom3 authors. See LICENSE file for details.
 """Use GDCM <https://github.com/malaterre/GDCM> to decompress encoded
 *Pixel Data*.
 
@@ -7,7 +7,7 @@ This module is not intended to be used directly.
 
 from typing import cast
 
-from pydicom import uid
+from pydicom3 import uid
 from pydicom3.pixels.decoders.base import DecodeRunner
 from pydicom3.pixels.common import PhotometricInterpretation as PI
 

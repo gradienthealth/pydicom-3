@@ -31,18 +31,18 @@ It's also extremely helpful if you can include one of the following:
 * The **anonymized** DICOM dataset, which can be attached to the issue as a zip archive, or
 * The output from:
 
-  For **pydicom >= 2.3**:
+  For **pydicom3 >= 2.3**:
   ```python
-  from pydicom import dcmread
+  from pydicom3 import dcmread
   from pydicom3.util import debug_pixel_data
 
   ds = dcmread("/path/to/the/dataset")
   debug_pixel_data(ds)
   ```
 
-  For **pydicom < 2.3**:
+  For **pydicom3 < 2.3**:
   ```python
-  from pydicom import dcmread
+  from pydicom3 import dcmread
 
   ds = dcmread("/path/to/the/dataset")
   print(ds.file_meta.get("TransferSyntaxUID", "(no transfer syntax)"))

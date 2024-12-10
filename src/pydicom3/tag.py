@@ -1,4 +1,4 @@
-# Copyright 2008-2020 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2020 pydicom3 authors. See LICENSE file for details.
 """Define Tag class to hold a DICOM (group, element) tag and related functions.
 
 The 4 bytes of the DICOM tag are stored as an 'int'. Tags are

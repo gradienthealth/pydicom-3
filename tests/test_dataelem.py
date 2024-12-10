@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Unit tests for the pydicom3.dataelem module."""
 
 # Many tests of DataElement class are implied in test_dataset also
@@ -12,7 +12,7 @@ import tempfile
 
 import pytest
 
-from pydicom import filewriter, config, dcmread
+from pydicom3 import filewriter, config, dcmread
 from pydicom3.charset import default_encoding
 from pydicom3.data import get_testdata_file
 from pydicom3.datadict import add_private_dict_entry

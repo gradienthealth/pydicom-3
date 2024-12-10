@@ -96,7 +96,7 @@ Available Plugins
 |                                                   +---------+--------------------------------------+-----+----------------------+
 |                                                   | Name    | Requires                             |Added| Known Limitations    |
 +===================================================+=========+======================================+=====+======================+
-|:attr:`~pydicom3.pixels.encoders.RLELosslessEncoder`| pydicom |                                      |v2.2 | ~20x slower to encode|
+|:attr:`~pydicom3.pixels.encoders.RLELosslessEncoder`| pydicom3 |                                      |v2.2 | ~20x slower to encode|
 |                                                   +---------+--------------------------------------+-----+----------------------+
 |                                                   |pylibjpeg|:ref:`NumPy<tut_install_np>`,         |v2.2 |                      |
 |                                                   |         |:ref:`pylibjpeg<tut_install_pylj>`,   |     |                      |
@@ -112,7 +112,7 @@ Compressing grayscale pixel data in-place:
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.uid import RLELossless
     >>> ds = examples.ct
     >>> ds.SamplesPerPixel
@@ -129,7 +129,7 @@ Compressing RGB pixel data in-place:
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> ds = examples.rgb_color
     >>> ds.SamplesPerPixel
     3
@@ -152,7 +152,7 @@ new *SOP Instance UID*:
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.pixels import convert_color_space
     >>> from pydicom3.uid import generate_uid
     >>> ds = examples.rgb_color

@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Functions related to writing DICOM data."""
 
 from collections.abc import Sequence, MutableSequence, Iterable
@@ -9,7 +9,7 @@ from typing import BinaryIO, Any, cast
 from collections.abc import Callable
 import zlib
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.charset import default_encoding, convert_encodings, encode_string
 from pydicom3.dataelem import (
     convert_raw_data_element,

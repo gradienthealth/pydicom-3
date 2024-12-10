@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Read a dicom media file"""
 
 import os

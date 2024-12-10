@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Unit tests for the pydicom3.filereader module."""
 
 import gzip
@@ -15,7 +15,7 @@ import tempfile
 import pytest
 
 import pydicom3.config
-from pydicom import config, dicomio
+from pydicom3 import config, dicomio
 from pydicom3.dataset import Dataset, FileDataset, FileMetaDataset
 from pydicom3.data import get_testdata_file
 from pydicom3.datadict import add_dict_entries
@@ -40,7 +40,7 @@ from pydicom3.uid import (
     PrivateTransferSyntaxes,
 )
 import pydicom3.valuerep
-from pydicom import values
+from pydicom3 import values
 
 
 from pydicom3.pixel_data_handlers import gdcm_handler

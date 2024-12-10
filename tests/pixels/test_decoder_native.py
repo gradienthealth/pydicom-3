@@ -2,7 +2,7 @@
 
 import pytest
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.data import get_testdata_file
 from pydicom3.pixels import get_decoder
 from pydicom3.pixels.decoders import (

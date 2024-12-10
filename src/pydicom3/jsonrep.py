@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Methods for converting Datasets and DataElements to/from json"""
 
 import base64
@@ -274,7 +274,7 @@ class JsonDataElementConverter:
         KeyError
             If the "vr" key is missing for a contained element
         """
-        from pydicom import DataElement
+        from pydicom3 import DataElement
         from pydicom3.dataelem import empty_value_for_VR
 
         ds = self.dataset_class()

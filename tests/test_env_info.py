@@ -1,4 +1,4 @@
-# Copyright 2020 pydicom authors. See LICENSE file for details.
+# Copyright 2020 pydicom3 authors. See LICENSE file for details.
 """Unit tests for the env_info module."""
 
 import pydicom3.env_info

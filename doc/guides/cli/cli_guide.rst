@@ -1,6 +1,6 @@
 :orphan:
 
-.. rubric:: pydicom command-line interface
+.. rubric:: pydicom3 command-line interface
 
 .. _cli_guide:
 

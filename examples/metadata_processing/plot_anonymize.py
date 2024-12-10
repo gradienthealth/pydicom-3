@@ -20,7 +20,7 @@ optionally remove curves and private tags, and write the results in a new file.
 
 import tempfile
 
-from pydicom import examples
+from pydicom3 import examples
 
 ds = examples.mr
 
@@ -52,7 +52,7 @@ ds.walk(person_names_callback)
 ds.walk(curves_callback)
 
 ###############################################################################
-# pydicom allows to remove private tags using ``remove_private_tags`` method
+# pydicom3 allows to remove private tags using ``remove_private_tags`` method
 
 ds.remove_private_tags()
 

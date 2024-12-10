@@ -155,7 +155,7 @@ Losslessly compress unsigned RGB pixel data in-place:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPEGLSLossless
 
     ds = examples.rgb_color
@@ -175,7 +175,7 @@ Losslessly compress signed greyscale pixel data in-place:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPEGLSLossless
 
     ds = examples.ct
@@ -211,7 +211,7 @@ intensity units:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPEGLSNearLossless
 
     ds = examples.rgb_color
@@ -232,7 +232,7 @@ intensity units:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPEGLSNearLossless
 
     ds = examples.ct

@@ -1,9 +1,9 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Test for datadict.py"""
 
 import pytest
 
-from pydicom import DataElement
+from pydicom3 import DataElement
 from pydicom3.dataset import Dataset
 from pydicom3.datadict import (
     keyword_for_tag,

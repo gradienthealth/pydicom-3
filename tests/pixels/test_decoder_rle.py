@@ -1,11 +1,11 @@
-"""Tests for the RLELosslessDecoder and the pydicom RLE plugin."""
+"""Tests for the RLELosslessDecoder and the pydicom3 RLE plugin."""
 
 from io import BytesIO
 from struct import pack, unpack
 
 import pytest
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.config import debug
 from pydicom3.encaps import get_frame, generate_frames, encapsulate
 from pydicom3.pixels import get_decoder

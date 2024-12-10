@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Utilities for pixel data handling."""
 
 from collections.abc import Iterable, Iterator
@@ -323,7 +323,7 @@ def compress(
 
     Compress the existing uncompressed *Pixel Data* in place:
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.pixels import compress
     >>> from pydicom3.uid import RLELossless
     >>> ds = examples.ct
@@ -1117,7 +1117,7 @@ def iter_pixels(
 
     Read a DICOM dataset then iterate through all the pixel data frames::
 
-        from pydicom import dcmread
+        from pydicom3 import dcmread
         from pydicom3.pixels import iter_pixels
 
         ds = dcmread("path/to/dataset.dcm")
@@ -1410,7 +1410,7 @@ def pixel_array(
 
      Read a DICOM dataset and return the entire pixel data::
 
-        from pydicom import dcmread
+        from pydicom3 import dcmread
         from pydicom3.pixels import pixel_array
 
         ds = dcmread("path/to/dataset.dcm")

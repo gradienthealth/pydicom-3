@@ -46,7 +46,7 @@ The waveforms within a dataset are contained in the items of the (5400,0100)
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> ds = examples.waveform
     >>> ds.SOPClassUID.name
     '12-lead ECG Waveform Storage'
@@ -257,7 +257,7 @@ We should now be able to plot our new waveforms:
 
 .. code-block:: python
 
-    >>> from pydicom import dcmread
+    >>> from pydicom3 import dcmread
     >>> ds = dcmread("my_waveform.dcm")
     >>> arr = ds.waveform_array(2)
     >>> fig, (ax1, ax2) = plt.subplots(2)

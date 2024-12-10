@@ -107,7 +107,7 @@ multiple-component transformation:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPE2000Lossless
 
     ds = examples.rgb_color
@@ -127,7 +127,7 @@ transformation:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPE2000Lossless
 
     ds = examples.rgb_color
@@ -149,7 +149,7 @@ Losslessly compress signed greyscale pixel data in-place:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPE2000Lossless
 
     ds = examples.ct
@@ -206,7 +206,7 @@ Lossy compression of unsigned RGB pixel data without multiple-component transfor
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPEG2000
 
     ds = examples.rgb_color
@@ -226,7 +226,7 @@ Lossy compression of unsigned RGB pixel data with multiple-component transformat
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPEG2000
 
     ds = examples.rgb_color
@@ -249,7 +249,7 @@ Lossy compression of signed greyscale pixel data:
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.uid import JPEG2000
 
     ds = examples.ct

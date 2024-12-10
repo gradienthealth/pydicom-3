@@ -12,7 +12,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import dcmread, examples
+from pydicom3 import dcmread, examples
 from pydicom3.data import get_testdata_file
 from pydicom3.encaps import encapsulate, get_frame
 from pydicom3.pixels.encoders import (

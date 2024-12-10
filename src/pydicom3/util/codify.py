@@ -1,9 +1,9 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """
 Produce runnable python code which can recreate DICOM objects or files.
 
 Can run as a script to produce code for an entire file,
-or import and use specific functions to provide code for pydicom DICOM classes
+or import and use specific functions to provide code for pydicom3 DICOM classes
 
 """
 
@@ -359,7 +359,7 @@ def code_file_from_dataset(
     Parameters
     ----------
     ds : Dataset
-        A pydicom Dataset to convert
+        A pydicom3 Dataset to convert
     exclude_size : int |None
         If not None, values longer than this (in bytes)
         will only have a commented string for a value,
@@ -383,7 +383,7 @@ def code_file_from_dataset(
 
     lines.append("# -*- coding: utf-8 -*-")
     lines.append(f"# Coded version of {identifier}")
-    lines.append("# Produced by pydicom codify utility script")
+    lines.append("# Produced by pydicom3 codify utility script")
 
     # Code the necessary imports
     lines.append(code_imports())
@@ -466,7 +466,7 @@ def set_parser_arguments(
 
 
 def do_codify(args: argparse.Namespace) -> None:
-    # Convert the requested dataset to python/pydicom code lines
+    # Convert the requested dataset to python/pydicom3 code lines
     if len(args.filespec) != 1:
         raise NotImplementedError("Codify can only work on a single DICOM file input")
 
@@ -513,7 +513,7 @@ def main(default_exclude_size: int, args: list[str] | None = None) -> None:
         used.
     """
     parser = argparse.ArgumentParser(
-        description="Produce python/pydicom code from a DICOM file",
+        description="Produce python/pydicom3 code from a DICOM file",
         epilog=(
             "Binary data (e.g. pixels) larger than --exclude-size "
             f"(default {default_exclude_size} bytes) is not included. A "

@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Tests for the pixel_data_handlers.numpy_handler module.
 
 There are the following possibilities:
@@ -29,7 +29,7 @@ There are the following possibilities:
 
 import pytest
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.data import get_testdata_file
 from pydicom3.dataset import Dataset, FileMetaDataset
 from pydicom3.filereader import dcmread

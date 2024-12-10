@@ -1,4 +1,4 @@
-# Copyright 2008-2019 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2019 pydicom3 authors. See LICENSE file for details.
 """Tests for the overlays.numpy_handler module.
 
 There are the following possibilities:

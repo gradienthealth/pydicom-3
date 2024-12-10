@@ -10,7 +10,7 @@ This example illustrates how to print the data set in your own format.
 # authors : Guillaume Lemaitre <g.lemaitre58@gmail.com>
 # license : MIT
 
-from pydicom import examples
+from pydicom3 import examples
 
 print(__doc__)
 

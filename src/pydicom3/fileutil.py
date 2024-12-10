@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Functions for reading to certain bytes, e.g. delimiters."""
 
 from collections.abc import Generator, Iterator

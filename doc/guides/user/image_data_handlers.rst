@@ -40,7 +40,7 @@ Supported Transfer Syntaxes
 
 To get the transfer syntax of a dataset you can do::
 
-  >>> from pydicom import dcmread
+  >>> from pydicom3 import dcmread
   >>> ds = dcmread('path/to/dicom/file')
   >>> ds.file_meta.TransferSyntaxUID
   '1.2.840.10008.1.2.1'

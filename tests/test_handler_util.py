@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Tests for the pixel_data_handlers.util module."""
 
 from sys import byteorder
@@ -12,7 +12,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import config
+from pydicom3 import config
 
 with pytest.warns(DeprecationWarning):
     from pydicom3.pixel_data_handlers.util import dtype_corrected_for_endianness

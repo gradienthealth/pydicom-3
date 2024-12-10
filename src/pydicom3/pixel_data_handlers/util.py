@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 # TODO: remove module in v4.0
 """Utility functions used in the pixel data handlers."""
 
@@ -10,7 +10,7 @@ try:
 except ImportError:
     pass
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.misc import warn_and_log
 
 

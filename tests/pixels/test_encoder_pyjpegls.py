@@ -11,7 +11,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import Dataset, examples
+from pydicom3 import Dataset, examples
 from pydicom3.encaps import encapsulate, get_frame
 from pydicom3.pixels.encoders import (
     JPEGLSLosslessEncoder,

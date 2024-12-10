@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Define the DataElement class.
 
 A DataElement has a tag,
@@ -14,7 +14,7 @@ from io import BufferedIOBase
 import json
 from typing import Any, TYPE_CHECKING, NamedTuple
 
-from pydicom import config  # don't import datetime_conversion directly
+from pydicom3 import config  # don't import datetime_conversion directly
 from pydicom3.config import logger
 from pydicom3.datadict import (
     dictionary_has_tag,
@@ -31,7 +31,7 @@ from pydicom3.misc import warn_and_log
 from pydicom3.multival import MultiValue
 from pydicom3.tag import Tag, BaseTag, _LUT_DESCRIPTOR_TAGS
 from pydicom3.uid import UID
-from pydicom import jsonrep
+from pydicom3 import jsonrep
 from pydicom3.fileutil import check_buffer, buffer_length, buffer_equality
 import pydicom3.valuerep  # don't import DS directly as can be changed by config
 from pydicom3.valuerep import (
@@ -115,7 +115,7 @@ class DataElement:
     While its possible to create a new :class:`DataElement` directly and add
     it to a :class:`~pydicom3.dataset.Dataset`:
 
-    >>> from pydicom import Dataset
+    >>> from pydicom3 import Dataset
     >>> elem = DataElement(0x00100010, 'PN', 'CITIZEN^Joan')
     >>> ds = Dataset()
     >>> ds.add(elem)

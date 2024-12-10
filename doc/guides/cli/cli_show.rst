@@ -1,26 +1,26 @@
 
-``pydicom show`` command
+``pydicom3 show`` command
 ========================
 
-The `pydicom show` command displays representation of DICOM files or parts of them
+The `pydicom3 show` command displays representation of DICOM files or parts of them
 from a command-line terminal.
 
 Some examples were already given in the :ref:`cli_intro`, but here we will
 show some additional options.
 
-To see the available options, in a command-line terminal, type ``pydicom help show``
-or ``pydicom show -h``.
+To see the available options, in a command-line terminal, type ``pydicom3 help show``
+or ``pydicom3 show -h``.
 
 .. code-block:: console
 
-    $ pydicom help show
-    usage: pydicom show [-h] [-x] [-t] [-q] filespec
+    $ pydicom3 help show
+    usage: pydicom3 show [-h] [-x] [-t] [-q] filespec
 
     Display all or part of a DICOM file
 
     positional arguments:
     filespec              File specification, in format [pydicom::]filename[::element]. If `pydicom::`
-                            prefix is present, then use the pydicom test file with that name. If `element`
+                            prefix is present, then use the pydicom3 test file with that name. If `element`
                             is given, use only that data element within the file. Examples:
                             path/to/your_file.dcm, your_file.dcm::StudyDate,
                             pydicom::rtplan.dcm::BeamSequence[0], yourplan.dcm::BeamSequence[0].BeamNumber
@@ -36,7 +36,7 @@ The basic command with no options shows all data elements and nested sequences:
 
 .. code-block:: console
 
-    $ pydicom show pydicom::CT_small.dcm
+    $ pydicom3 show pydicom::CT_small.dcm
     Dataset.file_meta -------------------------------
     (0002, 0000) File Meta Information Group Length  UL: 192
     (0002, 0001) File Meta Information Version       OB: b'\x00\x01'
@@ -69,14 +69,14 @@ Note that prefixing the file specification with ``pydicom::`` will read the file
 from the *pydicom* test data files rather than from the file system.
 
 You can also show just parts of the DICOM file by specifying a data element
-using the usual pydicom keyword notation:
+using the usual pydicom3 keyword notation:
 
 .. code-block:: console
 
-    $ pydicom show pydicom::CT_small.dcm::PatientName
+    $ pydicom3 show pydicom::CT_small.dcm::PatientName
     CompressedSamples^CT1
 
-    $ pydicom show pydicom::rtplan.dcm::FractionGroupSequence
+    $ pydicom3 show pydicom::rtplan.dcm::FractionGroupSequence
     [(300a, 0071) Fraction Group Number               IS: "1"
     (300a, 0078) Number of Fractions Planned         IS: "30"
     (300a, 0080) Number of Beams                     IS: "1"
@@ -92,7 +92,7 @@ The ``-q`` quiet argument shows a minimal version of some of the information in 
 file, using just the DICOM keyword and value (not showing the tag numbers
 and VR). The example below shows the quiet mode with an image slice::
 
-    pydicom show -q pydicom::ct_small.dcm
+    pydicom3 show -q pydicom::ct_small.dcm
 
     SOPClassUID: CT Image Storage
     PatientName: CompressedSamples^CT1
@@ -109,7 +109,7 @@ and VR). The example below shows the quiet mode with an image slice::
 
 And the following example shows an RT Plan in quiet mode::
 
-    pydicom show -q pydicom::rtplan.dcm
+    pydicom3 show -q pydicom::rtplan.dcm
 
     SOPClassUID: RT Plan Storage
     PatientName: Last^First^mid^pre

@@ -1,7 +1,7 @@
-# Copyright 2020 pydicom authors. See LICENSE file for details.
+# Copyright 2020 pydicom3 authors. See LICENSE file for details.
 
 # Copyright 2018-2019 Cancer Care Associates.
-# Relicensed under pydicom LICENSE by Simon Biggs.
+# Relicensed under pydicom3 LICENSE by Simon Biggs.
 
 import functools
 import hashlib
@@ -70,7 +70,7 @@ def calculate_file_hash(fpath: pathlib.Path) -> str:
 
 
 def get_config_dir() -> pathlib.Path:
-    """Return the path to the pydicom config directory, creating it if required
+    """Return the path to the pydicom3 config directory, creating it if required
 
     The config directory will be named ``.pydicom`` and will be created in the
     local user's home directory.

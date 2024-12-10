@@ -11,10 +11,10 @@ Enhancements
 * the ``codify`` script now supports VRs OD and OL, and works in Python 3
   (:issue:`498`); documentation has been added for ``codify``
 * the performance for reading and writing datasets has been improved to
-  be better than in pydicom 0.9.9 (:issue:`605`, :issue:`512`)
+  be better than in pydicom3 0.9.9 (:issue:`605`, :issue:`512`)
 * added support for bit-packed pixel data (:issue:`292`)
 * updated DICOM dictionary for 2018b edition
-* added full API documentation to pydicom documentation (:issue:`649`)
+* added full API documentation to pydicom3 documentation (:issue:`649`)
 
 Fixes
 -----

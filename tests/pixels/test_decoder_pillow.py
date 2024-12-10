@@ -16,7 +16,7 @@ try:
 except ImportError:
     pass
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.encaps import get_frame
 from pydicom3.pixels import get_decoder
 from pydicom3.pixels.decoders.pillow import is_available

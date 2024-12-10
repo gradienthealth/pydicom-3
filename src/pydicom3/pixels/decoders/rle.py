@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Use Python to decode RLE Lossless encoded *Pixel Data*.
 
 This module is not intended to be used directly.

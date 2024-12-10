@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Test suite for util functions"""
 import copy
 from contextlib import contextmanager
@@ -7,8 +7,8 @@ import os
 
 import pytest
 
-from pydicom import config, dcmread, Dataset, Sequence
-from pydicom import filereader
+from pydicom3 import config, dcmread, Dataset, Sequence
+from pydicom3 import filereader
 from pydicom3._private_dict import private_dictionaries
 from pydicom3.data import get_testdata_file
 from pydicom3.dataelem import DataElement

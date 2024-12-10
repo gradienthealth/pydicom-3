@@ -16,7 +16,7 @@ Download the current source code
 ================================
 
 1. Sign up to `GitHub <https://github.com>`_ and
-   :gh:`fork pydicom <pydicom/fork>`
+   :gh:`fork pydicom3 <pydicom/fork>`
 2. Install `Git <https://git-scm.com/downloads>`_. If you're new to Git,
    the Django project has a good introduction on `working with Git and GitHub
    <https://docs.djangoproject.com/en/3.0/internals/contributing/writing-code/working-with-git/>`_.
@@ -97,7 +97,7 @@ work as intended.
    find the following resources useful:
 
    * Take a look at the
-     :gh:`existing pydicom test suite <pydicom/tree/main/tests>`
+     :gh:`existing pydicom3 test suite <pydicom/tree/main/tests>`
      and see how the tests are written. There are examples for writing
      :gh:`a single test <pydicom/blob/73cffe3151915b53a18b521656680d819e7e1a18/pydicom/tests/test_rle_pixel_data.py#L137>`,
      :gh:`a group of related tests <pydicom/blob/73cffe3151915b53a18b521656680d819e7e1a18/pydicom/tests/test_dataelem.py#L27>`,
@@ -215,7 +215,7 @@ patch, send it to your fork::
 
   $ git push origin new-uid
 
-You can create a pull request by visiting the :gh:`pydicom GitHub page
+You can create a pull request by visiting the :gh:`pydicom3 GitHub page
 <pydicom>` where you should see your branch under *"Your recently push
 branches"*. Click *"Compare & pull request"* and fill out the title (with a
 ``[WIP]`` prefix, i.e. ``[WIP] Add NewDefinedUID to uid.py``) and follow the

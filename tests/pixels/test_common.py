@@ -9,7 +9,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.pixels.common import CoderBase, RunnerBase, PhotometricInterpretation as PI
 from pydicom3.uid import (
     RLELossless,

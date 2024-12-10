@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Use the `GDCM <https://sourceforge.net/projects/gdcm/>`_ Python package to
 decode pixel transfer syntaxes.
 """
@@ -30,7 +30,7 @@ except ImportError:
     HAVE_GDCM = False
     HAVE_GDCM_IN_MEMORY_SUPPORT = False
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.encaps import generate_frames, generate_fragmented_frames
 import pydicom3.uid
 from pydicom3.uid import UID, JPEG2000, JPEG2000Lossless

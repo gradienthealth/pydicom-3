@@ -1,7 +1,7 @@
 # TODO: remove module in v4.0
 from typing import Any
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.misc import warn_and_log
 from pydicom3.pixels import get_encoder as _get_encoder
 from pydicom3.pixels.encoders import RLELosslessEncoder as _rle_encoder

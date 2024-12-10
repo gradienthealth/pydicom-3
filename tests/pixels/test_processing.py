@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Tests for the pixels.processing module."""
 
 import os
@@ -20,7 +20,7 @@ try:
 except ImportError:
     HAVE_PIL = False
 
-from pydicom import dcmread, config
+from pydicom3 import dcmread, config
 from pydicom3.data import get_testdata_file, get_palette_files
 from pydicom3.dataset import Dataset, FileMetaDataset
 from pydicom3.pixels.processing import (

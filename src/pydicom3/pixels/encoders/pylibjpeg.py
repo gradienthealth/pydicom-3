@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Interface for *Pixel Data* encoding, not intended to be used directly."""
 
 from typing import cast
@@ -6,7 +6,7 @@ from typing import cast
 from pydicom3.pixels.encoders.base import EncodeRunner
 from pydicom3.pixels.common import PhotometricInterpretation as PI
 from pydicom3.pixels.utils import _passes_version_check
-from pydicom import uid
+from pydicom3 import uid
 
 try:
     from pylibjpeg.utils import get_pixel_data_encoders, Encoder

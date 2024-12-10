@@ -1,8 +1,8 @@
 
-``pydicom codify`` command
+``pydicom3 codify`` command
 ==========================
 
-The ``pydicom codify`` command takes a DICOM file and produces Python code to
+The ``pydicom3 codify`` command takes a DICOM file and produces Python code to
 recreate that file, or, optionally a subset within that file.
 
 See :ref:`writing_files_using_codify` for full details of writing a complete
@@ -21,10 +21,10 @@ A simple example
 
 A simple example of using the ``codify`` command would be::
 
-    $ pydicom codify pydicom::rtplan.dcm
+    $ pydicom3 codify pydicom::rtplan.dcm
 
     # Coded version of DICOM file 'C:\git\pydicom\pydicom\data\test_files\rtplan.dcm'
-    # Produced by pydicom codify utility script
+    # Produced by pydicom3 codify utility script
     import pydicom
     from pydicom3.dataset import Dataset, FileMetaDataset
     from pydicom3.sequence import Sequence
@@ -53,15 +53,15 @@ was specified. To see the available command options, use the ``help`` command:
 
 .. code-block::
 
-    pydicom help codify
+    pydicom3 help codify
 
-    usage: pydicom codify [-h] [-e EXCLUDE_SIZE] [-p] [-s SAVE_AS] filespec [outfile]
+    usage: pydicom3 codify [-h] [-e EXCLUDE_SIZE] [-p] [-s SAVE_AS] filespec [outfile]
 
     Read a DICOM file and produce the *pydicom* (Python) code which can create that file
 
     positional arguments:
     filespec              File specification, in format [pydicom::]filename[::element]. If `pydicom::`
-                            prefix is used, then use the pydicom test file with that name. If `element`
+                            prefix is used, then use the pydicom3 test file with that name. If `element`
                             is given, use only that data element within the file. Examples:
                             path/to/your_file.dcm, your_file.dcm::StudyDate,
                             pydicom::rtplan.dcm::BeamSequence[0],
@@ -85,7 +85,7 @@ was specified. To see the available command options, use the ``help`` command:
 
 For example::
 
-    pydicom codify -s savename.dcm dicomfile.dcm pythoncode.py
+    pydicom3 codify -s savename.dcm dicomfile.dcm pythoncode.py
 
 would read the DICOM file "dicomfile.dcm" and write the Python code
 to file "pythoncode.py".  In that code, near the end of the file
@@ -104,7 +104,7 @@ Note that the ``filespec`` argument to the ``codify`` command, as for
 :ref:`the show command<cli_show>`, allows you to specify a data element within the file,
 rather than the whole file::
 
-    pydicom codify pydicom::rtplan.dcm::FractionGroupSequence[0]
+    pydicom3 codify pydicom::rtplan.dcm::FractionGroupSequence[0]
 
     # Coded version of non-file dataset
     ...

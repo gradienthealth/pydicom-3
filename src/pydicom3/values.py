@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Functions for converting values of DICOM
    data elements to proper python types
 """
@@ -10,7 +10,7 @@ from typing import Union, cast, Any, TypeVar
 from collections.abc import MutableSequence, Callable
 
 # don't import datetime_conversion directly
-from pydicom import config
+from pydicom3 import config
 from pydicom3.charset import default_encoding, decode_bytes
 from pydicom3.config import logger, have_numpy
 from pydicom3.dataelem import empty_value_for_VR, RawDataElement

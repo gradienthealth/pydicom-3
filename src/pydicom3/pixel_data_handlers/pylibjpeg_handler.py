@@ -1,4 +1,4 @@
-# Copyright 2020 pydicom authors. See LICENSE file for details.
+# Copyright 2020 pydicom3 authors. See LICENSE file for details.
 """Use the :gh:`pylibjpeg <pylibjpeg/>` package
 to convert supported pixel data to a :class:`numpy.ndarray`.
 
@@ -93,7 +93,7 @@ try:
 except ImportError:
     HAVE_RLE = False
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.encaps import generate_frames as frame_generator
 from pydicom3.pixels.utils import (
     pixel_dtype,

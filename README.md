@@ -17,7 +17,7 @@ Note that *pydicom* is a general-purpose DICOM framework concerned with
 reading and writing DICOM datasets. In order to keep the
 project manageable, it does not handle the specifics of individual SOP classes
 or other aspects of DICOM. Other libraries both inside and outside the
-[pydicom organization](https://github.com/pydicom) are based on *pydicom*
+[pydicom3 organization](https://github.com/pydicom) are based on *pydicom*
 and provide support for other aspects of DICOM, and for more
 specific applications.
 
@@ -49,7 +49,7 @@ The *pydicom* [user guide](https://pydicom3.github.io/pydicom/stable/guides/user
 Compressed and uncompressed *Pixel Data* is always available to
 be read, changed and written as [bytes](https://docs.python.org/3/library/stdtypes.html#bytes-objects):
 ```python
->>> from pydicom import dcmread
+>>> from pydicom3 import dcmread
 >>> from pydicom3.data import get_testdata_file
 >>> path = get_testdata_file("CT_small.dcm")
 >>> ds = dcmread(path)
@@ -102,7 +102,7 @@ More [examples](https://pydicom3.github.io/pydicom/stable/auto_examples/index.ht
 
 **Change a patient's ID**
 ```python
-from pydicom import dcmread
+from pydicom3 import dcmread
 
 ds = dcmread("/path/to/file.dcm")
 # Edit the (0010,0020) 'Patient ID' element
@@ -115,7 +115,7 @@ ds.save_as("/path/to/file_updated.dcm")
 With [NumPy](https://numpy.org) and [matplotlib](https://matplotlib.org/)
 ```python
 import matplotlib.pyplot as plt
-from pydicom import dcmread, examples
+from pydicom3 import dcmread, examples
 
 # The path to the example "ct" dataset included with pydicom
 path: "pathlib.Path" = examples.get_path("ct")

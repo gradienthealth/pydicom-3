@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Tests for the 'pydicom' encoder plugin."""
 
 
@@ -11,7 +11,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import dcmread, Dataset
+from pydicom3 import dcmread, Dataset
 from pydicom3.data import get_testdata_file
 from pydicom3.dataset import FileMetaDataset
 from pydicom3.encaps import get_frame

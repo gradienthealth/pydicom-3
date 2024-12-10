@@ -1,5 +1,5 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""pydicom data manager"""
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
+"""pydicom3 data manager"""
 
 from .data_manager import (
     get_charset_files,

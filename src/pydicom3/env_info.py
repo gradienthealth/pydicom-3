@@ -1,6 +1,6 @@
-# Copyright 2020 pydicom authors. See LICENSE file for details.
+# Copyright 2020 pydicom3 authors. See LICENSE file for details.
 """
-Gather system information and version information for pydicom and auxiliary
+Gather system information and version information for pydicom3 and auxiliary
 modules.
 
 The output is a GitHub-flavoured markdown table whose contents can help

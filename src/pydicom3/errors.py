@@ -1,5 +1,5 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""Module for pydicom exception classes"""
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
+"""Module for pydicom3 exception classes"""
 
 from typing import Any
 

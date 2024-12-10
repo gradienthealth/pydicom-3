@@ -1,4 +1,4 @@
-# Copyright pydicom authors 2019. See LICENSE file for details
+# Copyright pydicom3 authors 2019. See LICENSE file for details
 """
 =========================================
 Show a dicom file using hierarchical tree

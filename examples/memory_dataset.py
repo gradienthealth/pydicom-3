@@ -1,4 +1,4 @@
-# Copyright pydicom authors 2019. See LICENSE file for details
+# Copyright pydicom3 authors 2019. See LICENSE file for details
 """
 ======================================
 Show working with memory-based dataset
@@ -13,7 +13,7 @@ datasets saved as blobs in a database.
 
 from io import BytesIO
 
-from pydicom import dcmread, dcmwrite, Dataset
+from pydicom3 import dcmread, dcmwrite, Dataset
 from pydicom3.filebase import DicomFileLike
 
 print(__doc__)

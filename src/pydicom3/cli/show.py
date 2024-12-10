@@ -1,5 +1,5 @@
-# Copyright 2019 pydicom authors. See LICENSE file for details.
-"""Pydicom command line interface program for `pydicom show`"""
+# Copyright 2019 pydicom3 authors. See LICENSE file for details.
+"""Pydicom command line interface program for `pydicom3 show`"""
 
 import argparse
 from collections.abc import Callable

@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Pixel data processing functions."""
 
 from io import BytesIO
@@ -122,7 +122,7 @@ def apply_color_lut(
                 raise ValueError(f"Unknown palette '{palette}'")
 
         try:
-            from pydicom import dcmread
+            from pydicom3 import dcmread
 
             fname = datasets[palette]
             ds = dcmread(get_palette_files(fname)[0])

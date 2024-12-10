@@ -16,7 +16,7 @@ instead of averagin the pixels. Finally, the image is store as a dicom image.
 # authors : Guillaume Lemaitre <g.lemaitre58@gmail.com>
 # license : MIT
 
-from pydicom import examples
+from pydicom3 import examples
 
 print(__doc__)
 

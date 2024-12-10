@@ -1,4 +1,4 @@
-# Copyright 2008-2019 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2019 pydicom3 authors. See LICENSE file for details.
 """Use the `numpy <https://numpy.org/>`_ package to convert supported *Overlay
 Data* to a :class:`numpy.ndarray`.
 

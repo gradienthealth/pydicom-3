@@ -1,9 +1,9 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 
 from typing import Any, TYPE_CHECKING, Protocol
 from collections.abc import MutableSequence, Callable
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.datadict import dictionary_VR, private_dictionary_VR
 from pydicom3.errors import BytesLengthException
 from pydicom3.misc import warn_and_log
@@ -64,7 +64,7 @@ class Hooks:
 
         .. code-block:: python
 
-            from pydicom import dcmread
+            from pydicom3 import dcmread
             from pydicom3.hooks import hooks, raw_element_value_fix_separator
 
             hooks.register_callback(
@@ -296,7 +296,7 @@ def raw_element_value_fix_separator(
     Fix **DS** and **IS** elements that use an invalid ":" character as the
     multivalue separator::
 
-        from pydicom import dcmread
+        from pydicom3 import dcmread
         from pydicom3.hooks import hooks, raw_element_value_fix_separator
 
         hooks.register_callback(
@@ -357,7 +357,7 @@ def raw_element_value_retry(
 
     Retry the value conversion for **DS** elements using **US** or **SS**::
 
-        from pydicom import dcmread
+        from pydicom3 import dcmread
         from pydicom3.hooks import hooks, raw_element_value_retry
 
         hooks.register_callback(

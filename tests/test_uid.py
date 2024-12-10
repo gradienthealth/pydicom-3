@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Test suite for uid.py"""
 
 import uuid
@@ -23,7 +23,7 @@ def test_storage_sopclass_uids():
 class TestGenerateUID:
     def test_generate_uid(self):
         """Test UID generator"""
-        # Test standard UID generation with pydicom prefix
+        # Test standard UID generation with pydicom3 prefix
         uid = generate_uid()
         assert uid[:26] == PYDICOM_ROOT_UID
         assert len(uid) <= 64

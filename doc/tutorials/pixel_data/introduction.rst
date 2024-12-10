@@ -20,7 +20,7 @@ Installing using pip:
 
 .. code-block:: bash
 
-    python -m pip install -U pydicom numpy matplotlib pylibjpeg[all]
+    python -m pip install -U pydicom3 numpy matplotlib pylibjpeg[all]
 
 Installing on conda:
 
@@ -55,7 +55,7 @@ All three elements use **O*** :dcm:`VRs<part05/sect_6.2.html>` (such as **OB** a
 **OD**), which in *pydicom* are :doc:`stored as</guides/element_value_types>`
 (and should be set using) :class:`bytes`::
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> ds = examples.jpeg2k
     >>> ds.group_dataset(0x7FE0)
     (7FE0,0010) Pixel Data                          OB: Array of 152326 elements
@@ -137,7 +137,7 @@ functions::
 
     import matplotlib.pyplot as plt
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import pixel_array
 
     # Get an example dataset as a FileDataset instance
@@ -157,7 +157,7 @@ This will convert the entire pixel data to an :class:`~numpy.ndarray` before usi
 frames but you're only interested in a particular one, then you can use the `index` parameter
 to return it::
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import pixel_array
 
     # Get an example multi-frame dataset
@@ -175,7 +175,7 @@ to return it::
 :func:`~pydicom3.pixels.iter_pixels` can be used to iterate through either all
 the available frames or those specified by the `indices` parameter::
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import iter_pixels
 
     # Iterate through all frames
@@ -199,7 +199,7 @@ data as found in the dataset you can pass ``raw=True``::
 
     import matplotlib.pyplot as plt
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import pixel_array
 
     ds = examples.ybr_color
@@ -228,7 +228,7 @@ packages are needed to perform the actual decompression (via their corresponding
 plugins). By default, all available plugins will be tried and the first successful
 one will have its results returned::
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import pixel_array
 
     ds = examples.jpeg2k
@@ -261,7 +261,7 @@ be identical no matter which plugin is used, there may be slight differences for
 compression methods. To ensure consistency you can use the `decoding_plugin` argument
 to use the specified :doc:`decompression plugin</guides/plugin_table>`::
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import pixel_array
 
     ds = examples.jpeg2k
@@ -271,7 +271,7 @@ to use the specified :doc:`decompression plugin</guides/plugin_table>`::
 
 And of course if the specified plugin isn't available you'll get an exception::
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> from pydicom3.pixels import pixel_array
     >>> pixel_array(examples.jpeg2k, decoding_plugin="pillow")
     Traceback (most recent call last):
@@ -298,7 +298,7 @@ By passing the path to the dataset (as :class:`str` or :class:`pathlib.Path`) to
 <part03/sect_C.7.6.3.html>` module elements and the minimum amount of required
 pixel data will be loaded::
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import pixel_array
 
     # Get the path to the 'examples.rt_dose' dataset
@@ -312,7 +312,7 @@ The same is true for :func:`~pydicom3.pixels.iter_pixels`::
     import matplotlib.pyplot as plt
     import numpy as np
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import iter_pixels
 
     # Get the path to the 'examples.ybr_color' dataset
@@ -335,7 +335,7 @@ an empty :class:`~pydicom3.dataset.Dataset` instance via the `ds_out` argument,
 or alternatively by using :func:`~pydicom3.filereader.dcmread` with
 ``stop_before_pixels=True``::
 
-    from pydicom import Dataset, examples
+    from pydicom3 import Dataset, examples
     from pydicom3.pixels import pixel_array, apply_rescale
 
     # Get the path to the 'examples.ct' dataset
@@ -371,7 +371,7 @@ describing the corresponding :class:`~numpy.ndarray`.
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import get_decoder
 
     ds = examples.ybr_color

@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 
 import pytest
 
@@ -200,7 +200,7 @@ class TestNoNumpy_NoPillowHandler:
         ds.pixel_array_options(use_v2_backend=True)
         msg = (
             "The pixel data handler 'pillow' is not available on your "
-            "system. Please refer to the pydicom documentation*"
+            "system. Please refer to the pydicom3 documentation*"
         )
         with pytest.raises(RuntimeError, match=msg):
             ds.decompress("pillow")

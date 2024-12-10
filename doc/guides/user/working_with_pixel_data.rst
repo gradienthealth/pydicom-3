@@ -29,7 +29,7 @@ The only exception to this is :dcm:`Parametric Map Storage
 
 By default *pydicom* reads in pixel data as the raw bytes found in the file::
 
-  >>> from pydicom import dcmread, examples
+  >>> from pydicom3 import dcmread, examples
   >>> path = examples.get_path("mr")  # The path to the examples.mr dataset
   >>> ds = dcmread(path)
   >>> ds.PixelData # doctest: +ELLIPSIS
@@ -148,7 +148,7 @@ to apply a palette color LUT to the pixel data to produce an RGB image.
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import apply_color_lut
 
     # Fetch an example PALETTE COLOR dataset
@@ -163,7 +163,7 @@ of the pixel data is 8-bit.
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import apply_color_lut
 
     ds = examples.palette_color
@@ -193,7 +193,7 @@ first.
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import apply_modality_lut
 
     ds = examples.ct
@@ -217,7 +217,7 @@ that the modality LUT or rescale operation has already been applied.
 
 .. code-block:: python
 
-    from pydicom import examples
+    from pydicom3 import examples
     from pydicom3.pixels import apply_voi_lut
 
     ds = examples.overlay

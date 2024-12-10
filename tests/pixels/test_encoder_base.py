@@ -12,7 +12,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import config, examples
+from pydicom3 import config, examples
 from pydicom3.data import get_testdata_file
 from pydicom3.dataset import Dataset
 from pydicom3.pixels.encoders import RLELosslessEncoder

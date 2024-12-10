@@ -1,10 +1,10 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Unit tests for the pydicom3.charset module."""
 
 import pytest
 
 import pydicom3.charset
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.data import get_charset_files, get_testdata_file
 from pydicom3.dataelem import DataElement
 from pydicom3.filebase import DicomBytesIO

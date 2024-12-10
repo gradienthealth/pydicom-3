@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Special classes for DICOM value representations (VR)"""
 
 import datetime
@@ -10,7 +10,7 @@ from typing import Optional, Any, cast
 from collections.abc import Callable, Sequence, Iterator
 
 # don't import datetime_conversion directly
-from pydicom import config
+from pydicom3 import config
 from pydicom3.misc import warn_and_log
 
 
@@ -666,7 +666,7 @@ class DA(_DateTimeBase, datetime.date):
 
             if len(val) == 10 and val[4] == "." and val[7] == ".":
                 # ACR-NEMA Standard 300, predecessor to DICOM
-                # for compatibility with a few old pydicom example files
+                # for compatibility with a few old pydicom3 example files
                 year = int(val[0:4])
                 month = int(val[5:7])
                 day = int(val[8:10])

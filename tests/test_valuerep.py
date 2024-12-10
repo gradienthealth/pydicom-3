@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Test suite for valuerep.py"""
 
 import copy
@@ -12,7 +12,7 @@ import math
 import pytest
 
 import pydicom
-from pydicom import config, valuerep
+from pydicom3 import config, valuerep
 from pydicom3.config import settings
 from pydicom3.data import get_testdata_file
 from pydicom3.dataset import Dataset
@@ -416,7 +416,7 @@ class TestTruncateFloatForDS:
     """Unit tests for float truncation function"""
 
     def check_valid(self, s: str) -> bool:
-        # Use the pydicom test function
+        # Use the pydicom3 test function
         if not pydicom3.valuerep.is_valid_ds(s):
             return False
 

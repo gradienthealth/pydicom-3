@@ -1,4 +1,4 @@
-# Copyright 2020 pydicom authors. See LICENSE file for details.
+# Copyright 2020 pydicom3 authors. See LICENSE file for details.
 """Tests for the pixel_data_handlers.pylibjpeg_handler module."""
 
 from pathlib import Path
@@ -447,7 +447,7 @@ class TestHandler:
         with pytest.raises(RuntimeError, match=msg):
             ds.pixel_array
 
-        # Don't use pydicom decoder
+        # Don't use pydicom3 decoder
         ds = dcmread(RLE_8_1_1F)
         ds.pixel_array_options(use_v2_backend=True)
         msg = (

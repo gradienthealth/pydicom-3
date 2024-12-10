@@ -10,7 +10,7 @@ Example at the command line in a terminal window:
 
 .. code-block:: console
 
-    $ pydicom show pydicom::rtplan.dcm
+    $ pydicom3 show pydicom::rtplan.dcm
     Dataset.file_meta -------------------------------
     (0002, 0000) File Meta Information Group Length  UL: 156
     (0002, 0001) File Meta Information Version       OB: b'\x00\x01'
@@ -37,7 +37,7 @@ using the usual *pydicom* keyword notation:
 
 .. code-block:: console
 
-    $ pydicom show pydicom::rtplan.dcm::FractionGroupSequence[0]
+    $ pydicom3 show pydicom::rtplan.dcm::FractionGroupSequence[0]
     (300a, 0071) Fraction Group Number               IS: "1"
     (300a, 0078) Number of Fractions Planned         IS: "30"
     (300a, 0080) Number of Beams                     IS: "1"
@@ -50,27 +50,27 @@ using the usual *pydicom* keyword notation:
     ---------
 
 You can see the available subcommands by simply typing ``pydicom`` with no
-arguments, or with ``pydicom help``:
+arguments, or with ``pydicom3 help``:
 
 .. code-block:: console
 
-    $ pydicom help
-    Use pydicom help [subcommand] to show help for a subcommand
+    $ pydicom3 help
+    Use pydicom3 help [subcommand] to show help for a subcommand
     Available subcommands: codify, show
 
 And, as noted in the block above, you get help for a particular subcommand
-by typing ``pydicom help [subcommand]``.  For example:
+by typing ``pydicom3 help [subcommand]``.  For example:
 
 .. code-block:: console
 
-    $ pydicom help show
-    usage: pydicom show [-h] [-x] [-t] [-q] filespec
+    $ pydicom3 help show
+    usage: pydicom3 show [-h] [-x] [-t] [-q] filespec
 
     Display all or part of a DICOM file
 
     positional arguments:
     filespec              File specification, in format [pydicom::]filename[::element]. If `pydicom::`
-                            prefix is used, then show the pydicom test file with that name. If `element`
+                            prefix is used, then show the pydicom3 test file with that name. If `element`
                             is given, use only that data element within the file. Examples:
                             path/to/your_file.dcm, your_file.dcm::StudyDate,
                             pydicom::rtplan.dcm::BeamSequence[0], yourplan.dcm::BeamSequence[0].BeamNumber
@@ -83,7 +83,7 @@ by typing ``pydicom help [subcommand]``.  For example:
     -q, --quiet           Only show basic information
 
 
-Installing the pydicom CLI
+Installing the pydicom3 CLI
 --------------------------
 
 The ``pydicom`` command should automatically be available after you
@@ -110,7 +110,7 @@ either "Dose" or "Sequence" in them:
 
 .. code-block:: console
 
-    $ pydicom show pydicom::rtplan.dcm | grep "Dose\|Sequence"
+    $ pydicom3 show pydicom::rtplan.dcm | grep "Dose\|Sequence"
     (300a, 0010)  Dose Reference Sequence  2 item(s) ----
     (300a, 0012) Dose Reference Number               IS: "1"
     (300a, 0014) Dose Reference Structure Type       CS: 'COORDINATES'

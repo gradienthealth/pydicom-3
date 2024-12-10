@@ -1,4 +1,4 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2018 pydicom3 authors. See LICENSE file for details.
 """Tests for the pixel_data_handlers.rle_handler module.
 
 There are the following possibilities:
@@ -27,7 +27,7 @@ from struct import pack, unpack
 
 import pytest
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 import pydicom3.config
 from pydicom3.data import get_testdata_file
 from pydicom3.encaps import get_frame, generate_frames, encapsulate

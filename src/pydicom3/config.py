@@ -1,4 +1,4 @@
-# Copyright 2008-2023 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2023 pydicom3 authors. See LICENSE file for details.
 """Pydicom configuration options."""
 
 # doc strings following items are picked up by sphinx for documentation
@@ -75,7 +75,7 @@ debug(False, False)
 
 
 # Set the type used to hold DS values
-#    default False; was decimal-based in pydicom 0.9.7
+#    default False; was decimal-based in pydicom3 0.9.7
 use_DS_decimal: bool = False
 """Set using :func:`DS_decimal` to control if elements with a
 VR of **DS** are represented as :class:`~decimal.Decimal`.
@@ -496,7 +496,7 @@ exception. If ``"IGNORE"`` then neither warn nor raise.
 Examples
 --------
 
->>> from pydicom import config
+>>> from pydicom3 import config
 >>> config.INVALID_KEYWORD_BEHAVIOR = "WARN"
 >>> ds = Dataset()
 >>> ds.PatientName = "Citizen^Jan"  # OK
@@ -522,7 +522,7 @@ nor raise.
 Examples
 --------
 
->>> from pydicom import config
+>>> from pydicom3 import config
 >>> config.INVALID_KEY_BEHAVIOR = "RAISE"
 >>> ds = Dataset()
 >>> 'PatientName' in ds  # OK
@@ -561,8 +561,8 @@ def future_behavior(enable_future: bool = True) -> None:
     Parameters
     ----------
     enable_future: bool
-        Set ``True`` (default) to emulate future pydicom behavior,
-        ``False`` to reset to current pydicom behavior.
+        Set ``True`` (default) to emulate future pydicom3 behavior,
+        ``False`` to reset to current pydicom3 behavior.
 
     See also
     --------

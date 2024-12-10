@@ -11,7 +11,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.encaps import get_frame, encapsulate
 from pydicom3.pixels import get_decoder
 from pydicom3.pixels.decoders.pylibjpeg import is_available

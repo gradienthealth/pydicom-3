@@ -10,7 +10,7 @@ This example shows how to read and interact with a DICOM File-set.
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pydicom import examples
+from pydicom3 import examples
 from pydicom3.data import get_testdata_file
 from pydicom3.fileset import FileSet
 from pydicom3.uid import generate_uid
@@ -98,7 +98,7 @@ fs.descriptor_character_set = "ISO_IR 100"
 
 # Changes to the File-set are staged until write() is called
 # Calling write() will update the File-set's directory structure to meet the
-#   semantics used by pydicom File-sets (if required), add/remove instances and
+#   semantics used by pydicom3 File-sets (if required), add/remove instances and
 #   and re-write the DICOMDIR file
 # We don't do it here because it would overwrite your example data
 # fs.write()

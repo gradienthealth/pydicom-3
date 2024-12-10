@@ -1,11 +1,11 @@
-# Copyright 2008-2019 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2019 pydicom3 authors. See LICENSE file for details.
 import json
 import logging
 from unittest import mock
 
 import pytest
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.data import get_testdata_file
 from pydicom3.dataelem import DataElement, RawDataElement
 from pydicom3.dataset import Dataset

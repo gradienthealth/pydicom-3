@@ -60,7 +60,7 @@ The DICOMDIR file is used to summarize the contents of the File-set and is a
 
 .. code-block:: python
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> ds = examples.dicomdir
     >>> ds.file_meta.MediaStorageSOPClassUID.name
     'Media Storage Directory Storage'
@@ -110,7 +110,7 @@ To load an existing File-set just pass a DICOMDIR
 
 .. code-block:: python
 
-    >>> from pydicom import dcmread
+    >>> from pydicom3 import dcmread
     >>> from pydicom3.fileset import FileSet
     >>> path = examples.get_path("dicomdir")  # The path to the examples.dicomdir dataset
     >>> ds = dcmread(path)

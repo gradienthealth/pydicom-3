@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Define the Dataset and FileDataset classes.
 
 The Dataset class represents the DICOM Dataset while the FileDataset class
@@ -48,8 +48,8 @@ try:
 except ImportError:
     pass
 
-import pydicom  # for dcmwrite
-from pydicom import jsonrep, config
+import pydicom3  # for dcmwrite
+from pydicom3 import jsonrep, config
 from pydicom3._version import __version_info__
 from pydicom3.charset import default_encoding, convert_encodings
 from pydicom3.config import logger
@@ -1774,13 +1774,13 @@ class Dataset:
             raise NotImplementedError(
                 "Unable to decode pixel data with a transfer syntax UID"
                 f" of '{tsyntax}' ({tsyntax.name}) using the pixel data "
-                f"handler '{name}'. Please see the pydicom documentation for "
+                f"handler '{name}'. Please see the pydicom3 documentation for "
                 "information on supported transfer syntaxes."
             )
         if not handler.is_available():
             raise RuntimeError(
                 f"The pixel data handler '{name}' is not available on your "
-                "system. Please refer to the pydicom documentation for "
+                "system. Please refer to the pydicom3 documentation for "
                 "information on installing needed packages."
             )
         # if the conversion fails, the exception is propagated up
@@ -1804,7 +1804,7 @@ class Dataset:
             raise NotImplementedError(
                 "Unable to decode pixel data with a transfer syntax UID of "
                 f"'{ts}' ({ts.name}) as there are no pixel data "
-                "handlers available that support it. Please see the pydicom "
+                "handlers available that support it. Please see the pydicom3 "
                 "documentation for information on supported transfer syntaxes "
             )
 
@@ -1849,7 +1849,7 @@ class Dataset:
         logger.info(
             "Unable to decode the pixel data using the following handlers: {}."
             "Please see the list of supported Transfer Syntaxes in the "
-            "pydicom documentation for alternative packages that might "
+            "pydicom3 documentation for alternative packages that might "
             "be able to decode the data".format(
                 ", ".join([str(hh) for hh in available_handlers])
             )
@@ -1957,7 +1957,7 @@ class Dataset:
 
         Compress the existing uncompressed *Pixel Data* in place:
 
-        >>> from pydicom import examples
+        >>> from pydicom3 import examples
         >>> from pydicom3.uid import RLELossless
         >>> ds = examples.ct
         >>> ds.compress(RLELossless)
@@ -2174,7 +2174,7 @@ class Dataset:
             backend pass ``use_v2_backend=True`` to the
             :meth:`~pydicom3.dataset.Dataset.pixel_array_options` method::
 
-                >>> from pydicom import examples
+                >>> from pydicom3 import examples
                 >>> ds = examples.ct
                 >>> ds.pixel_array_options(use_v2_backend=True)
                 >>> arr = ds.pixel_array
@@ -2258,7 +2258,7 @@ class Dataset:
 
         Convert the *Pixel Data* to an array that's a view on the original buffer::
 
-            >>> from pydicom import examples
+            >>> from pydicom3 import examples
             >>> ds = examples.ct
             >>> ds.pixel_array_options(view_only=True)
             >>> arr = ds.pixel_array
@@ -2266,7 +2266,7 @@ class Dataset:
         Use the deprecated :mod:`~pydicom3.pixel_data_handlers` backend to convert
         the *Pixel Data* to an array::
 
-            >>> from pydicom import examples
+            >>> from pydicom3 import examples
             >>> ds = examples.ct
             >>> ds.pixel_array_options(use_v2_backend=True)
             >>> arr = ds.pixel_array
@@ -3276,7 +3276,7 @@ class Dataset:
         Change the VR for the element with tag (0029,1026) before conversion to
         :class:`~pydicom3.dataelem.DataElement`.
 
-            >>> from pydicom import examples
+            >>> from pydicom3 import examples
             >>> ds = examples.ct
             >>> ds.update_raw_element(0x00291026, vr="US")
             >>> elem = ds[0x00291026]  # conversion to DataElement occurs here

@@ -101,7 +101,7 @@ Requires `pyjpegls <https://github.com/pydicom/pyjpegls>`_.
 ``pydicom``
 ...........
 
-Requires `pydicom <https://github.com/pydicom/pydicom>`_.
+Requires `pydicom3 <https://github.com/pydicom/pydicom>`_.
 
 **Known limitations**
 
@@ -160,7 +160,7 @@ compression and `pylibjpeg-rle <https://github.com/pydicom/pylibjpeg-rle>`_ for
 ``pydicom``
 ...........
 
-Requires `pydicom <https://github.com/pydicom/pydicom>`_.
+Requires `pydicom3 <https://github.com/pydicom/pydicom>`_.
 
 **Known limitations**
 

@@ -1,5 +1,5 @@
 #
-# pydicom documentation build configuration file
+# pydicom3 documentation build configuration file
 #
 # This file is execfile()d with the current
 #  directory set to its containing dir.
@@ -131,7 +131,7 @@ master_doc = "index"
 # General information about the project.
 project = "pydicom"
 year = datetime.now().strftime("%Y")
-copyright = f"2008-{year}, Darcy Mason and pydicom contributors"
+copyright = f"2008-{year}, Darcy Mason and pydicom3 contributors"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -272,8 +272,8 @@ latex_documents = [
     (
         "index",
         "pydicom3.tex",
-        "pydicom Documentation",
-        "Darcy Mason and pydicom contributors",
+        "pydicom3 Documentation",
+        "Darcy Mason and pydicom3 contributors",
         "manual",
     ),
 ]

@@ -6,7 +6,7 @@ from tempfile import TemporaryDirectory
 
 import pytest
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.data import get_testdata_file
 from pydicom3.dataset import Dataset, FileMetaDataset
 from pydicom3.filebase import DicomBytesIO
@@ -2256,7 +2256,7 @@ class TestFileSet_Modify:
         fs = FileSet(ds)
         assert 35**6 + 1 == len(fs)
         msg = (
-            r"pydicom doesn't support writing File-sets with more than "
+            r"pydicom3 doesn't support writing File-sets with more than "
             r"1838265625 managed instances"
         )
         with pytest.raises(NotImplementedError, match=msg):
@@ -2585,7 +2585,7 @@ class TestFileSet_Copy:
         fs = FileSet(tiny)
         assert 35**6 + 1 == len(fs)
         msg = (
-            r"pydicom doesn't support writing File-sets with more than "
+            r"pydicom3 doesn't support writing File-sets with more than "
             r"1838265625 managed instances"
         )
         with pytest.raises(NotImplementedError, match=msg):

@@ -30,7 +30,7 @@ from pydicom3.uid import (
 )
 
 if TYPE_CHECKING:
-    from pydicom import Dataset
+    from pydicom3 import Dataset
 
 
 class PixelReference:

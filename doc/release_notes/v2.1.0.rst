@@ -3,7 +3,7 @@ Version 2.1.0
 
 Enhancements
 ------------
-* Large testing data is no longer distributed within the pydicom package
+* Large testing data is no longer distributed within the pydicom3 package
   with the aim to reduce the package download size. These test files
   will download on-the-fly whenever either the tests are run, or should
   the file(s) be requested via the data manager functions.

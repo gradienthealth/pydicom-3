@@ -50,7 +50,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 import urllib.request as urllib2
 
-from pydicom import _version
+from pydicom3 import _version
 from pydicom3.values import converters
 
 

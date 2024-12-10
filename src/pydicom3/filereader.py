@@ -1,4 +1,4 @@
-# Copyright 2008-2021 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2021 pydicom3 authors. See LICENSE file for details.
 """Read a dicom media file"""
 
 
@@ -9,7 +9,7 @@ from typing import BinaryIO, Any, cast
 from collections.abc import Callable, MutableSequence, Iterator
 import zlib
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.charset import default_encoding, convert_encodings
 from pydicom3.config import logger
 from pydicom3.datadict import _dictionary_vr_fast
@@ -1111,7 +1111,7 @@ def read_deferred_data_element(
 
     .. note:
 
-        This is called internally by pydicom and will normally not be
+        This is called internally by pydicom3 and will normally not be
         needed in user code.
 
     Parameters

@@ -84,7 +84,7 @@ repository = "https://github.com/pydicom/pydicom"
 
 
 [project.scripts]
-pydicom = "pydicom3.cli.main:main"
+pydicom3 = "pydicom3.cli.main:main"
 
 
 [project.entry-points.pydicom_subcommands]

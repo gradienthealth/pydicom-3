@@ -1,4 +1,4 @@
-# Copyright 2020 pydicom authors. See LICENSE file for details.
+# Copyright 2020 pydicom3 authors. See LICENSE file for details.
 """Pydicom command line interface program
 
 Each subcommand is a module within pydicom3.cli, which
@@ -14,7 +14,7 @@ import sys
 from typing import cast, Any
 from collections.abc import Callable
 
-from pydicom import dcmread
+from pydicom3 import dcmread
 from pydicom3.data.data_manager import get_charset_files, get_testdata_file
 from pydicom3.dataset import Dataset
 
@@ -33,7 +33,7 @@ re_file_spec_object = re.compile(re_kywd_or_item + r"(\." + re_kywd_or_item + r"
 
 filespec_help = (
     "File specification, in format [pydicom::]filename[::element]. "
-    "If `pydicom::` prefix is present, then use the pydicom "
+    "If `pydicom::` prefix is present, then use the pydicom3 "
     "test file with that name. If `element` is given, "
     "use only that data element within the file. "
     "Examples: "
@@ -117,14 +117,14 @@ def filespec_parser(filespec: str) -> list[tuple[Dataset, Any]]:
     Raises
     ------
     argparse.ArgumentTypeError
-        If the filename does not exist in local path or in pydicom test files,
+        If the filename does not exist in local path or in pydicom3 test files,
         or if the optional element is not a valid expression,
         or if the optional element is a valid expression but does not exist
         within the dataset
     """
     prefix, filename, element = filespec_parts(filespec)
 
-    # Get the pydicom test filename even without prefix, in case user forgot it
+    # Get the pydicom3 test filename even without prefix, in case user forgot it
     try:
         pydicom_filename = cast(str, get_testdata_file(filename))
     except ValueError:  # will get this if absolute path passed
@@ -179,7 +179,7 @@ def help_command(args: argparse.Namespace) -> None:
     if args.subcommand and args.subcommand in subcommands:
         subparsers.choices[args.subcommand].print_help()
     else:
-        print("Use pydicom help [subcommand] to show help for a subcommand")
+        print("Use pydicom3 help [subcommand] to show help for a subcommand")
         subcommands.remove("help")
         print(f"Available subcommands: {', '.join(subcommands)}")
 
@@ -210,7 +210,7 @@ def main(args: list[str] | None = None) -> None:
 
     parser = argparse.ArgumentParser(
         prog="pydicom",
-        description=f"pydicom command line utilities (Python {py_version})",
+        description=f"pydicom3 command line utilities (Python {py_version})",
     )
     subparsers = parser.add_subparsers(help="subcommand help")
 

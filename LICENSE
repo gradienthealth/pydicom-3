@@ -1,8 +1,8 @@
 License file for pydicom, a pure-python DICOM library
 
-Copyright (c) 2008-2020 Darcy Mason and pydicom contributors
+Copyright (c) 2008-2020 Darcy Mason and pydicom3 contributors
 
-Except for portions outlined below, pydicom is released under an MIT license:
+Except for portions outlined below, pydicom3 is released under an MIT license:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Portions of pydicom (private dictionary file(s)) were generated from the 
+Portions of pydicom3 (private dictionary file(s)) were generated from the 
 private dictionary of the GDCM library, released under the following license:
 
   Program: GDCM (Grassroots DICOM). A DICOM library

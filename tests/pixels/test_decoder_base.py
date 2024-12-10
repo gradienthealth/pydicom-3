@@ -8,7 +8,7 @@ from sys import byteorder
 
 import pytest
 
-from pydicom import config, dcmread
+from pydicom3 import config, dcmread
 from pydicom3.dataset import Dataset
 from pydicom3.encaps import get_frame, generate_frames, encapsulate
 from pydicom3.pixels import get_decoder

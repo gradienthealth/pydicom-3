@@ -139,7 +139,7 @@ as the :class:`io.BufferedReader` instances returned by the :func:`open` built-i
 in read mode. This allows you to avoid having to read a large amount of data into
 memory when creating datasets::
 
-    from pydicom import Dataset, FileMetaDataset
+    from pydicom3 import Dataset, FileMetaDataset
     from pydicom3.uid import ExplicitVRLittleEndian
 
     with open("a_large_amount_of_data", "rb") as f:
@@ -154,7 +154,7 @@ syntax such as *JPEG 2000 Lossles*, the :func:`~pydicom3.encaps.encapsulate_buff
 :func:`~pydicom3.encaps.encapsulate_extended_buffer` functions can be used to encapsulate
 the buffered frames::
 
-    from pydicom import Dataset, FileMetaDataset
+    from pydicom3 import Dataset, FileMetaDataset
     from pydicom3.encaps import encapsulate_buffer
     from pydicom3.uid import JPEG2000Lossless
 

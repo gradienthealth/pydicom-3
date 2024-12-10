@@ -51,7 +51,7 @@ Usage
 The module attributes are all normal :class:`~pydicom3.dataset.FileDataset`
 instances::
 
-  >>> from pydicom import examples
+  >>> from pydicom3 import examples
   >>> type(examples.ct)
   <class 'pydicom3.dataset.FileDataset'>
   >>> examples.ct.PatientName

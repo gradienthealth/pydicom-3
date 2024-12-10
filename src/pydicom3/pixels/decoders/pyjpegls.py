@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Use pyjpegls <https://github.com/pydicom/pyjpegls> to decompress encoded
 *Pixel Data*.
 
@@ -6,7 +6,7 @@ This module is not intended to be used directly.
 """
 from typing import cast
 
-from pydicom import uid
+from pydicom3 import uid
 from pydicom3.pixels.utils import _passes_version_check
 from pydicom3.pixels.decoders.base import DecodeRunner
 

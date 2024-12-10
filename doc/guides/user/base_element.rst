@@ -1,7 +1,7 @@
 Core elements in pydicom
 ========================
 
-.. rubric:: pydicom object model, description of classes, examples
+.. rubric:: pydicom3 object model, description of classes, examples
 
 Dataset
 -------
@@ -22,7 +22,7 @@ A :class:`~dataset.Dataset` can be created directly, but you'll
 usually get one by reading an existing DICOM dataset from file using
 :func:`~pydicom3.filereader.dcmread`::
 
-    >>> from pydicom import dcmread, examples
+    >>> from pydicom3 import dcmread, examples
     >>> # Returns the path to pydicom's examples.rt_plan dataset
     >>> path = examples.get_path("rt_plan")
     >>> print(path)
@@ -122,7 +122,7 @@ Using DICOM keywords is the recommended way to access data elements, but you
 can also use the tag numbers directly, such as::
 
   >>> # Same thing with tag numbers - much harder to read:
-  >>> # Really should only be used if DICOM keyword not in pydicom dictionary
+  >>> # Really should only be used if DICOM keyword not in pydicom3 dictionary
   >>> ds[0x300a, 0xb0][0][0x300a, 0xc2].value
   'Field 1'
 

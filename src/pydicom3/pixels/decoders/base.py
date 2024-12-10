@@ -1,4 +1,4 @@
-# Copyright 2008-2024 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2024 pydicom3 authors. See LICENSE file for details.
 """Pixel data decoding."""
 
 from collections.abc import Callable, Iterator, Iterable
@@ -15,7 +15,7 @@ try:
 except ImportError:
     HAVE_NP = False
 
-from pydicom import config
+from pydicom3 import config
 from pydicom3.encaps import get_frame, generate_frames
 from pydicom3.misc import warn_and_log
 from pydicom3.pixels.common import (
@@ -85,7 +85,7 @@ class DecodeOptions(RunnerOptions, total=False):
 
     ## RLE decoding options
     # Segment ordering ">" for big endian (default) or "<" for little endian
-    rle_segment_order: str  # pydicom plugin
+    rle_segment_order: str  # pydicom3 plugin
     byteorder: str  # pylibjpeg + -rle plugin
 
     ## JPEG-LS decoding options

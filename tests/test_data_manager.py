@@ -1,4 +1,4 @@
-# Copyright 2008-2020 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2020 pydicom3 authors. See LICENSE file for details.
 """Unit tests for pydicom3.data_manager"""
 
 import json
@@ -138,7 +138,7 @@ class TestGetData:
     def test_no_absolute_path_in_get_testdata_file(self):
         msg = (
             "'get_testdata_file' does not support absolute paths, "
-            "as it only works with internal pydicom test data - "
+            "as it only works with internal pydicom3 test data - "
             r"did you mean 'dcmread\(\"/foo/bar.dcm\"\)'?"
         )
         with pytest.raises(ValueError, match=msg):
@@ -147,7 +147,7 @@ class TestGetData:
     def test_no_absolute_path_in_get_testdata_files(self):
         msg = (
             "'get_testdata_files' does not support absolute paths, as it only works "
-            "with internal pydicom test data."
+            "with internal pydicom3 test data."
         )
         with pytest.raises(ValueError, match=msg):
             get_testdata_files("/foo/*.dcm")

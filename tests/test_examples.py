@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 import pydicom
-from pydicom import examples, FileDataset
+from pydicom3 import examples, FileDataset
 from pydicom3.examples import ct
 
 

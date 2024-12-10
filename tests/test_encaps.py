@@ -1,4 +1,4 @@
-# Copyright 2008-2020 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2020 pydicom3 authors. See LICENSE file for details.
 """Test for encaps.py"""
 
 from io import BytesIO
@@ -8,7 +8,7 @@ import tempfile
 
 import pytest
 
-from pydicom import dcmread, config, encaps
+from pydicom3 import dcmread, config, encaps
 from pydicom3.data import get_testdata_file
 from pydicom3.encaps import (
     fragment_frame,

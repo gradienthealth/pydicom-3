@@ -21,7 +21,7 @@ In the tutorial we're going to be using one of the example DICOM datasets includ
 You can get the file path to the dataset by using the :func:`~pydicom3.examples.get_path`
 function to return the path as a :class:`pathlib.Path` (your path may vary)::
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> path = examples.get_path("ct")
     >>> path
     PosixPath('/path/to/pydicom/data/test_files/CT_small.dcm')
@@ -33,7 +33,7 @@ To read the DICOM dataset at a given file path (as a :class:`str` or :class:`pat
 we use :func:`~pydicom3.filereader.dcmread`, which returns a
 :class:`~pydicom3.dataset.FileDataset` instance::
 
-    >>> from pydicom import dcmread, examples
+    >>> from pydicom3 import dcmread, examples
     >>> path = get_path("ct")
     >>> ds = dcmread(path)
 
@@ -111,7 +111,7 @@ Viewing and accessing
 
 The ``CT_small.dcm`` dataset is also included as an example dataset:
 
-    >>> from pydicom import examples
+    >>> from pydicom3 import examples
     >>> ds = examples.ct
     >>> type(ds)
     <class 'pydicom3.dataset.FileDataset'>

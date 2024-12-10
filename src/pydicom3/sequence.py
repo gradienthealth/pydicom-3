@@ -1,7 +1,7 @@
-# Copyright 2008-2020 pydicom authors. See LICENSE file for details.
+# Copyright 2008-2020 pydicom3 authors. See LICENSE file for details.
 """Define the Sequence class, which contains a sequence DataElement's items.
 
-Sequence is a list of pydicom Dataset objects.
+Sequence is a list of pydicom3 Dataset objects.
 """
 from typing import cast, Any, TypeVar
 from collections.abc import Iterable

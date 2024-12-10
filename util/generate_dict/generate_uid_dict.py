@@ -20,7 +20,7 @@ from pathlib import Path
 from urllib import request
 import xml.etree.ElementTree as ET
 
-from pydicom import _version
+from pydicom3 import _version
 
 
 _PKG_DIRECTORY = Path(__file__).parent.parent.parent / "src" / "pydicom"
