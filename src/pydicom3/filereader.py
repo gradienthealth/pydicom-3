@@ -472,12 +472,14 @@ def read_dataset(
         specific_tags,
     )
     try:
-        if bytelength is None:
-            raw_data_elements = {e.tag: e for e in de_gen}
-        else:
-            while fp_tell() - fp_start < bytelength:
-                raw_data_element = next(de_gen)
-                raw_data_elements[raw_data_element.tag] = raw_data_element
+        while (bytelength is None) or (fp.tell() - fp_start < bytelength):
+            raw_data_element = next(de_gen)
+            # Read data elements. Stop on some errors, but return what was read
+            tag = raw_data_element.tag
+            # Check for ItemDelimiterTag --dataset is an item in a sequence
+            if tag == BaseTag(0xFFFEE00D):
+                break
+            raw_data_elements[tag] = raw_data_element
     except StopIteration:
         pass
     except EOFError as details:
