@@ -26,11 +26,11 @@ dependencies = []
 description = "A pure Python package for reading and writing DICOM data"
 # dynamic = ["version"]
 keywords = ["dicom, python, medical, imaging"]
-license = {text = "MIT"}
+license = "MIT"
 name = "pydicom3"
 readme = "README.md"
 requires-python = ">=3.10"
-version = "3.1.0.dev0"
+version = "3.1.0"
 
 
 [project.optional-dependencies]
@@ -77,9 +77,9 @@ gpl-license = ["pylibjpeg[libjpeg]"]
 
 [project.urls]
 documentation = "https://pydicom3.github.io/pydicom"
-download = "https://github.com/pydicom/pydicom/archive/main.zip"
-homepage = "https://github.com/pydicom/pydicom"
-repository = "https://github.com/pydicom/pydicom"
+download = "https://github.com/gradienthealth/pydicom-3/archive/main.zip"
+homepage = "https://github.com/gradienthealth/pydicom-3"
+repository = "https://github.com/gradienthealth/pydicom-3"
 
 
 
