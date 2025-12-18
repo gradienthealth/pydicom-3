@@ -4,10 +4,9 @@ build-backend = "flit_core.buildapi"
 
 [project]
 authors = [
-    {name = "Darcy Mason and contributors", email = "darcymason@gmail.com"}
+    {name = "Cal Nightingale and the pydicom contributors", email = "cal@gradienthealth.io"}
 ]
 classifiers=[
-    "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",
     "Intended Audience :: Healthcare Industry",
     "Intended Audience :: Science/Research",
